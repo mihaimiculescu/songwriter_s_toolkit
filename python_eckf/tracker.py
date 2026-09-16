@@ -7,7 +7,7 @@ from .config import ECKFConfig
 from .harmonic_change import HarmonicChangeDetector
 from .matlab_compat import complex_min_matlab_like
 from .silence import is_silent
-
+from .eckf_trace import ECKFTrace
 
 @dataclass
 class ECKFResult:
@@ -105,6 +105,7 @@ def track_pitch(
     harm_prev = 0
 
     detector = HarmonicChangeDetector(config)
+    trace = ECKFTrace(sample_rate)
 
     start = 0
     n = 0
@@ -139,6 +140,15 @@ def track_pitch(
         energy_track.append(cur_energy)
 
         if silent_cur:
+            trace.emit(
+                "SILENCE",
+                start,
+                frame_start=start,
+                frame_time_s=start / sample_rate,
+                silent_prev=silent_prev,
+                silent_cur=silent_cur,
+                flag=flag,
+            )
             flag = 0
             start += block
             n = start
@@ -159,6 +169,17 @@ def track_pitch(
             analysis_cur = detector.analyze(y_prev, y_frame, sample_rate)
 
         harm_cur = analysis_cur.flag
+        trace.emit(
+            "FRAME_ANALYSIS",
+            start,
+            frame_start=start,
+            frame_time_s=start / sample_rate,
+            harm_prev=harm_prev,
+            harm_cur=harm_cur,
+            silent_prev=silent_prev,
+            silent_cur=silent_cur,
+            flag=flag,
+        )
 
         count = 0
         initialization = None
@@ -170,12 +191,32 @@ def track_pitch(
         ):
             onset_samples.append(start)
 
+            trace.emit(
+                "RESET_TRIGGER",
+                start,
+                frame_start=start,
+                frame_time_s=start / sample_rate,
+                harm_prev=harm_prev,
+                harm_cur=harm_cur,
+                silent_prev=silent_prev,
+                silent_cur=silent_cur,
+                flag=flag,
+            )
+
             while count < config.num_buf_to_wait:
                 count += 1
                 start += block
 
             if start + block < padded_length:
                 future_frame = y[start:start + block]
+                trace.emit(
+                    "LOOKAHEAD_FRAME",
+                    start,
+                    frame_start=analysis_start,
+                    frame_time_s=analysis_start / sample_rate,
+                    count=count,
+                    flag=flag,
+                )
 
                 # MATLAB fills the skipped interval with the previous estimate.
                 if n > 0:
@@ -208,6 +249,16 @@ def track_pitch(
             f1 = initialization.f0_hz
             a1 = initialization.amplitude
             phi1 = initialization.phase
+            trace.emit(
+                "INITIALIZATION_PROPOSED",
+                start,
+                frame_start=analysis_start,
+                frame_time_s=analysis_start / sample_rate,
+                count=count,
+                init_f0_hz=f1,
+                init_amplitude=a1,
+                flag=flag,
+            )
 
             # MATLAB n is 1-based.  At this instant n corresponds to the
             # future/stabilized frame start.
@@ -228,7 +279,28 @@ def track_pitch(
 
             P0 = np.zeros((3, 3), dtype=np.complex128)
 
-            if abs(complex_min_matlab_like(K)) < config.kalman_gain_reset_threshold:
+            gain_min_abs = abs(complex_min_matlab_like(K))
+            reset_accepted = (
+                gain_min_abs
+                < config.kalman_gain_reset_threshold
+            )
+
+            trace.emit(
+                "RESET_DECISION",
+                start,
+                frame_start=analysis_start,
+                frame_time_s=analysis_start / sample_rate,
+                count=count,
+                init_f0_hz=f1,
+                init_amplitude=a1,
+                gain_min_abs=gain_min_abs,
+                reset_threshold=config.kalman_gain_reset_threshold,
+                reset_accepted=int(reset_accepted),
+                flag=flag,
+            )
+
+            if reset_accepted:
+            # if abs(complex_min_matlab_like(K)) < config.kalman_gain_reset_threshold:
                 P_last = P0
 
                 if config.mode == "matlab":
@@ -265,6 +337,16 @@ def track_pitch(
                     ).reshape(3, 1)
 
                 flag = 0
+                trace.emit(
+                    "RESET_COMPLETED",
+                    n,
+                    frame_start=analysis_start,
+                    frame_time_s=analysis_start / sample_rate,
+                    count=count,
+                    init_f0_hz=f1,
+                    reset_accepted=1,
+                    flag=flag,
+                )
 
         if P_last is None or x_last is None:
             # A non-silent frame should normally reach initialization through
@@ -318,6 +400,32 @@ def track_pitch(
             )
 
             f0[n] = abs(np.log(x1) / (1j * Ts * 2.0 * np.pi))
+            trace_stride = max(
+                1,
+                round(sample_rate * 0.010),
+            )
+
+            if n % trace_stride == 0:
+                trace.emit(
+                    "KALMAN_SAMPLE",
+                    n,
+                    frame_start=start,
+                    frame_time_s=start / sample_rate,
+                    f0_hz=f0[n],
+                    innovation_abs=abs(innovation),
+                    innovation_after_abs=innovation_after_update,
+                    q=float(np.real(q)),
+                    gain_norm=float(np.linalg.norm(K)),
+                    covariance_norm=float(np.linalg.norm(P_last)),
+                    state_frequency_hz=(
+                        float(
+                            abs(
+                                np.log(x1)
+                                / (1j * Ts * 2.0 * np.pi)
+                            )
+                        )
+                    ),
+                )            
             amp[n] = abs(x2)
 
             if amp[n] > 0.0:
@@ -338,7 +446,7 @@ def track_pitch(
         harm_prev = harm_cur
 
     onset_samples_arr = np.asarray(onset_samples, dtype=np.int64)
-
+    trace.close()
     return ECKFResult(
         f0_hz=f0,
         amplitude=amp,
