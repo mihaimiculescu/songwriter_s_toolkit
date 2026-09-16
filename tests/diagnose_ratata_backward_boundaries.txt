@@ -1,0 +1,276 @@
+
+====================================================================================================================================================================================
+SUB-RUN / BACKWARDS-BOUNDARY DIAGNOSTIC — OBSERVATIONAL PASS
+====================================================================================================================================================================================
+Rows:                    8864
+Analysis rate:           100.000 Hz
+Accepted rows:           4946 / 8864
+Rejected episodes:       94
+
+CLASSIFICATION COUNTS
+  INTERNAL_COHERENT_SUBRUN           17
+  ISOLATED_BOUNDARY_SAMPLE           46
+  NO_RESCUABLE_BOUNDARY              31
+
+====================================================================================================================================================================================
+RANKED REJECTED EPISODES
+====================================================================================================================================================================================
+ #   episode             dur   class                              backward rescue          forward rescue           span   maxstep  subruns  Lctx    Rctx
+---  ------------------  -----  ---------------------------------  -----------------------  -----------------------  -----  -------  -------  ------  ------
+  1  85.940-86.010          80  INTERNAL_COHERENT_SUBRUN           ---                      ---                       0.09     0.05        1   66.96   75.88
+  2  26.880-26.960          90  INTERNAL_COHERENT_SUBRUN           ---                      ---                       0.22     0.13        1   70.02   80.06
+  3  43.520-43.600          90  INTERNAL_COHERENT_SUBRUN           ---                      ---                       9.57     9.57        2   63.22   65.28
+  4  7.390-7.500           120  INTERNAL_COHERENT_SUBRUN           ---                      ---                       0.56     0.23        1   66.88   48.14
+  5  22.920-23.030         120  INTERNAL_COHERENT_SUBRUN           ---                      ---                       4.21     2.36        1   62.01   60.76
+  6  43.870-43.980         120  INTERNAL_COHERENT_SUBRUN           ---                      ---                       0.24     0.17        1   67.00   67.85
+  7  73.860-74.110         260  INTERNAL_COHERENT_SUBRUN           ---                      ---                      36.00    35.19        4   68.02   68.02
+  8  49.030-49.320         300  INTERNAL_COHERENT_SUBRUN           ---                      ---                      11.10    10.93        1   59.04   61.77
+  9  46.640-47.060         430  INTERNAL_COHERENT_SUBRUN           ---                      ---                      26.93    26.89        1   62.65   62.14
+ 10  25.430-25.980         560  INTERNAL_COHERENT_SUBRUN           ---                      ---                      58.71    29.50        2   50.26   47.17
+ 11  88.070-88.630         570  INTERNAL_COHERENT_SUBRUN           ---                      ---                      48.37    48.36        1   62.64     ---
+ 12  8.540-9.130           600  INTERNAL_COHERENT_SUBRUN           ---                      ---                      21.56    20.95        1   65.00   60.93
+ 13  19.500-20.260         770  INTERNAL_COHERENT_SUBRUN           ---                      ---                      13.06     8.17        6   78.09   63.07
+ 14  40.920-41.890         980  INTERNAL_COHERENT_SUBRUN           ---                      ---                      189.50    98.87        6   63.04   63.06
+ 15  36.780-37.880        1110  INTERNAL_COHERENT_SUBRUN           ---                      ---                      130.85    75.24        3   63.09   63.12
+ 16  24.070-25.210        1150  INTERNAL_COHERENT_SUBRUN           ---                      ---                      18.66    18.62        1   57.93   54.21
+ 17  0.000-6.270          6280  INTERNAL_COHERENT_SUBRUN           ---                      ---                       0.00     0.00        1     ---   51.60
+ 18  6.920-6.920            10  ISOLATED_BOUNDARY_SAMPLE           6.920-6.920(10ms)        ---                       0.00     0.00        1   57.50   62.91
+ 19  10.160-10.160          10  ISOLATED_BOUNDARY_SAMPLE           10.160-10.160(10ms)      ---                       0.00     0.00        1   49.80   59.24
+ 20  12.620-12.620          10  ISOLATED_BOUNDARY_SAMPLE           12.620-12.620(10ms)      ---                       0.00     0.00        1   55.14   62.99
+ 21  13.190-13.190          10  ISOLATED_BOUNDARY_SAMPLE           13.190-13.190(10ms)      ---                       0.00     0.00        1   62.97   59.41
+ 22  17.670-17.670          10  ISOLATED_BOUNDARY_SAMPLE           17.670-17.670(10ms)      ---                       0.00     0.00        1   51.22   62.98
+ 23  18.780-18.780          10  ISOLATED_BOUNDARY_SAMPLE           18.780-18.780(10ms)      ---                       0.00     0.00        1   62.88   47.34
+ 24  18.950-18.950          10  ISOLATED_BOUNDARY_SAMPLE           18.950-18.950(10ms)      ---                       0.00     0.00        1   47.33   62.81
+ 25  19.250-19.250          10  ISOLATED_BOUNDARY_SAMPLE           19.250-19.250(10ms)      ---                       0.00     0.00        1   63.07   73.59
+ 26  22.230-22.230          10  ISOLATED_BOUNDARY_SAMPLE           22.230-22.230(10ms)      ---                       0.00     0.00        1   88.56   62.81
+ 27  23.390-23.390          10  ISOLATED_BOUNDARY_SAMPLE           23.390-23.390(10ms)      ---                       0.00     0.00        1   62.96   55.98
+ 28  26.370-26.370          10  ISOLATED_BOUNDARY_SAMPLE           26.370-26.370(10ms)      ---                       0.00     0.00        1   47.33   69.62
+ 29  27.870-27.870          10  ISOLATED_BOUNDARY_SAMPLE           27.870-27.870(10ms)      ---                       0.00     0.00        1   79.10   63.05
+ 30  28.210-28.210          10  ISOLATED_BOUNDARY_SAMPLE           28.210-28.210(10ms)      ---                       0.00     0.00        1   64.28   68.49
+ 31  28.590-28.590          10  ISOLATED_BOUNDARY_SAMPLE           28.590-28.590(10ms)      ---                       0.00     0.00        1   68.97   61.31
+ 32  28.750-28.750          10  ISOLATED_BOUNDARY_SAMPLE           28.750-28.750(10ms)      ---                       0.00     0.00        1   61.35   66.98
+ 33  29.660-29.660          10  ISOLATED_BOUNDARY_SAMPLE           29.660-29.660(10ms)      ---                       0.00     0.00        1   81.53   64.13
+ 34  30.380-30.380          10  ISOLATED_BOUNDARY_SAMPLE           30.380-30.380(10ms)      ---                       0.00     0.00        1   64.21   83.04
+ 35  30.770-30.770          10  ISOLATED_BOUNDARY_SAMPLE           30.770-30.770(10ms)      ---                       0.00     0.00        1   82.80   63.82
+ 36  32.050-32.050          10  ISOLATED_BOUNDARY_SAMPLE           32.050-32.050(10ms)      ---                       0.00     0.00        1   67.07   86.12
+ 37  32.180-32.180          10  ISOLATED_BOUNDARY_SAMPLE           32.180-32.180(10ms)      ---                       0.00     0.00        1   86.12   68.02
+ 38  33.240-33.240          10  ISOLATED_BOUNDARY_SAMPLE           33.240-33.240(10ms)      ---                       0.00     0.00        1   61.03   57.38
+ 39  35.290-35.290          10  ISOLATED_BOUNDARY_SAMPLE           35.290-35.290(10ms)      ---                       0.00     0.00        1   63.91   57.08
+ 40  40.450-40.450          10  ISOLATED_BOUNDARY_SAMPLE           40.450-40.450(10ms)      ---                       0.00     0.00        1   58.61   63.16
+ 41  43.350-43.350          10  ISOLATED_BOUNDARY_SAMPLE           43.350-43.350(10ms)      ---                       0.00     0.00        1   61.30   63.92
+ 42  44.590-44.590          10  ISOLATED_BOUNDARY_SAMPLE           44.590-44.590(10ms)      ---                       0.00     0.00        1   63.72   65.22
+ 43  45.020-45.020          10  ISOLATED_BOUNDARY_SAMPLE           45.020-45.020(10ms)      ---                       0.00     0.00        1   63.13   67.01
+ 44  45.620-45.620          10  ISOLATED_BOUNDARY_SAMPLE           45.620-45.620(10ms)      ---                       0.00     0.00        1   58.62   65.90
+ 45  46.300-46.300          10  ISOLATED_BOUNDARY_SAMPLE           46.300-46.300(10ms)      ---                       0.00     0.00        1   57.53   63.04
+ 46  46.440-46.440          10  ISOLATED_BOUNDARY_SAMPLE           46.440-46.440(10ms)      ---                       0.00     0.00        1   63.04   62.64
+ 47  52.060-52.060          10  ISOLATED_BOUNDARY_SAMPLE           52.060-52.060(10ms)      ---                       0.00     0.00        1   67.49   75.20
+ 48  53.360-53.360          10  ISOLATED_BOUNDARY_SAMPLE           53.360-53.360(10ms)      ---                       0.00     0.00        1   66.43   63.83
+ 49  54.400-54.400          10  ISOLATED_BOUNDARY_SAMPLE           54.400-54.400(10ms)      ---                       0.00     0.00        1   61.17   53.14
+ 50  76.160-76.160          10  ISOLATED_BOUNDARY_SAMPLE           76.160-76.160(10ms)      ---                       0.00     0.00        1   69.98   89.92
+ 51  76.550-76.550          10  ISOLATED_BOUNDARY_SAMPLE           76.550-76.550(10ms)      ---                       0.00     0.00        1   89.77   70.07
+ 52  80.220-80.220          10  ISOLATED_BOUNDARY_SAMPLE           80.220-80.220(10ms)      ---                       0.00     0.00        1   70.63   65.43
+ 53  82.990-82.990          10  ISOLATED_BOUNDARY_SAMPLE           82.990-82.990(10ms)      ---                       0.00     0.00        1   67.04   73.33
+ 54  83.670-83.670          10  ISOLATED_BOUNDARY_SAMPLE           83.670-83.670(10ms)      ---                       0.00     0.00        1   73.51   67.18
+ 55  85.000-85.000          10  ISOLATED_BOUNDARY_SAMPLE           85.000-85.000(10ms)      ---                       0.00     0.00        1   70.08   52.52
+ 56  85.640-85.640          10  ISOLATED_BOUNDARY_SAMPLE           85.640-85.640(10ms)      ---                       0.00     0.00        1   52.34   67.10
+ 57  86.280-86.280          10  ISOLATED_BOUNDARY_SAMPLE           86.280-86.280(10ms)      ---                       0.00     0.00        1   75.93   66.96
+ 58  6.670-6.670            10  ISOLATED_BOUNDARY_SAMPLE           ---                      ---                       0.00     0.00        1   57.04   57.76
+ 59  7.640-7.640            10  ISOLATED_BOUNDARY_SAMPLE           ---                      ---                       0.00     0.00        1   48.17   63.95
+ 60  26.150-26.150          10  ISOLATED_BOUNDARY_SAMPLE           ---                      ---                       0.00     0.00        0   47.14   47.27
+ 61  40.270-40.270          10  ISOLATED_BOUNDARY_SAMPLE           ---                      ---                       0.00     0.00        1   62.10   60.99
+ 62  49.490-49.490          10  ISOLATED_BOUNDARY_SAMPLE           ---                      ---                       0.00     0.00        1   61.16   60.47
+ 63  53.880-53.880          10  ISOLATED_BOUNDARY_SAMPLE           ---                      ---                       0.00     0.00        1   62.14   65.09
+ 64  15.110-15.180          80  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.01     0.01        0   62.75   60.15
+ 65  39.430-39.500          80  NO_RESCUABLE_BOUNDARY              ---                      ---                       1.75     1.22        0   48.37   61.17
+ 66  13.440-13.520          90  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.27     0.23        0   57.99   59.91
+ 67  22.490-22.570          90  NO_RESCUABLE_BOUNDARY              ---                      ---                       1.35     0.95        0   63.03   59.84
+ 68  34.010-34.090          90  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.69     0.54        0   63.14   63.09
+ 69  38.870-38.950          90  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.39     0.25        0   56.49   64.12
+ 70  84.270-84.350          90  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.54     0.39        0   69.96   70.90
+ 71  9.900-9.990           100  NO_RESCUABLE_BOUNDARY              ---                      ---                       6.68     6.36        1   63.01   49.49
+ 72  39.130-39.240         120  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.73     0.58        0   63.13   48.29
+ 73  77.700-77.820         130  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.18     0.14        0   67.03   64.04
+ 74  87.510-87.670         170  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.44     0.44        0   62.91   63.17
+ 75  15.750-15.930         190  NO_RESCUABLE_BOUNDARY              ---                      ---                       7.07     7.07        1   55.03   56.09
+ 76  28.980-29.180         210  NO_RESCUABLE_BOUNDARY              ---                      ---                       3.02     2.30        0   66.99   80.58
+ 77  42.970-43.170         210  NO_RESCUABLE_BOUNDARY              ---                      ---                       8.39     4.73        0   60.31   61.47
+ 78  38.360-38.610         260  NO_RESCUABLE_BOUNDARY              ---                      ---                       2.48     2.48        0   62.94   55.30
+ 79  42.330-42.580         260  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.90     0.67        0   61.73   62.98
+ 80  13.740-14.030         300  NO_RESCUABLE_BOUNDARY              ---                      ---                      70.55    54.55        0   61.18   62.64
+ 81  32.390-32.680         300  NO_RESCUABLE_BOUNDARY              ---                      ---                      14.34     6.94        0   67.93   60.77
+ 82  77.960-78.250         300  NO_RESCUABLE_BOUNDARY              ---                      ---                       2.90     1.96        0   64.05   64.02
+ 83  8.030-8.400           380  NO_RESCUABLE_BOUNDARY              ---                      ---                       9.64     8.44        0   66.29   64.99
+ 84  9.350-9.720           380  NO_RESCUABLE_BOUNDARY              ---                      ---                      29.13    18.52        0   58.67   62.90
+ 85  52.480-52.860         390  NO_RESCUABLE_BOUNDARY              ---                      ---                       5.49     4.80        0   76.26   67.30
+ 86  21.470-21.930         470  NO_RESCUABLE_BOUNDARY              ---                      ---                      14.16     9.26        0   63.69   87.92
+ 87  36.140-36.600         470  NO_RESCUABLE_BOUNDARY              ---                      ---                       2.76     2.16        0   63.61   63.11
+ 88  72.710-73.170         470  NO_RESCUABLE_BOUNDARY              ---                      ---                       1.24     0.53        0   67.03   67.92
+ 89  49.630-50.130         510  NO_RESCUABLE_BOUNDARY              ---                      ---                      93.69    40.98        0   60.15   62.78
+ 90  11.780-12.370         600  NO_RESCUABLE_BOUNDARY              ---                      ---                       8.18     5.76        0   62.37   55.14
+ 91  16.860-17.530         680  NO_RESCUABLE_BOUNDARY              ---                      ---                      15.13    10.26        2   56.29   50.81
+ 92  78.940-79.650         720  NO_RESCUABLE_BOUNDARY              ---                      ---                      27.22    23.63        0   62.90   70.08
+ 93  80.900-81.620         730  NO_RESCUABLE_BOUNDARY              ---                      ---                       1.50     1.50        0   66.99   70.55
+ 94  54.830-70.950       16130  NO_RESCUABLE_BOUNDARY              ---                      ---                       0.03     0.03        0   53.16   67.68
+
+====================================================================================================================================================================================
+DETAILED RESCUE CANDIDATES
+====================================================================================================================================================================================
+
+0.000-6.270  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  0.000-0.040[50]
+  context:  left=---  right=51.60
+  raw shape: span=0.00 endpoint=0.00 maxstep=0.00 mono=1.00 eff=0.53
+
+7.390-7.500  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  7.390-7.500[120]
+  context:  left=66.88  right=48.14
+  raw shape: span=0.56 endpoint=0.15 maxstep=0.23 mono=0.50 eff=0.13
+
+8.540-9.130  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  9.090-9.130[50]
+  context:  left=65.00  right=60.93
+  raw shape: span=21.56 endpoint=18.25 maxstep=20.95 mono=0.47 eff=0.32
+
+19.500-20.260  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  19.500-19.500[10] | 19.520-19.570[60] | 19.590-19.610[30] | 19.630-19.710[90] | 19.750-19.780[40] | 19.820-19.850[40]
+  context:  left=78.09  right=63.07
+  raw shape: span=13.06 endpoint=-7.71 maxstep=8.17 mono=0.48 eff=0.12
+
+22.920-23.030  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  22.920-23.030[120]
+  context:  left=62.01  right=60.76
+  raw shape: span=4.21 endpoint=-0.06 maxstep=2.36 mono=0.73 eff=0.01
+
+24.070-25.210  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  25.140-25.210[80]
+  context:  left=57.93  right=54.21
+  raw shape: span=18.66 endpoint=18.66 maxstep=18.62 mono=1.00 eff=1.00
+
+25.430-25.980  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  25.430-25.510[90] | 25.820-25.890[80]
+  context:  left=50.26  right=47.17
+  raw shape: span=58.71 endpoint=31.53 maxstep=29.50 mono=0.51 eff=0.28
+
+26.880-26.960  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  26.880-26.960[90]
+  context:  left=70.02  right=80.06
+  raw shape: span=0.22 endpoint=0.11 maxstep=0.13 mono=0.75 eff=0.24
+
+36.780-37.880  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  37.130-37.170[50] | 37.190-37.190[10] | 37.230-37.330[110]
+  context:  left=63.09  right=63.12
+  raw shape: span=130.85 endpoint=-62.71 maxstep=75.24 mono=0.49 eff=0.06
+
+40.920-41.890  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  40.920-41.000[90] | 41.010-41.050[50] | 41.060-41.080[30] | 41.090-41.170[90] | 41.240-41.260[30] | 41.310-41.310[10]
+  context:  left=63.04  right=63.06
+  raw shape: span=189.50 endpoint=-87.49 maxstep=98.87 mono=0.52 eff=0.07
+
+43.520-43.600  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  43.520-43.550[40] | 43.560-43.600[50]
+  context:  left=63.22  right=65.28
+  raw shape: span=9.57 endpoint=-5.85 maxstep=9.57 mono=0.50 eff=0.36
+
+43.870-43.980  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  43.870-43.980[120]
+  context:  left=67.00  right=67.85
+  raw shape: span=0.24 endpoint=0.19 maxstep=0.17 mono=0.67 eff=0.26
+
+46.640-47.060  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  46.980-47.060[90]
+  context:  left=62.65  right=62.14
+  raw shape: span=26.93 endpoint=24.73 maxstep=26.89 mono=0.50 eff=0.56
+
+49.030-49.320  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  49.030-49.100[80]
+  context:  left=59.04  right=61.77
+  raw shape: span=11.10 endpoint=-6.15 maxstep=10.93 mono=0.55 eff=0.23
+
+73.860-74.110  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  73.860-73.940[90] | 73.950-74.000[60] | 74.020-74.050[40] | 74.070-74.110[50]
+  context:  left=68.02  right=68.02
+  raw shape: span=36.00 endpoint=-35.22 maxstep=35.19 mono=0.50 eff=0.87
+
+85.940-86.010  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  85.940-86.010[80]
+  context:  left=66.96  right=75.88
+  raw shape: span=0.09 endpoint=0.03 maxstep=0.05 mono=1.00 eff=0.17
+
+88.070-88.630  INTERNAL_COHERENT_SUBRUN
+  backward: ---
+  forward:  ---
+  subruns:  88.150-88.190[50]
+  context:  left=62.64  right=---
+  raw shape: span=48.37 endpoint=0.00 maxstep=48.36 mono=0.50 eff=0.00
+
+====================================================================================================================================================================================
+REGRESSION WINDOWS
+====================================================================================================================================================================================
+
+clean suffix formerly hidden inside chaotic run: 9.000-9.200s
+  episode:   8.540-9.130s
+  class:     INTERNAL_COHERENT_SUBRUN
+  backward:  ---
+  forward:   ---
+  subruns:   9.090-9.130[50]
+  shape:     span=21.56 endpoint=18.25 maxstep=20.95 mono=0.47
+
+possible ornament / leave-and-return: 22.850-23.100s
+  episode:   22.920-23.030s
+  class:     INTERNAL_COHERENT_SUBRUN
+  backward:  ---
+  forward:   ---
+  subruns:   22.920-23.030[120]
+  shape:     span=4.21 endpoint=-0.06 maxstep=2.36 mono=0.73
+
+djwww / noise collapse: 40.850-41.950s
+  episode:   40.920-41.890s
+  class:     INTERNAL_COHERENT_SUBRUN
+  backward:  ---
+  forward:   ---
+  subruns:   40.920-41.000[90] | 41.010-41.050[50] | 41.060-41.080[30] | 41.090-41.170[90] | 41.240-41.260[30] | 41.310-41.310[10]
+  shape:     span=189.50 endpoint=-87.49 maxstep=98.87 mono=0.52
+
+extreme tracker explosion: 73.800-74.200s
+  episode:   73.860-74.110s
+  class:     INTERNAL_COHERENT_SUBRUN
+  backward:  ---
+  forward:   ---
+  subruns:   73.860-73.940[90] | 73.950-74.000[60] | 74.020-74.050[40] | 74.070-74.110[50]
+  shape:     span=36.00 endpoint=-35.22 maxstep=35.19 mono=0.50
+
+====================================================================================================================================================================================
+IMPORTANT: OBSERVATIONAL ONLY — NO F0 OR VALIDITY SAMPLES WERE MODIFIED.
+====================================================================================================================================================================================

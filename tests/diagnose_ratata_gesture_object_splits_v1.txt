@@ -1,0 +1,163 @@
+========================================================================================================================
+GESTURE OBJECT STRUCTURAL SPLIT EVIDENCE V1
+========================================================================================================================
+Rows:                 8864
+Analysis rate:        100.000 Hz
+Valid rows:           4989
+Maximal objects:      55
+Observed links:       42
+Objects with links:   31
+Objects without links: 24
+Same-direction links: 3
+Reversal links:       9
+Near-flat links:      2
+Incomplete links:     28
+
+Expected invariants:
+  maximal objects remain 55
+  observed links remain 42
+  original 97 transitions remain untouched
+  NO objects are actually split in V1
+  NO musical labels are assigned
+
+========================================================================================================================
+ALL MULTI-TRANSITION OBJECTS
+========================================================================================================================
+
+OBJECT   1 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T0-S1-T2 INCOMPLETE prev=    -- S= 51.58 next=    -- dur= 130ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT   3 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T5-S6-T7 INCOMPLETE prev=    -- S= 66.93 next=    -- dur= 110ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT   4 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T9-S10-T11 INCOMPLETE prev=    -- S= 66.96 next=    -- dur=  80ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT   6 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T17-S18-T19 INCOMPLETE prev=    -- S= 62.89 next= 63.03 dur= 230ms in=    -- out=  0.14 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT   7 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T21-S22-T23 INCOMPLETE prev= 63.03 S= 58.16 next=    -- dur=  90ms in= -4.87 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT   8 T=3 links=2 same=0 rev=1 flat=0 incomplete=1 returnPrev=0 returnNext=1 returnBoth=0 path=2.40 excess=0.52 maxExcess=0.52 minRatio=0.78
+    L1 T29-S30-T31   REVERSAL prev= 62.84 S= 63.10 next= 60.97 dur= 250ms in=  0.26 out= -2.14 outer= -1.87 path= 2.40 excess= 0.52 ratio= 0.78 gainPrev=-1.61 gainNext= 0.26 ret=0/1
+    L2 T31-S32-T33 INCOMPLETE prev= 63.10 S= 60.97 next=    -- dur= 180ms in= -2.14 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  10 T=3 links=2 same=0 rev=0 flat=0 incomplete=2 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T36-S37-T38 INCOMPLETE prev=    -- S= 56.03 next= 57.95 dur= 150ms in=    -- out=  1.92 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+    L2 T38-S39-T40 INCOMPLETE prev= 56.03 S= 57.95 next=    -- dur= 130ms in=  1.92 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  11 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T42-S43-T44 INCOMPLETE prev=    -- S= 63.14 next= 63.01 dur= 180ms in=    -- out= -0.14 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  16 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T58-S59-T60 INCOMPLETE prev=    -- S= 57.91 next= 57.84 dur= 130ms in=    -- out= -0.08 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  18 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T66-S67-T68 INCOMPLETE prev=    -- S= 68.09 next=    -- dur= 190ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  19 T=3 links=2 same=1 rev=1 flat=0 incomplete=0 returnPrev=1 returnNext=0 returnBoth=0 path=2.25 excess=0.58 maxExcess=0.58 minRatio=0.43
+    L1 T70-S71-T72   SAME_DIR prev= 80.01 S= 79.49 next= 78.77 dur= 250ms in= -0.52 out= -0.72 outer= -1.24 path= 1.24 excess= 0.00 ratio= 1.00 gainPrev=-0.72 gainNext=-0.52 ret=0/0
+    L2 T72-S73-T74   REVERSAL prev= 79.49 S= 78.77 next= 79.06 dur= 180ms in= -0.72 out=  0.29 outer= -0.43 path= 1.01 excess= 0.58 ratio= 0.43 gainPrev= 0.29 gainNext=-0.14 ret=1/0
+
+OBJECT  21 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T78-S79-T80 INCOMPLETE prev=    -- S= 70.06 next=    -- dur=  90ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  24 T=3 links=2 same=0 rev=1 flat=0 incomplete=1 returnPrev=1 returnNext=1 returnBoth=1 path=5.61 excess=5.31 maxExcess=5.31 minRatio=0.05
+    L1 T88-S89-T90 INCOMPLETE prev=    -- S= 66.67 next= 64.02 dur= 110ms in=    -- out= -2.66 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+    L2 T90-S91-T92   REVERSAL prev= 66.67 S= 64.02 next= 66.97 dur=  80ms in= -2.66 out=  2.95 outer=  0.30 path= 5.61 excess= 5.31 ratio= 0.05 gainPrev= 2.36 gainNext= 2.66 ret=1/1
+
+OBJECT  25 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T97-S98-T99 INCOMPLETE prev= 60.75 S= 63.01 next=    -- dur= 190ms in=  2.26 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  27 T=3 links=2 same=0 rev=1 flat=0 incomplete=1 returnPrev=1 returnNext=0 returnBoth=0 path=2.61 excess=0.28 maxExcess=0.28 minRatio=0.89
+    L1 T102-S103-T104 INCOMPLETE prev=    -- S= 61.62 next= 64.09 dur=  80ms in=    -- out=  2.47 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+    L2 T104-S105-T106   REVERSAL prev= 61.62 S= 64.09 next= 63.95 dur= 110ms in=  2.47 out= -0.14 outer=  2.33 path= 2.61 excess= 0.28 ratio= 0.89 gainPrev= 0.14 gainNext=-2.19 ret=1/0
+
+OBJECT  33 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T124-S125-T126 INCOMPLETE prev= 63.21 S= 63.12 next=    -- dur= 100ms in= -0.09 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  35 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T129-S130-T131 INCOMPLETE prev=    -- S= 59.35 next=    -- dur=  90ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  37 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T135-S136-T137 INCOMPLETE prev=    -- S= 67.06 next=    -- dur= 120ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  38 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T140-S141-T142 INCOMPLETE prev= 66.97 S= 64.09 next=    -- dur= 110ms in= -2.88 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  39 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T143-S144-T145 INCOMPLETE prev=    -- S= 62.96 next=    -- dur= 130ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  41 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T149-S150-T151 INCOMPLETE prev=    -- S= 63.44 next=    -- dur= 140ms in=    -- out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  42 T=4 links=3 same=0 rev=2 flat=0 incomplete=1 returnPrev=2 returnNext=1 returnBoth=1 path=1.45 excess=0.75 maxExcess=0.59 minRatio=0.29
+    L1 T155-S156-T157   REVERSAL prev= 62.61 S= 62.91 next= 62.37 dur= 120ms in=  0.30 out= -0.54 outer= -0.24 path= 0.83 excess= 0.59 ratio= 0.29 gainPrev= 0.05 gainNext= 0.30 ret=1/1
+    L2 T157-S158-T159   REVERSAL prev= 62.91 S= 62.37 next= 62.45 dur= 150ms in= -0.54 out=  0.08 outer= -0.46 path= 0.62 excess= 0.16 ratio= 0.74 gainPrev= 0.08 gainNext=-0.38 ret=1/0
+    L3 T159-S160-T161 INCOMPLETE prev= 62.37 S= 62.45 next=    -- dur= 100ms in=  0.08 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  44 T=3 links=2 same=0 rev=0 flat=2 incomplete=0 returnPrev=0 returnNext=1 returnBoth=0 path=1.37 excess=0.03 maxExcess=0.03 minRatio=0.97
+    L1 T169-S170-T171   FLAT_OUT prev= 67.68 S= 68.01 next= 68.02 dur= 150ms in=  0.33 out=  0.02 outer=  0.35 path= 0.35 excess= 0.00 ratio= 1.00 gainPrev=-0.02 gainNext=-0.33 ret=0/0
+    L2 T171-S172-T173    FLAT_IN prev= 68.01 S= 68.02 next= 67.01 dur= 210ms in=  0.02 out= -1.01 outer= -0.99 path= 1.03 excess= 0.03 ratio= 0.97 gainPrev=-0.98 gainNext= 0.02 ret=0/1
+
+OBJECT  46 T=5 links=4 same=1 rev=3 flat=0 incomplete=0 returnPrev=3 returnNext=2 returnBoth=2 path=6.15 excess=2.64 maxExcess=1.41 minRatio=0.18
+    L1 T178-S179-T180   REVERSAL prev= 68.02 S= 67.00 next= 67.71 dur= 160ms in= -1.02 out=  0.71 outer= -0.31 path= 1.72 excess= 1.41 ratio= 0.18 gainPrev= 0.71 gainNext= 0.40 ret=1/1
+    L2 T180-S181-T182   REVERSAL prev= 67.00 S= 67.71 next= 67.40 dur= 160ms in=  0.71 out= -0.31 outer=  0.40 path= 1.01 excess= 0.61 ratio= 0.40 gainPrev= 0.31 gainNext=-0.10 ret=1/0
+    L3 T182-S183-T184   REVERSAL prev= 67.71 S= 67.40 next= 67.95 dur= 190ms in= -0.31 out=  0.54 outer=  0.24 path= 0.85 excess= 0.61 ratio= 0.28 gainPrev= 0.07 gainNext= 0.31 ret=1/1
+    L4 T184-S185-T186   SAME_DIR prev= 67.40 S= 67.95 next= 69.97 dur= 190ms in=  0.54 out=  2.02 outer=  2.57 path= 2.57 excess= 0.00 ratio= 1.00 gainPrev=-2.02 gainNext=-0.54 ret=0/0
+
+OBJECT  47 T=2 links=1 same=1 rev=0 flat=0 incomplete=0 returnPrev=0 returnNext=0 returnBoth=0 path=3.05 excess=0.00 maxExcess=0.00 minRatio=1.00
+    L1 T190-S191-T192   SAME_DIR prev= 70.08 S= 68.02 next= 67.03 dur= 230ms in= -2.05 out= -0.99 outer= -3.05 path= 3.05 excess= 0.00 ratio= 1.00 gainPrev=-0.99 gainNext=-2.05 ret=0/0
+
+OBJECT  49 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T199-S200-T201 INCOMPLETE prev= 70.28 S= 68.05 next=    -- dur=  80ms in= -2.23 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  50 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T202-S203-T204 INCOMPLETE prev=    -- S= 68.06 next= 67.00 dur= 120ms in=    -- out= -1.06 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  51 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T206-S207-T208 INCOMPLETE prev=    -- S= 68.02 next= 66.97 dur= 150ms in=    -- out= -1.05 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  52 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T211-S212-T213 INCOMPLETE prev=    -- S= 67.97 next= 69.97 dur= 130ms in=    -- out=  2.00 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  54 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T221-S222-T223 INCOMPLETE prev=    -- S= 63.95 next= 63.03 dur= 110ms in=    -- out= -0.92 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  55 T=2 links=1 same=0 rev=0 flat=0 incomplete=1 returnPrev=0 returnNext=0 returnBoth=0 path=0.00 excess=0.00 maxExcess=-- minRatio=--
+    L1 T226-S227-T228 INCOMPLETE prev= 63.25 S= 62.33 next=    -- dur= 170ms in= -0.92 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+========================================================================================================================
+REGRESSION OBJECTS
+========================================================================================================================
+
+OBJECT   8 T=3 links=2 same=0 rev=1 flat=0 incomplete=1 returnPrev=0 returnNext=1 returnBoth=0 path=2.40 excess=0.52 maxExcess=0.52 minRatio=0.78
+    L1 T29-S30-T31   REVERSAL prev= 62.84 S= 63.10 next= 60.97 dur= 250ms in=  0.26 out= -2.14 outer= -1.87 path= 2.40 excess= 0.52 ratio= 0.78 gainPrev=-1.61 gainNext= 0.26 ret=0/1
+    L2 T31-S32-T33 INCOMPLETE prev= 63.10 S= 60.97 next=    -- dur= 180ms in= -2.14 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  19 T=3 links=2 same=1 rev=1 flat=0 incomplete=0 returnPrev=1 returnNext=0 returnBoth=0 path=2.25 excess=0.58 maxExcess=0.58 minRatio=0.43
+    L1 T70-S71-T72   SAME_DIR prev= 80.01 S= 79.49 next= 78.77 dur= 250ms in= -0.52 out= -0.72 outer= -1.24 path= 1.24 excess= 0.00 ratio= 1.00 gainPrev=-0.72 gainNext=-0.52 ret=0/0
+    L2 T72-S73-T74   REVERSAL prev= 79.49 S= 78.77 next= 79.06 dur= 180ms in= -0.72 out=  0.29 outer= -0.43 path= 1.01 excess= 0.58 ratio= 0.43 gainPrev= 0.29 gainNext=-0.14 ret=1/0
+
+OBJECT  24 T=3 links=2 same=0 rev=1 flat=0 incomplete=1 returnPrev=1 returnNext=1 returnBoth=1 path=5.61 excess=5.31 maxExcess=5.31 minRatio=0.05
+    L1 T88-S89-T90 INCOMPLETE prev=    -- S= 66.67 next= 64.02 dur= 110ms in=    -- out= -2.66 outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+    L2 T90-S91-T92   REVERSAL prev= 66.67 S= 64.02 next= 66.97 dur=  80ms in= -2.66 out=  2.95 outer=  0.30 path= 5.61 excess= 5.31 ratio= 0.05 gainPrev= 2.36 gainNext= 2.66 ret=1/1
+
+OBJECT  42 T=4 links=3 same=0 rev=2 flat=0 incomplete=1 returnPrev=2 returnNext=1 returnBoth=1 path=1.45 excess=0.75 maxExcess=0.59 minRatio=0.29
+    L1 T155-S156-T157   REVERSAL prev= 62.61 S= 62.91 next= 62.37 dur= 120ms in=  0.30 out= -0.54 outer= -0.24 path= 0.83 excess= 0.59 ratio= 0.29 gainPrev= 0.05 gainNext= 0.30 ret=1/1
+    L2 T157-S158-T159   REVERSAL prev= 62.91 S= 62.37 next= 62.45 dur= 150ms in= -0.54 out=  0.08 outer= -0.46 path= 0.62 excess= 0.16 ratio= 0.74 gainPrev= 0.08 gainNext=-0.38 ret=1/0
+    L3 T159-S160-T161 INCOMPLETE prev= 62.37 S= 62.45 next=    -- dur= 100ms in=  0.08 out=    -- outer=    -- path=   -- excess=   -- ratio=   -- gainPrev=   -- gainNext=   -- ret=0/0
+
+OBJECT  44 T=3 links=2 same=0 rev=0 flat=2 incomplete=0 returnPrev=0 returnNext=1 returnBoth=0 path=1.37 excess=0.03 maxExcess=0.03 minRatio=0.97
+    L1 T169-S170-T171   FLAT_OUT prev= 67.68 S= 68.01 next= 68.02 dur= 150ms in=  0.33 out=  0.02 outer=  0.35 path= 0.35 excess= 0.00 ratio= 1.00 gainPrev=-0.02 gainNext=-0.33 ret=0/0
+    L2 T171-S172-T173    FLAT_IN prev= 68.01 S= 68.02 next= 67.01 dur= 210ms in=  0.02 out= -1.01 outer= -0.99 path= 1.03 excess= 0.03 ratio= 0.97 gainPrev=-0.98 gainNext= 0.02 ret=0/1
+
+OBJECT  46 T=5 links=4 same=1 rev=3 flat=0 incomplete=0 returnPrev=3 returnNext=2 returnBoth=2 path=6.15 excess=2.64 maxExcess=1.41 minRatio=0.18
+    L1 T178-S179-T180   REVERSAL prev= 68.02 S= 67.00 next= 67.71 dur= 160ms in= -1.02 out=  0.71 outer= -0.31 path= 1.72 excess= 1.41 ratio= 0.18 gainPrev= 0.71 gainNext= 0.40 ret=1/1
+    L2 T180-S181-T182   REVERSAL prev= 67.00 S= 67.71 next= 67.40 dur= 160ms in=  0.71 out= -0.31 outer=  0.40 path= 1.01 excess= 0.61 ratio= 0.40 gainPrev= 0.31 gainNext=-0.10 ret=1/0
+    L3 T182-S183-T184   REVERSAL prev= 67.71 S= 67.40 next= 67.95 dur= 190ms in= -0.31 out=  0.54 outer=  0.24 path= 0.85 excess= 0.61 ratio= 0.28 gainPrev= 0.07 gainNext= 0.31 ret=1/1
+    L4 T184-S185-T186   SAME_DIR prev= 67.40 S= 67.95 next= 69.97 dur= 190ms in=  0.54 out=  2.02 outer=  2.57 path= 2.57 excess= 0.00 ratio= 1.00 gainPrev=-2.02 gainNext=-0.54 ret=0/0
+
+OBJECT  47 T=2 links=1 same=1 rev=0 flat=0 incomplete=0 returnPrev=0 returnNext=0 returnBoth=0 path=3.05 excess=0.00 maxExcess=0.00 minRatio=1.00
+    L1 T190-S191-T192   SAME_DIR prev= 70.08 S= 68.02 next= 67.03 dur= 230ms in= -2.05 out= -0.99 outer= -3.05 path= 3.05 excess= 0.00 ratio= 1.00 gainPrev=-0.99 gainNext=-2.05 ret=0/0

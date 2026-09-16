@@ -1,0 +1,141 @@
+========================================================================================================================
+STRUCTURAL SPLITTING V3
+========================================================================================================================
+Rows:                 6730
+Analysis rate:        100.000 Hz
+Valid rows:           3579
+Maximal objects:      45
+Observed links:       24
+JOIN links:           2
+SPLIT links:          14
+UNRESOLVED links:     8
+Structural segments:  59
+
+Expected invariants:
+  maximal objects remain 55
+  observed links remain 42
+  JOIN + SPLIT + UNRESOLVED = 42
+  original 97 transitions remain untouched
+  NO musical gesture labels are assigned
+
+========================================================================================================================
+ALL STRUCTURAL DECISIONS
+========================================================================================================================
+
+OBJECT   2 splits=1 joins=0 unresolved=0 segments=2
+    L1 T5-S6-T7 SPLIT      connector=-                      boundary=DURATION,CENTER/SHAPE,TOPOLOGY
+        SEGMENT 1: T=(5,) S=() unresolved=()
+        SEGMENT 2: T=(7,) S=() unresolved=()
+
+OBJECT   4 splits=0 joins=0 unresolved=1 segments=1
+    L1 T12-S13-T14 UNRESOLVED connector=-                      boundary=-
+        SEGMENT 1: T=(12, 14) S=(13,) unresolved=(0,)
+
+OBJECT   9 splits=3 joins=1 unresolved=0 segments=4
+    L1 T23-S24-T25 SPLIT      connector=-                      boundary=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY
+    L2 T25-S26-T27 JOIN       connector=EXCURSION,SIMILAR      boundary=RESIDUAL
+    L3 T27-S28-T29 SPLIT      connector=-                      boundary=DURATION,PATH,TOPOLOGY
+    L4 T29-S30-T31 SPLIT      connector=-                      boundary=PATH,TOPOLOGY
+        SEGMENT 1: T=(23,) S=() unresolved=()
+        SEGMENT 2: T=(25, 27) S=(26,) unresolved=()
+        SEGMENT 3: T=(29,) S=() unresolved=()
+        SEGMENT 4: T=(31,) S=() unresolved=()
+
+OBJECT  13 splits=0 joins=0 unresolved=1 segments=1
+    L1 T40-S41-T42 UNRESOLVED connector=SIMILAR                boundary=TOPOLOGY
+        SEGMENT 1: T=(40, 42) S=(41,) unresolved=(0,)
+
+OBJECT  18 splits=0 joins=0 unresolved=2 segments=1
+    L1 T59-S60-T61 UNRESOLVED connector=-                      boundary=-
+    L2 T61-S62-T63 UNRESOLVED connector=-                      boundary=RESIDUAL
+        SEGMENT 1: T=(59, 61, 63) S=(60, 62) unresolved=(0, 1)
+
+OBJECT  20 splits=1 joins=0 unresolved=0 segments=2
+    L1 T68-S69-T70 SPLIT      connector=-                      boundary=DURATION,PATH,RESIDUAL,TOPOLOGY
+        SEGMENT 1: T=(68,) S=() unresolved=()
+        SEGMENT 2: T=(70,) S=() unresolved=()
+
+OBJECT  21 splits=1 joins=0 unresolved=0 segments=2
+    L1 T73-S74-T75 SPLIT      connector=-                      boundary=DURATION,PATH,TOPOLOGY
+        SEGMENT 1: T=(73,) S=() unresolved=()
+        SEGMENT 2: T=(75,) S=() unresolved=()
+
+OBJECT  23 splits=1 joins=0 unresolved=0 segments=2
+    L1 T80-S81-T82 SPLIT      connector=-                      boundary=DURATION,PATH,TOPOLOGY
+        SEGMENT 1: T=(80,) S=() unresolved=()
+        SEGMENT 2: T=(82,) S=() unresolved=()
+
+OBJECT  25 splits=1 joins=0 unresolved=0 segments=2
+    L1 T86-S87-T88 SPLIT      connector=-                      boundary=RESIDUAL,TOPOLOGY
+        SEGMENT 1: T=(86,) S=() unresolved=()
+        SEGMENT 2: T=(88,) S=() unresolved=()
+
+OBJECT  26 splits=0 joins=0 unresolved=1 segments=1
+    L1 T94-S95-T96 UNRESOLVED connector=SIMILAR                boundary=TOPOLOGY
+        SEGMENT 1: T=(94, 96) S=(95,) unresolved=(0,)
+
+OBJECT  27 splits=1 joins=0 unresolved=0 segments=2
+    L1 T99-S100-T101 SPLIT      connector=-                      boundary=PATH,TOPOLOGY
+        SEGMENT 1: T=(99,) S=() unresolved=()
+        SEGMENT 2: T=(101,) S=() unresolved=()
+
+OBJECT  36 splits=0 joins=1 unresolved=1 segments=1
+    L1 T122-S123-T124 UNRESOLVED connector=-                      boundary=-
+    L2 T124-S125-T126 JOIN       connector=DIRECT                 boundary=TOPOLOGY
+        SEGMENT 1: T=(122, 124, 126) S=(123, 125) unresolved=(0,)
+
+OBJECT  37 splits=1 joins=0 unresolved=0 segments=2
+    L1 T128-S129-T130 SPLIT      connector=-                      boundary=DURATION,PATH,TOPOLOGY
+        SEGMENT 1: T=(128,) S=() unresolved=()
+        SEGMENT 2: T=(130,) S=() unresolved=()
+
+OBJECT  38 splits=1 joins=0 unresolved=0 segments=2
+    L1 T131-S132-T133 SPLIT      connector=-                      boundary=DURATION,PATH,TOPOLOGY
+        SEGMENT 1: T=(131,) S=() unresolved=()
+        SEGMENT 2: T=(133,) S=() unresolved=()
+
+OBJECT  40 splits=0 joins=0 unresolved=1 segments=1
+    L1 T137-S138-T139 UNRESOLVED connector=-                      boundary=PATH
+        SEGMENT 1: T=(137, 139) S=(138,) unresolved=(0,)
+
+OBJECT  41 splits=0 joins=0 unresolved=1 segments=1
+    L1 T141-S142-T143 UNRESOLVED connector=-                      boundary=PATH
+        SEGMENT 1: T=(141, 143) S=(142,) unresolved=(0,)
+
+OBJECT  42 splits=1 joins=0 unresolved=0 segments=2
+    L1 T145-S146-T147 SPLIT      connector=-                      boundary=DURATION,PATH,TOPOLOGY
+        SEGMENT 1: T=(145,) S=() unresolved=()
+        SEGMENT 2: T=(147,) S=() unresolved=()
+
+OBJECT  44 splits=1 joins=0 unresolved=0 segments=2
+    L1 T150-S151-T152 SPLIT      connector=-                      boundary=DURATION,PATH,TOPOLOGY
+        SEGMENT 1: T=(150,) S=() unresolved=()
+        SEGMENT 2: T=(152,) S=() unresolved=()
+
+OBJECT  45 splits=1 joins=0 unresolved=0 segments=2
+    L1 T153-S154-T155 SPLIT      connector=-                      boundary=DURATION,PATH,TOPOLOGY
+        SEGMENT 1: T=(153,) S=() unresolved=()
+        SEGMENT 2: T=(155,) S=() unresolved=()
+
+========================================================================================================================
+REGRESSION OBJECTS
+========================================================================================================================
+
+OBJECT   8 splits=0 joins=0 unresolved=0 segments=1
+        SEGMENT 1: T=(21,) S=() unresolved=()
+
+OBJECT  19 splits=0 joins=0 unresolved=0 segments=1
+        SEGMENT 1: T=(65,) S=() unresolved=()
+
+OBJECT  24 splits=0 joins=0 unresolved=0 segments=1
+        SEGMENT 1: T=(85,) S=() unresolved=()
+
+OBJECT  42 splits=1 joins=0 unresolved=0 segments=2
+    L1 T145-S146-T147 SPLIT      connectorFamilies=0 boundaryFamilies=3
+        SEGMENT 1: T=(145,) S=() unresolved=()
+        SEGMENT 2: T=(147,) S=() unresolved=()
+
+OBJECT  44 splits=1 joins=0 unresolved=0 segments=2
+    L1 T150-S151-T152 SPLIT      connectorFamilies=0 boundaryFamilies=3
+        SEGMENT 1: T=(150,) S=() unresolved=()
+        SEGMENT 2: T=(152,) S=() unresolved=()

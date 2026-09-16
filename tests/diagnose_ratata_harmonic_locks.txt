@@ -1,0 +1,2729 @@
+
+================================================================================================================
+RATATA HARMONIC-LOCK / HUMAN-VOCAL PLAUSIBILITY DIAGNOSTIC
+================================================================================================================
+
+Rows:                    8864
+Analysis rate:           100.000 Hz
+Accepted runs:           93
+Rejected vocal runs:     78
+Trusted context:         ±200.0 ms
+
+VOCAL PRIOR:
+  thirds and below (<=4 st): essentially no rapid-change penalty
+  fourth/fifth: increasingly demanding at very short durations
+  sixth/seventh: strongly suspicious when nearly instantaneous
+  octave+: extremely suspicious as an instantaneous target jump
+  large SMOOTH trajectories are not rejected merely for total span
+
+================================================================================================================
+A. MOST SUSPICIOUS CURRENTLY ACCEPTED RUNS
+================================================================================================================
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #01
+Run:                    32.060 .. 32.170 s
+Duration:               120.0 ms
+Median run pitch:        86.12 D6
+Trusted pitch BEFORE:    67.02 G4
+Trusted pitch AFTER:     67.98 G#4
+
+Interval from BEFORE:   +19.11 st
+Interval from AFTER:    +18.14 st
+Vocal prior BEFORE:     10.514  EXTREME
+Vocal prior AFTER:      8.924  EXTREME
+
+Nearest harmonic BEFORE: +3:1     error=0.09 st
+Nearest harmonic AFTER:  +3:1     error=0.88 st
+
+Run span:               0.60 st
+Endpoint change:        +0.20 st
+Path length:            1.39 st
+Direct/path efficiency: 0.144
+Monotonic fraction:     0.636
+Maximum adjacent step:  0.35 st / 10.0 ms
+Max velocity:           35.4 st/s
+Median velocity:        9.6 st/s
+Max acceleration:       6081.1 st/s²
+
+DIAGNOSTIC SUSPICION:   12.514
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      31.980     395.28     67.14   G4     True    VALID_CONTINUOUS
+      31.990     393.55     67.07   G4     True    VALID_CONTINUOUS
+      32.000     393.04     67.05   G4     True    VALID_CONTINUOUS
+      32.010     393.74     67.08   G4     True    VALID_CONTINUOUS
+      32.020     392.40     67.02   G4     True    VALID_CONTINUOUS
+      32.030     391.64     66.98   G4     True    VALID_CONTINUOUS
+      32.040     393.78     67.08   G4     True    VALID_CONTINUOUS
+      32.050    1181.14     86.10   D6     False   LOCK_LOST_DISCONTINUITY
+>>    32.060    1182.06     86.11   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.070    1187.06     86.18   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.080    1211.56     86.54   D#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.090    1193.89     86.28   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.100    1184.23     86.14   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.110    1171.48     85.95   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.120    1170.58     85.94   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.130    1177.10     86.04   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.140    1178.88     86.06   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.150    1182.06     86.11   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.160    1187.84     86.19   D6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.170    1195.80     86.31   D6     True    REACQUIRED_FUTURE_CONFIRMED
+      32.180     422.13     68.28   G#4    False   LOCK_LOST_DISCONTINUITY
+      32.190     416.60     68.05   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      32.200     407.23     67.66   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      32.210     408.45     67.71   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      32.220     418.84     68.15   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      32.230     420.57     68.22   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      32.240     419.62     68.18   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      32.250     424.36     68.37   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #02
+Run:                    7.510 .. 7.630 s
+Duration:               130.0 ms
+Median run pitch:        48.16 C3
+Trusted pitch BEFORE:    66.90 G4
+Trusted pitch AFTER:     66.79 G4
+
+Interval from BEFORE:   -18.75 st
+Interval from AFTER:    -18.64 st
+Vocal prior BEFORE:     8.980  EXTREME
+Vocal prior AFTER:      8.813  EXTREME
+
+Nearest harmonic BEFORE: -3:1     error=0.27 st
+Nearest harmonic AFTER:  -3:1     error=0.38 st
+
+Run span:               7.56 st
+Endpoint change:        +6.72 st
+Path length:            10.52 st
+Direct/path efficiency: 0.639
+Monotonic fraction:     0.583
+Maximum adjacent step:  3.89 st / 10.0 ms
+Max velocity:           389.1 st/s
+Median velocity:        27.7 st/s
+Max acceleration:       37889.6 st/s²
+
+DIAGNOSTIC SUSPICION:   11.980
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+       7.430    1204.19     86.43   D6     False   WAITING_FOR_REACQUISITION
+       7.440    1194.12     86.28   D6     False   WAITING_FOR_REACQUISITION
+       7.450    1207.42     86.48   D6     False   WAITING_FOR_REACQUISITION
+       7.460    1223.23     86.70   D#6    False   WAITING_FOR_REACQUISITION
+       7.470    1233.33     86.84   D#6    False   WAITING_FOR_REACQUISITION
+       7.480    1230.86     86.81   D#6    False   WAITING_FOR_REACQUISITION
+       7.490    1216.10     86.60   D#6    False   WAITING_FOR_REACQUISITION
+       7.500    1211.48     86.53   D#6    False   WAITING_FOR_REACQUISITION
+>>     7.510     132.00     48.16   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.520     130.99     48.02   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.530     132.44     48.21   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.540     132.84     48.27   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.550     131.40     48.08   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.560     131.51     48.09   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.570     134.87     48.53   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.580     131.78     48.13   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.590     134.57     48.49   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.600     126.61     47.43   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.610     125.73     47.31   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.620     155.40     50.98   D#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.630     194.56     54.87   G3     True    VALID_CONTINUOUS
+       7.640     307.64     62.80   D#4    False   LOCK_LOST_DISCONTINUITY
+       7.650     243.22     58.74   B3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.660     237.32     58.31   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+       7.670     230.62     57.82   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+       7.680     230.15     57.78   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+       7.690     250.86     59.27   B3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.700     308.58     62.86   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+       7.710     350.10     65.04   F4     True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #03
+Run:                    22.240 .. 22.480 s
+Duration:               250.0 ms
+Median run pitch:        62.93 D#4
+Trusted pitch BEFORE:    88.50 E6
+Trusted pitch AFTER:     59.81 C4
+
+Interval from BEFORE:   -25.56 st
+Interval from AFTER:     +3.12 st
+Vocal prior BEFORE:     10.421  EXTREME
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -2 OCT   error=1.56 st
+Nearest harmonic AFTER:  +1 OCT   error=8.88 st
+
+Run span:               0.79 st
+Endpoint change:        +0.60 st
+Path length:            3.23 st
+Direct/path efficiency: 0.187
+Monotonic fraction:     0.583
+Maximum adjacent step:  0.48 st / 10.0 ms
+Max velocity:           48.2 st/s
+Median velocity:        12.0 st/s
+Max acceleration:       5944.2 st/s²
+
+DIAGNOSTIC SUSPICION:   10.421
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      22.160    1369.16     88.65   F6     True    VALID_CONTINUOUS
+      22.170    1361.86     88.56   F6     True    VALID_CONTINUOUS
+      22.180    1366.16     88.61   F6     True    VALID_CONTINUOUS
+      22.190    1371.01     88.68   F6     True    VALID_CONTINUOUS
+      22.200    1356.80     88.50   E6     True    VALID_CONTINUOUS
+      22.210    1366.73     88.62   F6     True    VALID_CONTINUOUS
+      22.220    1366.14     88.61   F6     True    VALID_CONTINUOUS
+      22.230     305.00     62.66   D#4    False   LOCK_LOST_DISCONTINUITY
+>>    22.240     301.25     62.44   D4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.250     309.75     62.92   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.260     308.70     62.86   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.270     311.62     63.03   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.280     309.57     62.91   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.290     309.60     62.91   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.300     306.74     62.75   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.310     301.91     62.48   D4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.320     299.37     62.33   D4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.330     302.84     62.53   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.340     306.10     62.72   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.350     309.34     62.90   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.360     311.60     63.03   D#4    True    VALID_CONTINUOUS
+>>    22.370     306.32     62.73   D#4    True    VALID_CONTINUOUS
+>>    22.380     311.65     63.03   D#4    True    VALID_CONTINUOUS
+>>    22.390     311.57     63.02   D#4    True    VALID_CONTINUOUS
+>>    22.400     311.60     63.03   D#4    True    VALID_CONTINUOUS
+>>    22.410     313.30     63.12   D#4    True    VALID_CONTINUOUS
+>>    22.420     312.16     63.06   D#4    True    VALID_CONTINUOUS
+>>    22.430     312.66     63.08   D#4    True    VALID_CONTINUOUS
+>>    22.440     309.95     62.93   D#4    True    VALID_CONTINUOUS
+>>    22.450     310.71     62.98   D#4    True    VALID_CONTINUOUS
+>>    22.460     311.98     63.05   D#4    True    VALID_CONTINUOUS
+>>    22.470     311.22     63.01   D#4    True    VALID_CONTINUOUS
+>>    22.480     311.96     63.05   D#4    True    VALID_CONTINUOUS
+      22.490     103.04     43.87   G#2    False   BELOW_VOCAL_FLOOR
+      22.500     103.30     43.91   G#2    False   BELOW_VOCAL_FLOOR
+      22.510     102.38     43.76   G#2    False   BELOW_VOCAL_FLOOR
+      22.520     105.41     44.26   G#2    False   BELOW_VOCAL_FLOOR
+      22.530     102.03     43.70   G#2    False   BELOW_VOCAL_FLOOR
+      22.540     102.65     43.80   G#2    False   BELOW_VOCAL_FLOOR
+      22.550     108.27     44.73   A2     False   BELOW_VOCAL_FLOOR
+      22.560     105.78     44.32   G#2    False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #04
+Run:                    21.940 .. 22.220 s
+Duration:               290.0 ms
+Median run pitch:        88.13 E6
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:     62.91 D#4
+
+Interval from BEFORE:   ---
+Interval from AFTER:    +25.21 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      8.211  EXTREME
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  +2 OCT   error=1.21 st
+
+Run span:               0.87 st
+Endpoint change:        +0.81 st
+Path length:            2.06 st
+Direct/path efficiency: 0.391
+Monotonic fraction:     0.607
+Maximum adjacent step:  0.33 st / 10.0 ms
+Max velocity:           33.5 st/s
+Median velocity:        5.1 st/s
+Max acceleration:       4332.6 st/s²
+
+DIAGNOSTIC SUSPICION:   8.711
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      21.860      43.67     29.01   F1     False   BELOW_VOCAL_FLOOR
+      21.870      44.24     29.23   F1     False   BELOW_VOCAL_FLOOR
+      21.880      46.17     29.97   F#1    False   BELOW_VOCAL_FLOOR
+      21.890      41.71     28.21   E1     False   BELOW_VOCAL_FLOOR
+      21.900      42.00     28.33   E1     False   BELOW_VOCAL_FLOOR
+      21.910      53.89     32.65   A1     False   BELOW_VOCAL_FLOOR
+      21.920      32.28     23.77   C1     False   BELOW_VOCAL_FLOOR
+      21.930      55.11     33.03   A1     False   BELOW_VOCAL_FLOOR
+>>    21.940    1303.93     87.81   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    21.950    1304.04     87.81   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    21.960    1303.52     87.80   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    21.970    1308.74     87.87   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    21.980    1312.43     87.92   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    21.990    1313.32     87.93   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.000    1310.60     87.90   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.010    1312.17     87.92   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.020    1320.46     88.03   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.030    1316.40     87.97   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.040    1314.73     87.95   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.050    1328.28     88.13   E6     True    REACQUIRED_FUTURE_CONFIRMED
+>>    22.060    1324.74     88.08   E6     True    VALID_CONTINUOUS
+>>    22.070    1327.49     88.12   E6     True    VALID_CONTINUOUS
+>>    22.080    1330.45     88.16   E6     True    VALID_CONTINUOUS
+>>    22.090    1328.05     88.12   E6     True    VALID_CONTINUOUS
+>>    22.100    1328.88     88.14   E6     True    VALID_CONTINUOUS
+>>    22.110    1354.82     88.47   E6     True    VALID_CONTINUOUS
+>>    22.120    1347.13     88.37   E6     True    VALID_CONTINUOUS
+>>    22.130    1361.81     88.56   F6     True    VALID_CONTINUOUS
+>>    22.140    1357.61     88.51   F6     True    VALID_CONTINUOUS
+>>    22.150    1359.60     88.53   F6     True    VALID_CONTINUOUS
+>>    22.160    1369.16     88.65   F6     True    VALID_CONTINUOUS
+>>    22.170    1361.86     88.56   F6     True    VALID_CONTINUOUS
+>>    22.180    1366.16     88.61   F6     True    VALID_CONTINUOUS
+>>    22.190    1371.01     88.68   F6     True    VALID_CONTINUOUS
+>>    22.200    1356.80     88.50   E6     True    VALID_CONTINUOUS
+>>    22.210    1366.73     88.62   F6     True    VALID_CONTINUOUS
+>>    22.220    1366.14     88.61   F6     True    VALID_CONTINUOUS
+      22.230     305.00     62.66   D#4    False   LOCK_LOST_DISCONTINUITY
+      22.240     301.25     62.44   D4     True    REACQUIRED_FUTURE_CONFIRMED
+      22.250     309.75     62.92   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      22.260     308.70     62.86   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      22.270     311.62     63.03   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      22.280     309.57     62.91   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      22.290     309.60     62.91   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      22.300     306.74     62.75   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #05
+Run:                    26.160 .. 26.360 s
+Duration:               210.0 ms
+Median run pitch:        47.34 B2
+Trusted pitch BEFORE:    47.19 B2
+Trusted pitch AFTER:     68.75 A4
+
+Interval from BEFORE:    +0.14 st
+Interval from AFTER:    -21.42 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      7.465  EXTREME
+
+Nearest harmonic BEFORE: +1 OCT   error=11.86 st
+Nearest harmonic AFTER:  -3:1     error=2.40 st
+
+Run span:               2.78 st
+Endpoint change:        +1.35 st
+Path length:            14.62 st
+Direct/path efficiency: 0.092
+Monotonic fraction:     0.550
+Maximum adjacent step:  2.50 st / 10.0 ms
+Max velocity:           249.8 st/s
+Median velocity:        48.9 st/s
+Max acceleration:       49229.8 st/s²
+
+DIAGNOSTIC SUSPICION:   7.465
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      26.080     124.37     47.13   B2     True    REACQUIRED_FUTURE_CONFIRMED
+      26.090     124.56     47.15   B2     True    REACQUIRED_FUTURE_CONFIRMED
+      26.100     124.23     47.11   B2     True    REACQUIRED_FUTURE_CONFIRMED
+      26.110     125.36     47.26   B2     True    VALID_CONTINUOUS
+      26.120     124.79     47.18   B2     True    VALID_CONTINUOUS
+      26.130     123.70     47.03   B2     True    VALID_CONTINUOUS
+      26.140     126.23     47.38   B2     True    VALID_CONTINUOUS
+      26.150     110.45     45.07   A2     False   BELOW_VOCAL_FLOOR
+>>    26.160     122.45     46.86   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.170     141.46     49.35   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.180     122.97     46.93   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.190     120.47     46.57   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.200     131.89     48.14   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.210     135.60     48.62   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.220     126.14     47.37   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.230     127.26     47.52   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.240     124.72     47.17   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.250     124.32     47.12   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.260     124.94     47.20   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.270     125.88     47.34   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.280     123.42     46.99   B2     True    VALID_CONTINUOUS
+>>    26.290     129.34     47.80   C3     True    VALID_CONTINUOUS
+>>    26.300     124.30     47.12   B2     True    VALID_CONTINUOUS
+>>    26.310     128.41     47.68   C3     True    VALID_CONTINUOUS
+>>    26.320     125.88     47.33   B2     True    VALID_CONTINUOUS
+>>    26.330     126.14     47.37   B2     True    VALID_CONTINUOUS
+>>    26.340     129.82     47.87   C3     True    VALID_CONTINUOUS
+>>    26.350     123.79     47.04   B2     True    VALID_CONTINUOUS
+>>    26.360     132.39     48.21   C3     True    VALID_CONTINUOUS
+      26.370     459.97     69.77   A#4    False   LOCK_LOST_DISCONTINUITY
+      26.380     453.06     69.51   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      26.390     463.36     69.90   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      26.400     458.93     69.73   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      26.410     450.24     69.40   A4     True    REACQUIRED_FUTURE_CONFIRMED
+      26.420     433.80     68.75   A4     True    REACQUIRED_FUTURE_CONFIRMED
+      26.430     472.86     70.25   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      26.440     471.69     70.20   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #06
+Run:                    32.190 .. 32.380 s
+Duration:               200.0 ms
+Median run pitch:        67.96 G#4
+Trusted pitch BEFORE:    86.05 D6
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   -18.09 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     4.490  EXTREME
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -3:1     error=0.93 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               1.42 st
+Endpoint change:        -1.10 st
+Path length:            5.18 st
+Direct/path efficiency: 0.213
+Monotonic fraction:     0.526
+Maximum adjacent step:  0.79 st / 10.0 ms
+Max velocity:           78.7 st/s
+Median velocity:        22.2 st/s
+Max acceleration:       14073.4 st/s²
+
+DIAGNOSTIC SUSPICION:   4.990
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      32.110    1171.48     85.95   D6     True    REACQUIRED_FUTURE_CONFIRMED
+      32.120    1170.58     85.94   D6     True    REACQUIRED_FUTURE_CONFIRMED
+      32.130    1177.10     86.04   D6     True    REACQUIRED_FUTURE_CONFIRMED
+      32.140    1178.88     86.06   D6     True    REACQUIRED_FUTURE_CONFIRMED
+      32.150    1182.06     86.11   D6     True    REACQUIRED_FUTURE_CONFIRMED
+      32.160    1187.84     86.19   D6     True    REACQUIRED_FUTURE_CONFIRMED
+      32.170    1195.80     86.31   D6     True    REACQUIRED_FUTURE_CONFIRMED
+      32.180     422.13     68.28   G#4    False   LOCK_LOST_DISCONTINUITY
+>>    32.190     416.60     68.05   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.200     407.23     67.66   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.210     408.45     67.71   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.220     418.84     68.15   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.230     420.57     68.22   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.240     419.62     68.18   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.250     424.36     68.37   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.260     409.29     67.75   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.270     394.87     67.13   G4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.280     413.22     67.91   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.290     414.94     67.98   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.300     417.04     68.07   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    32.310     422.61     68.30   G#4    True    VALID_CONTINUOUS
+>>    32.320     419.15     68.16   G#4    True    VALID_CONTINUOUS
+>>    32.330     413.81     67.94   G#4    True    VALID_CONTINUOUS
+>>    32.340     416.46     68.05   G#4    True    VALID_CONTINUOUS
+>>    32.350     409.36     67.75   G#4    True    VALID_CONTINUOUS
+>>    32.360     403.80     67.51   G#4    True    VALID_CONTINUOUS
+>>    32.370     401.19     67.40   G4     True    VALID_CONTINUOUS
+>>    32.380     390.86     66.95   G4     True    VALID_CONTINUOUS
+      32.390      31.97     23.61   C1     False   BELOW_VOCAL_FLOOR
+      32.400      32.25     23.76   C1     False   BELOW_VOCAL_FLOOR
+      32.410      31.90     23.57   C1     False   BELOW_VOCAL_FLOOR
+      32.420      30.44     22.76   B0     False   BELOW_VOCAL_FLOOR
+      32.430      32.29     23.78   C1     False   BELOW_VOCAL_FLOOR
+      32.440      31.24     23.21   B0     False   BELOW_VOCAL_FLOOR
+      32.450      35.55     25.45   C#1    False   BELOW_VOCAL_FLOOR
+      32.460      26.77     20.53   A0     False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #07
+Run:                    30.390 .. 30.760 s
+Duration:               380.0 ms
+Median run pitch:        83.00 B5
+Trusted pitch BEFORE:    64.10 E4
+Trusted pitch AFTER:     64.00 E4
+
+Interval from BEFORE:   +18.90 st
+Interval from AFTER:    +19.00 st
+Vocal prior BEFORE:     1.745  SUSPICIOUS
+Vocal prior AFTER:      1.792  SUSPICIOUS
+
+Nearest harmonic BEFORE: +3:1     error=0.12 st
+Nearest harmonic AFTER:  +3:1     error=0.02 st
+
+Run span:               0.88 st
+Endpoint change:        -0.20 st
+Path length:            2.14 st
+Direct/path efficiency: 0.092
+Monotonic fraction:     0.351
+Maximum adjacent step:  0.32 st / 10.0 ms
+Max velocity:           31.6 st/s
+Median velocity:        2.1 st/s
+Max acceleration:       6309.1 st/s²
+
+DIAGNOSTIC SUSPICION:   4.792
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      30.310     328.15     63.92   E4     True    VALID_CONTINUOUS
+      30.320     332.20     64.13   E4     True    VALID_CONTINUOUS
+      30.330     324.27     63.72   E4     True    VALID_CONTINUOUS
+      30.340     319.95     63.48   D#4    True    VALID_CONTINUOUS
+      30.350     328.38     63.93   E4     True    VALID_CONTINUOUS
+      30.360     336.61     64.36   E4     True    VALID_CONTINUOUS
+      30.370     335.15     64.29   E4     True    VALID_CONTINUOUS
+      30.380     990.00     83.04   B5     False   LOCK_LOST_DISCONTINUITY
+>>    30.390     989.94     83.04   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.400     989.94     83.04   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.410     990.09     83.04   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.420     990.12     83.04   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.430     990.89     83.05   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.440     991.72     83.07   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.450     990.38     83.05   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.460     990.46     83.05   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.470     990.72     83.05   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.480     989.84     83.04   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.490     990.27     83.04   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.500     991.18     83.06   B5     True    REACQUIRED_FUTURE_CONFIRMED
+>>    30.510     990.06     83.04   B5     True    VALID_CONTINUOUS
+>>    30.520     989.88     83.04   B5     True    VALID_CONTINUOUS
+>>    30.530     997.61     83.17   B5     True    VALID_CONTINUOUS
+>>    30.540     993.43     83.10   B5     True    VALID_CONTINUOUS
+>>    30.550     996.30     83.15   B5     True    VALID_CONTINUOUS
+>>    30.560    1014.58     83.46   B5     True    VALID_CONTINUOUS
+>>    30.570     996.22     83.15   B5     True    VALID_CONTINUOUS
+>>    30.580     982.01     82.90   B5     True    VALID_CONTINUOUS
+>>    30.590     985.52     82.96   B5     True    VALID_CONTINUOUS
+>>    30.600     978.13     82.83   B5     True    VALID_CONTINUOUS
+>>    30.610     981.01     82.88   B5     True    VALID_CONTINUOUS
+>>    30.620     968.14     82.65   B5     True    VALID_CONTINUOUS
+>>    30.630     964.41     82.59   B5     True    VALID_CONTINUOUS
+>>    30.640     964.16     82.58   B5     True    VALID_CONTINUOUS
+>>    30.650     964.28     82.58   B5     True    VALID_CONTINUOUS
+>>    30.660     966.22     82.62   B5     True    VALID_CONTINUOUS
+>>    30.670     969.27     82.67   B5     True    VALID_CONTINUOUS
+>>    30.680     973.93     82.76   B5     True    VALID_CONTINUOUS
+>>    30.690     974.77     82.77   B5     True    VALID_CONTINUOUS
+>>    30.700     977.22     82.81   B5     True    VALID_CONTINUOUS
+>>    30.710     976.12     82.79   B5     True    VALID_CONTINUOUS
+>>    30.720     976.97     82.81   B5     True    VALID_CONTINUOUS
+>>    30.730     978.24     82.83   B5     True    VALID_CONTINUOUS
+>>    30.740     978.58     82.84   B5     True    VALID_CONTINUOUS
+>>    30.750     977.41     82.82   B5     True    VALID_CONTINUOUS
+>>    30.760     978.70     82.84   B5     True    VALID_CONTINUOUS
+      30.770     318.99     63.43   D#4    False   LOCK_LOST_DISCONTINUITY
+      30.780     317.84     63.37   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      30.790     326.96     63.86   E4     True    REACQUIRED_FUTURE_CONFIRMED
+      30.800     318.98     63.43   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      30.810     309.94     62.93   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      30.820     339.06     64.49   E4     True    REACQUIRED_FUTURE_CONFIRMED
+      30.830     325.34     63.77   E4     True    REACQUIRED_FUTURE_CONFIRMED
+      30.840     319.21     63.44   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #08
+Run:                    18.790 .. 18.940 s
+Duration:               160.0 ms
+Median run pitch:        47.32 B2
+Trusted pitch BEFORE:    62.98 D#4
+Trusted pitch AFTER:     62.90 D#4
+
+Interval from BEFORE:   -15.65 st
+Interval from AFTER:    -15.58 st
+Vocal prior BEFORE:     3.665  STRONG
+Vocal prior AFTER:      3.599  STRONG
+
+Nearest harmonic BEFORE: -3:1     error=3.37 st
+Nearest harmonic AFTER:  -3:1     error=3.44 st
+
+Run span:               0.47 st
+Endpoint change:        -0.13 st
+Path length:            1.80 st
+Direct/path efficiency: 0.072
+Monotonic fraction:     0.467
+Maximum adjacent step:  0.31 st / 10.0 ms
+Max velocity:           31.1 st/s
+Median velocity:        8.7 st/s
+Max acceleration:       5760.0 st/s²
+
+DIAGNOSTIC SUSPICION:   3.665
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      18.710     306.66     62.75   D#4    True    VALID_CONTINUOUS
+      18.720     305.33     62.67   D#4    True    VALID_CONTINUOUS
+      18.730     316.81     63.31   D#4    True    VALID_CONTINUOUS
+      18.740     324.06     63.71   E4     True    VALID_CONTINUOUS
+      18.750     318.66     63.41   D#4    True    VALID_CONTINUOUS
+      18.760     305.31     62.67   D#4    True    VALID_CONTINUOUS
+      18.770     310.69     62.98   D#4    True    VALID_CONTINUOUS
+      18.780     126.03     47.36   B2     False   LOCK_LOST_DISCONTINUITY
+>>    18.790     125.66     47.30   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.800     127.59     47.57   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.810     125.32     47.26   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.820     124.70     47.17   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.830     126.03     47.35   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.840     126.48     47.42   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.850     125.97     47.35   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.860     126.33     47.40   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.870     125.00     47.21   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.880     125.75     47.32   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.890     126.42     47.41   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.900     125.84     47.33   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.910     125.86     47.33   B2     True    VALID_CONTINUOUS
+>>    18.920     124.79     47.18   B2     True    VALID_CONTINUOUS
+>>    18.930     124.16     47.10   B2     True    VALID_CONTINUOUS
+>>    18.940     124.72     47.17   B2     True    VALID_CONTINUOUS
+      18.950     310.94     62.99   D#4    False   LOCK_LOST_DISCONTINUITY
+      18.960     309.75     62.92   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      18.970     307.72     62.81   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      18.980     312.34     63.07   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      18.990     348.08     64.94   F4     True    REACQUIRED_FUTURE_CONFIRMED
+      19.000     306.04     62.71   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      19.010     308.33     62.84   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      19.020     307.84     62.82   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #09
+Run:                    38.960 .. 39.120 s
+Duration:               170.0 ms
+Median run pitch:        64.07 E4
+Trusted pitch BEFORE:    56.76 A3
+Trusted pitch AFTER:     48.32 C3
+
+Interval from BEFORE:    +7.31 st
+Interval from AFTER:    +15.76 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      3.431  STRONG
+
+Nearest harmonic BEFORE: +1 OCT   error=4.69 st
+Nearest harmonic AFTER:  +3:1     error=3.26 st
+
+Run span:               4.24 st
+Endpoint change:        -3.05 st
+Path length:            6.42 st
+Direct/path efficiency: 0.476
+Monotonic fraction:     0.625
+Maximum adjacent step:  1.49 st / 10.0 ms
+Max velocity:           148.6 st/s
+Median velocity:        22.5 st/s
+Max acceleration:       14431.8 st/s²
+
+DIAGNOSTIC SUSPICION:   3.431
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      38.880      44.03     29.15   F1     False   BELOW_VOCAL_FLOOR
+      38.890      44.08     29.17   F1     False   BELOW_VOCAL_FLOOR
+      38.900      43.71     29.02   F1     False   BELOW_VOCAL_FLOOR
+      38.910      43.72     29.03   F1     False   BELOW_VOCAL_FLOOR
+      38.920      43.78     29.05   F1     False   BELOW_VOCAL_FLOOR
+      38.930      43.91     29.10   F1     False   BELOW_VOCAL_FLOOR
+      38.940      44.54     29.35   F1     False   BELOW_VOCAL_FLOOR
+      38.950      44.71     29.41   F1     False   BELOW_VOCAL_FLOOR
+>>    38.960     331.00     64.07   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    38.970     331.06     64.07   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    38.980     335.65     64.31   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    38.990     338.56     64.46   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.000     354.43     65.26   F4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.010     341.36     64.61   F4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.020     337.87     64.43   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.030     323.28     63.66   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.040     325.01     63.76   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.050     332.75     64.16   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.060     331.03     64.07   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.070     303.81     62.59   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.080     300.16     62.38   D4     True    VALID_CONTINUOUS
+>>    39.090     299.77     62.36   D4     True    VALID_CONTINUOUS
+>>    39.100     287.94     61.66   D4     True    VALID_CONTINUOUS
+>>    39.110     284.43     61.45   C#4    True    VALID_CONTINUOUS
+>>    39.120     277.47     61.02   C#4    True    VALID_CONTINUOUS
+      39.130     105.01     44.20   G#2    False   BELOW_VOCAL_FLOOR
+      39.140     105.00     44.20   G#2    False   BELOW_VOCAL_FLOOR
+      39.150     104.98     44.19   G#2    False   BELOW_VOCAL_FLOOR
+      39.160     105.01     44.20   G#2    False   BELOW_VOCAL_FLOOR
+      39.170     105.18     44.22   G#2    False   BELOW_VOCAL_FLOOR
+      39.180     105.37     44.25   G#2    False   BELOW_VOCAL_FLOOR
+      39.190     104.51     44.11   G#2    False   BELOW_VOCAL_FLOOR
+      39.200     104.62     44.13   G#2    False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #10
+Run:                    76.170 .. 76.540 s
+Duration:               380.0 ms
+Median run pitch:        89.94 F#6
+Trusted pitch BEFORE:    69.97 A#4
+Trusted pitch AFTER:     70.06 A#4
+
+Interval from BEFORE:   +19.97 st
+Interval from AFTER:    +19.89 st
+Vocal prior BEFORE:     2.256  STRONG
+Vocal prior AFTER:      2.214  STRONG
+
+Nearest harmonic BEFORE: +3:1     error=0.95 st
+Nearest harmonic AFTER:  +3:1     error=0.87 st
+
+Run span:               0.86 st
+Endpoint change:        -0.70 st
+Path length:            2.11 st
+Direct/path efficiency: 0.334
+Monotonic fraction:     0.595
+Maximum adjacent step:  0.21 st / 10.0 ms
+Max velocity:           20.8 st/s
+Median velocity:        3.8 st/s
+Max acceleration:       2462.3 st/s²
+
+DIAGNOSTIC SUSPICION:   3.256
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      76.090     462.44     69.86   A#4    True    VALID_CONTINUOUS
+      76.100     465.87     69.99   A#4    True    VALID_CONTINUOUS
+      76.110     463.32     69.89   A#4    True    VALID_CONTINUOUS
+      76.120     465.76     69.99   A#4    True    VALID_CONTINUOUS
+      76.130     463.67     69.91   A#4    True    VALID_CONTINUOUS
+      76.140     466.48     70.01   A#4    True    VALID_CONTINUOUS
+      76.150     463.84     69.91   A#4    True    VALID_CONTINUOUS
+      76.160    1477.00     89.97   F#6    False   LOCK_LOST_DISCONTINUITY
+>>    76.170    1477.28     89.97   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.180    1473.16     89.92   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.190    1460.89     89.78   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.200    1460.21     89.77   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.210    1472.41     89.91   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.220    1469.18     89.87   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.230    1466.06     89.84   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.240    1470.50     89.89   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.250    1480.32     90.00   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.260    1485.37     90.06   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.270    1483.90     90.05   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.280    1483.50     90.04   F#6    True    REACQUIRED_FUTURE_CONFIRMED
+>>    76.290    1485.47     90.06   F#6    True    VALID_CONTINUOUS
+>>    76.300    1487.97     90.09   F#6    True    VALID_CONTINUOUS
+>>    76.310    1487.50     90.09   F#6    True    VALID_CONTINUOUS
+>>    76.320    1488.96     90.10   F#6    True    VALID_CONTINUOUS
+>>    76.330    1485.96     90.07   F#6    True    VALID_CONTINUOUS
+>>    76.340    1482.78     90.03   F#6    True    VALID_CONTINUOUS
+>>    76.350    1479.41     89.99   F#6    True    VALID_CONTINUOUS
+>>    76.360    1479.04     89.99   F#6    True    VALID_CONTINUOUS
+>>    76.370    1478.82     89.99   F#6    True    VALID_CONTINUOUS
+>>    76.380    1474.50     89.94   F#6    True    VALID_CONTINUOUS
+>>    76.390    1471.85     89.90   F#6    True    VALID_CONTINUOUS
+>>    76.400    1471.91     89.91   F#6    True    VALID_CONTINUOUS
+>>    76.410    1473.92     89.93   F#6    True    VALID_CONTINUOUS
+>>    76.420    1475.46     89.95   F#6    True    VALID_CONTINUOUS
+>>    76.430    1479.78     90.00   F#6    True    VALID_CONTINUOUS
+>>    76.440    1486.26     90.07   F#6    True    VALID_CONTINUOUS
+>>    76.450    1490.58     90.12   F#6    True    VALID_CONTINUOUS
+>>    76.460    1485.86     90.07   F#6    True    VALID_CONTINUOUS
+>>    76.470    1474.90     89.94   F#6    True    VALID_CONTINUOUS
+>>    76.480    1466.82     89.85   F#6    True    VALID_CONTINUOUS
+>>    76.490    1453.61     89.69   F#6    True    VALID_CONTINUOUS
+>>    76.500    1447.17     89.61   F#6    True    VALID_CONTINUOUS
+>>    76.510    1431.89     89.43   F6     True    VALID_CONTINUOUS
+>>    76.520    1432.44     89.43   F6     True    VALID_CONTINUOUS
+>>    76.530    1435.58     89.47   F6     True    VALID_CONTINUOUS
+>>    76.540    1418.42     89.26   F6     True    VALID_CONTINUOUS
+      76.550     469.16     70.11   A#4    False   LOCK_LOST_DISCONTINUITY
+      76.560     467.67     70.06   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      76.570     464.42     69.94   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      76.580     477.33     70.41   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      76.590     463.20     69.89   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      76.600     463.60     69.90   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      76.610     471.10     70.18   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+      76.620     471.36     70.19   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #11
+Run:                    17.540 .. 17.660 s
+Duration:               130.0 ms
+Median run pitch:        50.99 D#3
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:     62.97 D#4
+
+Interval from BEFORE:   ---
+Interval from AFTER:    -11.98 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      1.682  SUSPICIOUS
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  -1 OCT   error=0.02 st
+
+Run span:               7.73 st
+Endpoint change:        +7.01 st
+Path length:            13.26 st
+Direct/path efficiency: 0.529
+Monotonic fraction:     0.500
+Maximum adjacent step:  2.34 st / 10.0 ms
+Max velocity:           234.1 st/s
+Median velocity:        120.4 st/s
+Max acceleration:       35895.1 st/s²
+
+DIAGNOSTIC SUSPICION:   3.182
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      17.460      63.11     35.38   B1     False   BELOW_VOCAL_FLOOR
+      17.470      64.49     35.75   C2     False   BELOW_VOCAL_FLOOR
+      17.480      65.17     35.94   C2     False   BELOW_VOCAL_FLOOR
+      17.490      65.46     36.01   C2     False   BELOW_VOCAL_FLOOR
+      17.500      60.99     34.79   B1     False   BELOW_VOCAL_FLOOR
+      17.510      63.06     35.37   B1     False   BELOW_VOCAL_FLOOR
+      17.520      63.66     35.53   C2     False   BELOW_VOCAL_FLOOR
+      17.530      57.37     33.73   A#1    False   BELOW_VOCAL_FLOOR
+>>    17.540     144.02     49.66   D3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.550     143.90     49.65   D3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.560     141.90     49.41   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.570     138.17     48.95   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.580     155.47     50.99   D#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.590     142.18     49.44   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.600     152.26     50.63   D#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.610     163.39     51.85   E3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.620     159.60     51.44   D#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.630     182.70     53.78   F#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.640     177.99     53.33   F3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.650     192.65     54.70   G3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    17.660     215.89     56.67   A3     True    VALID_CONTINUOUS
+      17.670     310.76     62.98   D#4    False   LOCK_LOST_DISCONTINUITY
+      17.680     301.81     62.47   D4     True    REACQUIRED_FUTURE_CONFIRMED
+      17.690     305.47     62.68   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      17.700     308.49     62.85   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      17.710     306.70     62.75   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      17.720     310.61     62.97   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      17.730     319.89     63.48   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      17.740     324.34     63.72   E4     True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #12
+Run:                    7.650 .. 8.020 s
+Duration:               380.0 ms
+Median run pitch:        66.72 G4
+Trusted pitch BEFORE:    48.16 C3
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   +18.56 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     1.597  SUSPICIOUS
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: +3:1     error=0.46 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               10.20 st
+Endpoint change:        +6.55 st
+Path length:            15.19 st
+Direct/path efficiency: 0.431
+Monotonic fraction:     0.405
+Maximum adjacent step:  3.58 st / 10.0 ms
+Max velocity:           358.5 st/s
+Median velocity:        14.8 st/s
+Max acceleration:       20936.0 st/s²
+
+DIAGNOSTIC SUSPICION:   3.097
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+       7.570     134.87     48.53   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+       7.580     131.78     48.13   C3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.590     134.57     48.49   C3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.600     126.61     47.43   B2     True    REACQUIRED_FUTURE_CONFIRMED
+       7.610     125.73     47.31   B2     True    REACQUIRED_FUTURE_CONFIRMED
+       7.620     155.40     50.98   D#3    True    REACQUIRED_FUTURE_CONFIRMED
+       7.630     194.56     54.87   G3     True    VALID_CONTINUOUS
+       7.640     307.64     62.80   D#4    False   LOCK_LOST_DISCONTINUITY
+>>     7.650     243.22     58.74   B3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.660     237.32     58.31   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.670     230.62     57.82   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.680     230.15     57.78   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.690     250.86     59.27   B3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.700     308.58     62.86   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.710     350.10     65.04   F4     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.720     385.44     66.71   G4     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.730     397.42     67.24   G4     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.740     409.73     67.77   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.750     414.81     67.98   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.760     411.65     67.85   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.770     410.87     67.81   G#4    True    VALID_CONTINUOUS
+>>     7.780     408.82     67.73   G#4    True    VALID_CONTINUOUS
+>>     7.790     401.40     67.41   G4     True    VALID_CONTINUOUS
+>>     7.800     393.63     67.07   G4     True    VALID_CONTINUOUS
+>>     7.810     388.61     66.85   G4     True    VALID_CONTINUOUS
+>>     7.820     385.98     66.73   G4     True    VALID_CONTINUOUS
+>>     7.830     387.34     66.79   G4     True    VALID_CONTINUOUS
+>>     7.840     390.00     66.91   G4     True    VALID_CONTINUOUS
+>>     7.850     393.35     67.06   G4     True    VALID_CONTINUOUS
+>>     7.860     395.94     67.17   G4     True    VALID_CONTINUOUS
+>>     7.870     396.27     67.19   G4     True    VALID_CONTINUOUS
+>>     7.880     392.24     67.01   G4     True    VALID_CONTINUOUS
+>>     7.890     384.66     66.67   G4     True    VALID_CONTINUOUS
+>>     7.900     387.72     66.81   G4     True    VALID_CONTINUOUS
+>>     7.910     387.44     66.80   G4     True    VALID_CONTINUOUS
+>>     7.920     385.14     66.69   G4     True    VALID_CONTINUOUS
+>>     7.930     386.85     66.77   G4     True    VALID_CONTINUOUS
+>>     7.940     384.23     66.65   G4     True    VALID_CONTINUOUS
+>>     7.950     381.46     66.53   G4     True    VALID_CONTINUOUS
+>>     7.960     379.29     66.43   F#4    True    VALID_CONTINUOUS
+>>     7.970     373.40     66.16   F#4    True    VALID_CONTINUOUS
+>>     7.980     366.66     65.84   F#4    True    VALID_CONTINUOUS
+>>     7.990     363.41     65.69   F#4    True    VALID_CONTINUOUS
+>>     8.000     363.44     65.69   F#4    True    VALID_CONTINUOUS
+>>     8.010     356.45     65.35   F4     True    VALID_CONTINUOUS
+>>     8.020     355.00     65.28   F4     True    VALID_CONTINUOUS
+       8.030      50.06     31.37   G1     False   BELOW_VOCAL_FLOOR
+       8.040      51.39     31.82   G#1    False   BELOW_VOCAL_FLOOR
+       8.050      49.09     31.03   G1     False   BELOW_VOCAL_FLOOR
+       8.060      55.17     33.05   A1     False   BELOW_VOCAL_FLOOR
+       8.070      53.08     32.38   G#1    False   BELOW_VOCAL_FLOOR
+       8.080      49.67     31.23   G1     False   BELOW_VOCAL_FLOOR
+       8.090      52.79     32.29   G#1    False   BELOW_VOCAL_FLOOR
+       8.100      54.66     32.89   A1     False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #13
+Run:                    26.380 .. 26.870 s
+Duration:               500.0 ms
+Median run pitch:        68.42 G#4
+Trusted pitch BEFORE:    47.34 B2
+Trusted pitch AFTER:     80.03 G#5
+
+Interval from BEFORE:   +21.09 st
+Interval from AFTER:    -11.61 st
+Vocal prior BEFORE:     1.587  SUSPICIOUS
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: +3:1     error=2.07 st
+Nearest harmonic AFTER:  -1 OCT   error=0.39 st
+
+Run span:               2.75 st
+Endpoint change:        +0.55 st
+Path length:            18.02 st
+Direct/path efficiency: 0.031
+Monotonic fraction:     0.571
+Maximum adjacent step:  2.52 st / 10.0 ms
+Max velocity:           252.2 st/s
+Median velocity:        17.1 st/s
+Max acceleration:       33055.6 st/s²
+
+DIAGNOSTIC SUSPICION:   3.087
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      26.300     124.30     47.12   B2     True    VALID_CONTINUOUS
+      26.310     128.41     47.68   C3     True    VALID_CONTINUOUS
+      26.320     125.88     47.33   B2     True    VALID_CONTINUOUS
+      26.330     126.14     47.37   B2     True    VALID_CONTINUOUS
+      26.340     129.82     47.87   C3     True    VALID_CONTINUOUS
+      26.350     123.79     47.04   B2     True    VALID_CONTINUOUS
+      26.360     132.39     48.21   C3     True    VALID_CONTINUOUS
+      26.370     459.97     69.77   A#4    False   LOCK_LOST_DISCONTINUITY
+>>    26.380     453.06     69.51   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.390     463.36     69.90   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.400     458.93     69.73   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.410     450.24     69.40   A4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.420     433.80     68.75   A4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.430     472.86     70.25   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.440     471.69     70.20   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.450     475.64     70.35   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.460     411.16     67.83   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.470     430.21     68.61   A4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.480     462.30     69.86   A#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.490     449.03     69.35   A4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    26.500     411.17     67.83   G#4    True    VALID_CONTINUOUS
+>>    26.510     418.40     68.13   G#4    True    VALID_CONTINUOUS
+>>    26.520     406.59     67.63   G#4    True    VALID_CONTINUOUS
+>>    26.530     412.41     67.88   G#4    True    VALID_CONTINUOUS
+>>    26.540     417.20     68.08   G#4    True    VALID_CONTINUOUS
+>>    26.550     421.28     68.25   G#4    True    VALID_CONTINUOUS
+>>    26.560     418.88     68.15   G#4    True    VALID_CONTINUOUS
+>>    26.570     418.45     68.13   G#4    True    VALID_CONTINUOUS
+>>    26.580     427.44     68.50   G#4    True    VALID_CONTINUOUS
+>>    26.590     425.70     68.43   G#4    True    VALID_CONTINUOUS
+>>    26.600     425.40     68.42   G#4    True    VALID_CONTINUOUS
+>>    26.610     416.11     68.03   G#4    True    VALID_CONTINUOUS
+>>    26.620     416.62     68.05   G#4    True    VALID_CONTINUOUS
+>>    26.630     416.98     68.07   G#4    True    VALID_CONTINUOUS
+>>    26.640     417.42     68.09   G#4    True    VALID_CONTINUOUS
+>>    26.650     415.49     68.01   G#4    True    VALID_CONTINUOUS
+>>    26.660     416.59     68.05   G#4    True    VALID_CONTINUOUS
+>>    26.670     405.73     67.60   G#4    True    VALID_CONTINUOUS
+>>    26.680     408.65     67.72   G#4    True    VALID_CONTINUOUS
+>>    26.690     428.79     68.55   A4     True    VALID_CONTINUOUS
+>>    26.700     430.36     68.62   A4     True    VALID_CONTINUOUS
+>>    26.710     417.55     68.09   G#4    True    VALID_CONTINUOUS
+>>    26.720     421.69     68.26   G#4    True    VALID_CONTINUOUS
+>>    26.730     407.96     67.69   G#4    True    VALID_CONTINUOUS
+>>    26.740     413.04     67.91   G#4    True    VALID_CONTINUOUS
+>>    26.750     414.80     67.98   G#4    True    VALID_CONTINUOUS
+>>    26.760     422.82     68.31   G#4    True    VALID_CONTINUOUS
+>>    26.770     427.98     68.52   A4     True    VALID_CONTINUOUS
+>>    26.780     425.45     68.42   G#4    True    VALID_CONTINUOUS
+>>    26.790     441.93     69.08   A4     True    VALID_CONTINUOUS
+>>    26.800     465.91     69.99   A#4    True    VALID_CONTINUOUS
+>>    26.810     466.71     70.02   A#4    True    VALID_CONTINUOUS
+>>    26.820     468.24     70.08   A#4    True    VALID_CONTINUOUS
+>>    26.830     466.82     70.02   A#4    True    VALID_CONTINUOUS
+>>    26.840     470.31     70.15   A#4    True    VALID_CONTINUOUS
+>>    26.850     469.17     70.11   A#4    True    VALID_CONTINUOUS
+>>    26.860     466.78     70.02   A#4    True    VALID_CONTINUOUS
+>>    26.870     467.77     70.06   A#4    True    VALID_CONTINUOUS
+      26.880    1395.00     88.98   F6     False   LOCK_LOST_DISCONTINUITY
+      26.890    1395.29     88.98   F6     False   WAITING_FOR_REACQUISITION
+      26.900    1395.92     88.99   F6     False   WAITING_FOR_REACQUISITION
+      26.910    1401.79     89.06   F6     False   WAITING_FOR_REACQUISITION
+      26.920    1412.60     89.19   F6     False   WAITING_FOR_REACQUISITION
+      26.930    1409.66     89.16   F6     False   WAITING_FOR_REACQUISITION
+      26.940    1406.89     89.12   F6     False   WAITING_FOR_REACQUISITION
+      26.950    1412.15     89.19   F6     False   WAITING_FOR_REACQUISITION
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #14
+Run:                    6.930 .. 7.380 s
+Duration:               460.0 ms
+Median run pitch:        66.92 G4
+Trusted pitch BEFORE:    57.62 A#3
+Trusted pitch AFTER:     48.14 C3
+
+Interval from BEFORE:    +9.30 st
+Interval from AFTER:    +18.78 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      1.028  SUSPICIOUS
+
+Nearest harmonic BEFORE: +1 OCT   error=2.70 st
+Nearest harmonic AFTER:  +3:1     error=0.24 st
+
+Run span:               11.86 st
+Endpoint change:        -4.71 st
+Path length:            33.66 st
+Direct/path efficiency: 0.140
+Monotonic fraction:     0.533
+Maximum adjacent step:  3.35 st / 10.0 ms
+Max velocity:           335.3 st/s
+Median velocity:        34.6 st/s
+Max acceleration:       28856.3 st/s²
+
+DIAGNOSTIC SUSPICION:   2.528
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+       6.850     226.19     57.48   A3     True    VALID_CONTINUOUS
+       6.860     226.82     57.53   A#3    True    VALID_CONTINUOUS
+       6.870     226.72     57.52   A#3    True    VALID_CONTINUOUS
+       6.880     224.72     57.37   A3     True    VALID_CONTINUOUS
+       6.890     221.37     57.11   A3     True    VALID_CONTINUOUS
+       6.900     222.06     57.16   A3     True    VALID_CONTINUOUS
+       6.910     222.54     57.20   A3     True    VALID_CONTINUOUS
+       6.920     419.17     68.16   G#4    False   LOCK_LOST_DISCONTINUITY
+>>     6.930     420.54     68.22   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     6.940     412.75     67.89   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     6.950     409.36     67.75   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     6.960     425.98     68.44   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     6.970     409.66     67.76   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     6.980     337.54     64.41   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>     6.990     283.94     61.42   C#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.000     247.60     59.05   B3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.010     249.02     59.15   B3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.020     220.80     57.06   A3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.030     228.09     57.62   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.040     252.48     59.38   B3     True    REACQUIRED_FUTURE_CONFIRMED
+>>     7.050     263.24     60.11   C4     True    VALID_CONTINUOUS
+>>     7.060     267.24     60.37   C4     True    VALID_CONTINUOUS
+>>     7.070     273.51     60.77   C#4    True    VALID_CONTINUOUS
+>>     7.080     293.12     61.97   D4     True    VALID_CONTINUOUS
+>>     7.090     353.22     65.20   F4     True    VALID_CONTINUOUS
+>>     7.100     427.54     68.50   A4     True    VALID_CONTINUOUS
+>>     7.110     438.05     68.92   A4     True    VALID_CONTINUOUS
+>>     7.120     423.56     68.34   G#4    True    VALID_CONTINUOUS
+>>     7.130     428.54     68.54   A4     True    VALID_CONTINUOUS
+>>     7.140     426.24     68.45   G#4    True    VALID_CONTINUOUS
+>>     7.150     422.33     68.29   G#4    True    VALID_CONTINUOUS
+>>     7.160     403.22     67.49   G4     True    VALID_CONTINUOUS
+>>     7.170     393.01     67.04   G4     True    VALID_CONTINUOUS
+>>     7.180     392.26     67.01   G4     True    VALID_CONTINUOUS
+>>     7.190     387.66     66.81   G4     True    VALID_CONTINUOUS
+>>     7.200     380.60     66.49   F#4    True    VALID_CONTINUOUS
+>>     7.210     388.32     66.84   G4     True    VALID_CONTINUOUS
+>>     7.220     396.12     67.18   G4     True    VALID_CONTINUOUS
+>>     7.230     390.41     66.93   G4     True    VALID_CONTINUOUS
+>>     7.240     400.39     67.37   G4     True    VALID_CONTINUOUS
+>>     7.250     392.47     67.02   G4     True    VALID_CONTINUOUS
+>>     7.260     389.23     66.88   G4     True    VALID_CONTINUOUS
+>>     7.270     391.54     66.98   G4     True    VALID_CONTINUOUS
+>>     7.280     389.97     66.91   G4     True    VALID_CONTINUOUS
+>>     7.290     385.21     66.70   G4     True    VALID_CONTINUOUS
+>>     7.300     386.22     66.74   G4     True    VALID_CONTINUOUS
+>>     7.310     390.84     66.95   G4     True    VALID_CONTINUOUS
+>>     7.320     391.31     66.97   G4     True    VALID_CONTINUOUS
+>>     7.330     391.97     67.00   G4     True    VALID_CONTINUOUS
+>>     7.340     394.03     67.09   G4     True    VALID_CONTINUOUS
+>>     7.350     388.77     66.86   G4     True    VALID_CONTINUOUS
+>>     7.360     379.84     66.45   F#4    True    VALID_CONTINUOUS
+>>     7.370     350.39     65.06   F4     True    VALID_CONTINUOUS
+>>     7.380     320.32     63.50   E4     True    VALID_CONTINUOUS
+       7.390    1201.04     86.38   D6     False   LOCK_LOST_DISCONTINUITY
+       7.400    1201.17     86.39   D6     False   WAITING_FOR_REACQUISITION
+       7.410    1197.42     86.33   D6     False   WAITING_FOR_REACQUISITION
+       7.420    1201.21     86.39   D6     False   WAITING_FOR_REACQUISITION
+       7.430    1204.19     86.43   D6     False   WAITING_FOR_REACQUISITION
+       7.440    1194.12     86.28   D6     False   WAITING_FOR_REACQUISITION
+       7.450    1207.42     86.48   D6     False   WAITING_FOR_REACQUISITION
+       7.460    1223.23     86.70   D#6    False   WAITING_FOR_REACQUISITION
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #15
+Run:                    10.000 .. 10.150 s
+Duration:               160.0 ms
+Median run pitch:        49.58 D3
+Trusted pitch BEFORE:    63.00 D#4
+Trusted pitch AFTER:     59.90 C4
+
+Interval from BEFORE:   -13.42 st
+Interval from AFTER:    -10.31 st
+Vocal prior BEFORE:     1.957  SUSPICIOUS
+Vocal prior AFTER:      0.391  MILD
+
+Nearest harmonic BEFORE: -1 OCT   error=1.42 st
+Nearest harmonic AFTER:  -1 OCT   error=1.69 st
+
+Run span:               2.81 st
+Endpoint change:        +2.77 st
+Path length:            7.00 st
+Direct/path efficiency: 0.396
+Monotonic fraction:     0.600
+Maximum adjacent step:  1.12 st / 10.0 ms
+Max velocity:           112.5 st/s
+Median velocity:        44.0 st/s
+Max acceleration:       15124.0 st/s²
+
+DIAGNOSTIC SUSPICION:   2.457
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+       9.920     102.67     43.81   G#2    False   BELOW_VOCAL_FLOOR
+       9.930      96.63     42.76   G2     False   BELOW_VOCAL_FLOOR
+       9.940      82.90     40.10   E2     False   BELOW_VOCAL_FLOOR
+       9.950     119.67     46.46   A#2    False   BELOW_VOCAL_FLOOR
+       9.960     121.96     46.79   B2     False   WAITING_FOR_REACQUISITION
+       9.970     121.33     46.70   B2     False   WAITING_FOR_REACQUISITION
+       9.980     121.63     46.74   B2     False   WAITING_FOR_REACQUISITION
+       9.990     113.90     45.60   A#2    False   BELOW_VOCAL_FLOOR
+>>    10.000     128.47     47.69   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.010     130.14     47.91   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.020     138.87     49.03   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.030     142.87     49.53   D3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.040     140.85     49.28   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.050     142.52     49.48   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.060     150.41     50.42   D3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.070     145.99     49.90   D3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.080     140.67     49.26   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.090     144.29     49.70   D3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.100     143.81     49.64   D3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.110     142.63     49.50   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.120     151.14     50.50   D#3    True    VALID_CONTINUOUS
+>>    10.130     146.77     49.99   D3     True    VALID_CONTINUOUS
+>>    10.140     149.10     50.27   D3     True    VALID_CONTINUOUS
+>>    10.150     150.76     50.46   D3     True    VALID_CONTINUOUS
+      10.160     239.27     58.45   A#3    False   LOCK_LOST_DISCONTINUITY
+      10.170     251.10     59.29   B3     True    REACQUIRED_FUTURE_CONFIRMED
+      10.180     268.44     60.45   C4     True    REACQUIRED_FUTURE_CONFIRMED
+      10.190     261.44     59.99   C4     True    REACQUIRED_FUTURE_CONFIRMED
+      10.200     260.05     59.90   C4     True    REACQUIRED_FUTURE_CONFIRMED
+      10.210     261.10     59.97   C4     True    REACQUIRED_FUTURE_CONFIRMED
+      10.220     258.99     59.82   C4     True    REACQUIRED_FUTURE_CONFIRMED
+      10.230     249.64     59.19   B3     True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #16
+Run:                    39.250 .. 39.420 s
+Duration:               180.0 ms
+Median run pitch:        48.37 C3
+Trusted pitch BEFORE:    62.37 D4
+Trusted pitch AFTER:     61.17 C#4
+
+Interval from BEFORE:   -14.00 st
+Interval from AFTER:    -12.80 st
+Vocal prior BEFORE:     1.920  SUSPICIOUS
+Vocal prior AFTER:      1.245  SUSPICIOUS
+
+Nearest harmonic BEFORE: -1 OCT   error=2.00 st
+Nearest harmonic AFTER:  -1 OCT   error=0.80 st
+
+Run span:               2.40 st
+Endpoint change:        -1.04 st
+Path length:            8.18 st
+Direct/path efficiency: 0.127
+Monotonic fraction:     0.471
+Maximum adjacent step:  2.40 st / 10.0 ms
+Max velocity:           240.1 st/s
+Median velocity:        38.8 st/s
+Max acceleration:       30106.9 st/s²
+
+DIAGNOSTIC SUSPICION:   2.420
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      39.170     105.18     44.22   G#2    False   BELOW_VOCAL_FLOOR
+      39.180     105.37     44.25   G#2    False   BELOW_VOCAL_FLOOR
+      39.190     104.51     44.11   G#2    False   BELOW_VOCAL_FLOOR
+      39.200     104.62     44.13   G#2    False   BELOW_VOCAL_FLOOR
+      39.210     104.63     44.13   G#2    False   BELOW_VOCAL_FLOOR
+      39.220     104.77     44.16   G#2    False   BELOW_VOCAL_FLOOR
+      39.230     104.46     44.11   G#2    False   BELOW_VOCAL_FLOOR
+      39.240     101.01     43.52   G#2    False   BELOW_VOCAL_FLOOR
+>>    39.250     143.44     49.60   D3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.260     124.87     47.19   B2     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.270     129.35     47.80   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.280     133.90     48.40   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.290     135.56     48.62   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.300     132.55     48.23   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.310     129.84     47.87   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.320     133.97     48.41   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.330     137.43     48.85   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.340     133.16     48.31   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.350     128.18     47.65   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.360     132.83     48.26   C3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    39.370     132.96     48.28   C3     True    VALID_CONTINUOUS
+>>    39.380     134.91     48.53   C#3    True    VALID_CONTINUOUS
+>>    39.390     134.32     48.46   C3     True    VALID_CONTINUOUS
+>>    39.400     133.33     48.33   C3     True    VALID_CONTINUOUS
+>>    39.410     135.49     48.61   C#3    True    VALID_CONTINUOUS
+>>    39.420     135.09     48.56   C#3    True    VALID_CONTINUOUS
+      39.430      34.92     25.14   C#1    False   BELOW_VOCAL_FLOOR
+      39.440      35.58     25.46   C#1    False   BELOW_VOCAL_FLOOR
+      39.450      35.48     25.41   C#1    False   BELOW_VOCAL_FLOOR
+      39.460      33.69     24.51   C#1    False   BELOW_VOCAL_FLOOR
+      39.470      35.06     25.20   C#1    False   BELOW_VOCAL_FLOOR
+      39.480      36.54     25.92   D1     False   BELOW_VOCAL_FLOOR
+      39.490      34.06     24.70   C#1    False   BELOW_VOCAL_FLOOR
+      39.500      33.03     24.17   C1     False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #17
+Run:                    9.730 .. 9.890 s
+Duration:               170.0 ms
+Median run pitch:        63.00 D#4
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:     49.38 C#3
+
+Interval from BEFORE:   ---
+Interval from AFTER:    +13.61 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      1.876  SUSPICIOUS
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  +1 OCT   error=1.61 st
+
+Run span:               3.17 st
+Endpoint change:        -1.93 st
+Path length:            12.73 st
+Direct/path efficiency: 0.152
+Monotonic fraction:     0.562
+Maximum adjacent step:  3.09 st / 10.0 ms
+Max velocity:           308.8 st/s
+Median velocity:        33.8 st/s
+Max acceleration:       54769.4 st/s²
+
+DIAGNOSTIC SUSPICION:   1.876
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+       9.650      49.89     31.31   G1     False   BELOW_VOCAL_FLOOR
+       9.660      50.43     31.50   G1     False   BELOW_VOCAL_FLOOR
+       9.670      48.25     30.73   G1     False   BELOW_VOCAL_FLOOR
+       9.680      49.97     31.34   G1     False   BELOW_VOCAL_FLOOR
+       9.690      49.41     31.14   G1     False   BELOW_VOCAL_FLOOR
+       9.700      32.21     23.74   C1     False   BELOW_VOCAL_FLOOR
+       9.710      27.48     20.99   A0     False   BELOW_VOCAL_FLOOR
+       9.720       9.43      2.47   D-1    False   BELOW_VOCAL_FLOOR
+>>     9.730     308.03     62.83   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.740     301.63     62.46   D4     True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.750     304.18     62.61   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.760     317.78     63.37   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.770     276.82     60.98   C#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.780     330.88     64.07   E4     True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.790     316.35     63.29   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.800     310.70     62.98   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.810     302.44     62.51   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.820     297.75     62.24   D4     True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.830     311.22     63.01   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.840     315.35     63.23   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>     9.850     311.39     63.01   D#4    True    VALID_CONTINUOUS
+>>     9.860     314.58     63.19   D#4    True    VALID_CONTINUOUS
+>>     9.870     311.04     63.00   D#4    True    VALID_CONTINUOUS
+>>     9.880     315.30     63.23   D#4    True    VALID_CONTINUOUS
+>>     9.890     275.52     60.90   C#4    True    VALID_CONTINUOUS
+       9.900      96.99     42.82   G2     False   BELOW_VOCAL_FLOOR
+       9.910      96.43     42.72   G2     False   BELOW_VOCAL_FLOOR
+       9.920     102.67     43.81   G#2    False   BELOW_VOCAL_FLOOR
+       9.930      96.63     42.76   G2     False   BELOW_VOCAL_FLOOR
+       9.940      82.90     40.10   E2     False   BELOW_VOCAL_FLOOR
+       9.950     119.67     46.46   A#2    False   BELOW_VOCAL_FLOOR
+       9.960     121.96     46.79   B2     False   WAITING_FOR_REACQUISITION
+       9.970     121.33     46.70   B2     False   WAITING_FOR_REACQUISITION
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #18
+Run:                    18.960 .. 19.240 s
+Duration:               290.0 ms
+Median run pitch:        62.96 D#4
+Trusted pitch BEFORE:    47.33 B2
+Trusted pitch AFTER:     73.61 D5
+
+Interval from BEFORE:   +15.63 st
+Interval from AFTER:    -10.65 st
+Vocal prior BEFORE:     1.227  SUSPICIOUS
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: +3:1     error=3.39 st
+Nearest harmonic AFTER:  -1 OCT   error=1.35 st
+
+Run span:               2.46 st
+Endpoint change:        +0.22 st
+Path length:            9.45 st
+Direct/path efficiency: 0.023
+Monotonic fraction:     0.571
+Maximum adjacent step:  2.23 st / 10.0 ms
+Max velocity:           222.9 st/s
+Median velocity:        12.2 st/s
+Max acceleration:       41044.9 st/s²
+
+DIAGNOSTIC SUSPICION:   1.727
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      18.880     125.75     47.32   B2     True    REACQUIRED_FUTURE_CONFIRMED
+      18.890     126.42     47.41   B2     True    REACQUIRED_FUTURE_CONFIRMED
+      18.900     125.84     47.33   B2     True    REACQUIRED_FUTURE_CONFIRMED
+      18.910     125.86     47.33   B2     True    VALID_CONTINUOUS
+      18.920     124.79     47.18   B2     True    VALID_CONTINUOUS
+      18.930     124.16     47.10   B2     True    VALID_CONTINUOUS
+      18.940     124.72     47.17   B2     True    VALID_CONTINUOUS
+      18.950     310.94     62.99   D#4    False   LOCK_LOST_DISCONTINUITY
+>>    18.960     309.75     62.92   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.970     307.72     62.81   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.980     312.34     63.07   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    18.990     348.08     64.94   F4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.000     306.04     62.71   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.010     308.33     62.84   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.020     307.84     62.82   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.030     306.62     62.75   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.040     305.72     62.70   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.050     307.45     62.79   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.060     307.70     62.81   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.070     313.01     63.10   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+>>    19.080     313.76     63.15   D#4    True    VALID_CONTINUOUS
+>>    19.090     328.77     63.95   E4     True    VALID_CONTINUOUS
+>>    19.100     332.15     64.13   E4     True    VALID_CONTINUOUS
+>>    19.110     308.15     62.83   D#4    True    VALID_CONTINUOUS
+>>    19.120     313.47     63.13   D#4    True    VALID_CONTINUOUS
+>>    19.130     311.66     63.03   D#4    True    VALID_CONTINUOUS
+>>    19.140     309.34     62.90   D#4    True    VALID_CONTINUOUS
+>>    19.150     308.72     62.87   D#4    True    VALID_CONTINUOUS
+>>    19.160     302.00     62.48   D4     True    VALID_CONTINUOUS
+>>    19.170     309.08     62.89   D#4    True    VALID_CONTINUOUS
+>>    19.180     310.35     62.96   D#4    True    VALID_CONTINUOUS
+>>    19.190     313.75     63.15   D#4    True    VALID_CONTINUOUS
+>>    19.200     314.97     63.21   D#4    True    VALID_CONTINUOUS
+>>    19.210     316.18     63.28   D#4    True    VALID_CONTINUOUS
+>>    19.220     315.65     63.25   D#4    True    VALID_CONTINUOUS
+>>    19.230     312.94     63.10   D#4    True    VALID_CONTINUOUS
+>>    19.240     313.75     63.15   D#4    True    VALID_CONTINUOUS
+      19.250     574.03     73.60   D5     False   LOCK_LOST_DISCONTINUITY
+      19.260     574.06     73.60   D5     True    REACQUIRED_FUTURE_CONFIRMED
+      19.270     574.03     73.60   D5     True    REACQUIRED_FUTURE_CONFIRMED
+      19.280     573.28     73.58   D5     True    REACQUIRED_FUTURE_CONFIRMED
+      19.290     572.93     73.57   D5     True    REACQUIRED_FUTURE_CONFIRMED
+      19.300     574.55     73.62   D5     True    REACQUIRED_FUTURE_CONFIRMED
+      19.310     573.17     73.58   D5     True    REACQUIRED_FUTURE_CONFIRMED
+      19.320     575.53     73.65   D5     True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #19
+Run:                    10.170 .. 11.770 s
+Duration:               1610.0 ms
+Median run pitch:        62.19 D4
+Trusted pitch BEFORE:    49.58 D3
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   +12.60 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: +1 OCT   error=0.60 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               7.96 st
+Endpoint change:        +3.85 st
+Path length:            78.09 st
+Direct/path efficiency: 0.049
+Monotonic fraction:     0.500
+Maximum adjacent step:  3.79 st / 10.0 ms
+Max velocity:           378.6 st/s
+Median velocity:        25.8 st/s
+Max acceleration:       48167.0 st/s²
+
+DIAGNOSTIC SUSPICION:   1.500
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      10.090     144.29     49.70   D3     True    REACQUIRED_FUTURE_CONFIRMED
+      10.100     143.81     49.64   D3     True    REACQUIRED_FUTURE_CONFIRMED
+      10.110     142.63     49.50   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+      10.120     151.14     50.50   D#3    True    VALID_CONTINUOUS
+      10.130     146.77     49.99   D3     True    VALID_CONTINUOUS
+      10.140     149.10     50.27   D3     True    VALID_CONTINUOUS
+      10.150     150.76     50.46   D3     True    VALID_CONTINUOUS
+      10.160     239.27     58.45   A#3    False   LOCK_LOST_DISCONTINUITY
+>>    10.170     251.10     59.29   B3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.180     268.44     60.45   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.190     261.44     59.99   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.200     260.05     59.90   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.210     261.10     59.97   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.220     258.99     59.82   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.230     249.64     59.19   B3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.240     239.26     58.45   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.250     238.40     58.39   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.260     234.02     58.07   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.270     245.81     58.92   B3     True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.280     233.43     58.03   A#3    True    REACQUIRED_FUTURE_CONFIRMED
+>>    10.290     290.48     61.81   D4     True    VALID_CONTINUOUS
+>>    10.300     273.69     60.78   C#4    True    VALID_CONTINUOUS
+>>    10.310     257.86     59.75   C4     True    VALID_CONTINUOUS
+>>    10.320     296.40     62.16   D4     True    VALID_CONTINUOUS
+>>    10.330     319.40     63.45   D#4    True    VALID_CONTINUOUS
+>>    10.340     308.40     62.85   D#4    True    VALID_CONTINUOUS
+>>    10.350     306.46     62.74   D#4    True    VALID_CONTINUOUS
+>>    10.360     314.63     63.19   D#4    True    VALID_CONTINUOUS
+>>    10.370     313.72     63.14   D#4    True    VALID_CONTINUOUS
+>>    10.380     311.99     63.05   D#4    True    VALID_CONTINUOUS
+>>    10.390     313.61     63.14   D#4    True    VALID_CONTINUOUS
+>>    10.400     313.40     63.13   D#4    True    VALID_CONTINUOUS
+>>    10.410     310.19     62.95   D#4    True    VALID_CONTINUOUS
+>>    10.420     307.79     62.81   D#4    True    VALID_CONTINUOUS
+>>    10.430     307.45     62.79   D#4    True    VALID_CONTINUOUS
+>>    10.440     308.36     62.85   D#4    True    VALID_CONTINUOUS
+>>    10.450     308.89     62.88   D#4    True    VALID_CONTINUOUS
+>>    10.460     311.86     63.04   D#4    True    VALID_CONTINUOUS
+>>    10.470     313.85     63.15   D#4    True    VALID_CONTINUOUS
+>>    10.480     312.25     63.06   D#4    True    VALID_CONTINUOUS
+>>    10.490     317.99     63.38   D#4    True    VALID_CONTINUOUS
+>>    10.500     310.40     62.96   D#4    True    VALID_CONTINUOUS
+>>    10.510     305.79     62.70   D#4    True    VALID_CONTINUOUS
+>>    10.520     306.94     62.77   D#4    True    VALID_CONTINUOUS
+>>    10.530     306.95     62.77   D#4    True    VALID_CONTINUOUS
+>>    10.540     309.94     62.93   D#4    True    VALID_CONTINUOUS
+>>    10.550     312.03     63.05   D#4    True    VALID_CONTINUOUS
+>>    10.560     307.56     62.80   D#4    True    VALID_CONTINUOUS
+>>    10.570     309.16     62.89   D#4    True    VALID_CONTINUOUS
+>>    10.580     306.42     62.74   D#4    True    VALID_CONTINUOUS
+>>    10.590     307.81     62.81   D#4    True    VALID_CONTINUOUS
+>>    10.600     311.62     63.03   D#4    True    VALID_CONTINUOUS
+>>    10.610     318.58     63.41   D#4    True    VALID_CONTINUOUS
+>>    10.620     313.87     63.15   D#4    True    VALID_CONTINUOUS
+>>    10.630     319.47     63.46   D#4    True    VALID_CONTINUOUS
+>>    10.640     320.29     63.50   E4     True    VALID_CONTINUOUS
+>>    10.650     306.66     62.75   D#4    True    VALID_CONTINUOUS
+>>    10.660     282.38     61.32   C#4    True    VALID_CONTINUOUS
+>>    10.670     271.90     60.67   C#4    True    VALID_CONTINUOUS
+>>    10.680     277.73     61.03   C#4    True    VALID_CONTINUOUS
+>>    10.690     271.97     60.67   C#4    True    VALID_CONTINUOUS
+>>    10.700     277.05     60.99   C#4    True    VALID_CONTINUOUS
+>>    10.710     277.60     61.03   C#4    True    VALID_CONTINUOUS
+>>    10.720     275.66     60.90   C#4    True    VALID_CONTINUOUS
+>>    10.730     279.54     61.15   C#4    True    VALID_CONTINUOUS
+>>    10.740     280.96     61.23   C#4    True    VALID_CONTINUOUS
+>>    10.750     281.01     61.24   C#4    True    VALID_CONTINUOUS
+>>    10.760     313.02     63.11   D#4    True    VALID_CONTINUOUS
+>>    10.770     312.68     63.09   D#4    True    VALID_CONTINUOUS
+>>    10.780     315.87     63.26   D#4    True    VALID_CONTINUOUS
+>>    10.790     300.48     62.40   D4     True    VALID_CONTINUOUS
+>>    10.800     283.93     61.42   C#4    True    VALID_CONTINUOUS
+>>    10.810     294.57     62.05   D4     True    VALID_CONTINUOUS
+>>    10.820     299.42     62.34   D4     True    VALID_CONTINUOUS
+>>    10.830     306.36     62.73   D#4    True    VALID_CONTINUOUS
+>>    10.840     313.43     63.13   D#4    True    VALID_CONTINUOUS
+>>    10.850     311.70     63.03   D#4    True    VALID_CONTINUOUS
+>>    10.860     310.55     62.97   D#4    True    VALID_CONTINUOUS
+>>    10.870     313.34     63.12   D#4    True    VALID_CONTINUOUS
+>>    10.880     314.48     63.19   D#4    True    VALID_CONTINUOUS
+>>    10.890     312.21     63.06   D#4    True    VALID_CONTINUOUS
+>>    10.900     311.93     63.04   D#4    True    VALID_CONTINUOUS
+>>    10.910     312.54     63.08   D#4    True    VALID_CONTINUOUS
+>>    10.920     308.71     62.87   D#4    True    VALID_CONTINUOUS
+>>    10.930     310.82     62.98   D#4    True    VALID_CONTINUOUS
+>>    10.940     309.55     62.91   D#4    True    VALID_CONTINUOUS
+>>    10.950     313.41     63.13   D#4    True    VALID_CONTINUOUS
+>>    10.960     316.08     63.27   D#4    True    VALID_CONTINUOUS
+>>    10.970     313.28     63.12   D#4    True    VALID_CONTINUOUS
+>>    10.980     312.26     63.06   D#4    True    VALID_CONTINUOUS
+>>    10.990     311.26     63.01   D#4    True    VALID_CONTINUOUS
+>>    11.000     307.77     62.81   D#4    True    VALID_CONTINUOUS
+>>    11.010     309.56     62.91   D#4    True    VALID_CONTINUOUS
+>>    11.020     310.56     62.97   D#4    True    VALID_CONTINUOUS
+>>    11.030     310.90     62.99   D#4    True    VALID_CONTINUOUS
+>>    11.040     315.58     63.25   D#4    True    VALID_CONTINUOUS
+>>    11.050     314.77     63.20   D#4    True    VALID_CONTINUOUS
+>>    11.060     313.10     63.11   D#4    True    VALID_CONTINUOUS
+>>    11.070     316.04     63.27   D#4    True    VALID_CONTINUOUS
+>>    11.080     309.97     62.94   D#4    True    VALID_CONTINUOUS
+>>    11.090     307.92     62.82   D#4    True    VALID_CONTINUOUS
+>>    11.100     309.64     62.92   D#4    True    VALID_CONTINUOUS
+>>    11.110     308.40     62.85   D#4    True    VALID_CONTINUOUS
+>>    11.120     309.48     62.91   D#4    True    VALID_CONTINUOUS
+>>    11.130     313.97     63.16   D#4    True    VALID_CONTINUOUS
+>>    11.140     312.88     63.10   D#4    True    VALID_CONTINUOUS
+>>    11.150     313.92     63.15   D#4    True    VALID_CONTINUOUS
+>>    11.160     318.25     63.39   D#4    True    VALID_CONTINUOUS
+>>    11.170     318.03     63.38   D#4    True    VALID_CONTINUOUS
+>>    11.180     310.42     62.96   D#4    True    VALID_CONTINUOUS
+>>    11.190     294.93     62.07   D4     True    VALID_CONTINUOUS
+>>    11.200     295.54     62.11   D4     True    VALID_CONTINUOUS
+>>    11.210     293.98     62.02   D4     True    VALID_CONTINUOUS
+>>    11.220     284.74     61.47   C#4    True    VALID_CONTINUOUS
+>>    11.230     268.86     60.47   C4     True    VALID_CONTINUOUS
+>>    11.240     276.96     60.99   C#4    True    VALID_CONTINUOUS
+>>    11.250     259.81     59.88   C4     True    VALID_CONTINUOUS
+>>    11.260     259.25     59.84   C4     True    VALID_CONTINUOUS
+>>    11.270     228.80     57.68   A#3    True    VALID_CONTINUOUS
+>>    11.280     230.17     57.78   A#3    True    VALID_CONTINUOUS
+>>    11.290     242.71     58.70   B3     True    VALID_CONTINUOUS
+>>    11.300     238.84     58.42   A#3    True    VALID_CONTINUOUS
+>>    11.310     238.66     58.41   A#3    True    VALID_CONTINUOUS
+>>    11.320     224.72     57.37   A3     True    VALID_CONTINUOUS
+>>    11.330     240.35     58.53   B3     True    VALID_CONTINUOUS
+>>    11.340     236.65     58.26   A#3    True    VALID_CONTINUOUS
+>>    11.350     229.29     57.72   A#3    True    VALID_CONTINUOUS
+>>    11.360     236.60     58.26   A#3    True    VALID_CONTINUOUS
+>>    11.370     235.21     58.16   A#3    True    VALID_CONTINUOUS
+>>    11.380     228.30     57.64   A#3    True    VALID_CONTINUOUS
+>>    11.390     234.26     58.09   A#3    True    VALID_CONTINUOUS
+>>    11.400     237.09     58.30   A#3    True    VALID_CONTINUOUS
+>>    11.410     226.15     57.48   A3     True    VALID_CONTINUOUS
+>>    11.420     223.54     57.28   A3     True    VALID_CONTINUOUS
+>>    11.430     230.89     57.84   A#3    True    VALID_CONTINUOUS
+>>    11.440     251.50     59.32   B3     True    VALID_CONTINUOUS
+>>    11.450     258.57     59.80   C4     True    VALID_CONTINUOUS
+>>    11.460     238.03     58.36   A#3    True    VALID_CONTINUOUS
+>>    11.470     212.07     56.36   G#3    True    VALID_CONTINUOUS
+>>    11.480     202.23     55.54   G#3    True    VALID_CONTINUOUS
+>>    11.490     213.65     56.49   G#3    True    VALID_CONTINUOUS
+>>    11.500     239.82     58.49   A#3    True    VALID_CONTINUOUS
+>>    11.510     215.21     56.62   A3     True    VALID_CONTINUOUS
+>>    11.520     222.51     57.20   A3     True    VALID_CONTINUOUS
+>>    11.530     242.88     58.71   B3     True    VALID_CONTINUOUS
+>>    11.540     235.56     58.18   A#3    True    VALID_CONTINUOUS
+>>    11.550     261.80     60.01   C4     True    VALID_CONTINUOUS
+>>    11.560     243.18     58.73   B3     True    VALID_CONTINUOUS
+>>    11.570     251.12     59.29   B3     True    VALID_CONTINUOUS
+>>    11.580     238.46     58.40   A#3    True    VALID_CONTINUOUS
+>>    11.590     254.89     59.55   C4     True    VALID_CONTINUOUS
+>>    11.600     258.77     59.81   C4     True    VALID_CONTINUOUS
+>>    11.610     270.32     60.57   C#4    True    VALID_CONTINUOUS
+>>    11.620     279.97     61.17   C#4    True    VALID_CONTINUOUS
+>>    11.630     280.89     61.23   C#4    True    VALID_CONTINUOUS
+>>    11.640     271.37     60.63   C#4    True    VALID_CONTINUOUS
+>>    11.650     275.66     60.90   C#4    True    VALID_CONTINUOUS
+>>    11.660     279.30     61.13   C#4    True    VALID_CONTINUOUS
+>>    11.670     288.79     61.71   D4     True    VALID_CONTINUOUS
+>>    11.680     281.00     61.24   C#4    True    VALID_CONTINUOUS
+>>    11.690     262.20     60.04   C4     True    VALID_CONTINUOUS
+>>    11.700     253.69     59.47   B3     True    VALID_CONTINUOUS
+>>    11.710     296.85     62.19   D4     True    VALID_CONTINUOUS
+>>    11.720     304.49     62.63   D#4    True    VALID_CONTINUOUS
+>>    11.730     303.09     62.55   D#4    True    VALID_CONTINUOUS
+>>    11.740     315.57     63.25   D#4    True    VALID_CONTINUOUS
+>>    11.750     319.86     63.48   D#4    True    VALID_CONTINUOUS
+>>    11.760     319.20     63.44   D#4    True    VALID_CONTINUOUS
+>>    11.770     313.64     63.14   D#4    True    VALID_CONTINUOUS
+      11.780      76.17     38.64   D#2    False   BELOW_VOCAL_FLOOR
+      11.790      74.71     38.30   D2     False   BELOW_VOCAL_FLOOR
+      11.800      79.91     39.47   D#2    False   BELOW_VOCAL_FLOOR
+      11.810      85.44     40.63   F2     False   BELOW_VOCAL_FLOOR
+      11.820      76.09     38.62   D#2    False   BELOW_VOCAL_FLOOR
+      11.830      75.56     38.50   D2     False   BELOW_VOCAL_FLOOR
+      11.840      77.32     38.90   D#2    False   BELOW_VOCAL_FLOOR
+      11.850      64.89     35.86   C2     False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+ACCEPTED #20
+Run:                    15.190 .. 15.740 s
+Duration:               560.0 ms
+Median run pitch:        58.40 A#3
+Trusted pitch BEFORE:    62.75 D#4
+Trusted pitch AFTER:     46.54 B2
+
+Interval from BEFORE:    -4.35 st
+Interval from AFTER:    +11.86 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -1 OCT   error=7.65 st
+Nearest harmonic AFTER:  +1 OCT   error=0.14 st
+
+Run span:               7.15 st
+Endpoint change:        -4.98 st
+Path length:            23.22 st
+Direct/path efficiency: 0.215
+Monotonic fraction:     0.455
+Maximum adjacent step:  3.35 st / 10.0 ms
+Max velocity:           334.6 st/s
+Median velocity:        20.0 st/s
+Max acceleration:       33927.9 st/s²
+
+DIAGNOSTIC SUSPICION:   1.500
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      15.110    1944.99     94.73   B6     False   ABOVE_VOCAL_CEILING
+      15.120    1944.99     94.73   B6     False   ABOVE_VOCAL_CEILING
+      15.130    1944.90     94.73   B6     False   ABOVE_VOCAL_CEILING
+      15.140    1944.96     94.73   B6     False   ABOVE_VOCAL_CEILING
+      15.150    1944.87     94.73   B6     False   ABOVE_VOCAL_CEILING
+      15.160    1944.34     94.72   B6     False   ABOVE_VOCAL_CEILING
+      15.170    1944.44     94.73   B6     False   ABOVE_VOCAL_CEILING
+      15.180    1945.45     94.73   B6     False   ABOVE_VOCAL_CEILING
+>>    15.190     264.00     60.16   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.200     264.59     60.20   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.210     265.07     60.23   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.220     262.26     60.04   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.230     265.34     60.24   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.240     260.78     59.94   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.250     263.81     60.14   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.260     256.40     59.65   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.270     261.00     59.96   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.280     263.69     60.14   C4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.290     287.18     61.61   D4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.300     291.52     61.87   D4     True    REACQUIRED_FUTURE_CONFIRMED
+>>    15.310     295.59     62.11   D4     True    VALID_CONTINUOUS
+>>    15.320     282.20     61.31   C#4    True    VALID_CONTINUOUS
+>>    15.330     278.74     61.10   C#4    True    VALID_CONTINUOUS
+>>    15.340     277.92     61.05   C#4    True    VALID_CONTINUOUS
+>>    15.350     266.99     60.35   C4     True    VALID_CONTINUOUS
+>>    15.360     286.13     61.55   D4     True    VALID_CONTINUOUS
+>>    15.370     291.80     61.89   D4     True    VALID_CONTINUOUS
+>>    15.380     283.68     61.40   C#4    True    VALID_CONTINUOUS
+>>    15.390     252.39     59.38   B3     True    VALID_CONTINUOUS
+>>    15.400     225.79     57.45   A3     True    VALID_CONTINUOUS
+>>    15.410     245.68     58.91   B3     True    VALID_CONTINUOUS
+>>    15.420     251.39     59.31   B3     True    VALID_CONTINUOUS
+>>    15.430     239.00     58.43   A#3    True    VALID_CONTINUOUS
+>>    15.440     243.29     58.74   B3     True    VALID_CONTINUOUS
+>>    15.450     240.65     58.55   B3     True    VALID_CONTINUOUS
+>>    15.460     230.19     57.78   A#3    True    VALID_CONTINUOUS
+>>    15.470     238.56     58.40   A#3    True    VALID_CONTINUOUS
+>>    15.480     238.44     58.39   A#3    True    VALID_CONTINUOUS
+>>    15.490     229.00     57.69   A#3    True    VALID_CONTINUOUS
+>>    15.500     229.27     57.71   A#3    True    VALID_CONTINUOUS
+>>    15.510     229.78     57.75   A#3    True    VALID_CONTINUOUS
+>>    15.520     231.21     57.86   A#3    True    VALID_CONTINUOUS
+>>    15.530     231.27     57.86   A#3    True    VALID_CONTINUOUS
+>>    15.540     228.61     57.66   A#3    True    VALID_CONTINUOUS
+>>    15.550     228.15     57.63   A#3    True    VALID_CONTINUOUS
+>>    15.560     224.02     57.31   A3     True    VALID_CONTINUOUS
+>>    15.570     226.48     57.50   A#3    True    VALID_CONTINUOUS
+>>    15.580     235.91     58.21   A#3    True    VALID_CONTINUOUS
+>>    15.590     242.21     58.67   B3     True    VALID_CONTINUOUS
+>>    15.600     237.15     58.30   A#3    True    VALID_CONTINUOUS
+>>    15.610     237.79     58.35   A#3    True    VALID_CONTINUOUS
+>>    15.620     196.00     55.00   G3     True    VALID_CONTINUOUS
+>>    15.630     195.97     55.00   G3     True    VALID_CONTINUOUS
+>>    15.640     196.03     55.00   G3     True    VALID_CONTINUOUS
+>>    15.650     196.20     55.02   G3     True    VALID_CONTINUOUS
+>>    15.660     195.69     54.97   G3     True    VALID_CONTINUOUS
+>>    15.670     196.39     55.04   G3     True    VALID_CONTINUOUS
+>>    15.680     196.39     55.03   G3     True    VALID_CONTINUOUS
+>>    15.690     195.69     54.97   G3     True    VALID_CONTINUOUS
+>>    15.700     195.61     54.97   G3     True    VALID_CONTINUOUS
+>>    15.710     196.48     55.04   G3     True    VALID_CONTINUOUS
+>>    15.720     197.42     55.13   G3     True    VALID_CONTINUOUS
+>>    15.730     197.45     55.13   G3     True    VALID_CONTINUOUS
+>>    15.740     197.99     55.18   G3     True    VALID_CONTINUOUS
+      15.750     103.00     43.86   G#2    False   BELOW_VOCAL_FLOOR
+      15.760     103.00     43.86   G#2    False   BELOW_VOCAL_FLOOR
+      15.770     102.99     43.86   G#2    False   BELOW_VOCAL_FLOOR
+      15.780     103.07     43.87   G#2    False   BELOW_VOCAL_FLOOR
+      15.790     102.80     43.83   G#2    False   BELOW_VOCAL_FLOOR
+      15.800     103.21     43.90   G#2    False   BELOW_VOCAL_FLOOR
+      15.810     103.42     43.93   G#2    False   BELOW_VOCAL_FLOOR
+      15.820     103.90     44.01   G#2    False   BELOW_VOCAL_FLOOR
+
+================================================================================================================
+B. MOST SUSPICIOUS / INTERESTING CURRENTLY REJECTED RUNS
+================================================================================================================
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #01
+Run:                    73.860 .. 74.000 s
+Duration:               150.0 ms
+Median run pitch:        81.99 A#5
+Trusted pitch BEFORE:    68.03 G#4
+Trusted pitch AFTER:     68.03 G#4
+
+Interval from BEFORE:   +13.97 st
+Interval from AFTER:    +13.97 st
+Vocal prior BEFORE:     2.588  STRONG
+Vocal prior AFTER:      2.590  STRONG
+
+Nearest harmonic BEFORE: +1 OCT   error=1.97 st
+Nearest harmonic AFTER:  +1 OCT   error=1.97 st
+
+Run span:               35.54 st
+Endpoint change:        -34.91 st
+Path length:            36.35 st
+Direct/path efficiency: 0.960
+Monotonic fraction:     0.429
+Maximum adjacent step:  35.19 st / 10.0 ms
+Max velocity:           3519.0 st/s
+Median velocity:        5.3 st/s
+Max acceleration:       352210.9 st/s²
+
+DIAGNOSTIC SUSPICION:   764.479
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      73.780     415.47     68.01   G#4    True    VALID_CONTINUOUS
+      73.790     417.69     68.10   G#4    True    VALID_CONTINUOUS
+      73.800     416.24     68.04   G#4    True    VALID_CONTINUOUS
+      73.810     417.13     68.08   G#4    True    VALID_CONTINUOUS
+      73.820     413.41     67.92   G#4    True    VALID_CONTINUOUS
+      73.830     417.52     68.09   G#4    True    VALID_CONTINUOUS
+      73.840     413.22     67.91   G#4    True    VALID_CONTINUOUS
+      73.850     416.98     68.07   G#4    True    VALID_CONTINUOUS
+>>    73.860     931.98     81.99   A#5    False   LOCK_LOST_DISCONTINUITY
+>>    73.870     931.50     81.98   A#5    False   WAITING_FOR_REACQUISITION
+>>    73.880     936.88     82.08   A#5    False   WAITING_FOR_REACQUISITION
+>>    73.890     939.50     82.13   A#5    False   WAITING_FOR_REACQUISITION
+>>    73.900     947.62     82.28   A#5    False   WAITING_FOR_REACQUISITION
+>>    73.910     938.08     82.11   A#5    False   WAITING_FOR_REACQUISITION
+>>    73.920     934.97     82.05   A#5    False   WAITING_FOR_REACQUISITION
+>>    73.930     936.38     82.08   A#5    False   WAITING_FOR_REACQUISITION
+>>    73.940     937.07     82.09   A#5    False   WAITING_FOR_REACQUISITION
+>>    73.950     122.74     46.90   B2     False   WAITING_FOR_REACQUISITION
+>>    73.960     122.96     46.93   B2     False   WAITING_FOR_REACQUISITION
+>>    73.970     123.03     46.94   B2     False   WAITING_FOR_REACQUISITION
+>>    73.980     122.75     46.90   B2     False   WAITING_FOR_REACQUISITION
+>>    73.990     121.66     46.74   B2     False   WAITING_FOR_REACQUISITION
+>>    74.000     124.10     47.09   B2     False   WAITING_FOR_REACQUISITION
+      74.010     118.45     46.28   A#2    False   BELOW_VOCAL_FLOOR
+      74.020     120.26     46.54   B2     False   WAITING_FOR_REACQUISITION
+      74.030     123.00     46.93   B2     False   WAITING_FOR_REACQUISITION
+      74.040     121.78     46.76   B2     False   WAITING_FOR_REACQUISITION
+      74.050     122.97     46.93   B2     False   WAITING_FOR_REACQUISITION
+      74.060     118.79     46.33   A#2    False   BELOW_VOCAL_FLOOR
+      74.070     122.26     46.83   B2     False   WAITING_FOR_REACQUISITION
+      74.080     122.63     46.88   B2     False   WAITING_FOR_REACQUISITION
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #02
+Run:                    19.590 .. 19.610 s
+Duration:               30.0 ms
+Median run pitch:        46.64 B2
+Trusted pitch BEFORE:    78.17 F#5
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   -31.53 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     188.963  EXTREME
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -2 OCT   error=7.53 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               0.18 st
+Endpoint change:        -0.11 st
+Path length:            0.26 st
+Direct/path efficiency: 0.413
+Monotonic fraction:     0.500
+Maximum adjacent step:  0.18 st / 10.0 ms
+Max velocity:           18.3 st/s
+Median velocity:        13.0 st/s
+Max acceleration:       2592.1 st/s²
+
+DIAGNOSTIC SUSPICION:   188.963
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      19.510     119.94     46.50   A#2    False   BELOW_VOCAL_FLOOR
+      19.520     120.07     46.52   B2     False   WAITING_FOR_REACQUISITION
+      19.530     120.13     46.52   B2     False   WAITING_FOR_REACQUISITION
+      19.540     120.61     46.59   B2     False   WAITING_FOR_REACQUISITION
+      19.550     120.17     46.53   B2     False   WAITING_FOR_REACQUISITION
+      19.560     120.43     46.57   B2     False   WAITING_FOR_REACQUISITION
+      19.570     120.14     46.53   B2     False   WAITING_FOR_REACQUISITION
+      19.580     119.96     46.50   B2     False   BELOW_VOCAL_FLOOR
+>>    19.590     120.93     46.64   B2     False   WAITING_FOR_REACQUISITION
+>>    19.600     121.46     46.72   B2     False   WAITING_FOR_REACQUISITION
+>>    19.610     120.18     46.53   B2     False   WAITING_FOR_REACQUISITION
+      19.620     119.43     46.42   A#2    False   BELOW_VOCAL_FLOOR
+      19.630     120.99     46.65   B2     False   WAITING_FOR_REACQUISITION
+      19.640     120.53     46.58   B2     False   WAITING_FOR_REACQUISITION
+      19.650     121.14     46.67   B2     False   WAITING_FOR_REACQUISITION
+      19.660     120.44     46.57   B2     False   WAITING_FOR_REACQUISITION
+      19.670     120.62     46.60   B2     False   WAITING_FOR_REACQUISITION
+      19.680     121.80     46.76   B2     False   WAITING_FOR_REACQUISITION
+      19.690     123.27     46.97   B2     False   WAITING_FOR_REACQUISITION
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #03
+Run:                    19.520 .. 19.570 s
+Duration:               60.0 ms
+Median run pitch:        46.53 B2
+Trusted pitch BEFORE:    76.99 F5
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   -30.46 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     84.546  EXTREME
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -2 OCT   error=6.46 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               0.08 st
+Endpoint change:        +0.01 st
+Path length:            0.22 st
+Direct/path efficiency: 0.051
+Monotonic fraction:     0.600
+Maximum adjacent step:  0.07 st / 10.0 ms
+Max velocity:           6.9 st/s
+Median velocity:        4.2 st/s
+Max acceleration:       1322.9 st/s²
+
+DIAGNOSTIC SUSPICION:   84.546
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      19.440     747.36     78.17   F#5    True    VALID_CONTINUOUS
+      19.450     757.32     78.40   F#5    True    VALID_CONTINUOUS
+      19.460     781.87     78.95   G5     True    VALID_CONTINUOUS
+      19.470     805.56     79.47   G5     True    VALID_CONTINUOUS
+      19.480     815.60     79.68   G#5    True    VALID_CONTINUOUS
+      19.490     846.14     80.32   G#5    True    VALID_CONTINUOUS
+      19.500     120.00     46.51   B2     False   LOCK_LOST_DISCONTINUITY
+      19.510     119.94     46.50   A#2    False   BELOW_VOCAL_FLOOR
+>>    19.520     120.07     46.52   B2     False   WAITING_FOR_REACQUISITION
+>>    19.530     120.13     46.52   B2     False   WAITING_FOR_REACQUISITION
+>>    19.540     120.61     46.59   B2     False   WAITING_FOR_REACQUISITION
+>>    19.550     120.17     46.53   B2     False   WAITING_FOR_REACQUISITION
+>>    19.560     120.43     46.57   B2     False   WAITING_FOR_REACQUISITION
+>>    19.570     120.14     46.53   B2     False   WAITING_FOR_REACQUISITION
+      19.580     119.96     46.50   B2     False   BELOW_VOCAL_FLOOR
+      19.590     120.93     46.64   B2     False   WAITING_FOR_REACQUISITION
+      19.600     121.46     46.72   B2     False   WAITING_FOR_REACQUISITION
+      19.610     120.18     46.53   B2     False   WAITING_FOR_REACQUISITION
+      19.620     119.43     46.42   A#2    False   BELOW_VOCAL_FLOOR
+      19.630     120.99     46.65   B2     False   WAITING_FOR_REACQUISITION
+      19.640     120.53     46.58   B2     False   WAITING_FOR_REACQUISITION
+      19.650     121.14     46.67   B2     False   WAITING_FOR_REACQUISITION
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #04
+Run:                    7.390 .. 7.500 s
+Duration:               120.0 ms
+Median run pitch:        86.45 D6
+Trusted pitch BEFORE:    66.89 G4
+Trusted pitch AFTER:     48.49 C3
+
+Interval from BEFORE:   +19.56 st
+Interval from AFTER:    +37.96 st
+Vocal prior BEFORE:     11.305  EXTREME
+Vocal prior AFTER:      73.004  EXTREME
+
+Nearest harmonic BEFORE: +3:1     error=0.54 st
+Nearest harmonic AFTER:  +2 OCT   error=13.96 st
+
+Run span:               0.56 st
+Endpoint change:        +0.15 st
+Path length:            1.17 st
+Direct/path efficiency: 0.128
+Monotonic fraction:     0.545
+Maximum adjacent step:  0.23 st / 10.0 ms
+Max velocity:           22.5 st/s
+Median velocity:        6.6 st/s
+Max acceleration:       3371.8 st/s²
+
+DIAGNOSTIC SUSPICION:   74.504
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+       7.310     390.84     66.95   G4     True    VALID_CONTINUOUS
+       7.320     391.31     66.97   G4     True    VALID_CONTINUOUS
+       7.330     391.97     67.00   G4     True    VALID_CONTINUOUS
+       7.340     394.03     67.09   G4     True    VALID_CONTINUOUS
+       7.350     388.77     66.86   G4     True    VALID_CONTINUOUS
+       7.360     379.84     66.45   F#4    True    VALID_CONTINUOUS
+       7.370     350.39     65.06   F4     True    VALID_CONTINUOUS
+       7.380     320.32     63.50   E4     True    VALID_CONTINUOUS
+>>     7.390    1201.04     86.38   D6     False   LOCK_LOST_DISCONTINUITY
+>>     7.400    1201.17     86.39   D6     False   WAITING_FOR_REACQUISITION
+>>     7.410    1197.42     86.33   D6     False   WAITING_FOR_REACQUISITION
+>>     7.420    1201.21     86.39   D6     False   WAITING_FOR_REACQUISITION
+>>     7.430    1204.19     86.43   D6     False   WAITING_FOR_REACQUISITION
+>>     7.440    1194.12     86.28   D6     False   WAITING_FOR_REACQUISITION
+>>     7.450    1207.42     86.48   D6     False   WAITING_FOR_REACQUISITION
+>>     7.460    1223.23     86.70   D#6    False   WAITING_FOR_REACQUISITION
+>>     7.470    1233.33     86.84   D#6    False   WAITING_FOR_REACQUISITION
+>>     7.480    1230.86     86.81   D#6    False   WAITING_FOR_REACQUISITION
+>>     7.490    1216.10     86.60   D#6    False   WAITING_FOR_REACQUISITION
+>>     7.500    1211.48     86.53   D#6    False   WAITING_FOR_REACQUISITION
+       7.510     132.00     48.16   C3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.520     130.99     48.02   C3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.530     132.44     48.21   C3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.540     132.84     48.27   C3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.550     131.40     48.08   C3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.560     131.51     48.09   C3     True    REACQUIRED_FUTURE_CONFIRMED
+       7.570     134.87     48.53   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+       7.580     131.78     48.13   C3     True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #05
+Run:                    19.630 .. 19.710 s
+Duration:               90.0 ms
+Median run pitch:        46.60 B2
+Trusted pitch BEFORE:    78.95 G5
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   -32.35 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     64.844  EXTREME
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -2 OCT   error=8.35 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               0.43 st
+Endpoint change:        -0.05 st
+Path length:            1.15 st
+Direct/path efficiency: 0.041
+Monotonic fraction:     0.375
+Maximum adjacent step:  0.43 st / 10.0 ms
+Max velocity:           43.2 st/s
+Median velocity:        9.4 st/s
+Max acceleration:       6396.3 st/s²
+
+DIAGNOSTIC SUSPICION:   64.844
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      19.550     120.17     46.53   B2     False   WAITING_FOR_REACQUISITION
+      19.560     120.43     46.57   B2     False   WAITING_FOR_REACQUISITION
+      19.570     120.14     46.53   B2     False   WAITING_FOR_REACQUISITION
+      19.580     119.96     46.50   B2     False   BELOW_VOCAL_FLOOR
+      19.590     120.93     46.64   B2     False   WAITING_FOR_REACQUISITION
+      19.600     121.46     46.72   B2     False   WAITING_FOR_REACQUISITION
+      19.610     120.18     46.53   B2     False   WAITING_FOR_REACQUISITION
+      19.620     119.43     46.42   A#2    False   BELOW_VOCAL_FLOOR
+>>    19.630     120.99     46.65   B2     False   WAITING_FOR_REACQUISITION
+>>    19.640     120.53     46.58   B2     False   WAITING_FOR_REACQUISITION
+>>    19.650     121.14     46.67   B2     False   WAITING_FOR_REACQUISITION
+>>    19.660     120.44     46.57   B2     False   WAITING_FOR_REACQUISITION
+>>    19.670     120.62     46.60   B2     False   WAITING_FOR_REACQUISITION
+>>    19.680     121.80     46.76   B2     False   WAITING_FOR_REACQUISITION
+>>    19.690     123.27     46.97   B2     False   WAITING_FOR_REACQUISITION
+>>    19.700     120.23     46.54   B2     False   WAITING_FOR_REACQUISITION
+>>    19.710     120.66     46.60   B2     False   WAITING_FOR_REACQUISITION
+      19.720     118.75     46.33   A#2    False   BELOW_VOCAL_FLOOR
+      19.730     119.00     46.36   A#2    False   BELOW_VOCAL_FLOOR
+      19.740     119.21     46.39   A#2    False   BELOW_VOCAL_FLOOR
+      19.750     120.11     46.52   B2     False   WAITING_FOR_REACQUISITION
+      19.760     126.37     47.40   B2     False   WAITING_FOR_REACQUISITION
+      19.770     124.35     47.12   B2     False   WAITING_FOR_REACQUISITION
+      19.780     121.57     46.73   B2     False   WAITING_FOR_REACQUISITION
+      19.790     117.17     46.09   A#2    False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #06
+Run:                    74.020 .. 74.050 s
+Duration:               40.0 ms
+Median run pitch:        46.85 B2
+Trusted pitch BEFORE:    68.00 G#4
+Trusted pitch AFTER:     68.02 G#4
+
+Interval from BEFORE:   -21.15 st
+Interval from AFTER:    -21.17 st
+Vocal prior BEFORE:     47.839  EXTREME
+Vocal prior AFTER:      47.999  EXTREME
+
+Nearest harmonic BEFORE: -3:1     error=2.13 st
+Nearest harmonic AFTER:  -3:1     error=2.16 st
+
+Run span:               0.39 st
+Endpoint change:        +0.39 st
+Path length:            0.73 st
+Direct/path efficiency: 0.530
+Monotonic fraction:     0.667
+Maximum adjacent step:  0.39 st / 10.0 ms
+Max velocity:           39.0 st/s
+Median velocity:        17.1 st/s
+Max acceleration:       5613.8 st/s²
+
+DIAGNOSTIC SUSPICION:   47.999
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      73.940     937.07     82.09   A#5    False   WAITING_FOR_REACQUISITION
+      73.950     122.74     46.90   B2     False   WAITING_FOR_REACQUISITION
+      73.960     122.96     46.93   B2     False   WAITING_FOR_REACQUISITION
+      73.970     123.03     46.94   B2     False   WAITING_FOR_REACQUISITION
+      73.980     122.75     46.90   B2     False   WAITING_FOR_REACQUISITION
+      73.990     121.66     46.74   B2     False   WAITING_FOR_REACQUISITION
+      74.000     124.10     47.09   B2     False   WAITING_FOR_REACQUISITION
+      74.010     118.45     46.28   A#2    False   BELOW_VOCAL_FLOOR
+>>    74.020     120.26     46.54   B2     False   WAITING_FOR_REACQUISITION
+>>    74.030     123.00     46.93   B2     False   WAITING_FOR_REACQUISITION
+>>    74.040     121.78     46.76   B2     False   WAITING_FOR_REACQUISITION
+>>    74.050     122.97     46.93   B2     False   WAITING_FOR_REACQUISITION
+      74.060     118.79     46.33   A#2    False   BELOW_VOCAL_FLOOR
+      74.070     122.26     46.83   B2     False   WAITING_FOR_REACQUISITION
+      74.080     122.63     46.88   B2     False   WAITING_FOR_REACQUISITION
+      74.090     122.20     46.82   B2     False   WAITING_FOR_REACQUISITION
+      74.100     126.73     47.45   B2     False   WAITING_FOR_REACQUISITION
+      74.110     121.86     46.77   B2     False   WAITING_FOR_REACQUISITION
+      74.120     415.79     68.02   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      74.130     414.81     67.98   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #07
+Run:                    74.070 .. 74.110 s
+Duration:               50.0 ms
+Median run pitch:        46.83 B2
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:     68.02 G#4
+
+Interval from BEFORE:   ---
+Interval from AFTER:    -21.19 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      37.998  EXTREME
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  -3:1     error=2.17 st
+
+Run span:               0.68 st
+Endpoint change:        -0.06 st
+Path length:            1.42 st
+Direct/path efficiency: 0.041
+Monotonic fraction:     0.500
+Maximum adjacent step:  0.68 st / 10.0 ms
+Max velocity:           67.9 st/s
+Median velocity:        34.5 st/s
+Max acceleration:       13086.2 st/s²
+
+DIAGNOSTIC SUSPICION:   37.998
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      73.990     121.66     46.74   B2     False   WAITING_FOR_REACQUISITION
+      74.000     124.10     47.09   B2     False   WAITING_FOR_REACQUISITION
+      74.010     118.45     46.28   A#2    False   BELOW_VOCAL_FLOOR
+      74.020     120.26     46.54   B2     False   WAITING_FOR_REACQUISITION
+      74.030     123.00     46.93   B2     False   WAITING_FOR_REACQUISITION
+      74.040     121.78     46.76   B2     False   WAITING_FOR_REACQUISITION
+      74.050     122.97     46.93   B2     False   WAITING_FOR_REACQUISITION
+      74.060     118.79     46.33   A#2    False   BELOW_VOCAL_FLOOR
+>>    74.070     122.26     46.83   B2     False   WAITING_FOR_REACQUISITION
+>>    74.080     122.63     46.88   B2     False   WAITING_FOR_REACQUISITION
+>>    74.090     122.20     46.82   B2     False   WAITING_FOR_REACQUISITION
+>>    74.100     126.73     47.45   B2     False   WAITING_FOR_REACQUISITION
+>>    74.110     121.86     46.77   B2     False   WAITING_FOR_REACQUISITION
+      74.120     415.79     68.02   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      74.130     414.81     67.98   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      74.140     415.05     67.99   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      74.150     429.69     68.59   A4     True    REACQUIRED_FUTURE_CONFIRMED
+      74.160     416.46     68.05   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      74.170     415.92     68.03   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      74.180     417.72     68.10   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+      74.190     414.23     67.96   G#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #08
+Run:                    9.960 .. 9.980 s
+Duration:               30.0 ms
+Median run pitch:        46.74 B2
+Trusted pitch BEFORE:    63.01 D#4
+Trusted pitch AFTER:     49.67 D3
+
+Interval from BEFORE:   -16.27 st
+Interval from AFTER:     -2.93 st
+Vocal prior BEFORE:     30.446  EXTREME
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -3:1     error=2.75 st
+Nearest harmonic AFTER:  -1 OCT   error=9.07 st
+
+Run span:               0.09 st
+Endpoint change:        -0.05 st
+Path length:            0.13 st
+Direct/path efficiency: 0.359
+Monotonic fraction:     0.500
+Maximum adjacent step:  0.09 st / 10.0 ms
+Max velocity:           8.9 st/s
+Median velocity:        6.5 st/s
+Max acceleration:       1303.2 st/s²
+
+DIAGNOSTIC SUSPICION:   30.446
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+       9.880     315.30     63.23   D#4    True    VALID_CONTINUOUS
+       9.890     275.52     60.90   C#4    True    VALID_CONTINUOUS
+       9.900      96.99     42.82   G2     False   BELOW_VOCAL_FLOOR
+       9.910      96.43     42.72   G2     False   BELOW_VOCAL_FLOOR
+       9.920     102.67     43.81   G#2    False   BELOW_VOCAL_FLOOR
+       9.930      96.63     42.76   G2     False   BELOW_VOCAL_FLOOR
+       9.940      82.90     40.10   E2     False   BELOW_VOCAL_FLOOR
+       9.950     119.67     46.46   A#2    False   BELOW_VOCAL_FLOOR
+>>     9.960     121.96     46.79   B2     False   WAITING_FOR_REACQUISITION
+>>     9.970     121.33     46.70   B2     False   WAITING_FOR_REACQUISITION
+>>     9.980     121.63     46.74   B2     False   WAITING_FOR_REACQUISITION
+       9.990     113.90     45.60   A#2    False   BELOW_VOCAL_FLOOR
+      10.000     128.47     47.69   C3     True    REACQUIRED_FUTURE_CONFIRMED
+      10.010     130.14     47.91   C3     True    REACQUIRED_FUTURE_CONFIRMED
+      10.020     138.87     49.03   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+      10.030     142.87     49.53   D3     True    REACQUIRED_FUTURE_CONFIRMED
+      10.040     140.85     49.28   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+      10.050     142.52     49.48   C#3    True    REACQUIRED_FUTURE_CONFIRMED
+      10.060     150.41     50.42   D3     True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #09
+Run:                    85.940 .. 86.010 s
+Duration:               80.0 ms
+Median run pitch:        87.95 E6
+Trusted pitch BEFORE:    66.98 G4
+Trusted pitch AFTER:     75.93 E5
+
+Interval from BEFORE:   +20.97 st
+Interval from AFTER:    +12.02 st
+Vocal prior BEFORE:     22.147  EXTREME
+Vocal prior AFTER:      3.593  STRONG
+
+Nearest harmonic BEFORE: +3:1     error=1.95 st
+Nearest harmonic AFTER:  +1 OCT   error=0.02 st
+
+Run span:               0.09 st
+Endpoint change:        +0.03 st
+Path length:            0.16 st
+Direct/path efficiency: 0.169
+Monotonic fraction:     0.429
+Maximum adjacent step:  0.05 st / 10.0 ms
+Max velocity:           5.3 st/s
+Median velocity:        2.2 st/s
+Max acceleration:       678.4 st/s²
+
+DIAGNOSTIC SUSPICION:   23.647
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      85.860     388.58     66.85   G4     True    VALID_CONTINUOUS
+      85.870     391.32     66.97   G4     True    VALID_CONTINUOUS
+      85.880     394.72     67.12   G4     True    VALID_CONTINUOUS
+      85.890     393.32     67.06   G4     True    VALID_CONTINUOUS
+      85.900     390.38     66.93   G4     True    VALID_CONTINUOUS
+      85.910     394.09     67.09   G4     True    VALID_CONTINUOUS
+      85.920     389.13     66.87   G4     True    VALID_CONTINUOUS
+      85.930     380.22     66.47   F#4    True    VALID_CONTINUOUS
+>>    85.940    1315.04     87.95   E6     False   LOCK_LOST_DISCONTINUITY
+>>    85.950    1314.86     87.95   E6     False   WAITING_FOR_REACQUISITION
+>>    85.960    1315.24     87.96   E6     False   WAITING_FOR_REACQUISITION
+>>    85.970    1314.33     87.95   E6     False   WAITING_FOR_REACQUISITION
+>>    85.980    1312.65     87.92   E6     False   WAITING_FOR_REACQUISITION
+>>    85.990    1310.31     87.89   E6     False   WAITING_FOR_REACQUISITION
+>>    86.000    1313.10     87.93   E6     False   WAITING_FOR_REACQUISITION
+>>    86.010    1317.13     87.98   E6     False   WAITING_FOR_REACQUISITION
+      86.020     652.99     75.83   E5     True    REACQUIRED_FUTURE_CONFIRMED
+      86.030     652.77     75.83   E5     True    REACQUIRED_FUTURE_CONFIRMED
+      86.040     652.77     75.83   E5     True    REACQUIRED_FUTURE_CONFIRMED
+      86.050     654.24     75.87   E5     True    REACQUIRED_FUTURE_CONFIRMED
+      86.060     658.70     75.99   E5     True    REACQUIRED_FUTURE_CONFIRMED
+      86.070     662.91     76.10   E5     True    REACQUIRED_FUTURE_CONFIRMED
+      86.080     665.64     76.17   E5     True    REACQUIRED_FUTURE_CONFIRMED
+      86.090     660.11     76.02   E5     True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #10
+Run:                    25.820 .. 25.890 s
+Duration:               80.0 ms
+Median run pitch:        67.04 G4
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:     47.20 B2
+
+Interval from BEFORE:   ---
+Interval from AFTER:    +19.84 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      18.839  EXTREME
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  +3:1     error=0.82 st
+
+Run span:               0.92 st
+Endpoint change:        -0.71 st
+Path length:            2.82 st
+Direct/path efficiency: 0.251
+Monotonic fraction:     0.429
+Maximum adjacent step:  0.85 st / 10.0 ms
+Max velocity:           84.8 st/s
+Median velocity:        42.4 st/s
+Max acceleration:       12719.9 st/s²
+
+DIAGNOSTIC SUSPICION:   19.339
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      25.740      74.45     38.24   D2     False   BELOW_VOCAL_FLOOR
+      25.750      77.68     38.98   D#2    False   BELOW_VOCAL_FLOOR
+      25.760      75.81     38.56   D#2    False   BELOW_VOCAL_FLOOR
+      25.770      73.14     37.93   D2     False   BELOW_VOCAL_FLOOR
+      25.780      74.76     38.31   D2     False   BELOW_VOCAL_FLOOR
+      25.790      70.74     37.36   C#2    False   BELOW_VOCAL_FLOOR
+      25.800      72.70     37.83   D2     False   BELOW_VOCAL_FLOOR
+      25.810      76.80     38.78   D#2    False   BELOW_VOCAL_FLOOR
+>>    25.820     395.99     67.18   G4     False   WAITING_FOR_REACQUISITION
+>>    25.830     400.88     67.39   G4     False   WAITING_FOR_REACQUISITION
+>>    25.840     389.64     66.90   G4     False   WAITING_FOR_REACQUISITION
+>>    25.850     396.91     67.22   G4     False   WAITING_FOR_REACQUISITION
+>>    25.860     387.31     66.79   G4     False   WAITING_FOR_REACQUISITION
+>>    25.870     389.53     66.89   G4     False   WAITING_FOR_REACQUISITION
+>>    25.880     399.20     67.32   G4     False   WAITING_FOR_REACQUISITION
+>>    25.890     380.12     66.47   F#4    False   WAITING_FOR_REACQUISITION
+      25.900    2089.00     95.97   C7     False   ABOVE_VOCAL_CEILING
+      25.910    2089.34     95.97   C7     False   ABOVE_VOCAL_CEILING
+      25.920    2088.61     95.96   C7     False   ABOVE_VOCAL_CEILING
+      25.930    2100.54     96.06   C7     False   ABOVE_VOCAL_CEILING
+      25.940    2093.40     96.00   C7     False   ABOVE_VOCAL_CEILING
+      25.950    2092.53     96.00   C7     False   ABOVE_VOCAL_CEILING
+      25.960    2098.83     96.05   C7     False   ABOVE_VOCAL_CEILING
+      25.970    2100.89     96.07   C7     False   ABOVE_VOCAL_CEILING
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #11
+Run:                    26.880 .. 26.960 s
+Duration:               90.0 ms
+Median run pitch:        89.08 F6
+Trusted pitch BEFORE:    68.58 A4
+Trusted pitch AFTER:     80.02 G#5
+
+Interval from BEFORE:   +20.50 st
+Interval from AFTER:     +9.06 st
+Vocal prior BEFORE:     18.179  EXTREME
+Vocal prior AFTER:      0.754  MILD
+
+Nearest harmonic BEFORE: +3:1     error=1.48 st
+Nearest harmonic AFTER:  +1 OCT   error=2.94 st
+
+Run span:               0.22 st
+Endpoint change:        +0.11 st
+Path length:            0.46 st
+Direct/path efficiency: 0.237
+Monotonic fraction:     0.625
+Maximum adjacent step:  0.13 st / 10.0 ms
+Max velocity:           13.3 st/s
+Median velocity:        5.0 st/s
+Max acceleration:       1691.7 st/s²
+
+DIAGNOSTIC SUSPICION:   18.679
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      26.800     465.91     69.99   A#4    True    VALID_CONTINUOUS
+      26.810     466.71     70.02   A#4    True    VALID_CONTINUOUS
+      26.820     468.24     70.08   A#4    True    VALID_CONTINUOUS
+      26.830     466.82     70.02   A#4    True    VALID_CONTINUOUS
+      26.840     470.31     70.15   A#4    True    VALID_CONTINUOUS
+      26.850     469.17     70.11   A#4    True    VALID_CONTINUOUS
+      26.860     466.78     70.02   A#4    True    VALID_CONTINUOUS
+      26.870     467.77     70.06   A#4    True    VALID_CONTINUOUS
+>>    26.880    1395.00     88.98   F6     False   LOCK_LOST_DISCONTINUITY
+>>    26.890    1395.29     88.98   F6     False   WAITING_FOR_REACQUISITION
+>>    26.900    1395.92     88.99   F6     False   WAITING_FOR_REACQUISITION
+>>    26.910    1401.79     89.06   F6     False   WAITING_FOR_REACQUISITION
+>>    26.920    1412.60     89.19   F6     False   WAITING_FOR_REACQUISITION
+>>    26.930    1409.66     89.16   F6     False   WAITING_FOR_REACQUISITION
+>>    26.940    1406.89     89.12   F6     False   WAITING_FOR_REACQUISITION
+>>    26.950    1412.15     89.19   F6     False   WAITING_FOR_REACQUISITION
+>>    26.960    1403.71     89.08   F6     False   WAITING_FOR_REACQUISITION
+      26.970     832.06     80.03   G#5    True    REACQUIRED_FUTURE_CONFIRMED
+      26.980     830.75     80.00   G#5    True    REACQUIRED_FUTURE_CONFIRMED
+      26.990     835.10     80.09   G#5    True    REACQUIRED_FUTURE_CONFIRMED
+      27.000     842.10     80.24   G#5    True    REACQUIRED_FUTURE_CONFIRMED
+      27.010     827.12     79.93   G#5    True    REACQUIRED_FUTURE_CONFIRMED
+      27.020     858.15     80.56   A5     True    REACQUIRED_FUTURE_CONFIRMED
+      27.030     856.35     80.53   A5     True    REACQUIRED_FUTURE_CONFIRMED
+      27.040     839.34     80.18   G#5    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #12
+Run:                    43.520 .. 43.600 s
+Duration:               90.0 ms
+Median run pitch:        56.11 G#3
+Trusted pitch BEFORE:    63.53 E4
+Trusted pitch AFTER:     65.67 F#4
+
+Interval from BEFORE:    -7.42 st
+Interval from AFTER:     -9.56 st
+Vocal prior BEFORE:     0.039  PLAUSIBLE
+Vocal prior AFTER:      1.043  SUSPICIOUS
+
+Nearest harmonic BEFORE: -1 OCT   error=4.58 st
+Nearest harmonic AFTER:  -1 OCT   error=2.44 st
+
+Run span:               9.57 st
+Endpoint change:        -5.85 st
+Path length:            16.29 st
+Direct/path efficiency: 0.359
+Monotonic fraction:     0.375
+Maximum adjacent step:  9.57 st / 10.0 ms
+Max velocity:           956.8 st/s
+Median velocity:        86.3 st/s
+Max acceleration:       122652.2 st/s²
+
+DIAGNOSTIC SUSPICION:   18.637
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      43.440     323.06     63.65   E4     True    REACQUIRED_FUTURE_CONFIRMED
+      43.450     320.81     63.53   E4     True    REACQUIRED_FUTURE_CONFIRMED
+      43.460     308.91     62.88   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      43.470     309.34     62.90   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+      43.480     294.26     62.04   D4     True    VALID_CONTINUOUS
+      43.490     296.07     62.14   D4     True    VALID_CONTINUOUS
+      43.500     246.47     58.97   B3     True    VALID_CONTINUOUS
+      43.510     210.16     56.21   G#3    True    VALID_CONTINUOUS
+>>    43.520     293.00     61.96   D4     False   LOCK_LOST_DISCONTINUITY
+>>    43.530     293.61     62.00   D4     False   WAITING_FOR_REACQUISITION
+>>    43.540     275.66     60.90   C#4    False   WAITING_FOR_REACQUISITION
+>>    43.550     306.53     62.74   D#4    False   WAITING_FOR_REACQUISITION
+>>    43.560     176.38     53.17   F3     False   WAITING_FOR_REACQUISITION
+>>    43.570     206.11     55.87   G#3    False   WAITING_FOR_REACQUISITION
+>>    43.580     206.29     55.89   G#3    False   WAITING_FOR_REACQUISITION
+>>    43.590     201.50     55.48   G3     False   WAITING_FOR_REACQUISITION
+>>    43.600     209.01     56.11   G#3    False   WAITING_FOR_REACQUISITION
+      43.610     278.18     61.06   C#4    True    REACQUIRED_FUTURE_CONFIRMED
+      43.620     331.42     64.09   E4     True    REACQUIRED_FUTURE_CONFIRMED
+      43.630     340.35     64.55   F4     True    REACQUIRED_FUTURE_CONFIRMED
+      43.640     344.44     64.76   F4     True    REACQUIRED_FUTURE_CONFIRMED
+      43.650     348.32     64.95   F4     True    REACQUIRED_FUTURE_CONFIRMED
+      43.660     355.82     65.32   F4     True    REACQUIRED_FUTURE_CONFIRMED
+      43.670     353.90     65.23   F4     True    REACQUIRED_FUTURE_CONFIRMED
+      43.680     361.33     65.59   F#4    True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #13
+Run:                    88.150 .. 88.190 s
+Duration:               50.0 ms
+Median run pitch:        78.64 G5
+Trusted pitch BEFORE:    62.64 D#4
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   +16.01 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     16.687  EXTREME
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: +3:1     error=3.01 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               0.00 st
+Endpoint change:        -0.00 st
+Path length:            0.00 st
+Direct/path efficiency: 0.284
+Monotonic fraction:     0.500
+Maximum adjacent step:  0.00 st / 10.0 ms
+Max velocity:           0.0 st/s
+Median velocity:        0.0 st/s
+Max acceleration:       0.0 st/s²
+
+DIAGNOSTIC SUSPICION:   16.687
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      88.070      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.080      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.090      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.100      47.01     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.110      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.120      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.130      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.140      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+>>    88.150     768.00     78.64   G5     False   WAITING_FOR_REACQUISITION
+>>    88.160     768.00     78.64   G5     False   WAITING_FOR_REACQUISITION
+>>    88.170     768.00     78.64   G5     False   WAITING_FOR_REACQUISITION
+>>    88.180     768.00     78.64   G5     False   WAITING_FOR_REACQUISITION
+>>    88.190     768.00     78.64   G5     False   WAITING_FOR_REACQUISITION
+      88.200      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.210      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.220      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.230      47.00     30.28   F#1    False   BELOW_VOCAL_FLOOR
+      88.240       0.00       nan   ---    False   NO_F0
+      88.250       0.00       nan   ---    False   NO_F0
+      88.260       0.00       nan   ---    False   NO_F0
+      88.270       0.00       nan   ---    False   NO_F0
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #14
+Run:                    40.920 .. 41.170 s
+Duration:               260.0 ms
+Median run pitch:        56.52 A3
+Trusted pitch BEFORE:    62.95 D#4
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:    -6.43 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -1 OCT   error=5.57 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               21.88 st
+Endpoint change:        +21.83 st
+Path length:            25.95 st
+Direct/path efficiency: 0.841
+Monotonic fraction:     0.600
+Maximum adjacent step:  8.41 st / 10.0 ms
+Max velocity:           841.4 st/s
+Median velocity:        13.5 st/s
+Max acceleration:       84481.0 st/s²
+
+DIAGNOSTIC SUSPICION:   10.875
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      40.840     315.47     63.24   D#4    True    VALID_CONTINUOUS
+      40.850     311.67     63.03   D#4    True    VALID_CONTINUOUS
+      40.860     302.05     62.49   D4     True    VALID_CONTINUOUS
+      40.870     310.79     62.98   D#4    True    VALID_CONTINUOUS
+      40.880     312.65     63.08   D#4    True    VALID_CONTINUOUS
+      40.890     300.09     62.37   D4     True    VALID_CONTINUOUS
+      40.900     302.72     62.53   D#4    True    VALID_CONTINUOUS
+      40.910     312.32     63.07   D#4    True    VALID_CONTINUOUS
+>>    40.920     132.00     48.16   C3     False   LOCK_LOST_DISCONTINUITY
+>>    40.930     132.01     48.16   C3     False   WAITING_FOR_REACQUISITION
+>>    40.940     132.03     48.16   C3     False   WAITING_FOR_REACQUISITION
+>>    40.950     132.07     48.17   C3     False   WAITING_FOR_REACQUISITION
+>>    40.960     132.01     48.16   C3     False   WAITING_FOR_REACQUISITION
+>>    40.970     131.87     48.14   C3     False   WAITING_FOR_REACQUISITION
+>>    40.980     131.80     48.13   C3     False   WAITING_FOR_REACQUISITION
+>>    40.990     131.87     48.14   C3     False   WAITING_FOR_REACQUISITION
+>>    41.000     131.61     48.11   C3     False   WAITING_FOR_REACQUISITION
+>>    41.010     213.98     56.52   A3     False   WAITING_FOR_REACQUISITION
+>>    41.020     214.07     56.53   A3     False   WAITING_FOR_REACQUISITION
+>>    41.030     213.77     56.50   A3     False   WAITING_FOR_REACQUISITION
+>>    41.040     206.41     55.90   G#3    False   WAITING_FOR_REACQUISITION
+>>    41.050     204.80     55.76   G#3    False   WAITING_FOR_REACQUISITION
+>>    41.060     282.75     61.34   C#4    False   WAITING_FOR_REACQUISITION
+>>    41.070     300.46     62.40   D4     False   WAITING_FOR_REACQUISITION
+>>    41.080     303.62     62.58   D#4    False   WAITING_FOR_REACQUISITION
+>>    41.090     393.01     67.04   G4     False   WAITING_FOR_REACQUISITION
+>>    41.100     390.03     66.91   G4     False   WAITING_FOR_REACQUISITION
+>>    41.110     395.54     67.16   G4     False   WAITING_FOR_REACQUISITION
+>>    41.120     396.54     67.20   G4     False   WAITING_FOR_REACQUISITION
+>>    41.130     388.70     66.85   G4     False   WAITING_FOR_REACQUISITION
+>>    41.140     420.62     68.22   G#4    False   WAITING_FOR_REACQUISITION
+>>    41.150     402.84     67.47   G4     False   WAITING_FOR_REACQUISITION
+>>    41.160     423.22     68.33   G#4    False   WAITING_FOR_REACQUISITION
+>>    41.170     465.73     69.98   A#4    False   WAITING_FOR_REACQUISITION
+      41.180      63.63     35.52   C2     False   BELOW_VOCAL_FLOOR
+      41.190      60.79     34.73   B1     False   BELOW_VOCAL_FLOOR
+      41.200      65.95     36.14   C2     False   BELOW_VOCAL_FLOOR
+      41.210      73.66     38.06   D2     False   BELOW_VOCAL_FLOOR
+      41.220     104.88     44.17   G#2    False   BELOW_VOCAL_FLOOR
+      41.230     102.08     43.71   G#2    False   BELOW_VOCAL_FLOOR
+      41.240     136.43     48.73   C#3    False   WAITING_FOR_REACQUISITION
+      41.250     160.24     51.51   E3     False   WAITING_FOR_REACQUISITION
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #15
+Run:                    25.430 .. 25.510 s
+Duration:               90.0 ms
+Median run pitch:        64.54 F4
+Trusted pitch BEFORE:    52.30 E3
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   +12.23 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     3.270  STRONG
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: +1 OCT   error=0.23 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               1.45 st
+Endpoint change:        -0.52 st
+Path length:            4.55 st
+Direct/path efficiency: 0.114
+Monotonic fraction:     0.500
+Maximum adjacent step:  1.45 st / 10.0 ms
+Max velocity:           145.1 st/s
+Median velocity:        52.5 st/s
+Max acceleration:       26139.2 st/s²
+
+DIAGNOSTIC SUSPICION:   4.770
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      25.350     145.23     49.81   D3     True    VALID_CONTINUOUS
+      25.360     147.24     50.05   D3     True    VALID_CONTINUOUS
+      25.370     143.14     49.56   D3     True    VALID_CONTINUOUS
+      25.380     156.51     51.11   D#3    True    VALID_CONTINUOUS
+      25.390     149.52     50.31   D3     True    VALID_CONTINUOUS
+      25.400     142.31     49.46   C#3    True    VALID_CONTINUOUS
+      25.410     154.32     50.86   D#3    True    VALID_CONTINUOUS
+      25.420     148.51     50.20   D3     True    VALID_CONTINUOUS
+>>    25.430     340.00     64.54   F4     False   LOCK_LOST_DISCONTINUITY
+>>    25.440     339.98     64.54   F4     False   WAITING_FOR_REACQUISITION
+>>    25.450     340.77     64.58   F4     False   WAITING_FOR_REACQUISITION
+>>    25.460     344.80     64.78   F4     False   WAITING_FOR_REACQUISITION
+>>    25.470     336.10     64.34   E4     False   WAITING_FOR_REACQUISITION
+>>    25.480     348.12     64.95   F4     False   WAITING_FOR_REACQUISITION
+>>    25.490     335.51     64.31   E4     False   WAITING_FOR_REACQUISITION
+>>    25.500     358.82     65.47   F4     False   WAITING_FOR_REACQUISITION
+>>    25.510     329.97     64.02   E4     False   WAITING_FOR_REACQUISITION
+      25.520      75.94     38.59   D#2    False   BELOW_VOCAL_FLOOR
+      25.530      76.14     38.63   D#2    False   BELOW_VOCAL_FLOOR
+      25.540      76.57     38.73   D#2    False   BELOW_VOCAL_FLOOR
+      25.550      76.10     38.62   D#2    False   BELOW_VOCAL_FLOOR
+      25.560      75.70     38.53   D#2    False   BELOW_VOCAL_FLOOR
+      25.570      76.14     38.63   D#2    False   BELOW_VOCAL_FLOOR
+      25.580      76.21     38.65   D#2    False   BELOW_VOCAL_FLOOR
+      25.590      76.43     38.70   D#2    False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #16
+Run:                    49.030 .. 49.100 s
+Duration:               80.0 ms
+Median run pitch:        47.35 B2
+Trusted pitch BEFORE:    59.03 B3
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   -11.68 st
+Interval from AFTER:    ---
+Vocal prior BEFORE:     3.212  STRONG
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: -1 OCT   error=0.32 st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               0.12 st
+Endpoint change:        -0.01 st
+Path length:            0.25 st
+Direct/path efficiency: 0.025
+Monotonic fraction:     0.571
+Maximum adjacent step:  0.08 st / 10.0 ms
+Max velocity:           7.7 st/s
+Median velocity:        4.4 st/s
+Max acceleration:       1226.7 st/s²
+
+DIAGNOSTIC SUSPICION:   4.712
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      48.950     247.12     59.01   B3     True    VALID_CONTINUOUS
+      48.960     247.47     59.04   B3     True    VALID_CONTINUOUS
+      48.970     247.22     59.02   B3     True    VALID_CONTINUOUS
+      48.980     246.86     58.99   B3     True    VALID_CONTINUOUS
+      48.990     297.04     62.20   D4     True    VALID_CONTINUOUS
+      49.000     343.24     64.70   F4     True    VALID_CONTINUOUS
+      49.010     329.39     63.99   E4     True    VALID_CONTINUOUS
+      49.020     317.64     63.36   D#4    True    VALID_CONTINUOUS
+>>    49.030     126.00     47.35   B2     False   LOCK_LOST_DISCONTINUITY
+>>    49.040     125.95     47.34   B2     False   WAITING_FOR_REACQUISITION
+>>    49.050     125.97     47.35   B2     False   WAITING_FOR_REACQUISITION
+>>    49.060     125.73     47.31   B2     False   WAITING_FOR_REACQUISITION
+>>    49.070     126.05     47.36   B2     False   WAITING_FOR_REACQUISITION
+>>    49.080     126.61     47.43   B2     False   WAITING_FOR_REACQUISITION
+>>    49.090     126.28     47.39   B2     False   WAITING_FOR_REACQUISITION
+>>    49.100     125.95     47.34   B2     False   WAITING_FOR_REACQUISITION
+      49.110      67.00     36.42   C2     False   BELOW_VOCAL_FLOOR
+      49.120      66.99     36.41   C2     False   BELOW_VOCAL_FLOOR
+      49.130      67.00     36.42   C2     False   BELOW_VOCAL_FLOOR
+      49.140      67.07     36.43   C2     False   BELOW_VOCAL_FLOOR
+      49.150      66.95     36.40   C2     False   BELOW_VOCAL_FLOOR
+      49.160      67.00     36.42   C2     False   BELOW_VOCAL_FLOOR
+      49.170      66.94     36.40   C2     False   BELOW_VOCAL_FLOOR
+      49.180      66.98     36.41   C2     False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #17
+Run:                    0.000 .. 0.040 s
+Duration:               50.0 ms
+Median run pitch:        47.35 B2
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   ---
+Interval from AFTER:    ---
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               0.00 st
+Endpoint change:        +0.00 st
+Path length:            0.00 st
+Direct/path efficiency: 0.527
+Monotonic fraction:     0.500
+Maximum adjacent step:  0.00 st / 10.0 ms
+Max velocity:           0.0 st/s
+Median velocity:        0.0 st/s
+Max acceleration:       0.1 st/s²
+
+DIAGNOSTIC SUSPICION:   0.000
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+>>     0.000     126.00     47.35   B2     False   WAITING_FOR_REACQUISITION
+>>     0.010     126.00     47.35   B2     False   WAITING_FOR_REACQUISITION
+>>     0.020     126.00     47.35   B2     False   WAITING_FOR_REACQUISITION
+>>     0.030     126.00     47.35   B2     False   WAITING_FOR_REACQUISITION
+>>     0.040     126.00     47.35   B2     False   WAITING_FOR_REACQUISITION
+       0.050       0.00       nan   ---    False   NO_F0
+       0.060       0.00       nan   ---    False   NO_F0
+       0.070       0.00       nan   ---    False   NO_F0
+       0.080       0.00       nan   ---    False   NO_F0
+       0.090       0.00       nan   ---    False   NO_F0
+       0.100       0.00       nan   ---    False   NO_F0
+       0.110       0.00       nan   ---    False   NO_F0
+       0.120       0.00       nan   ---    False   NO_F0
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #18
+Run:                    9.090 .. 9.130 s
+Duration:               50.0 ms
+Median run pitch:        60.28 C4
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:     59.59 C4
+
+Interval from BEFORE:   ---
+Interval from AFTER:     +0.69 st
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  +1 OCT   error=11.31 st
+
+Run span:               1.54 st
+Endpoint change:        -1.54 st
+Path length:            1.54 st
+Direct/path efficiency: 1.000
+Monotonic fraction:     1.000
+Maximum adjacent step:  0.94 st / 10.0 ms
+Max velocity:           93.8 st/s
+Median velocity:        30.3 st/s
+Max acceleration:       8702.8 st/s²
+
+DIAGNOSTIC SUSPICION:   0.000
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+       9.010      78.98     39.26   D#2    False   BELOW_VOCAL_FLOOR
+       9.020      79.16     39.31   D#2    False   BELOW_VOCAL_FLOOR
+       9.030      79.02     39.27   D#2    False   BELOW_VOCAL_FLOOR
+       9.040      78.48     39.15   D#2    False   BELOW_VOCAL_FLOOR
+       9.050      79.15     39.30   D#2    False   BELOW_VOCAL_FLOOR
+       9.060      79.16     39.30   D#2    False   BELOW_VOCAL_FLOOR
+       9.070      79.39     39.36   D#2    False   BELOW_VOCAL_FLOOR
+       9.080      79.60     39.40   D#2    False   BELOW_VOCAL_FLOOR
+>>     9.090     267.00     60.35   C4     False   WAITING_FOR_REACQUISITION
+>>     9.100     266.99     60.35   C4     False   WAITING_FOR_REACQUISITION
+>>     9.110     265.95     60.28   C4     False   WAITING_FOR_REACQUISITION
+>>     9.120     251.93     59.35   B3     False   WAITING_FOR_REACQUISITION
+>>     9.130     244.21     58.81   B3     False   WAITING_FOR_REACQUISITION
+       9.140     312.31     63.07   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+       9.150     292.44     61.93   D4     True    REACQUIRED_FUTURE_CONFIRMED
+       9.160     281.96     61.30   C#4    True    REACQUIRED_FUTURE_CONFIRMED
+       9.170     297.07     62.20   D4     True    REACQUIRED_FUTURE_CONFIRMED
+       9.180     304.13     62.61   D#4    True    REACQUIRED_FUTURE_CONFIRMED
+       9.190     278.09     61.06   C#4    True    REACQUIRED_FUTURE_CONFIRMED
+       9.200     274.08     60.81   C#4    True    REACQUIRED_FUTURE_CONFIRMED
+       9.210     263.72     60.14   C4     True    REACQUIRED_FUTURE_CONFIRMED
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #19
+Run:                    19.750 .. 19.780 s
+Duration:               40.0 ms
+Median run pitch:        46.93 B2
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   ---
+Interval from AFTER:    ---
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               0.88 st
+Endpoint change:        +0.21 st
+Path length:            1.55 st
+Direct/path efficiency: 0.135
+Monotonic fraction:     0.333
+Maximum adjacent step:  0.88 st / 10.0 ms
+Max velocity:           88.0 st/s
+Median velocity:        39.1 st/s
+Max acceleration:       11590.9 st/s²
+
+DIAGNOSTIC SUSPICION:   0.000
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      19.670     120.62     46.60   B2     False   WAITING_FOR_REACQUISITION
+      19.680     121.80     46.76   B2     False   WAITING_FOR_REACQUISITION
+      19.690     123.27     46.97   B2     False   WAITING_FOR_REACQUISITION
+      19.700     120.23     46.54   B2     False   WAITING_FOR_REACQUISITION
+      19.710     120.66     46.60   B2     False   WAITING_FOR_REACQUISITION
+      19.720     118.75     46.33   A#2    False   BELOW_VOCAL_FLOOR
+      19.730     119.00     46.36   A#2    False   BELOW_VOCAL_FLOOR
+      19.740     119.21     46.39   A#2    False   BELOW_VOCAL_FLOOR
+>>    19.750     120.11     46.52   B2     False   WAITING_FOR_REACQUISITION
+>>    19.760     126.37     47.40   B2     False   WAITING_FOR_REACQUISITION
+>>    19.770     124.35     47.12   B2     False   WAITING_FOR_REACQUISITION
+>>    19.780     121.57     46.73   B2     False   WAITING_FOR_REACQUISITION
+      19.790     117.17     46.09   A#2    False   BELOW_VOCAL_FLOOR
+      19.800     118.44     46.28   A#2    False   BELOW_VOCAL_FLOOR
+      19.810     118.93     46.35   A#2    False   BELOW_VOCAL_FLOOR
+      19.820     121.41     46.71   B2     False   WAITING_FOR_REACQUISITION
+      19.830     130.76     47.99   C3     False   WAITING_FOR_REACQUISITION
+      19.840     137.82     48.90   C#3    False   WAITING_FOR_REACQUISITION
+      19.850     127.44     47.55   C3     False   WAITING_FOR_REACQUISITION
+      19.860     118.98     46.36   A#2    False   BELOW_VOCAL_FLOOR
+
+----------------------------------------------------------------------------------------------------------------
+REJECTED #20
+Run:                    19.820 .. 19.850 s
+Duration:               40.0 ms
+Median run pitch:        47.77 C3
+Trusted pitch BEFORE:   ---
+Trusted pitch AFTER:    ---
+
+Interval from BEFORE:   ---
+Interval from AFTER:    ---
+Vocal prior BEFORE:     0.000  PLAUSIBLE
+Vocal prior AFTER:      0.000  PLAUSIBLE
+
+Nearest harmonic BEFORE: NONE     error=inf st
+Nearest harmonic AFTER:  NONE     error=inf st
+
+Run span:               2.19 st
+Endpoint change:        +0.84 st
+Path length:            3.55 st
+Direct/path efficiency: 0.236
+Monotonic fraction:     0.667
+Maximum adjacent step:  1.36 st / 10.0 ms
+Max velocity:           135.5 st/s
+Median velocity:        128.5 st/s
+Max acceleration:       22645.3 st/s²
+
+DIAGNOSTIC SUSPICION:   0.000
+
+    time_s      f0_hz    midi     note   valid   reason
+    --------   --------   -------   ----   -----   ----------------------------
+      19.740     119.21     46.39   A#2    False   BELOW_VOCAL_FLOOR
+      19.750     120.11     46.52   B2     False   WAITING_FOR_REACQUISITION
+      19.760     126.37     47.40   B2     False   WAITING_FOR_REACQUISITION
+      19.770     124.35     47.12   B2     False   WAITING_FOR_REACQUISITION
+      19.780     121.57     46.73   B2     False   WAITING_FOR_REACQUISITION
+      19.790     117.17     46.09   A#2    False   BELOW_VOCAL_FLOOR
+      19.800     118.44     46.28   A#2    False   BELOW_VOCAL_FLOOR
+      19.810     118.93     46.35   A#2    False   BELOW_VOCAL_FLOOR
+>>    19.820     121.41     46.71   B2     False   WAITING_FOR_REACQUISITION
+>>    19.830     130.76     47.99   C3     False   WAITING_FOR_REACQUISITION
+>>    19.840     137.82     48.90   C#3    False   WAITING_FOR_REACQUISITION
+>>    19.850     127.44     47.55   C3     False   WAITING_FOR_REACQUISITION
+      19.860     118.98     46.36   A#2    False   BELOW_VOCAL_FLOOR
+      19.870     118.79     46.33   A#2    False   BELOW_VOCAL_FLOOR
+      19.880     111.96     45.31   A2     False   BELOW_VOCAL_FLOOR
+      19.890      69.86     37.14   C#2    False   BELOW_VOCAL_FLOOR
+      19.900      75.81     38.56   D#2    False   BELOW_VOCAL_FLOOR
+      19.910      64.81     35.84   C2     False   BELOW_VOCAL_FLOOR
+      19.920      67.71     36.60   C#2    False   BELOW_VOCAL_FLOOR
+      19.930      68.06     36.69   C#2    False   BELOW_VOCAL_FLOOR
+
+================================================================================================================
