@@ -300,6 +300,7 @@ def track_pitch(
             )
 
             if reset_accepted:
+            # TODO - delete if no longer necessary 
             # if abs(complex_min_matlab_like(K)) < config.kalman_gain_reset_threshold:
                 P_last = P0
 
@@ -417,14 +418,15 @@ def track_pitch(
                     q=float(np.real(q)),
                     gain_norm=float(np.linalg.norm(K)),
                     covariance_norm=float(np.linalg.norm(P_last)),
-                    state_frequency_hz=(
-                        float(
-                            abs(
-                                np.log(x1)
-                                / (1j * Ts * 2.0 * np.pi)
-                            )
-                        )
-                    ),
+                    state_frequency_hz=f0[n],
+                    # state_frequency_hz=(
+                    #     float(
+                    #         abs(
+                    #             np.log(x1)
+                    #             / (1j * Ts * 2.0 * np.pi)
+                    #         )
+                    #     )
+                    # ),
                 )            
             amp[n] = abs(x2)
 
