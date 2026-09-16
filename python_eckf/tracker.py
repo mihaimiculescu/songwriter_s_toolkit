@@ -8,6 +8,7 @@ from .harmonic_change import HarmonicChangeDetector
 from .matlab_compat import complex_min_matlab_like
 from .silence import is_silent
 from .eckf_trace import ECKFTrace
+from .periodicity import assess_periodicity
 
 @dataclass
 class ECKFResult:
@@ -130,69 +131,136 @@ def track_pitch(
 
         y_frame = y[start:end_exclusive]
 
-        silent_prev = silent_cur
-        silent_cur, cur_spf, cur_energy = is_silent(
-            y_frame,
-            flatness_threshold=config.silence_flatness_threshold,
-            energy_db_threshold=config.silence_energy_db_threshold,
-        )
-        spf.append(cur_spf)
-        energy_track.append(cur_energy)
+        if config.mode == "offline":
+            # Offline: assess EVERY frame, including frames after initialization.
+            # A non-periodic frame has no pitch, even when it is loud.
+            silent_prev = silent_cur
+            silent_cur, cur_spf, cur_energy = is_silent(
+                y_frame,
+                flatness_threshold=config.silence_flatness_threshold,
+                energy_db_threshold=config.silence_energy_db_threshold,
+            )
+            spf.append(cur_spf)
+            energy_track.append(cur_energy)
 
-        if silent_cur:
+            periodicity = assess_periodicity(y_frame, sample_rate)
             trace.emit(
-                "SILENCE",
-                start,
+                "PERIODICITY_DECISION", start,
                 frame_start=start,
                 frame_time_s=start / sample_rate,
-                silent_prev=silent_prev,
-                silent_cur=silent_cur,
-                flag=flag,
+                acf_peak=periodicity.acf_peak,
+                cmndf_minimum=periodicity.cmndf_minimum,
+                acf_frequency_hz=periodicity.acf_frequency_hz,
+                cmndf_frequency_hz=periodicity.cmndf_frequency_hz,
+                voiced=int(periodicity.voiced),
+                reason=periodicity.reason,
             )
+            if not periodicity.voiced:
+                # No oscillator is allowed to survive an unvoiced frame.
+                # Output arrays were initialized to zero: do not fill or interpolate.
+                P_last = None
+                x_last = None
+                flag = 0
+                harm_prev = 0
+                silent_cur = 1  # previous frame is unavailable for harmonic comparison
+                start += block
+                n = start
+                continue
+
+            y_prev = y[start - block:start] if start >= block else None
+            if P_last is None or silent_prev:
+                analysis_cur = detector.analyze(None, y_frame, sample_rate)
+            else:
+                analysis_cur = detector.analyze(y_prev, y_frame, sample_rate)
+            harm_cur = analysis_cur.flag
+            needs_initialization = (
+                P_last is None or x_last is None
+                or (harm_prev == 0 and harm_cur == 1)
+            )
+            if needs_initialization:
+                # No lookahead and no backtracking: an unverified frame is never
+                # assigned a pitch based on a different frame.
+                initialization = detector.analyze(None, y_frame, sample_rate)
+                f1 = initialization.f0_hz
+                a1 = initialization.amplitude
+                phi1 = initialization.phase
+                trace.emit(
+                    "INITIALIZATION_PROPOSED", start,
+                    frame_start=start,
+                    frame_time_s=start / sample_rate,
+                    count=0,
+                    init_f0_hz=f1,
+                    init_amplitude=a1,
+                    flag=1,
+                )
+                if not (np.isfinite(f1) and f1 > 0 and np.isfinite(a1)
+                        and a1 >= 0 and np.isfinite(phi1)):
+                    trace.emit("INITIALIZATION_REJECTED", start,
+                               frame_start=start, reason="invalid_initialization")
+                    P_last = None
+                    x_last = None
+                    flag = 0
+                    harm_prev = 0
+                    silent_cur = 1
+                    start += block
+                    n = start
+                    continue
+                n_matlab = start + 1
+                x_last = np.array([
+                    np.exp(1j * 2.0 * np.pi * f1 * Ts),
+                    a1 * np.exp(1j * (2.0 * np.pi * f1 * n_matlab * Ts + phi1)),
+                    a1 * np.exp(-1j * (2.0 * np.pi * f1 * n_matlab * Ts + phi1)),
+                ], dtype=np.complex128).reshape(3, 1)
+                P_last = np.zeros((3, 3), dtype=np.complex128)
+                K = np.zeros((3, 1), dtype=np.complex128)
+                onset_samples.append(start)
+                trace.emit("RESET_COMPLETED", start,
+                           frame_start=start, count=0, init_f0_hz=f1,
+                           reset_accepted=1, flag=0)
             flag = 0
-            start += block
             n = start
-            continue
-
-        y_prev = y[start - block:start] if start >= block else None
-
-        # A harmonic-change comparison against a frame already classified
-        # as silent is meaningless.  On a silence -> sound transition the
-        # onset is already established by the silence detector itself.
-        #
-        # We still analyse the current frame because its f0/amplitude/phase
-        # may be needed by the normal initialization path, but there is no
-        # previous harmonic spectrum to compare against.
-        if config.mode == "offline" and silent_prev == 1:
-            analysis_cur = detector.analyze(None, y_frame, sample_rate)
         else:
-            analysis_cur = detector.analyze(y_prev, y_frame, sample_rate)
+            silent_prev = silent_cur
+            silent_cur, cur_spf, cur_energy = is_silent(
+                y_frame,
+                flatness_threshold=config.silence_flatness_threshold,
+                energy_db_threshold=config.silence_energy_db_threshold,
+            )
+            spf.append(cur_spf)
+            energy_track.append(cur_energy)
 
-        harm_cur = analysis_cur.flag
-        trace.emit(
-            "FRAME_ANALYSIS",
-            start,
-            frame_start=start,
-            frame_time_s=start / sample_rate,
-            harm_prev=harm_prev,
-            harm_cur=harm_cur,
-            silent_prev=silent_prev,
-            silent_cur=silent_cur,
-            flag=flag,
-        )
+            if silent_cur:
+                trace.emit(
+                    "SILENCE",
+                    start,
+                    frame_start=start,
+                    frame_time_s=start / sample_rate,
+                    silent_prev=silent_prev,
+                    silent_cur=silent_cur,
+                    flag=flag,
+                )
+                flag = 0
+                start += block
+                n = start
+                continue
 
-        count = 0
-        initialization = None
-        analysis_start = start
+            y_prev = y[start - block:start] if start >= block else None
 
-        if (
-            (silent_prev == 1 and silent_cur == 0)
-            or (harm_prev == 0 and harm_cur == 1)
-        ):
-            onset_samples.append(start)
+            # A harmonic-change comparison against a frame already classified
+            # as silent is meaningless.  On a silence -> sound transition the
+            # onset is already established by the silence detector itself.
+            #
+            # We still analyse the current frame because its f0/amplitude/phase
+            # may be needed by the normal initialization path, but there is no
+            # previous harmonic spectrum to compare against.
+            if config.mode == "offline" and silent_prev == 1:
+                analysis_cur = detector.analyze(None, y_frame, sample_rate)
+            else:
+                analysis_cur = detector.analyze(y_prev, y_frame, sample_rate)
 
+            harm_cur = analysis_cur.flag
             trace.emit(
-                "RESET_TRIGGER",
+                "FRAME_ANALYSIS",
                 start,
                 frame_start=start,
                 frame_time_s=start / sample_rate,
@@ -203,176 +271,198 @@ def track_pitch(
                 flag=flag,
             )
 
-            while count < config.num_buf_to_wait:
-                count += 1
-                start += block
+            count = 0
+            initialization = None
+            analysis_start = start
 
-            if start + block < padded_length:
-                future_frame = y[start:start + block]
+            if (
+                (silent_prev == 1 and silent_cur == 0)
+                or (harm_prev == 0 and harm_cur == 1)
+            ):
+                onset_samples.append(start)
+
                 trace.emit(
-                    "LOOKAHEAD_FRAME",
+                    "RESET_TRIGGER",
+                    start,
+                    frame_start=start,
+                    frame_time_s=start / sample_rate,
+                    harm_prev=harm_prev,
+                    harm_cur=harm_cur,
+                    silent_prev=silent_prev,
+                    silent_cur=silent_cur,
+                    flag=flag,
+                )
+
+                while count < config.num_buf_to_wait:
+                    count += 1
+                    start += block
+
+                if start + block < padded_length:
+                    future_frame = y[start:start + block]
+                    trace.emit(
+                        "LOOKAHEAD_FRAME",
+                        start,
+                        frame_start=analysis_start,
+                        frame_time_s=analysis_start / sample_rate,
+                        count=count,
+                        flag=flag,
+                    )
+
+                    # MATLAB fills the skipped interval with the previous estimate.
+                    if n > 0:
+                        stop = min(start + 1, padded_length)
+                        f0[n:stop] = f0[n - 1]
+                        amp[n:stop] = amp[n - 1]
+                        phase[n:stop] = phase[n - 1]
+
+                    flag = 1
+                    n = start
+                    y_frame = future_frame
+                else:
+                    break
+
+            if flag == 1:
+                if config.mode == "offline":
+                    initialization = detector.analyze(
+                        None,
+                        y_frame,
+                        sample_rate,
+                    )
+                else:
+                    y_prev_init = y[start - block:start] if start >= block else None
+                    initialization = detector.analyze(
+                        y_prev_init,
+                        y_frame,
+                        sample_rate,
+                    )
+
+                f1 = initialization.f0_hz
+                a1 = initialization.amplitude
+                phi1 = initialization.phase
+                trace.emit(
+                    "INITIALIZATION_PROPOSED",
                     start,
                     frame_start=analysis_start,
                     frame_time_s=analysis_start / sample_rate,
                     count=count,
+                    peak_1_hz=float(initialization.peak_frequencies_hz[0]),
+                    peak_2_hz=float(initialization.peak_frequencies_hz[1]),
+                    peak_3_hz=float(initialization.peak_frequencies_hz[2]),
+                    spacing_1_hz=float(
+                        initialization.peak_frequencies_hz[1]
+                        - initialization.peak_frequencies_hz[0]
+                    ),
+                    spacing_2_hz=float(
+                        initialization.peak_frequencies_hz[2]
+                        - initialization.peak_frequencies_hz[1]
+                    ),
+                    rounded_spacing_1_hz=float(
+                        np.floor(
+                            initialization.peak_frequencies_hz[1]
+                            - initialization.peak_frequencies_hz[0]
+                            + 0.5
+                        )
+                    ),
+                    rounded_spacing_2_hz=float(
+                        np.floor(
+                            initialization.peak_frequencies_hz[2]
+                            - initialization.peak_frequencies_hz[1]
+                            + 0.5
+                        )
+                    ),
+                    init_f0_hz=f1,
+                    init_amplitude=a1,
                     flag=flag,
                 )
 
-                # MATLAB fills the skipped interval with the previous estimate.
-                if n > 0:
-                    stop = min(start + 1, padded_length)
-                    f0[n:stop] = f0[n - 1]
-                    amp[n:stop] = amp[n - 1]
-                    phase[n:stop] = phase[n - 1]
+                # MATLAB n is 1-based.  At this instant n corresponds to the
+                # future/stabilized frame start.
+                n_matlab = n + 1
 
-                flag = 1
-                n = start
-                y_frame = future_frame
-            else:
-                break
+                x0 = np.array(
+                    [
+                        np.exp(1j * 2.0 * np.pi * f1 * Ts),
+                        a1 * np.exp(
+                            1j * 2.0 * np.pi * f1 * n_matlab * Ts + 1j * phi1
+                        ),
+                        a1 * np.exp(
+                            -1j * 2.0 * np.pi * f1 * n_matlab * Ts - 1j * phi1
+                        ),
+                    ],
+                    dtype=np.complex128,
+                ).reshape(3, 1)
 
-        if flag == 1:
-            if config.mode == "offline":
-                initialization = detector.analyze(
-                    None,
-                    y_frame,
-                    sample_rate,
-                )
-            else:
-                y_prev_init = y[start - block:start] if start >= block else None
-                initialization = detector.analyze(
-                    y_prev_init,
-                    y_frame,
-                    sample_rate,
+                P0 = np.zeros((3, 3), dtype=np.complex128)
+
+                gain_min_abs = abs(complex_min_matlab_like(K))
+                reset_accepted = (
+                    gain_min_abs
+                    < config.kalman_gain_reset_threshold
                 )
 
-            f1 = initialization.f0_hz
-            a1 = initialization.amplitude
-            phi1 = initialization.phase
-            trace.emit(
-                "INITIALIZATION_PROPOSED",
-                start,
-                frame_start=analysis_start,
-                frame_time_s=analysis_start / sample_rate,
-                count=count,
-                peak_1_hz=float(initialization.peak_frequencies_hz[0]),
-                peak_2_hz=float(initialization.peak_frequencies_hz[1]),
-                peak_3_hz=float(initialization.peak_frequencies_hz[2]),
-                spacing_1_hz=float(
-                    initialization.peak_frequencies_hz[1]
-                    - initialization.peak_frequencies_hz[0]
-                ),
-                spacing_2_hz=float(
-                    initialization.peak_frequencies_hz[2]
-                    - initialization.peak_frequencies_hz[1]
-                ),
-                rounded_spacing_1_hz=float(
-                    np.floor(
-                        initialization.peak_frequencies_hz[1]
-                        - initialization.peak_frequencies_hz[0]
-                        + 0.5
-                    )
-                ),
-                rounded_spacing_2_hz=float(
-                    np.floor(
-                        initialization.peak_frequencies_hz[2]
-                        - initialization.peak_frequencies_hz[1]
-                        + 0.5
-                    )
-                ),
-                init_f0_hz=f1,
-                init_amplitude=a1,
-                flag=flag,
-            )
-
-            # MATLAB n is 1-based.  At this instant n corresponds to the
-            # future/stabilized frame start.
-            n_matlab = n + 1
-
-            x0 = np.array(
-                [
-                    np.exp(1j * 2.0 * np.pi * f1 * Ts),
-                    a1 * np.exp(
-                        1j * 2.0 * np.pi * f1 * n_matlab * Ts + 1j * phi1
-                    ),
-                    a1 * np.exp(
-                        -1j * 2.0 * np.pi * f1 * n_matlab * Ts - 1j * phi1
-                    ),
-                ],
-                dtype=np.complex128,
-            ).reshape(3, 1)
-
-            P0 = np.zeros((3, 3), dtype=np.complex128)
-
-            gain_min_abs = abs(complex_min_matlab_like(K))
-            reset_accepted = (
-                gain_min_abs
-                < config.kalman_gain_reset_threshold
-            )
-
-            trace.emit(
-                "RESET_DECISION",
-                start,
-                frame_start=analysis_start,
-                frame_time_s=analysis_start / sample_rate,
-                count=count,
-                init_f0_hz=f1,
-                init_amplitude=a1,
-                gain_min_abs=gain_min_abs,
-                reset_threshold=config.kalman_gain_reset_threshold,
-                reset_accepted=int(reset_accepted),
-                flag=flag,
-            )
-
-            if reset_accepted:
-            # TODO - delete if no longer necessary 
-            # if abs(complex_min_matlab_like(K)) < config.kalman_gain_reset_threshold:
-                P_last = P0
-
-                if config.mode == "matlab":
-                    x_last = x0
-                    # Literal source behavior: rewind the time/output cursor
-                    # but KEEP y_frame pointing at the future stabilized frame.
-                    start -= count * block
-                    n = start
-                else:
-                    # Offline correction:
-                    # use the future frame only to obtain stable f1/a1/phi1,
-                    # then really resume filtering on the backtracked audio.
-                    start -= count * block
-                    n = start
-                    y_frame = y[start:start + block]
-
-                    # Re-anchor the initialized oscillatory state to the actual
-                    # backtracked sample position while retaining the stable
-                    # future-frame spectral estimates.
-                    n_back_matlab = n + 1
-                    x_last = np.array(
-                        [
-                            np.exp(1j * 2.0 * np.pi * f1 * Ts),
-                            a1 * np.exp(
-                                1j * 2.0 * np.pi * f1 * n_back_matlab * Ts
-                                + 1j * phi1
-                            ),
-                            a1 * np.exp(
-                                -1j * 2.0 * np.pi * f1 * n_back_matlab * Ts
-                                - 1j * phi1
-                            ),
-                        ],
-                        dtype=np.complex128,
-                    ).reshape(3, 1)
-
-                flag = 0
                 trace.emit(
-                    "RESET_COMPLETED",
-                    n,
+                    "RESET_DECISION",
+                    start,
                     frame_start=analysis_start,
                     frame_time_s=analysis_start / sample_rate,
                     count=count,
                     init_f0_hz=f1,
-                    reset_accepted=1,
+                    init_amplitude=a1,
+                    gain_min_abs=gain_min_abs,
+                    reset_threshold=config.kalman_gain_reset_threshold,
+                    reset_accepted=int(reset_accepted),
                     flag=flag,
                 )
+
+                if reset_accepted:
+                # TODO - delete if no longer necessary 
+                # if abs(complex_min_matlab_like(K)) < config.kalman_gain_reset_threshold:
+                    P_last = P0
+
+                    if config.mode == "matlab":
+                        x_last = x0
+                        # Literal source behavior: rewind the time/output cursor
+                        # but KEEP y_frame pointing at the future stabilized frame.
+                        start -= count * block
+                        n = start
+                    else:
+                        # Offline correction:
+                        # use the future frame only to obtain stable f1/a1/phi1,
+                        # then really resume filtering on the backtracked audio.
+                        start -= count * block
+                        n = start
+                        y_frame = y[start:start + block]
+
+                        # Re-anchor the initialized oscillatory state to the actual
+                        # backtracked sample position while retaining the stable
+                        # future-frame spectral estimates.
+                        n_back_matlab = n + 1
+                        x_last = np.array(
+                            [
+                                np.exp(1j * 2.0 * np.pi * f1 * Ts),
+                                a1 * np.exp(
+                                    1j * 2.0 * np.pi * f1 * n_back_matlab * Ts
+                                    + 1j * phi1
+                                ),
+                                a1 * np.exp(
+                                    -1j * 2.0 * np.pi * f1 * n_back_matlab * Ts
+                                    - 1j * phi1
+                                ),
+                            ],
+                            dtype=np.complex128,
+                        ).reshape(3, 1)
+
+                    flag = 0
+                    trace.emit(
+                        "RESET_COMPLETED",
+                        n,
+                        frame_start=analysis_start,
+                        frame_time_s=analysis_start / sample_rate,
+                        count=count,
+                        init_f0_hz=f1,
+                        reset_accepted=1,
+                        flag=flag,
+                    )
 
         if P_last is None or x_last is None:
             # A non-silent frame should normally reach initialization through
