@@ -255,31 +255,6 @@ def track_pitch(
                 frame_start=analysis_start,
                 frame_time_s=analysis_start / sample_rate,
                 count=count,
-                peak_1_hz=float(initialization.peak_frequencies_hz[0]),
-                peak_2_hz=float(initialization.peak_frequencies_hz[1]),
-                peak_3_hz=float(initialization.peak_frequencies_hz[2]),
-                spacing_1_hz=float(
-                    initialization.peak_frequencies_hz[1]
-                    - initialization.peak_frequencies_hz[0]
-                ),
-                spacing_2_hz=float(
-                    initialization.peak_frequencies_hz[2]
-                    - initialization.peak_frequencies_hz[1]
-                ),
-                rounded_spacing_1_hz=float(
-                    np.floor(
-                        initialization.peak_frequencies_hz[1]
-                        - initialization.peak_frequencies_hz[0]
-                        + 0.5
-                    )
-                ),
-                rounded_spacing_2_hz=float(
-                    np.floor(
-                        initialization.peak_frequencies_hz[2]
-                        - initialization.peak_frequencies_hz[1]
-                        + 0.5
-                    )
-                ),
                 init_f0_hz=f1,
                 init_amplitude=a1,
                 flag=flag,
