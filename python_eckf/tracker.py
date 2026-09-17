@@ -9,6 +9,7 @@ from .matlab_compat import complex_min_matlab_like
 from .silence import is_silent
 from .eckf_trace import ECKFTrace
 from .periodicity import assess_periodicity
+from .pitch_status import PitchStatus, validate_pitch_status
 
 @dataclass
 class ECKFResult:
@@ -24,6 +25,7 @@ class ECKFResult:
     original_length: int
     padded_length: int
     config: ECKFConfig
+    pitch_status: np.ndarray | None = None
 
 
 def _as_mono_float64(audio: np.ndarray) -> np.ndarray:
@@ -79,6 +81,7 @@ def track_pitch(
     phase = np.zeros(padded_length, dtype=np.float64)
     x_est = np.zeros(padded_length, dtype=np.complex128)
     q_track = np.zeros(padded_length, dtype=np.float64)
+    pitch_status = np.full(padded_length, PitchStatus.UNVOICED, dtype=np.uint8)
 
     onset_samples = []
     spf = []
@@ -95,6 +98,7 @@ def track_pitch(
             original_length,
             padded_length,
             config,
+            pitch_status,
         )
 
     Ts = 1.0 / float(sample_rate)
@@ -197,6 +201,7 @@ def track_pitch(
                         and a1 >= 0 and np.isfinite(phi1)):
                     trace.emit("INITIALIZATION_REJECTED", start,
                                frame_start=start, reason="invalid_initialization")
+                    pitch_status[start:end_exclusive] = PitchStatus.VOICED_UNRESOLVED
                     P_last = None
                     x_last = None
                     flag = 0
@@ -516,6 +521,8 @@ def track_pitch(
             )
 
             f0[n] = abs(np.log(x1) / (1j * Ts * 2.0 * np.pi))
+            if config.mode == "offline":
+                pitch_status[n] = PitchStatus.VOICED_VALID
             trace_stride = max(
                 1,
                 round(sample_rate * 0.010),
@@ -564,6 +571,10 @@ def track_pitch(
 
     onset_samples_arr = np.asarray(onset_samples, dtype=np.int64)
     trace.close()
+    if config.mode == "offline":
+        validate_pitch_status(f0, pitch_status)
+    else:
+        pitch_status[np.isfinite(f0) & (f0 > 0)] = PitchStatus.VOICED_VALID
     return ECKFResult(
         f0_hz=f0,
         amplitude=amp,
@@ -577,4 +588,5 @@ def track_pitch(
         original_length=original_length,
         padded_length=padded_length,
         config=config,
+        pitch_status=pitch_status,
     )

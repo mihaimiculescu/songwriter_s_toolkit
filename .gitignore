@@ -1,4 +1,6 @@
 # gitignore file dev branch
 *.wav
 *.mid
+*.zip
+*.npz
 __pycache__/
