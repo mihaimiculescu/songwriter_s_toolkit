@@ -1,0 +1,58 @@
+=== FULL-SONG SELECTOR v2 → v3 COMPARISON: READ ONLY ===
+v2: tests/PREDESTINATI_full_v2_frames.csv
+v3: tests/PREDESTINATI_full_v3_frames.csv
+frames: 1450
+Same WAV, sample rate, window and exact sample grid: VERIFIED
+Voiced means nonempty positive F0 in the synchronized frame, not a note boundary.
+Large pitch difference threshold: 1.00 semitones
+No MIDI or reference melody was consulted. Difference != automatically improvement.
+
+=== COUNTS ===
+LARGE_PITCH_CHANGE: 8
+VOICING_CHANGED: 9
+both_unvoiced: 625
+similar_voiced: 808
+frames with changed reset/rejection events: 15
+
+=== EVERY VOICING STATUS CHANGE ===
+28.1890s sample=1243136 v2=--Hz (0 voiced samples) v3=186.076Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+40.5420s sample=1787904 v2=--Hz (0 voiced samples) v3=289.076Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+44.3501s sample=1955840 v2=--Hz (0 voiced samples) v3=329.120Hz (2048 voiced samples) delta=--st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+46.2077s sample=2037760 v2=--Hz (0 voiced samples) v3=367.463Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+46.2541s sample=2039808 v2=--Hz (0 voiced samples) v3=379.802Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[-]
+52.7093s sample=2324480 v2=--Hz (0 voiced samples) v3=309.732Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+54.6133s sample=2408448 v2=--Hz (0 voiced samples) v3=358.466Hz (2048 voiced samples) delta=--st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+61.0220s sample=2691072 v2=--Hz (0 voiced samples) v3=220.822Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+67.1521s sample=2961408 v2=--Hz (0 voiced samples) v3=293.979Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+
+=== EVERY LARGE F0 DIFFERENCE ===
+28.2355s sample=1245184 v2=197.740Hz (2048 voiced samples) v3=181.384Hz (2048 voiced samples) delta=-1.495st v2=[CANDIDATES:accepted,RESET:?] v3=[-]
+38.0343s sample=1677312 v2=177.145Hz (2048 voiced samples) v3=358.893Hz (2048 voiced samples) delta=12.223st v2=[CANDIDATES:accepted,RESET:?] v3=[CANDIDATES:accepted,RESET:?]
+38.0807s sample=1679360 v2=176.387Hz (2048 voiced samples) v3=376.449Hz (2048 voiced samples) delta=13.125st v2=[-] v3=[-]
+38.1272s sample=1681408 v2=192.581Hz (2048 voiced samples) v3=383.479Hz (2048 voiced samples) delta=11.924st v2=[CANDIDATES:accepted,RESET:?] v3=[CANDIDATES:accepted,RESET:?]
+40.5885s sample=1789952 v2=306.250Hz (2048 voiced samples) v3=283.706Hz (2048 voiced samples) delta=-1.324st v2=[CANDIDATES:accepted,RESET:?] v3=[-]
+53.5917s sample=2363392 v2=201.370Hz (2048 voiced samples) v3=401.278Hz (2048 voiced samples) delta=11.937st v2=[CANDIDATES:accepted,RESET:?] v3=[CANDIDATES:accepted,RESET:?]
+53.6381s sample=2365440 v2=202.196Hz (2048 voiced samples) v3=413.233Hz (2048 voiced samples) delta=12.374st v2=[-] v3=[-]
+53.6845s sample=2367488 v2=203.979Hz (2048 voiced samples) v3=404.269Hz (2048 voiced samples) delta=11.843st v2=[-] v3=[-]
+
+=== EVERY RESET/REJECTION EVENT CHANGE ===
+28.1890s sample=1243136 v2=--Hz (0 voiced samples) v3=186.076Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+28.2355s sample=1245184 v2=197.740Hz (2048 voiced samples) v3=181.384Hz (2048 voiced samples) delta=-1.495st v2=[CANDIDATES:accepted,RESET:?] v3=[-]
+40.5420s sample=1787904 v2=--Hz (0 voiced samples) v3=289.076Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+40.5885s sample=1789952 v2=306.250Hz (2048 voiced samples) v3=283.706Hz (2048 voiced samples) delta=-1.324st v2=[CANDIDATES:accepted,RESET:?] v3=[-]
+40.6349s sample=1792000 v2=314.979Hz (2048 voiced samples) v3=316.601Hz (2048 voiced samples) delta=0.089st v2=[CANDIDATES:accepted,RESET:?] v3=[-]
+42.7712s sample=1886208 v2=--Hz (0 voiced samples) v3=--Hz (0 voiced samples) delta=--st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:ambiguous_harmonic_family,REJECT:ambiguous_harmonic_family]
+42.8176s sample=1888256 v2=--Hz (0 voiced samples) v3=--Hz (0 voiced samples) delta=--st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:ambiguous_harmonic_family,REJECT:ambiguous_harmonic_family]
+44.3501s sample=1955840 v2=--Hz (0 voiced samples) v3=329.120Hz (2048 voiced samples) delta=--st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+46.2077s sample=2037760 v2=--Hz (0 voiced samples) v3=367.463Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+46.2541s sample=2039808 v2=--Hz (0 voiced samples) v3=379.802Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[-]
+52.5700s sample=2318336 v2=--Hz (0 voiced samples) v3=--Hz (0 voiced samples) delta=--st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:ambiguous_harmonic_family,REJECT:ambiguous_harmonic_family]
+52.7093s sample=2324480 v2=--Hz (0 voiced samples) v3=309.732Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+54.6133s sample=2408448 v2=--Hz (0 voiced samples) v3=358.466Hz (2048 voiced samples) delta=--st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+61.0220s sample=2691072 v2=--Hz (0 voiced samples) v3=220.822Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+67.1521s sample=2961408 v2=--Hz (0 voiced samples) v3=293.979Hz (2048 voiced samples) delta=0.000st v2=[CANDIDATES:no_acoustically_supported_candidate,REJECT:no_acoustically_supported_candidate] v3=[CANDIDATES:accepted,RESET:?]
+
+=== INTERPRETATION ===
+Investigate every changed frame using its same-run trace and waveform evidence.
+This comparison identifies regressions/candidates; it cannot score pitch accuracy without an independent acoustic check.
+Do not interpret status changes as MIDI note boundaries.
