@@ -1,0 +1,32 @@
+=== EXISTING INTERVAL/TIME PENALTY AUDIT (READ ONLY) ===
+Existing implementation: /home/theea/songwriter_s_toolkit/tests/diagnose_ratata_harmonic_locks.py
+Function: rapid_interval_penalty(interval_semitones: 'float', duration_ms: 'float') -> 'float'
+Sources: synchronized trace and frame CSV from the same ECKF run.
+Penalty applied to raw proposals for OBSERVATION ONLY; no frequency is altered.
+
+=== INITIALIZER PROPOSALS ===
+58.0499s previous_last=413.058 Hz proposal=401.000 Hz interval=-0.513 st time=46.440 ms EXISTING_penalty=0.0
+  observed_new_frame_first=401.00000000000006 Hz median=401.53472568984176 Hz
+58.1428s previous_last=385.661 Hz proposal=797.000 Hz interval=+12.567 st time=46.440 ms EXISTING_penalty=8.326130001804286
+  observed_new_frame_first=797.0 Hz median=801.5041400467494 Hz
+58.9322s previous_last=709.877 Hz proposal=385.000 Hz interval=-10.593 st time=417.959 ms EXISTING_penalty=0.0
+  observed_new_frame_first=385.00000000000006 Hz median=384.3151063751436 Hz
+
+=== FRAME-TO-FRAME OUTPUT TRANSITIONS (NO EXTRA PENALTY FORMULA) ===
+58.0034->58.0499s 401.90->401.53 Hz interval=-0.016 st dt=46.4 ms penalty=0.0
+58.0499->58.0963s 401.53->392.66 Hz interval=-0.387 st dt=46.4 ms penalty=0.0
+58.0963->58.1428s 392.66->801.50 Hz interval=+12.353 st dt=46.4 ms penalty=7.851177481227834
+58.1428->58.1892s 801.50->798.80 Hz interval=-0.059 st dt=46.4 ms penalty=0.0
+58.1892->58.2356s 798.80->779.23 Hz interval=-0.429 st dt=46.4 ms penalty=0.0
+58.2356->58.2821s 779.23->780.21 Hz interval=+0.022 st dt=46.4 ms penalty=0.0
+58.2821->58.3285s 780.21->779.60 Hz interval=-0.013 st dt=46.4 ms penalty=0.0
+58.3285->58.3750s 779.60->766.73 Hz interval=-0.288 st dt=46.4 ms penalty=0.0
+58.3750->58.4214s 766.73->699.38 Hz interval=-1.592 st dt=46.4 ms penalty=0.0
+58.4214->58.4678s 699.38->703.32 Hz interval=+0.097 st dt=46.4 ms penalty=0.0
+58.4678->58.5143s 703.32->708.94 Hz interval=+0.138 st dt=46.4 ms penalty=0.0
+58.9322->58.9787s 384.32->391.56 Hz interval=+0.323 st dt=46.4 ms penalty=0.0
+58.9787->59.0251s 391.56->390.61 Hz interval=-0.042 st dt=46.4 ms penalty=0.0
+59.0251->59.0716s 390.61->396.68 Hz interval=+0.267 st dt=46.4 ms penalty=0.0
+
+NOTE: Penalty is diagnostic evidence, NOT permission to reject, bridge,
+halve, interpolate, or reinterpret a sung pitch or MIDI note boundary.

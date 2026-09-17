@@ -1,0 +1,75 @@
+=== SYNCHRONIZED ECKF DIAGNOSTIC ===
+WAV: /home/theea/songwriter_s_toolkit/tests/PREDESTINATI.wav
+Sample rate: 44100 Hz | block: 2048 samples | mode: offline
+Window: 58.0000–59.1000 s
+Trace events and F0 belong to the SAME track_pitch() call.
+No pitch was changed; no MIDI was used; no previous trace was read.
+
+=== OUTPUT FRAMES ===
+time_s     voiced   first_Hz    median_Hz   last_Hz     min_Hz      max_Hz
+  58.0034    2048     392.898     401.896     413.058     386.769     417.163
+  58.0499    2048     401.000     401.535     405.705     400.989     406.031
+  58.0963    2048     405.681     392.665     385.661     377.950     406.322
+  58.1428    2048     797.000     801.504     795.334     792.092     827.072
+  58.1892    2048     795.126     798.798     787.248     786.515     807.421
+  58.2356    2048     786.843     779.231     773.442     773.080     790.348
+  58.2821    2048     773.524     780.206     782.287     773.524     783.799
+  58.3285    2048     782.303     779.598     778.358     776.277     782.957
+  58.3750    2048     778.320     766.734     713.541     713.484     778.681
+  58.4214    2048     713.585     699.382     695.818     694.558     714.725
+  58.4678    2048     695.838     703.324     708.464     695.838     708.464
+  58.5143    2048     708.525     708.939     709.877     704.606     711.911
+  58.5607       0          --          --          --          --          --
+  58.6072       0          --          --          --          --          --
+  58.6536       0          --          --          --          --          --
+  58.7000       0          --          --          --          --          --
+  58.7465       0          --          --          --          --          --
+  58.7929       0          --          --          --          --          --
+  58.8394       0          --          --          --          --          --
+  58.8858       0          --          --          --          --          --
+  58.9322    2048     385.000     384.315     391.215     372.804     402.715
+  58.9787    2048     390.571     391.563     394.315     381.296     400.309
+  59.0251    2048     394.152     390.609     394.791     384.397     396.195
+  59.0716    2048     394.804     396.681     397.562     387.922     403.794
+
+=== ACTUAL EVENTS IN EMISSION ORDER ===
+  57.9106s PERIODICITY_DECISION       frame_start=2553856 acf_peak=0.9439335981133176 cmndf_minimum=0.055139922836016285 acf_frequency_hz=390.2654867256637 cmndf_frequency_hz=390.2654867256637 voiced=1 reason=accepted
+  57.9570s PERIODICITY_DECISION       frame_start=2555904 acf_peak=0.8934974371974846 cmndf_minimum=0.10293309363278302 acf_frequency_hz=390.2654867256637 cmndf_frequency_hz=390.2654867256637 voiced=1 reason=accepted
+  58.0034s PERIODICITY_DECISION       frame_start=2557952 acf_peak=0.9747429070887728 cmndf_minimum=0.024687633513261534 acf_frequency_hz=404.58715596330273 cmndf_frequency_hz=404.58715596330273 voiced=1 reason=accepted
+  58.0499s PERIODICITY_DECISION       frame_start=2560000 acf_peak=0.9331223310906327 cmndf_minimum=0.06544096648365019 acf_frequency_hz=400.90909090909093 cmndf_frequency_hz=400.90909090909093 voiced=1 reason=accepted
+  58.0499s INITIALIZATION_PROPOSED    frame_start=2560000 init_f0_hz=401.0 init_amplitude=0.001045862445924152 count=0 flag=1
+  58.0499s RESET_COMPLETED            frame_start=2560000 init_f0_hz=401.0 reset_accepted=1 count=0 flag=0
+  58.0963s PERIODICITY_DECISION       frame_start=2562048 acf_peak=0.9619619232217894 cmndf_minimum=0.03705659080062428 acf_frequency_hz=390.2654867256637 cmndf_frequency_hz=390.2654867256637 voiced=1 reason=accepted
+  58.1428s PERIODICITY_DECISION       frame_start=2564096 acf_peak=0.9729985390261896 cmndf_minimum=0.02622383241245485 acf_frequency_hz=400.90909090909093 cmndf_frequency_hz=400.90909090909093 voiced=1 reason=accepted
+  58.1428s INITIALIZATION_PROPOSED    frame_start=2564096 init_f0_hz=797.0 init_amplitude=0.0035933758312163056 count=0 flag=1
+  58.1428s RESET_COMPLETED            frame_start=2564096 init_f0_hz=797.0 reset_accepted=1 count=0 flag=0
+  58.1892s PERIODICITY_DECISION       frame_start=2566144 acf_peak=0.9729165151545662 cmndf_minimum=0.026184444552458542 acf_frequency_hz=397.2972972972973 cmndf_frequency_hz=397.2972972972973 voiced=1 reason=accepted
+  58.2356s PERIODICITY_DECISION       frame_start=2568192 acf_peak=0.9844331301986933 cmndf_minimum=0.01519534337107791 acf_frequency_hz=390.2654867256637 cmndf_frequency_hz=390.2654867256637 voiced=1 reason=accepted
+  58.2821s PERIODICITY_DECISION       frame_start=2570240 acf_peak=0.9957808235370328 cmndf_minimum=0.004117010075762348 acf_frequency_hz=390.2654867256637 cmndf_frequency_hz=390.2654867256637 voiced=1 reason=accepted
+  58.3285s PERIODICITY_DECISION       frame_start=2572288 acf_peak=0.9927670397102057 cmndf_minimum=0.006989541938390174 acf_frequency_hz=390.2654867256637 cmndf_frequency_hz=390.2654867256637 voiced=1 reason=accepted
+  58.3750s PERIODICITY_DECISION       frame_start=2574336 acf_peak=0.7791448387979627 cmndf_minimum=0.21065623539812223 acf_frequency_hz=380.17241379310343 cmndf_frequency_hz=380.17241379310343 voiced=1 reason=accepted
+  58.4214s PERIODICITY_DECISION       frame_start=2576384 acf_peak=0.9800004018528018 cmndf_minimum=0.01936344247374074 acf_frequency_hz=350.0 cmndf_frequency_hz=350.0 voiced=1 reason=accepted
+  58.4678s PERIODICITY_DECISION       frame_start=2578432 acf_peak=0.9834119930094718 cmndf_minimum=0.016487960170881708 acf_frequency_hz=350.0 cmndf_frequency_hz=350.0 voiced=1 reason=accepted
+  58.5143s PERIODICITY_DECISION       frame_start=2580480 acf_peak=0.8861394008112439 cmndf_minimum=0.10672775771545598 acf_frequency_hz=347.244094488189 cmndf_frequency_hz=347.244094488189 voiced=1 reason=accepted
+  58.5607s PERIODICITY_DECISION       frame_start=2582528 acf_peak=0.14253110101426286 cmndf_minimum=0.7383548444741543 acf_frequency_hz=107.8239608801956 cmndf_frequency_hz=71.5909090909091 voiced=0 reason=weak_autocorrelation,weak_difference_periodicity,period_disagreement
+  58.6072s PERIODICITY_DECISION       frame_start=2584576 acf_peak=0.23612981281430212 cmndf_minimum=0.667067630818352 acf_frequency_hz=168.9655172413793 cmndf_frequency_hz=85.46511627906976 voiced=0 reason=weak_autocorrelation,weak_difference_periodicity,period_disagreement
+  58.6536s PERIODICITY_DECISION       frame_start=2586624 acf_peak=0.21320288184313724 cmndf_minimum=0.7428589994665318 acf_frequency_hz=254.91329479768785 cmndf_frequency_hz=254.91329479768785 voiced=0 reason=weak_autocorrelation,weak_difference_periodicity
+  58.7000s PERIODICITY_DECISION       frame_start=2588672 acf_peak=0.23406075480943214 cmndf_minimum=0.7476303086055188 acf_frequency_hz=1002.2727272727273 cmndf_frequency_hz=70.56 voiced=0 reason=weak_autocorrelation,weak_difference_periodicity,period_disagreement
+  58.7465s PERIODICITY_DECISION       frame_start=2590720 acf_peak=0.20191758026813883 cmndf_minimum=0.7606854490550993 acf_frequency_hz=495.5056179775281 cmndf_frequency_hz=290.13157894736844 voiced=0 reason=weak_autocorrelation,weak_difference_periodicity,period_disagreement
+  58.7929s PERIODICITY_DECISION       frame_start=2592768 acf_peak=0.245479152688799 cmndf_minimum=0.6286728156378203 acf_frequency_hz=958.695652173913 cmndf_frequency_hz=140.0 voiced=0 reason=weak_autocorrelation,weak_difference_periodicity,period_disagreement
+  58.8394s PERIODICITY_DECISION       frame_start=2594816 acf_peak=0.6178070801577966 cmndf_minimum=0.3838063996462897 acf_frequency_hz=344.53125 cmndf_frequency_hz=344.53125 voiced=0 reason=weak_autocorrelation,weak_difference_periodicity
+  58.8858s PERIODICITY_DECISION       frame_start=2596864 acf_peak=0.6541482891078206 cmndf_minimum=0.3437649815283029 acf_frequency_hz=183.75 cmndf_frequency_hz=183.75 voiced=0 reason=weak_autocorrelation,weak_difference_periodicity
+  58.9322s PERIODICITY_DECISION       frame_start=2598912 acf_peak=0.9554325242351727 cmndf_minimum=0.04383344872420688 acf_frequency_hz=390.2654867256637 cmndf_frequency_hz=390.2654867256637 voiced=1 reason=accepted
+  58.9322s INITIALIZATION_PROPOSED    frame_start=2598912 init_f0_hz=385.0 init_amplitude=0.002971660053071729 count=0 flag=1
+  58.9322s RESET_COMPLETED            frame_start=2598912 init_f0_hz=385.0 reset_accepted=1 count=0 flag=0
+  58.9787s PERIODICITY_DECISION       frame_start=2600960 acf_peak=0.9961685089706921 cmndf_minimum=0.00373408697581727 acf_frequency_hz=393.75 cmndf_frequency_hz=393.75 voiced=1 reason=accepted
+  59.0251s PERIODICITY_DECISION       frame_start=2603008 acf_peak=0.9963847315337943 cmndf_minimum=0.003499131311847789 acf_frequency_hz=390.2654867256637 cmndf_frequency_hz=390.2654867256637 voiced=1 reason=accepted
+  59.0716s PERIODICITY_DECISION       frame_start=2605056 acf_peak=0.9940627403004285 cmndf_minimum=0.005765924712355545 acf_frequency_hz=397.2972972972973 cmndf_frequency_hz=397.2972972972973 voiced=1 reason=accepted
+  59.1180s PERIODICITY_DECISION       frame_start=2607104 acf_peak=0.992286686611454 cmndf_minimum=0.007493915002390696 acf_frequency_hz=404.58715596330273 cmndf_frequency_hz=404.58715596330273 voiced=1 reason=accepted
+  59.1644s PERIODICITY_DECISION       frame_start=2609152 acf_peak=0.9702050532800842 cmndf_minimum=0.02890513208456982 acf_frequency_hz=397.2972972972973 cmndf_frequency_hz=397.2972972972973 voiced=1 reason=accepted
+
+=== READING THE RESULT ===
+If INITIALIZATION_PROPOSED is already ~2x observed F0, the proposed octave is wrong.
+If proposed F0 is ~correct but first_f0_hz is ~2x, investigate state initialization/filtering.
+Events are listed in emission order, not sorted time: a reset may rewind the cursor.
+This report alone does not establish performed F0; compare with WAV periodicity evidence.
