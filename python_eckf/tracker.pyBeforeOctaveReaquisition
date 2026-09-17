@@ -11,7 +11,6 @@ from .eckf_trace import ECKFTrace
 from .periodicity import assess_periodicity
 from .pitch_status import PitchStatus, validate_pitch_status
 from .initialization_candidates import choose_initialization
-from .octave_reacquisition import reconcile_initialization, inspect_octave_disagreement
 
 @dataclass
 class ECKFResult:
@@ -195,18 +194,6 @@ def track_pitch(
                 choice = choose_initialization(
                     detector, y_frame, sample_rate, start,
                     initialization, periodicity, previous_hz, elapsed_ms,
-                )
-                # Independently challenge an octave-related initialization only
-                # when ACF, CMNDF and measured spectral harmonics all agree.
-                choice, octave_evidence = reconcile_initialization(
-                    detector, y_frame, sample_rate, start, choice,
-                    periodicity, previous_hz, elapsed_ms,
-                )
-                trace.emit(
-                    "OCTAVE_INITIALIZATION_AUDIT", start,
-                    frame_start=start, decision=octave_evidence.state,
-                    reason=octave_evidence.reason,
-                    measured_f0_hz=octave_evidence.measured_hz,
                 )
                 f1 = choice.frequency_hz
                 a1 = choice.amplitude
