@@ -1,0 +1,407 @@
+[
+  {
+    "anchor_s": 10.774,
+    "position": "frame_center",
+    "window_ms": 24.0,
+    "start_s": 10.785283446712018,
+    "end_s": 10.809274376417234,
+    "rms": 0.07423660354842382,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "frame_center",
+    "window_ms": 40.0,
+    "start_s": 10.777278911564625,
+    "end_s": 10.817278911564626,
+    "rms": 0.0728973463322672,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "frame_center",
+    "window_ms": 64.0,
+    "start_s": 10.765283446712019,
+    "end_s": 10.829274376417233,
+    "rms": 0.06419047433910552,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "frame_center",
+    "window_ms": 96.0,
+    "start_s": 10.749274376417233,
+    "end_s": 10.845283446712019,
+    "rms": 0.05529738633229105,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "frame_center",
+    "window_ms": "production_2048",
+    "start_s": 10.7740589569161,
+    "end_s": 10.820498866213152,
+    "rms": 0.0706236467988861,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_center",
+    "window_ms": 24.0,
+    "start_s": 10.761995464852607,
+    "end_s": 10.785986394557822,
+    "rms": 0.046584863452471904,
+    "candidates_meeting_exploratory_display_floor": 6,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_center",
+    "window_ms": 40.0,
+    "start_s": 10.753990929705216,
+    "end_s": 10.793990929705215,
+    "rms": 0.050472648581471866,
+    "candidates_meeting_exploratory_display_floor": 5,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_center",
+    "window_ms": 64.0,
+    "start_s": 10.741995464852607,
+    "end_s": 10.805986394557824,
+    "rms": 0.052812471351061305,
+    "candidates_meeting_exploratory_display_floor": 5,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_center",
+    "window_ms": 96.0,
+    "start_s": 10.725986394557824,
+    "end_s": 10.821995464852607,
+    "rms": 0.052430841055955295,
+    "candidates_meeting_exploratory_display_floor": 7,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_center",
+    "window_ms": "production_2048",
+    "start_s": 10.750770975056689,
+    "end_s": 10.797210884353742,
+    "rms": 0.05106308567314255,
+    "candidates_meeting_exploratory_display_floor": 5,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_plus_10ms",
+    "window_ms": 24.0,
+    "start_s": 10.771995464852608,
+    "end_s": 10.795986394557824,
+    "rms": 0.06666951275448464,
+    "candidates_meeting_exploratory_display_floor": 5,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_plus_10ms",
+    "window_ms": 40.0,
+    "start_s": 10.763990929705216,
+    "end_s": 10.803990929705215,
+    "rms": 0.061816601926379965,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_plus_10ms",
+    "window_ms": 64.0,
+    "start_s": 10.751995464852607,
+    "end_s": 10.815986394557823,
+    "rms": 0.05855800060425014,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_plus_10ms",
+    "window_ms": 96.0,
+    "start_s": 10.735986394557823,
+    "end_s": 10.831995464852607,
+    "rms": 0.05466920451785702,
+    "candidates_meeting_exploratory_display_floor": 6,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.774,
+    "position": "marker_plus_10ms",
+    "window_ms": "production_2048",
+    "start_s": 10.760770975056689,
+    "end_s": 10.807210884353742,
+    "rms": 0.060800465067264775,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 137.38317757009347,
+      "production_choice_before_hz": 275.0,
+      "production_choice_after_hz": 137.38317757009347,
+      "production_reset_hz": 137.38317757009347
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "frame_center",
+    "window_ms": 24.0,
+    "start_s": 10.83172335600907,
+    "end_s": 10.855714285714285,
+    "rms": 0.030743089516319894,
+    "candidates_meeting_exploratory_display_floor": 16,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "frame_center",
+    "window_ms": 40.0,
+    "start_s": 10.823718820861679,
+    "end_s": 10.863718820861678,
+    "rms": 0.03567859979398796,
+    "candidates_meeting_exploratory_display_floor": 11,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "frame_center",
+    "window_ms": 64.0,
+    "start_s": 10.81172335600907,
+    "end_s": 10.875714285714286,
+    "rms": 0.04165356832354347,
+    "candidates_meeting_exploratory_display_floor": 11,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "frame_center",
+    "window_ms": 96.0,
+    "start_s": 10.795714285714286,
+    "end_s": 10.89172335600907,
+    "rms": 0.047825521492883834,
+    "candidates_meeting_exploratory_display_floor": 11,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "frame_center",
+    "window_ms": "production_2048",
+    "start_s": 10.820498866213152,
+    "end_s": 10.866938775510205,
+    "rms": 0.03784099400398828,
+    "candidates_meeting_exploratory_display_floor": 12,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_center",
+    "window_ms": 24.0,
+    "start_s": 10.809002267573696,
+    "end_s": 10.832993197278912,
+    "rms": 0.062007465781192914,
+    "candidates_meeting_exploratory_display_floor": 3,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_center",
+    "window_ms": 40.0,
+    "start_s": 10.800997732426303,
+    "end_s": 10.840997732426304,
+    "rms": 0.06019270984657748,
+    "candidates_meeting_exploratory_display_floor": 3,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_center",
+    "window_ms": 64.0,
+    "start_s": 10.789002267573697,
+    "end_s": 10.852993197278911,
+    "rms": 0.0590692034103737,
+    "candidates_meeting_exploratory_display_floor": 4,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_center",
+    "window_ms": 96.0,
+    "start_s": 10.772993197278911,
+    "end_s": 10.869002267573697,
+    "rms": 0.05582615973278986,
+    "candidates_meeting_exploratory_display_floor": 5,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_center",
+    "window_ms": "production_2048",
+    "start_s": 10.797777777777778,
+    "end_s": 10.84421768707483,
+    "rms": 0.06019375515405915,
+    "candidates_meeting_exploratory_display_floor": 3,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_plus_10ms",
+    "window_ms": 24.0,
+    "start_s": 10.819002267573696,
+    "end_s": 10.842993197278911,
+    "rms": 0.04941488522424895,
+    "candidates_meeting_exploratory_display_floor": 3,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_plus_10ms",
+    "window_ms": 40.0,
+    "start_s": 10.810997732426303,
+    "end_s": 10.850997732426304,
+    "rms": 0.05024055052974527,
+    "candidates_meeting_exploratory_display_floor": 3,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_plus_10ms",
+    "window_ms": 64.0,
+    "start_s": 10.799002267573696,
+    "end_s": 10.86299319727891,
+    "rms": 0.051306782345247784,
+    "candidates_meeting_exploratory_display_floor": 5,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_plus_10ms",
+    "window_ms": 96.0,
+    "start_s": 10.78299319727891,
+    "end_s": 10.879002267573696,
+    "rms": 0.0533452352930904,
+    "candidates_meeting_exploratory_display_floor": 6,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  },
+  {
+    "anchor_s": 10.821,
+    "position": "marker_plus_10ms",
+    "window_ms": "production_2048",
+    "start_s": 10.807777777777778,
+    "end_s": 10.85421768707483,
+    "rms": 0.05009007103431377,
+    "candidates_meeting_exploratory_display_floor": 3,
+    "production": {
+      "production_periodicity_hz": 257.89473684210526
+    }
+  }
+]

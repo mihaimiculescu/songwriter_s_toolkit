@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "hop_ms": 10.0,
+    "cycles": 6.0,
+    "windows_ms": [
+      24.0,
+      40.0,
+      64.0,
+      96.0
+    ],
+    "hotspots_only": false
+  },
+  "midi_used": false,
+  "production_modified": false,
+  "files": [
+    {
+      "name": "Ochiitai",
+      "wav": "/home/theea/songwriter_s_toolkit/tests/Ochiitai.wav",
+      "sha256": "76959849c88454a8b3d343a32c7306ad9c18aa96109acb4594f964699cf38845",
+      "sample_rate": 44100,
+      "samples": 2401751,
+      "duration_s": 54.46147392290249,
+      "baseline": "tests/robustness_v3/Ochiitai_v3_frames.csv",
+      "observations": 5437,
+      "elapsed_s": 4.0254956080007105,
+      "observations_per_s": 1350.6411456999012,
+      "expanded": 1407,
+      "unresolved": 1152,
+      "nonstationary": 70,
+      "comparison_counts": {
+        "both_unresolved": 1060,
+        "baseline_unvoiced": 268,
+        "within_1st": 3825,
+        "adaptive_unresolved": 92,
+        "pitch_disagreement_>=1st": 192
+      },
+      "output": "tests/adaptive_evidence/Ochiitai_adaptive.csv"
+    },
+    {
+      "name": "PREDESTINATI",
+      "wav": "/home/theea/songwriter_s_toolkit/tests/PREDESTINATI.wav",
+      "sha256": "a8fd3ceda5d2f644f180277a585b8281f6536282c2fba440464620e0f8bac24e",
+      "sample_rate": 44100,
+      "samples": 2967616,
+      "duration_s": 67.2928798185941,
+      "baseline": "tests/robustness_v3/PREDESTINATI_v3_frames.csv",
+      "observations": 6720,
+      "elapsed_s": 4.377052361999631,
+      "observations_per_s": 1535.2797828833848,
+      "expanded": 3446,
+      "unresolved": 2760,
+      "nonstationary": 138,
+      "comparison_counts": {
+        "both_unresolved": 2616,
+        "baseline_unvoiced": 273,
+        "within_1st": 3526,
+        "pitch_disagreement_>=1st": 161,
+        "adaptive_unresolved": 144
+      },
+      "output": "tests/adaptive_evidence/PREDESTINATI_adaptive.csv"
+    },
+    {
+      "name": "RATATA",
+      "wav": "/home/theea/songwriter_s_toolkit/tests/RATATA.wav",
+      "sha256": "2a3033bbb1671d5c34a6d038ab1728e7b302051b2488cf1e6c68c072cccbc9e2",
+      "sample_rate": 48000,
+      "samples": 4254626,
+      "duration_s": 88.63804166666667,
+      "baseline": "tests/robustness_v3/RATATA_v3_frames.csv",
+      "observations": 8855,
+      "elapsed_s": 7.489456326999971,
+      "observations_per_s": 1182.3288117826598,
+      "expanded": 4815,
+      "unresolved": 4378,
+      "nonstationary": 121,
+      "comparison_counts": {
+        "both_unresolved": 4205,
+        "baseline_unvoiced": 678,
+        "pitch_disagreement_>=1st": 386,
+        "within_1st": 3413,
+        "adaptive_unresolved": 173
+      },
+      "output": "tests/adaptive_evidence/RATATA_adaptive.csv"
+    },
+    {
+      "name": "Trandafiri",
+      "wav": "/home/theea/songwriter_s_toolkit/tests/Trandafiri.wav",
+      "sha256": "80bac9a970b08ff5ff53fcef4c94ceb6bce3a15f27cc7fcc62c6ffeae6f0e986",
+      "sample_rate": 44100,
+      "samples": 2362404,
+      "duration_s": 53.56925170068027,
+      "baseline": "tests/robustness_v3/Trandafiri_v3_frames.csv",
+      "observations": 5348,
+      "elapsed_s": 3.751462430999709,
+      "observations_per_s": 1425.577384384158,
+      "expanded": 4446,
+      "unresolved": 3855,
+      "nonstationary": 50,
+      "comparison_counts": {
+        "both_unresolved": 3803,
+        "baseline_unvoiced": 118,
+        "within_1st": 1340,
+        "adaptive_unresolved": 52,
+        "pitch_disagreement_>=1st": 35
+      },
+      "output": "tests/adaptive_evidence/Trandafiri_adaptive.csv"
+    }
+  ]
+}

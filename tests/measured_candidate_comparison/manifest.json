@@ -1,0 +1,40 @@
+{
+  "midi_used": false,
+  "production_modified": false,
+  "pitch_modified": false,
+  "comparisons_are_observational": true,
+  "cases": {
+    "Ochiitai": {
+      "sample_rate": 44100,
+      "wav_sha256": "76959849c88454a8b3d343a32c7306ad9c18aa96109acb4594f964699cf38845",
+      "trace_present": true,
+      "candidate_rows": 499,
+      "candidate_csv": "tests/measured_candidate_comparison/Ochiitai_candidates.csv",
+      "window_summary": "tests/measured_candidate_comparison/Ochiitai_windows.json"
+    },
+    "PREDESTINATI": {
+      "sample_rate": 44100,
+      "wav_sha256": "a8fd3ceda5d2f644f180277a585b8281f6536282c2fba440464620e0f8bac24e",
+      "trace_present": true,
+      "candidate_rows": 229,
+      "candidate_csv": "tests/measured_candidate_comparison/PREDESTINATI_candidates.csv",
+      "window_summary": "tests/measured_candidate_comparison/PREDESTINATI_windows.json"
+    },
+    "RATATA": {
+      "sample_rate": 48000,
+      "wav_sha256": "2a3033bbb1671d5c34a6d038ab1728e7b302051b2488cf1e6c68c072cccbc9e2",
+      "trace_present": true,
+      "candidate_rows": 569,
+      "candidate_csv": "tests/measured_candidate_comparison/RATATA_candidates.csv",
+      "window_summary": "tests/measured_candidate_comparison/RATATA_windows.json"
+    },
+    "Trandafiri": {
+      "sample_rate": 44100,
+      "wav_sha256": "80bac9a970b08ff5ff53fcef4c94ceb6bce3a15f27cc7fcc62c6ffeae6f0e986",
+      "trace_present": true,
+      "candidate_rows": 170,
+      "candidate_csv": "tests/measured_candidate_comparison/Trandafiri_candidates.csv",
+      "window_summary": "tests/measured_candidate_comparison/Trandafiri_windows.json"
+    }
+  }
+}

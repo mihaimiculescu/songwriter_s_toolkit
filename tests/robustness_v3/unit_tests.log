@@ -1,0 +1,22 @@
+test_octave_proposal_is_not_forced_on_waveform (test_initialization_candidates.TestInitializationCandidates.test_octave_proposal_is_not_forced_on_waveform) ... ok
+test_true_unresolved_does_not_grant_midi_boundary (test_initialization_candidates.TestInitializationCandidates.test_true_unresolved_does_not_grant_midi_boundary) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.010s
+
+OK
+test_missing_previous_pitch_does_not_make_submultiple_win (test_selector_priority_regressions.SelectorPriorityRegression.test_missing_previous_pitch_does_not_make_submultiple_win) ... ok
+test_previous_octave_case_remains_at_measured_fundamental (test_selector_priority_regressions.SelectorPriorityRegression.test_previous_octave_case_remains_at_measured_fundamental) ... ok
+test_third_submultiple_does_not_steal_479_period (test_selector_priority_regressions.SelectorPriorityRegression.test_third_submultiple_does_not_steal_479_period) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
+test_53_5917_shared_harmonics_do_not_steal_fundamental (test_selector_family_v3.FamilyRegressions.test_53_5917_shared_harmonics_do_not_steal_fundamental) ... ok
+test_genuinely_supported_lower_fundamental_not_suppressed (test_selector_family_v3.FamilyRegressions.test_genuinely_supported_lower_fundamental_not_suppressed) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK

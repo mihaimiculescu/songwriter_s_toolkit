@@ -1,0 +1,62 @@
+{
+  "script": "trace_production_decisions.py",
+  "ground_truth_used": false,
+  "production_modified": false,
+  "driver_sha256": "80a06fe68535a6bd60943dbf653b7fb2e6bb7420d7d005d4ffb3b2c541de029d",
+  "cases": {
+    "Ochiitai": {
+      "wav": "/home/theea/songwriter_s_toolkit/tests/Ochiitai.wav",
+      "samplerate": 44100,
+      "wav_sha256": "76959849c88454a8b3d343a32c7306ad9c18aa96109acb4594f964699cf38845",
+      "sites_s": [
+        42.214,
+        42.353
+      ],
+      "records": 83,
+      "runtime_s": 28.878769521999857,
+      "trace": "tests/production_decision_trace/Ochiitai_decision_path.jsonl",
+      "diagnostic": "tests/production_decision_trace/Ochiitai_diagnostic.txt"
+    },
+    "PREDESTINATI": {
+      "wav": "/home/theea/songwriter_s_toolkit/tests/PREDESTINATI.wav",
+      "samplerate": 44100,
+      "wav_sha256": "a8fd3ceda5d2f644f180277a585b8281f6536282c2fba440464620e0f8bac24e",
+      "sites_s": [
+        38.034,
+        53.592
+      ],
+      "records": 127,
+      "runtime_s": 27.209789479000392,
+      "trace": "tests/production_decision_trace/PREDESTINATI_decision_path.jsonl",
+      "diagnostic": "tests/production_decision_trace/PREDESTINATI_diagnostic.txt"
+    },
+    "RATATA": {
+      "wav": "/home/theea/songwriter_s_toolkit/tests/RATATA.wav",
+      "samplerate": 48000,
+      "wav_sha256": "2a3033bbb1671d5c34a6d038ab1728e7b302051b2488cf1e6c68c072cccbc9e2",
+      "sites_s": [
+        36.923,
+        41.026,
+        42.965,
+        49.231
+      ],
+      "records": 187,
+      "runtime_s": 32.56891179299964,
+      "trace": "tests/production_decision_trace/RATATA_decision_path.jsonl",
+      "diagnostic": "tests/production_decision_trace/RATATA_diagnostic.txt"
+    },
+    "Trandafiri": {
+      "wav": "/home/theea/songwriter_s_toolkit/tests/Trandafiri.wav",
+      "samplerate": 44100,
+      "wav_sha256": "80bac9a970b08ff5ff53fcef4c94ceb6bce3a15f27cc7fcc62c6ffeae6f0e986",
+      "sites_s": [
+        10.774,
+        10.821
+      ],
+      "records": 44,
+      "runtime_s": 11.464502375998563,
+      "trace": "tests/production_decision_trace/Trandafiri_decision_path.jsonl",
+      "diagnostic": "tests/production_decision_trace/Trandafiri_diagnostic.txt"
+    }
+  }
+}

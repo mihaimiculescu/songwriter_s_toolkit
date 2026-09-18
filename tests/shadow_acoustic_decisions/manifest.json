@@ -1,0 +1,92 @@
+{
+  "midi_used": false,
+  "production_modified": false,
+  "pitch_modified": false,
+  "decisions_applied": false,
+  "input": "previously measured WAV-only adaptive observations",
+  "no_independent_vote_from_overlapping_windows": true,
+  "cases": {
+    "Ochiitai": {
+      "rows": 5437,
+      "source_sha256": "3b099113d64ba6629ea71769998ab885c3782c6733e29f3c247040b9643db9f0",
+      "baseline_present": true,
+      "trace_present": true,
+      "counts": {
+        "adaptive_evidence_unresolved": 1082,
+        "both_unresolved_or_unvoiced": 1158,
+        "observed_local_period_with_support": 950,
+        "baseline_unvoiced_candidate_review": 170,
+        "measured_state_agreement": 705,
+        "nonstationary_window": 70,
+        "acoustic_evidence_unresolved_no_reset": 3329,
+        "competing_measured_integer_related_periods": 2833,
+        "weak_spectral_corrobation": 500,
+        "acoustic_state_disagreement_review": 75,
+        "reported_hz_not_measured_in_candidate_list": 2
+      },
+      "csv": "tests/shadow_acoustic_decisions/Ochiitai_shadow.csv",
+      "hotspots": "tests/shadow_acoustic_decisions/Ochiitai_hotspots.json"
+    },
+    "PREDESTINATI": {
+      "rows": 6720,
+      "source_sha256": "3fc1859fbe5a35c64ec318e747a2e24e38346eaefd9898a4797d575e12357339",
+      "baseline_present": true,
+      "trace_present": true,
+      "counts": {
+        "adaptive_evidence_unresolved": 2622,
+        "both_unresolved_or_unvoiced": 2695,
+        "observed_local_period_with_support": 1001,
+        "baseline_unvoiced_candidate_review": 194,
+        "weak_spectral_corrobation": 407,
+        "acoustic_evidence_unresolved_no_reset": 3024,
+        "competing_measured_integer_related_periods": 2549,
+        "measured_state_agreement": 726,
+        "nonstationary_window": 138,
+        "acoustic_state_disagreement_review": 81,
+        "reported_hz_not_measured_in_candidate_list": 3
+      },
+      "csv": "tests/shadow_acoustic_decisions/PREDESTINATI_shadow.csv",
+      "hotspots": "tests/shadow_acoustic_decisions/PREDESTINATI_hotspots.json"
+    },
+    "RATATA": {
+      "rows": 8855,
+      "source_sha256": "ec391eb85f7d984a0cba15da3caadebc1c8ecde674b15607b63fec6b10da1067",
+      "baseline_present": true,
+      "trace_present": true,
+      "counts": {
+        "adaptive_evidence_unresolved": 4257,
+        "both_unresolved_or_unvoiced": 4471,
+        "observed_local_period_with_support": 1752,
+        "baseline_unvoiced_candidate_review": 412,
+        "acoustic_state_disagreement_review": 131,
+        "weak_spectral_corrobation": 123,
+        "acoustic_evidence_unresolved_no_reset": 2632,
+        "nonstationary_window": 121,
+        "measured_state_agreement": 1209,
+        "competing_measured_integer_related_periods": 2602
+      },
+      "csv": "tests/shadow_acoustic_decisions/RATATA_shadow.csv",
+      "hotspots": "tests/shadow_acoustic_decisions/RATATA_hotspots.json"
+    },
+    "Trandafiri": {
+      "rows": 5348,
+      "source_sha256": "5d0175c1b0cb2bcd2eb97b6b72ce83ce5bf0d0b79fef9bb3ed7be7d3bf04b9d7",
+      "baseline_present": true,
+      "trace_present": true,
+      "counts": {
+        "adaptive_evidence_unresolved": 3805,
+        "both_unresolved_or_unvoiced": 3837,
+        "observed_local_period_with_support": 274,
+        "baseline_unvoiced_candidate_review": 84,
+        "nonstationary_window": 50,
+        "competing_measured_integer_related_periods": 1160,
+        "acoustic_evidence_unresolved_no_reset": 1237,
+        "measured_state_agreement": 179,
+        "weak_spectral_corrobation": 59,
+        "acoustic_state_disagreement_review": 11
+      },
+      "csv": "tests/shadow_acoustic_decisions/Trandafiri_shadow.csv",
+      "hotspots": "tests/shadow_acoustic_decisions/Trandafiri_hotspots.json"
+    }
+  }
+}

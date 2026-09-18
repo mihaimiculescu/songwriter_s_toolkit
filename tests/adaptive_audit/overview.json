@@ -1,0 +1,109 @@
+{
+  "midi_used": false,
+  "production_modified": false,
+  "corrected_pitch": false,
+  "summary": [
+    {
+      "name": "Ochiitai",
+      "observations": 5437,
+      "first_s": 0.04800454,
+      "last_s": 54.40800454,
+      "baseline_unvoiced_candidate": 268,
+      "adaptive_unresolved": 1152,
+      "probe_rms_median": 0.10558505,
+      "probe_rms_p10": 0.0053082315,
+      "probe_rms_p90": 0.14433,
+      "expansion_counts": {
+        "96.0": 1165,
+        "64.0": 67,
+        "40.0": 175,
+        "24.0": 4030
+      },
+      "comparisons": {
+        "both_unresolved": 1060,
+        "baseline_unvoiced": 268,
+        "within_1st": 3825,
+        "adaptive_unresolved": 92,
+        "pitch_disagreement_>=1st": 192
+      }
+    },
+    {
+      "name": "PREDESTINATI",
+      "observations": 6720,
+      "first_s": 0.04800454,
+      "last_s": 67.23800454,
+      "baseline_unvoiced_candidate": 273,
+      "adaptive_unresolved": 2760,
+      "probe_rms_median": 0.0456853055,
+      "probe_rms_p10": 0.0,
+      "probe_rms_p90": 0.12029039,
+      "expansion_counts": {
+        "96.0": 2754,
+        "64.0": 109,
+        "40.0": 583,
+        "24.0": 3274
+      },
+      "comparisons": {
+        "both_unresolved": 2616,
+        "baseline_unvoiced": 273,
+        "within_1st": 3526,
+        "pitch_disagreement_>=1st": 161,
+        "adaptive_unresolved": 144
+      }
+    },
+    {
+      "name": "RATATA",
+      "observations": 8855,
+      "first_s": 0.048,
+      "last_s": 88.588,
+      "baseline_unvoiced_candidate": 678,
+      "adaptive_unresolved": 4378,
+      "probe_rms_median": 0.062394361,
+      "probe_rms_p10": 2.2605943e-05,
+      "probe_rms_p90": 0.13459219,
+      "expansion_counts": {
+        "96.0": 4368,
+        "24.0": 4040,
+        "64.0": 68,
+        "40.0": 379
+      },
+      "comparisons": {
+        "both_unresolved": 4205,
+        "baseline_unvoiced": 678,
+        "pitch_disagreement_>=1st": 386,
+        "within_1st": 3413,
+        "adaptive_unresolved": 173
+      }
+    },
+    {
+      "name": "Trandafiri",
+      "observations": 5348,
+      "first_s": 0.04800454,
+      "last_s": 53.51800454,
+      "baseline_unvoiced_candidate": 118,
+      "adaptive_unresolved": 3855,
+      "probe_rms_median": 3.3148153e-05,
+      "probe_rms_p10": 3.0828878e-05,
+      "probe_rms_p90": 0.076527862,
+      "expansion_counts": {
+        "96.0": 3852,
+        "64.0": 47,
+        "40.0": 547,
+        "24.0": 902
+      },
+      "comparisons": {
+        "both_unresolved": 3803,
+        "baseline_unvoiced": 118,
+        "within_1st": 1340,
+        "adaptive_unresolved": 52,
+        "pitch_disagreement_>=1st": 35
+      }
+    }
+  ],
+  "baseline_unvoiced_candidates": 1337,
+  "djuvv_wav_times_s": [
+    36.923,
+    41.026,
+    49.231
+  ]
+}

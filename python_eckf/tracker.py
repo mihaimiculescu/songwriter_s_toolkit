@@ -183,6 +183,26 @@ def track_pitch(
                 P_last is None or x_last is None
                 or (harm_prev == 0 and harm_cur == 1)
             )
+            #DIAGNOSTIC ONLY
+            trace.emit(
+                "INITIALIZATION_GATE",
+                start,
+                frame_start=start,
+                periodicity_voiced=int(periodicity.voiced),
+                periodicity_f0_hz=periodicity.acf_frequency_hz,
+                periodicity_acf_peak=periodicity.acf_peak,
+                periodicity_cmndf_minimum=periodicity.cmndf_minimum,
+                state_available=int(P_last is not None and x_last is not None),
+                harm_prev=harm_prev,
+                harm_cur=harm_cur,
+                needs_initialization=int(needs_initialization),
+                existing_f0_hz=(
+                    float(f0[start - 1])
+                    if start > 0 and pitch_status[start - 1] == PitchStatus.VOICED_VALID
+                    else None
+                ),
+            )
+            #END DIAGNOSTIC ONLY
             if needs_initialization:
                 # No lookahead and no backtracking: an unverified frame is never
                 # assigned a pitch based on a different frame.
@@ -196,12 +216,38 @@ def track_pitch(
                     detector, y_frame, sample_rate, start,
                     initialization, periodicity, previous_hz, elapsed_ms,
                 )
+#DIAGNOSE ONLY
+                trace.emit(
+                    "INITIALIZATION_CHOICE_BEFORE_OCTAVE",
+                    start,
+                    frame_start=start,
+                    spectral_proposal_hz=initialization.f0_hz,
+                    periodicity_hz=periodicity.acf_frequency_hz,
+                    choice_hz=choice.frequency_hz,
+                    choice_source=choice.source,
+                    choice_reason=choice.reason,
+                    choice_harmonics=choice.spectral_harmonics,
+                )
+#END DIAGNOSE ONLY
                 # Independently challenge an octave-related initialization only
                 # when ACF, CMNDF and measured spectral harmonics all agree.
                 choice, octave_evidence = reconcile_initialization(
                     detector, y_frame, sample_rate, start, choice,
                     periodicity, previous_hz, elapsed_ms,
                 )
+#DIAGNOSE ONLY
+                trace.emit(
+                    "INITIALIZATION_CHOICE_AFTER_OCTAVE",
+                    start,
+                    frame_start=start,
+                    evidence_state=octave_evidence.state,
+                    evidence_reason=octave_evidence.reason,
+                    evidence_measured_hz=octave_evidence.measured_hz,
+                    final_choice_hz=choice.frequency_hz,
+                    final_choice_source=choice.source,
+                    final_choice_reason=choice.reason,
+                )
+#END DIAGNOSE ONLY
                 trace.emit(
                     "OCTAVE_INITIALIZATION_AUDIT", start,
                     frame_start=start, decision=octave_evidence.state,
