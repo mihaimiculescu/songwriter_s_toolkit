@@ -5,4 +5,5 @@
 *.npz
 __pycache__/
 extract/
-tests/
+tests/*
+!tests/*.py
