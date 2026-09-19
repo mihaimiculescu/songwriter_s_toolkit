@@ -1,0 +1,141 @@
+{
+  "version": "v11",
+  "cases": {
+    "Ochiitai": {
+      "review_observations": 803,
+      "investigation_classes": {
+        "acoustically_competing_candidates": 549,
+        "pattern:rising_energy_toward_future": 33,
+        "pattern:no_strong_energy_asymmetry": 545,
+        "pattern:locally_low_energy_without_direction": 177,
+        "supported_period_in_low_or_decaying_energy_inspect_source": 45,
+        "period_not_eligible_energy_cannot_rescue": 132,
+        "pattern:falling_energy_relative_to_past": 48,
+        "period_shift_robustness_not_established": 23,
+        "supported_period_source_identity_unresolved": 49,
+        "supported_period_near_possible_onset_inspect_source": 5
+      },
+      "annotated_regions": {
+        "transition": {
+          "supported_period_in_low_or_decaying_energy_inspect_source": 1,
+          "period_not_eligible_energy_cannot_rescue": 6,
+          "period_shift_robustness_not_established": 1,
+          "supported_period_near_possible_onset_inspect_source": 1,
+          "supported_period_source_identity_unresolved": 1,
+          "acoustically_competing_candidates": 11
+        }
+      },
+      "sample_rate": 44100,
+      "output": "tests/energy_observability_v11/Ochiitai_energy_observability.csv"
+    },
+    "PREDESTINATI": {
+      "review_observations": 871,
+      "investigation_classes": {
+        "period_not_eligible_energy_cannot_rescue": 156,
+        "pattern:rising_energy_toward_future": 62,
+        "acoustically_competing_candidates": 554,
+        "pattern:no_strong_energy_asymmetry": 628,
+        "supported_period_source_identity_unresolved": 70,
+        "period_shift_robustness_not_established": 51,
+        "pattern:locally_low_energy_without_direction": 96,
+        "pattern:falling_energy_relative_to_past": 85,
+        "supported_period_in_low_or_decaying_energy_inspect_source": 29,
+        "supported_period_near_possible_onset_inspect_source": 11
+      },
+      "annotated_regions": {
+        "control_53": {
+          "acoustically_competing_candidates": 1,
+          "period_not_eligible_energy_cannot_rescue": 2
+        }
+      },
+      "sample_rate": 44100,
+      "output": "tests/energy_observability_v11/PREDESTINATI_energy_observability.csv"
+    },
+    "RATATA": {
+      "review_observations": 1750,
+      "investigation_classes": {
+        "period_not_eligible_energy_cannot_rescue": 327,
+        "pattern:locally_low_energy_without_direction": 246,
+        "period_shift_robustness_not_established": 69,
+        "pattern:rising_energy_toward_future": 17,
+        "pattern:no_strong_energy_asymmetry": 1409,
+        "acoustically_competing_candidates": 1033,
+        "supported_period_source_identity_unresolved": 206,
+        "supported_period_in_low_or_decaying_energy_inspect_source": 113,
+        "pattern:falling_energy_relative_to_past": 78,
+        "supported_period_near_possible_onset_inspect_source": 2
+      },
+      "annotated_regions": {
+        "djuvv_1": {
+          "period_not_eligible_energy_cannot_rescue": 5
+        },
+        "djuvv_2": {
+          "period_not_eligible_energy_cannot_rescue": 4,
+          "supported_period_source_identity_unresolved": 1
+        },
+        "submultiple": {
+          "supported_period_source_identity_unresolved": 2,
+          "supported_period_in_low_or_decaying_energy_inspect_source": 6,
+          "period_shift_robustness_not_established": 1,
+          "period_not_eligible_energy_cannot_rescue": 3,
+          "acoustically_competing_candidates": 3
+        },
+        "djuvv_3": {
+          "period_not_eligible_energy_cannot_rescue": 2
+        }
+      },
+      "sample_rate": 48000,
+      "output": "tests/energy_observability_v11/RATATA_energy_observability.csv"
+    },
+    "Trandafiri": {
+      "review_observations": 166,
+      "investigation_classes": {
+        "acoustically_competing_candidates": 73,
+        "pattern:no_strong_energy_asymmetry": 103,
+        "period_shift_robustness_not_established": 15,
+        "pattern:locally_low_energy_without_direction": 22,
+        "period_not_eligible_energy_cannot_rescue": 42,
+        "pattern:falling_energy_relative_to_past": 28,
+        "supported_period_in_low_or_decaying_energy_inspect_source": 12,
+        "supported_period_near_possible_onset_inspect_source": 4,
+        "pattern:rising_energy_toward_future": 13,
+        "supported_period_source_identity_unresolved": 20
+      },
+      "annotated_regions": {
+        "steady_i_between_consonants": {
+          "acoustically_competing_candidates": 7,
+          "period_not_eligible_energy_cannot_rescue": 2
+        }
+      },
+      "sample_rate": 44100,
+      "output": "tests/energy_observability_v11/Trandafiri_energy_observability.csv"
+    }
+  },
+  "curve_status": "existing_function_imported_unchanged",
+  "energy_does_not_decide_voicing": true,
+  "curve_does_not_decide_pitch": true,
+  "production_modified": false,
+  "no_midi": true,
+  "correct_ratata_regions": [
+    [
+      "djuvv_1",
+      36.923,
+      37.435
+    ],
+    [
+      "djuvv_2",
+      41.025,
+      41.538
+    ],
+    [
+      "djuvv_3",
+      49.23,
+      49.743
+    ],
+    [
+      "submultiple",
+      42.9,
+      43.1
+    ]
+  ]
+}

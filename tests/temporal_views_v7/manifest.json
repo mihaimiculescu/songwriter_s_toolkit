@@ -1,0 +1,159 @@
+{
+  "schema": "temporal_views_v7",
+  "read_only": true,
+  "production_is_not_ground_truth": true,
+  "no_pitch_or_voicing_applied": true,
+  "focus_mechanisms": [
+    "block_timing_ambiguity",
+    "candidate_during_unvoiced_block",
+    "remote_periodicity",
+    "testable_no_local_support"
+  ],
+  "view_lengths_ms": [
+    24,
+    40,
+    64,
+    96
+  ],
+  "correct_ratata_djuvvs": [
+    [
+      36.923,
+      37.435
+    ],
+    [
+      41.025,
+      41.538
+    ],
+    [
+      49.23,
+      49.743
+    ]
+  ],
+  "trandafiri": "steady i between consonants; not a glissando",
+  "cases": {
+    "Ochiitai": {
+      "observations": 803,
+      "output_rows": 3212,
+      "sample_rate": 44100,
+      "geometry_counts": {
+        "center_support_with_asymmetry": 858,
+        "all_three_support_period": 1164,
+        "past_only_period_support": 98,
+        "flanking_only_or_asymmetric": 33,
+        "no_measured_period_in_views": 35,
+        "unanchored_independent_view_candidates": 817,
+        "no_view_support_for_reference": 159,
+        "future_only_period_support": 48
+      },
+      "comparison_counts_per_view": {
+        "production_voiced_adaptive_unresolved": 1616,
+        "production_voiced_adaptive_different_70c": 1004,
+        "production_unvoiced_adaptive_candidate": 592
+      },
+      "focus_geometry_counts": {
+        "center_support_with_asymmetry": 415,
+        "all_three_support_period": 516,
+        "flanking_only_or_asymmetric": 13,
+        "past_only_period_support": 52,
+        "no_measured_period_in_views": 32,
+        "unanchored_independent_view_candidates": 748,
+        "no_view_support_for_reference": 85,
+        "future_only_period_support": 15
+      },
+      "output": "tests/temporal_views_v7/Ochiitai_temporal_views.csv"
+    },
+    "PREDESTINATI": {
+      "observations": 871,
+      "output_rows": 3484,
+      "sample_rate": 44100,
+      "geometry_counts": {
+        "no_measured_period_in_views": 92,
+        "unanchored_independent_view_candidates": 960,
+        "center_support_with_asymmetry": 1058,
+        "all_three_support_period": 939,
+        "past_only_period_support": 52,
+        "no_view_support_for_reference": 321,
+        "future_only_period_support": 47,
+        "flanking_only_or_asymmetric": 15
+      },
+      "comparison_counts_per_view": {
+        "production_voiced_adaptive_unresolved": 1964,
+        "production_voiced_adaptive_different_70c": 1068,
+        "production_unvoiced_adaptive_candidate": 452
+      },
+      "focus_geometry_counts": {
+        "no_measured_period_in_views": 83,
+        "unanchored_independent_view_candidates": 853,
+        "center_support_with_asymmetry": 360,
+        "no_view_support_for_reference": 120,
+        "past_only_period_support": 20,
+        "future_only_period_support": 20,
+        "all_three_support_period": 254,
+        "flanking_only_or_asymmetric": 6
+      },
+      "output": "tests/temporal_views_v7/PREDESTINATI_temporal_views.csv"
+    },
+    "RATATA": {
+      "observations": 1750,
+      "output_rows": 7000,
+      "sample_rate": 48000,
+      "geometry_counts": {
+        "unanchored_independent_view_candidates": 2829,
+        "no_measured_period_in_views": 147,
+        "center_support_with_asymmetry": 1451,
+        "no_view_support_for_reference": 532,
+        "all_three_support_period": 1682,
+        "past_only_period_support": 148,
+        "future_only_period_support": 164,
+        "flanking_only_or_asymmetric": 47
+      },
+      "comparison_counts_per_view": {
+        "production_voiced_adaptive_unresolved": 3316,
+        "production_voiced_adaptive_different_70c": 1732,
+        "production_unvoiced_adaptive_candidate": 1952
+      },
+      "focus_geometry_counts": {
+        "unanchored_independent_view_candidates": 2657,
+        "no_measured_period_in_views": 119,
+        "center_support_with_asymmetry": 850,
+        "past_only_period_support": 99,
+        "future_only_period_support": 119,
+        "no_view_support_for_reference": 388,
+        "all_three_support_period": 593,
+        "flanking_only_or_asymmetric": 15
+      },
+      "output": "tests/temporal_views_v7/RATATA_temporal_views.csv"
+    },
+    "Trandafiri": {
+      "observations": 166,
+      "output_rows": 664,
+      "sample_rate": 44100,
+      "geometry_counts": {
+        "center_support_with_asymmetry": 245,
+        "no_view_support_for_reference": 45,
+        "all_three_support_period": 149,
+        "unanchored_independent_view_candidates": 187,
+        "no_measured_period_in_views": 17,
+        "past_only_period_support": 9,
+        "flanking_only_or_asymmetric": 1,
+        "future_only_period_support": 11
+      },
+      "comparison_counts_per_view": {
+        "production_unvoiced_adaptive_candidate": 160,
+        "production_voiced_adaptive_unresolved": 256,
+        "production_voiced_adaptive_different_70c": 248
+      },
+      "focus_geometry_counts": {
+        "center_support_with_asymmetry": 112,
+        "unanchored_independent_view_candidates": 168,
+        "no_measured_period_in_views": 16,
+        "all_three_support_period": 37,
+        "past_only_period_support": 4,
+        "no_view_support_for_reference": 23,
+        "flanking_only_or_asymmetric": 1,
+        "future_only_period_support": 7
+      },
+      "output": "tests/temporal_views_v7/Trandafiri_temporal_views.csv"
+    }
+  }
+}

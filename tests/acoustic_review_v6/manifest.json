@@ -1,0 +1,188 @@
+{
+  "version": "v6",
+  "read_only": true,
+  "production_ground_truth": false,
+  "review_categories": [
+    "production_voiced_adaptive_unresolved",
+    "production_voiced_adaptive_different_70c",
+    "production_unvoiced_adaptive_candidate"
+  ],
+  "warning": "Production voiced counts are block-level. These are hypotheses, not errors or validated voicing.",
+  "cases": {
+    "Ochiitai": {
+      "total": 5417,
+      "review": 803,
+      "review_categories": {
+        "production_voiced_adaptive_unresolved": 404,
+        "production_voiced_adaptive_different_70c": 251,
+        "production_unvoiced_adaptive_candidate": 148
+      },
+      "primary_mechanisms": {
+        "block_timing_ambiguity": 130,
+        "locally_supported_conflict": 247,
+        "local_period_ambiguous": 70,
+        "candidate_during_unvoiced_block": 144,
+        "testable_no_local_support": 77,
+        "remote_periodicity": 118,
+        "no_period_measured": 3,
+        "period_visible_but_not_eligible": 14
+      },
+      "aperture_opportunities": {
+        "local_candidate_present_at_shortest_inspected_aperture": 584,
+        "raw_period_found_but_no_local_eligible_candidate": 210,
+        "all_four_apertures_inspected_no_raw_period": 3,
+        "observed_longer_aperture_first_local_candidate": 6
+      },
+      "early_stop_risks": {
+        "not_assessable_or_not_suggested": 772,
+        "observed_early_stop_would_miss_raw_evidence": 26,
+        "observed_later_stages_show_no_raw_candidate": 5
+      },
+      "output": "tests/acoustic_review_v6/Ochiitai_review.csv"
+    },
+    "PREDESTINATI": {
+      "total": 6700,
+      "review": 871,
+      "review_categories": {
+        "production_voiced_adaptive_unresolved": 491,
+        "production_voiced_adaptive_different_70c": 267,
+        "production_unvoiced_adaptive_candidate": 113
+      },
+      "primary_mechanisms": {
+        "testable_no_local_support": 76,
+        "remote_periodicity": 158,
+        "block_timing_ambiguity": 86,
+        "local_period_ambiguous": 161,
+        "locally_supported_conflict": 252,
+        "candidate_during_unvoiced_block": 109,
+        "period_visible_but_not_eligible": 28,
+        "no_period_measured": 1
+      },
+      "aperture_opportunities": {
+        "raw_period_found_but_no_local_eligible_candidate": 262,
+        "local_candidate_present_at_shortest_inspected_aperture": 592,
+        "observed_longer_aperture_first_local_candidate": 16,
+        "all_four_apertures_inspected_no_raw_period": 1
+      },
+      "early_stop_risks": {
+        "observed_early_stop_would_miss_raw_evidence": 35,
+        "not_assessable_or_not_suggested": 835,
+        "observed_later_stages_show_no_raw_candidate": 1
+      },
+      "output": "tests/acoustic_review_v6/PREDESTINATI_review.csv"
+    },
+    "RATATA": {
+      "total": 8834,
+      "review": 1750,
+      "review_categories": {
+        "production_voiced_adaptive_unresolved": 829,
+        "production_voiced_adaptive_different_70c": 433,
+        "production_unvoiced_adaptive_candidate": 488
+      },
+      "primary_mechanisms": {
+        "remote_periodicity": 262,
+        "locally_supported_conflict": 423,
+        "period_visible_but_not_eligible": 43,
+        "testable_no_local_support": 432,
+        "candidate_during_unvoiced_block": 474,
+        "local_period_ambiguous": 71,
+        "block_timing_ambiguity": 42,
+        "no_period_measured": 2,
+        "cycle_limited": 1
+      },
+      "aperture_opportunities": {
+        "raw_period_found_but_no_local_eligible_candidate": 742,
+        "local_candidate_present_at_shortest_inspected_aperture": 982,
+        "observed_longer_aperture_first_local_candidate": 24,
+        "all_four_apertures_inspected_no_raw_period": 2
+      },
+      "early_stop_risks": {
+        "not_assessable_or_not_suggested": 1737,
+        "observed_early_stop_would_miss_raw_evidence": 8,
+        "observed_later_stages_show_no_raw_candidate": 5
+      },
+      "output": "tests/acoustic_review_v6/RATATA_review.csv"
+    },
+    "Trandafiri": {
+      "total": 5327,
+      "review": 166,
+      "review_categories": {
+        "production_unvoiced_adaptive_candidate": 40,
+        "production_voiced_adaptive_unresolved": 64,
+        "production_voiced_adaptive_different_70c": 62
+      },
+      "primary_mechanisms": {
+        "candidate_during_unvoiced_block": 39,
+        "local_period_ambiguous": 7,
+        "testable_no_local_support": 12,
+        "block_timing_ambiguity": 7,
+        "remote_periodicity": 34,
+        "locally_supported_conflict": 62,
+        "no_period_measured": 1,
+        "period_visible_but_not_eligible": 4
+      },
+      "aperture_opportunities": {
+        "local_candidate_present_at_shortest_inspected_aperture": 109,
+        "raw_period_found_but_no_local_eligible_candidate": 50,
+        "observed_longer_aperture_first_local_candidate": 6,
+        "all_four_apertures_inspected_no_raw_period": 1
+      },
+      "early_stop_risks": {
+        "not_assessable_or_not_suggested": 153,
+        "observed_early_stop_would_miss_raw_evidence": 12,
+        "observed_later_stages_show_no_raw_candidate": 1
+      },
+      "output": "tests/acoustic_review_v6/Trandafiri_review.csv"
+    }
+  },
+  "overall": {
+    "total": 26278,
+    "review": 3590,
+    "review_categories": {
+      "production_voiced_adaptive_unresolved": 1788,
+      "production_voiced_adaptive_different_70c": 1013,
+      "production_unvoiced_adaptive_candidate": 789
+    },
+    "primary_mechanisms": {
+      "block_timing_ambiguity": 265,
+      "locally_supported_conflict": 984,
+      "local_period_ambiguous": 309,
+      "candidate_during_unvoiced_block": 766,
+      "testable_no_local_support": 597,
+      "remote_periodicity": 572,
+      "no_period_measured": 7,
+      "period_visible_but_not_eligible": 89,
+      "cycle_limited": 1
+    },
+    "comparison_by_mechanism": {
+      "production_voiced_adaptive_unresolved": {
+        "block_timing_ambiguity": 265,
+        "local_period_ambiguous": 257,
+        "testable_no_local_support": 597,
+        "remote_periodicity": 572,
+        "no_period_measured": 7,
+        "period_visible_but_not_eligible": 89,
+        "cycle_limited": 1
+      },
+      "production_voiced_adaptive_different_70c": {
+        "locally_supported_conflict": 984,
+        "local_period_ambiguous": 29
+      },
+      "production_unvoiced_adaptive_candidate": {
+        "candidate_during_unvoiced_block": 766,
+        "local_period_ambiguous": 23
+      }
+    },
+    "aperture_opportunities": {
+      "local_candidate_present_at_shortest_inspected_aperture": 2267,
+      "raw_period_found_but_no_local_eligible_candidate": 1264,
+      "all_four_apertures_inspected_no_raw_period": 7,
+      "observed_longer_aperture_first_local_candidate": 52
+    },
+    "early_stop_risks": {
+      "not_assessable_or_not_suggested": 3497,
+      "observed_early_stop_would_miss_raw_evidence": 81,
+      "observed_later_stages_show_no_raw_candidate": 12
+    }
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "schema": "candidate_geometry_v8",
+  "read_only": true,
+  "not_ground_truth": true,
+  "no_bpm_or_grid_changes": true,
+  "no_pitch_or_voicing_applied": true,
+  "correct_ratata_djuvvs": [
+    [
+      36.923,
+      37.435
+    ],
+    [
+      41.025,
+      41.538
+    ],
+    [
+      49.23,
+      49.743
+    ]
+  ],
+  "trandafiri": "steady i between consonants, not a glissando",
+  "cases": {
+    "Ochiitai": {
+      "unique_review_observations": 803,
+      "rows": 3212,
+      "geometry_counts_all_durations": {
+        "one_center_period_with_view_asymmetry": 389,
+        "multiple_independently_measured_center_periods": 2138,
+        "one_center_period_supported_across_views": 138,
+        "flank_eligible_without_center": 479,
+        "raw_periods_only_no_center_eligible": 61,
+        "no_raw_period_in_any_view": 7
+      },
+      "geometry_counts_by_duration": {
+        "24.0": {
+          "one_center_period_with_view_asymmetry": 79,
+          "one_center_period_supported_across_views": 52,
+          "multiple_independently_measured_center_periods": 559,
+          "raw_periods_only_no_center_eligible": 21,
+          "flank_eligible_without_center": 87,
+          "no_raw_period_in_any_view": 5
+        },
+        "40.0": {
+          "multiple_independently_measured_center_periods": 546,
+          "one_center_period_supported_across_views": 38,
+          "one_center_period_with_view_asymmetry": 87,
+          "flank_eligible_without_center": 118,
+          "raw_periods_only_no_center_eligible": 14
+        },
+        "64.0": {
+          "multiple_independently_measured_center_periods": 527,
+          "one_center_period_with_view_asymmetry": 107,
+          "one_center_period_supported_across_views": 24,
+          "flank_eligible_without_center": 131,
+          "no_raw_period_in_any_view": 2,
+          "raw_periods_only_no_center_eligible": 12
+        },
+        "96.0": {
+          "one_center_period_with_view_asymmetry": 116,
+          "multiple_independently_measured_center_periods": 506,
+          "flank_eligible_without_center": 143,
+          "one_center_period_supported_across_views": 24,
+          "raw_periods_only_no_center_eligible": 14
+        }
+      },
+      "observations_missing_one_or_more_durations": 0,
+      "output": "tests/candidate_geometry_v8/Ochiitai_candidate_geometry.csv"
+    },
+    "PREDESTINATI": {
+      "unique_review_observations": 871,
+      "rows": 3484,
+      "geometry_counts_all_durations": {
+        "no_raw_period_in_any_view": 11,
+        "raw_periods_only_no_center_eligible": 103,
+        "flank_eligible_without_center": 561,
+        "one_center_period_with_view_asymmetry": 599,
+        "multiple_independently_measured_center_periods": 2064,
+        "one_center_period_supported_across_views": 146
+      },
+      "geometry_counts_by_duration": {
+        "24.0": {
+          "no_raw_period_in_any_view": 9,
+          "raw_periods_only_no_center_eligible": 39,
+          "flank_eligible_without_center": 111,
+          "one_center_period_with_view_asymmetry": 109,
+          "multiple_independently_measured_center_periods": 548,
+          "one_center_period_supported_across_views": 55
+        },
+        "40.0": {
+          "raw_periods_only_no_center_eligible": 18,
+          "flank_eligible_without_center": 137,
+          "multiple_independently_measured_center_periods": 556,
+          "one_center_period_with_view_asymmetry": 140,
+          "one_center_period_supported_across_views": 20
+        },
+        "64.0": {
+          "flank_eligible_without_center": 152,
+          "multiple_independently_measured_center_periods": 487,
+          "one_center_period_with_view_asymmetry": 187,
+          "one_center_period_supported_across_views": 23,
+          "raw_periods_only_no_center_eligible": 21,
+          "no_raw_period_in_any_view": 1
+        },
+        "96.0": {
+          "one_center_period_with_view_asymmetry": 163,
+          "multiple_independently_measured_center_periods": 473,
+          "flank_eligible_without_center": 161,
+          "one_center_period_supported_across_views": 48,
+          "raw_periods_only_no_center_eligible": 25,
+          "no_raw_period_in_any_view": 1
+        }
+      },
+      "observations_missing_one_or_more_durations": 0,
+      "output": "tests/candidate_geometry_v8/PREDESTINATI_candidate_geometry.csv"
+    },
+    "RATATA": {
+      "unique_review_observations": 1750,
+      "rows": 7000,
+      "geometry_counts_all_durations": {
+        "flank_eligible_without_center": 1299,
+        "raw_periods_only_no_center_eligible": 336,
+        "one_center_period_with_view_asymmetry": 1083,
+        "multiple_independently_measured_center_periods": 3851,
+        "one_center_period_supported_across_views": 417,
+        "no_raw_period_in_any_view": 14
+      },
+      "geometry_counts_by_duration": {
+        "24.0": {
+          "flank_eligible_without_center": 174,
+          "one_center_period_with_view_asymmetry": 224,
+          "multiple_independently_measured_center_periods": 1198,
+          "one_center_period_supported_across_views": 127,
+          "raw_periods_only_no_center_eligible": 25,
+          "no_raw_period_in_any_view": 2
+        },
+        "40.0": {
+          "raw_periods_only_no_center_eligible": 45,
+          "one_center_period_with_view_asymmetry": 290,
+          "flank_eligible_without_center": 281,
+          "multiple_independently_measured_center_periods": 1034,
+          "one_center_period_supported_across_views": 100
+        },
+        "64.0": {
+          "one_center_period_with_view_asymmetry": 281,
+          "flank_eligible_without_center": 394,
+          "one_center_period_supported_across_views": 110,
+          "multiple_independently_measured_center_periods": 865,
+          "raw_periods_only_no_center_eligible": 100
+        },
+        "96.0": {
+          "flank_eligible_without_center": 450,
+          "one_center_period_with_view_asymmetry": 288,
+          "multiple_independently_measured_center_periods": 754,
+          "raw_periods_only_no_center_eligible": 166,
+          "one_center_period_supported_across_views": 80,
+          "no_raw_period_in_any_view": 12
+        }
+      },
+      "observations_missing_one_or_more_durations": 0,
+      "output": "tests/candidate_geometry_v8/RATATA_candidate_geometry.csv"
+    },
+    "Trandafiri": {
+      "unique_review_observations": 166,
+      "rows": 664,
+      "geometry_counts_all_durations": {
+        "multiple_independently_measured_center_periods": 267,
+        "one_center_period_with_view_asymmetry": 177,
+        "one_center_period_supported_across_views": 36,
+        "flank_eligible_without_center": 163,
+        "raw_periods_only_no_center_eligible": 19,
+        "no_raw_period_in_any_view": 2
+      },
+      "geometry_counts_by_duration": {
+        "24.0": {
+          "multiple_independently_measured_center_periods": 52,
+          "one_center_period_with_view_asymmetry": 44,
+          "one_center_period_supported_across_views": 22,
+          "flank_eligible_without_center": 35,
+          "raw_periods_only_no_center_eligible": 11,
+          "no_raw_period_in_any_view": 2
+        },
+        "40.0": {
+          "multiple_independently_measured_center_periods": 69,
+          "one_center_period_with_view_asymmetry": 49,
+          "flank_eligible_without_center": 41,
+          "raw_periods_only_no_center_eligible": 1,
+          "one_center_period_supported_across_views": 6
+        },
+        "64.0": {
+          "one_center_period_with_view_asymmetry": 49,
+          "multiple_independently_measured_center_periods": 65,
+          "flank_eligible_without_center": 49,
+          "raw_periods_only_no_center_eligible": 1,
+          "one_center_period_supported_across_views": 2
+        },
+        "96.0": {
+          "multiple_independently_measured_center_periods": 81,
+          "one_center_period_with_view_asymmetry": 35,
+          "flank_eligible_without_center": 38,
+          "raw_periods_only_no_center_eligible": 6,
+          "one_center_period_supported_across_views": 6
+        }
+      },
+      "observations_missing_one_or_more_durations": 0,
+      "output": "tests/candidate_geometry_v8/Trandafiri_candidate_geometry.csv"
+    }
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "read_only": true,
+  "midi_used": false,
+  "production_modified": false,
+  "pitch_or_status_changed": false,
+  "note": "No classification is ground truth.",
+  "djuvv_intervals_s": [
+    [
+      "djuvv_1",
+      32.307,
+      32.38
+    ],
+    [
+      "djuvv_2",
+      36.41,
+      36.923
+    ],
+    [
+      "djuvv_3",
+      44.615,
+      45.128
+    ]
+  ],
+  "cases": {
+    "RATATA": {
+      "wav": "tests/RATATA.wav",
+      "fs": 48000,
+      "wav_sha256": "2a3033bbb1671d5c34a6d038ab1728e7b302051b2488cf1e6c68c072cccbc9e2",
+      "input_sha256": {
+        "baseline": "81fd50091864345ded18577881d3d5ad13eb70fe4fd1bd65c69b0a7fd56ed94c",
+        "adaptive": "ec391eb85f7d984a0cba15da3caadebc1c8ecde674b15607b63fec6b10da1067",
+        "shadow": "e02f7ced75a618fd9140911b9fd4b190c669e2237edd97a086850dea52dc471e",
+        "review": "74c12949a39962297e7cd9126cf2697ad374c21d9ce7e6342449eac9cf88c7f9"
+      },
+      "regions": [
+        {
+          "label": "djuvv_1",
+          "interval_s": [
+            32.307,
+            32.38
+          ],
+          "context_margin_ms": 35,
+          "counts": {
+            "context": 6,
+            "inside": 8,
+            "baseline_voiced": 8,
+            "adaptive_candidate": 8,
+            "shadow_candidate": 8
+          },
+          "output": "tests/corrected_adaptive_regression/RATATA_djuvv_1_timeline.csv"
+        },
+        {
+          "label": "djuvv_2",
+          "interval_s": [
+            36.41,
+            36.923
+          ],
+          "context_margin_ms": 35,
+          "counts": {
+            "context": 8,
+            "inside": 51,
+            "baseline_unvoiced": 17,
+            "adaptive_unresolved": 7,
+            "shadow_abstained": 9,
+            "baseline_voiced": 34,
+            "adaptive_candidate": 44,
+            "shadow_candidate": 42,
+            "state_review": 8,
+            "unvoiced_review": 10
+          },
+          "output": "tests/corrected_adaptive_regression/RATATA_djuvv_2_timeline.csv"
+        },
+        {
+          "label": "djuvv_3",
+          "interval_s": [
+            44.615,
+            45.128
+          ],
+          "context_margin_ms": 35,
+          "counts": {
+            "context": 6,
+            "inside": 52,
+            "baseline_unvoiced": 17,
+            "adaptive_unresolved": 12,
+            "shadow_abstained": 13,
+            "adaptive_candidate": 40,
+            "shadow_candidate": 39,
+            "unvoiced_review": 7,
+            "baseline_voiced": 35
+          },
+          "output": "tests/corrected_adaptive_regression/RATATA_djuvv_3_timeline.csv"
+        },
+        {
+          "label": "submultiple_42_965",
+          "interval_s": [
+            42.915,
+            43.065
+          ],
+          "context_margin_ms": 35,
+          "counts": {
+            "context": 7,
+            "inside": 15,
+            "baseline_voiced": 14,
+            "adaptive_candidate": 12,
+            "shadow_candidate": 11,
+            "adaptive_unresolved": 3,
+            "shadow_abstained": 4,
+            "state_review": 7,
+            "baseline_unvoiced": 1
+          },
+          "output": "tests/corrected_adaptive_regression/RATATA_submultiple_42_965_timeline.csv"
+        }
+      ]
+    },
+    "Ochiitai": {
+      "wav": "tests/Ochiitai.wav",
+      "fs": 44100,
+      "wav_sha256": "76959849c88454a8b3d343a32c7306ad9c18aa96109acb4594f964699cf38845",
+      "input_sha256": {
+        "baseline": "17328874dcd0d48834262a3ea7a3e980479dc7fd47e6fed0ef657cae0785a6d1",
+        "adaptive": "3b099113d64ba6629ea71769998ab885c3782c6733e29f3c247040b9643db9f0",
+        "shadow": "4dbe5e2767891c7088fdec32242503b1b038b7e19ae7995fe9444c1678adb8ce",
+        "review": "f02f57dfc7922baf7c4f9b0928f434b335e08862b9ad9ea98b0a59ec0d6fbad3"
+      },
+      "regions": [
+        {
+          "label": "transition_42_214",
+          "interval_s": [
+            42.174,
+            42.413
+          ],
+          "context_margin_ms": 35,
+          "counts": {
+            "context": 6,
+            "inside": 24,
+            "baseline_voiced": 23,
+            "adaptive_candidate": 22,
+            "shadow_candidate": 21,
+            "adaptive_unresolved": 2,
+            "shadow_abstained": 3,
+            "state_review": 16,
+            "baseline_unvoiced": 1,
+            "unvoiced_review": 1
+          },
+          "output": "tests/corrected_adaptive_regression/Ochiitai_transition_42_214_timeline.csv"
+        }
+      ]
+    },
+    "Trandafiri": {
+      "wav": "tests/Trandafiri.wav",
+      "fs": 44100,
+      "wav_sha256": "80bac9a970b08ff5ff53fcef4c94ceb6bce3a15f27cc7fcc62c6ffeae6f0e986",
+      "input_sha256": {
+        "baseline": "9ac7f3d2853dab8199e81110fa1599633affb88033aa67f14cff260bed7165f7",
+        "adaptive": "5d0175c1b0cb2bcd2eb97b6b72ce83ce5bf0d0b79fef9bb3ed7be7d3bf04b9d7",
+        "shadow": "c4997da6f26c865e41b2bef6b281617f0328a3026c6afbe5882b16a87507e9ad",
+        "review": "93fe38dfbaa8b96d49f6f80809736022128a0b158dff1ff8ce61ead26f741d5c"
+      },
+      "regions": [
+        {
+          "label": "tsis_10_774",
+          "interval_s": [
+            10.724,
+            10.921
+          ],
+          "context_margin_ms": 35,
+          "counts": {
+            "context": 6,
+            "inside": 20,
+            "baseline_unvoiced": 11,
+            "adaptive_unresolved": 11,
+            "shadow_abstained": 14,
+            "adaptive_candidate": 9,
+            "baseline_voiced": 9,
+            "shadow_candidate": 6,
+            "state_review": 6
+          },
+          "output": "tests/corrected_adaptive_regression/Trandafiri_tsis_10_774_timeline.csv"
+        }
+      ]
+    },
+    "PREDESTINATI": {
+      "wav": "tests/PREDESTINATI.wav",
+      "fs": 44100,
+      "wav_sha256": "a8fd3ceda5d2f644f180277a585b8281f6536282c2fba440464620e0f8bac24e",
+      "input_sha256": {
+        "baseline": "ffa4348e7e5082bb3427769a13e16cacecdea4b1e902d303023984f85fe69351",
+        "adaptive": "3fc1859fbe5a35c64ec318e747a2e24e38346eaefd9898a4797d575e12357339",
+        "shadow": "33618adee29543d30e7f3545c6742d30af5965a84b07df35160878c1802e062d",
+        "review": "2fce87b0d87907ad1e90a3cc7a9c906269b1e1f986516dbdd2768b524e22cf29"
+      },
+      "regions": [
+        {
+          "label": "control_38_034",
+          "interval_s": [
+            37.984,
+            38.144
+          ],
+          "context_margin_ms": 35,
+          "counts": {
+            "context": 7,
+            "inside": 16,
+            "baseline_voiced": 16,
+            "adaptive_candidate": 16,
+            "shadow_candidate": 13,
+            "shadow_abstained": 3
+          },
+          "output": "tests/corrected_adaptive_regression/PREDESTINATI_control_38_034_timeline.csv"
+        },
+        {
+          "label": "control_53_592",
+          "interval_s": [
+            53.542,
+            53.752
+          ],
+          "context_margin_ms": 35,
+          "counts": {
+            "context": 7,
+            "inside": 21,
+            "baseline_unvoiced": 5,
+            "adaptive_candidate": 16,
+            "shadow_candidate": 16,
+            "unvoiced_review": 3,
+            "adaptive_unresolved": 5,
+            "shadow_abstained": 5,
+            "baseline_voiced": 16,
+            "state_review": 1
+          },
+          "output": "tests/corrected_adaptive_regression/PREDESTINATI_control_53_592_timeline.csv"
+        }
+      ]
+    }
+  }
+}

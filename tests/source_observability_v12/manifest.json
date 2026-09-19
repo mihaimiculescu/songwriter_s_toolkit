@@ -1,0 +1,68 @@
+{
+  "version": "v12_corrected_predecision_shadow",
+  "curve_status": "existing_function_imported_unchanged",
+  "cases": {
+    "Ochiitai": {
+      "review_observations": 803,
+      "diagnostics": {
+        "fundamental_competition": 504,
+        "single_provisional_acoustic_candidate": 81,
+        "low_decaying_periodic_material_source_unresolved": 41,
+        "no_eligible_local_candidate": 132,
+        "local_period_not_shift_confirmed": 23,
+        "fundamental_competition_with_curve_comparison": 22
+      },
+      "curve_eligible_pairs": 59,
+      "curve_evaluations": 75,
+      "file": "tests/source_observability_v12/Ochiitai_source_observability.csv"
+    },
+    "PREDESTINATI": {
+      "review_observations": 871,
+      "diagnostics": {
+        "no_eligible_local_candidate": 156,
+        "fundamental_competition": 519,
+        "single_provisional_acoustic_candidate": 90,
+        "local_period_not_shift_confirmed": 51,
+        "low_decaying_periodic_material_source_unresolved": 35,
+        "fundamental_competition_with_curve_comparison": 20
+      },
+      "curve_eligible_pairs": 61,
+      "curve_evaluations": 79,
+      "file": "tests/source_observability_v12/PREDESTINATI_source_observability.csv"
+    },
+    "RATATA": {
+      "review_observations": 1750,
+      "diagnostics": {
+        "no_eligible_local_candidate": 327,
+        "local_period_not_shift_confirmed": 69,
+        "fundamental_competition": 966,
+        "single_provisional_acoustic_candidate": 283,
+        "fundamental_competition_with_curve_comparison": 49,
+        "low_decaying_periodic_material_source_unresolved": 56
+      },
+      "curve_eligible_pairs": 221,
+      "curve_evaluations": 256,
+      "file": "tests/source_observability_v12/RATATA_source_observability.csv"
+    },
+    "Trandafiri": {
+      "review_observations": 166,
+      "diagnostics": {
+        "fundamental_competition": 65,
+        "local_period_not_shift_confirmed": 15,
+        "no_eligible_local_candidate": 42,
+        "single_provisional_acoustic_candidate": 31,
+        "fundamental_competition_with_curve_comparison": 5,
+        "low_decaying_periodic_material_source_unresolved": 8
+      },
+      "curve_eligible_pairs": 17,
+      "curve_evaluations": 22,
+      "file": "tests/source_observability_v12/Trandafiri_source_observability.csv"
+    }
+  },
+  "no_midi": true,
+  "production_modified": false,
+  "penalty_coefficients_unchanged": true,
+  "no_noise_propagation": true,
+  "only_adjacent_candidate_pairs": true,
+  "v11_is_review_only": true
+}

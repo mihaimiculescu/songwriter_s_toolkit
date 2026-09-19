@@ -1,0 +1,4886 @@
+[
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.85800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.846009070294784,
+    "window_end_s": 37.87,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 328.12332512288253,
+    "measured_candidate_hz": 326.6666666666667,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1678729456201451,
+    "window_to_context_rms_ratio": 0.9988733425254445,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 135,
+        "cycles": 7.837037037037038,
+        "acf_at_measured_period": 0.9973807050898761,
+        "difference_over_total_energy": 0.004733630542179632
+      },
+      "projection": {
+        "amplitude": 0.06985591003791834,
+        "variance_fraction": 0.08546718448877104
+      },
+      "thirds": [
+        {
+          "rms": 0.1717058217302051,
+          "period": {
+            "lag": 135,
+            "cycles": 2.614814814814815,
+            "acf_at_measured_period": 0.9949336777478911,
+            "difference_over_total_energy": 0.006583176141320409
+          },
+          "projection": {
+            "amplitude": 0.05646859360376594,
+            "variance_fraction": 0.05362146831488938
+          }
+        },
+        {
+          "rms": 0.16304548392612478,
+          "period": {
+            "lag": 135,
+            "cycles": 2.614814814814815,
+            "acf_at_measured_period": 0.9987435110561698,
+            "difference_over_total_energy": 0.0016317142956092064
+          },
+          "projection": {
+            "amplitude": 0.06937329838820944,
+            "variance_fraction": 0.08934913460974545
+          }
+        },
+        {
+          "rms": 0.16818841159366849,
+          "period": {
+            "lag": 135,
+            "cycles": 2.6074074074074076,
+            "acf_at_measured_period": 0.9984127479216998,
+            "difference_over_total_energy": 0.002114276311398659
+          },
+          "projection": {
+            "amplitude": 0.09082417716023494,
+            "variance_fraction": 0.14554105046401622
+          }
+        }
+      ],
+      "rms": 0.1676838103111865,
+      "third_rms_ratio": 1.0531160851287624,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3781
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.86800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.85600907029478,
+    "window_end_s": 37.88,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 328.12332512288253,
+    "measured_candidate_hz": 326.6666666666667,
+    "acoustic_reason": "acoustic_advantage",
+    "context_median_25ms_rms": 0.16197473936194778,
+    "window_to_context_rms_ratio": 0.99648710210664,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 135,
+        "cycles": 7.837037037037038,
+        "acf_at_measured_period": 0.9972603923194787,
+        "difference_over_total_energy": 0.004858681160286703
+      },
+      "projection": {
+        "amplitude": 0.0728291847259123,
+        "variance_fraction": 0.10281644880366464
+      },
+      "thirds": [
+        {
+          "rms": 0.17061796075427543,
+          "period": {
+            "lag": 135,
+            "cycles": 2.614814814814815,
+            "acf_at_measured_period": 0.999062866252647,
+            "difference_over_total_energy": 0.001353387362882809
+          },
+          "projection": {
+            "amplitude": 0.09193332655515005,
+            "variance_fraction": 0.14909409523599887
+          }
+        },
+        {
+          "rms": 0.1565611047890544,
+          "period": {
+            "lag": 135,
+            "cycles": 2.614814814814815,
+            "acf_at_measured_period": 0.9986297758925482,
+            "difference_over_total_energy": 0.0016609842988915763
+          },
+          "projection": {
+            "amplitude": 0.04996543834367417,
+            "variance_fraction": 0.05287041805112322
+          }
+        },
+        {
+          "rms": 0.15661818586474838,
+          "period": {
+            "lag": 135,
+            "cycles": 2.6074074074074076,
+            "acf_at_measured_period": 0.9927754294429416,
+            "difference_over_total_energy": 0.008875407794462725
+          },
+          "projection": {
+            "amplitude": 0.08306920019268076,
+            "variance_fraction": 0.1317449617908091
+          }
+        }
+      ],
+      "rms": 0.16140573864126567,
+      "third_rms_ratio": 1.089785109680727,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3782
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.87800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.86600907029479,
+    "window_end_s": 37.89,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 328.12332512288253,
+    "measured_candidate_hz": 329.1044776119403,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.15806378821897615,
+    "window_to_context_rms_ratio": 0.9828225158111192,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 134,
+        "cycles": 7.895522388059701,
+        "acf_at_measured_period": 0.9891061205742597,
+        "difference_over_total_energy": 0.018953998544509285
+      },
+      "projection": {
+        "amplitude": 0.06963427491141651,
+        "variance_fraction": 0.10027860120866926
+      },
+      "thirds": [
+        {
+          "rms": 0.1566876034123932,
+          "period": {
+            "lag": 134,
+            "cycles": 2.6343283582089554,
+            "acf_at_measured_period": 0.9900244577361437,
+            "difference_over_total_energy": 0.012151478647010494
+          },
+          "projection": {
+            "amplitude": 0.0802703564686392,
+            "variance_fraction": 0.12253090943026819
+          }
+        },
+        {
+          "rms": 0.1611684269449624,
+          "period": {
+            "lag": 134,
+            "cycles": 2.6343283582089554,
+            "acf_at_measured_period": 0.9953344302547215,
+            "difference_over_total_energy": 0.005958532032318597
+          },
+          "projection": {
+            "amplitude": 0.08794621642071229,
+            "variance_fraction": 0.14132435495680098
+          }
+        },
+        {
+          "rms": 0.14787468411001345,
+          "period": {
+            "lag": 134,
+            "cycles": 2.626865671641791,
+            "acf_at_measured_period": 0.9804538526024251,
+            "difference_over_total_energy": 0.022427580383112364
+          },
+          "projection": {
+            "amplitude": 0.053820936226252794,
+            "variance_fraction": 0.06906652623108167
+          }
+        }
+      ],
+      "rms": 0.15534864999601009,
+      "third_rms_ratio": 1.0898987065633146,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3783
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.88800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.876009070294785,
+    "window_end_s": 37.9,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 328.12332512288253,
+    "measured_candidate_hz": 334.09090909090907,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1524662975099813,
+    "window_to_context_rms_ratio": 1.0056172129087677,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 132,
+        "cycles": 8.015151515151514,
+        "acf_at_measured_period": 0.9907162555178896,
+        "difference_over_total_energy": 0.016301718876259735
+      },
+      "projection": {
+        "amplitude": 0.07352845114230949,
+        "variance_fraction": 0.11512793601930062
+      },
+      "thirds": [
+        {
+          "rms": 0.1493487432858317,
+          "period": {
+            "lag": 132,
+            "cycles": 2.674242424242424,
+            "acf_at_measured_period": 0.9836893215314186,
+            "difference_over_total_energy": 0.01964656160136859
+          },
+          "projection": {
+            "amplitude": 0.05055848476377365,
+            "variance_fraction": 0.06033705061519108
+          }
+        },
+        {
+          "rms": 0.1565236478872477,
+          "period": {
+            "lag": 132,
+            "cycles": 2.674242424242424,
+            "acf_at_measured_period": 0.9969900264477253,
+            "difference_over_total_energy": 0.003860025973809725
+          },
+          "projection": {
+            "amplitude": 0.0922592384662132,
+            "variance_fraction": 0.16275453559254086
+          }
+        },
+        {
+          "rms": 0.15401130328365306,
+          "period": {
+            "lag": 132,
+            "cycles": 2.6666666666666665,
+            "acf_at_measured_period": 0.9874285620470385,
+            "difference_over_total_energy": 0.016136844516885605
+          },
+          "projection": {
+            "amplitude": 0.08727796832126608,
+            "variance_fraction": 0.15326865086943825
+          }
+        }
+      ],
+      "rms": 0.1533227331645064,
+      "third_rms_ratio": 1.048041278711561,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3784
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.89800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.88600907029478,
+    "window_end_s": 37.91,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 342.28664046115,
+    "measured_candidate_hz": 336.6412213740458,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1472855681735189,
+    "window_to_context_rms_ratio": 1.0133943270874552,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 131,
+        "cycles": 8.076335877862595,
+        "acf_at_measured_period": 0.9940567334804788,
+        "difference_over_total_energy": 0.010432574042028941
+      },
+      "projection": {
+        "amplitude": 0.07382222386808002,
+        "variance_fraction": 0.1213041120325177
+      },
+      "thirds": [
+        {
+          "rms": 0.15631325875770102,
+          "period": {
+            "lag": 131,
+            "cycles": 2.6946564885496187,
+            "acf_at_measured_period": 0.9885673673465419,
+            "difference_over_total_energy": 0.014824351340310774
+          },
+          "projection": {
+            "amplitude": 0.08885560416065943,
+            "variance_fraction": 0.15213659144687902
+          }
+        },
+        {
+          "rms": 0.145510683113513,
+          "period": {
+            "lag": 131,
+            "cycles": 2.6946564885496187,
+            "acf_at_measured_period": 0.995739867529048,
+            "difference_over_total_energy": 0.005225335962376864
+          },
+          "projection": {
+            "amplitude": 0.0585557608062475,
+            "variance_fraction": 0.08518348207096613
+          }
+        },
+        {
+          "rms": 0.145684568969836,
+          "period": {
+            "lag": 131,
+            "cycles": 2.687022900763359,
+            "acf_at_measured_period": 0.9947635433974312,
+            "difference_over_total_energy": 0.006494913871162595
+          },
+          "projection": {
+            "amplitude": 0.08434234018569851,
+            "variance_fraction": 0.15559322501760162
+          }
+        }
+      ],
+      "rms": 0.14925835924889672,
+      "third_rms_ratio": 1.0742390552572756,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3785
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.90800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.89600907029479,
+    "window_end_s": 37.92,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 342.28664046115,
+    "measured_candidate_hz": 339.2307692307692,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1422332137295087,
+    "window_to_context_rms_ratio": 1.0157053420588196,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 130,
+        "cycles": 8.138461538461538,
+        "acf_at_measured_period": 0.9935313997616388,
+        "difference_over_total_energy": 0.011577269302863733
+      },
+      "projection": {
+        "amplitude": 0.07620218140952266,
+        "variance_fraction": 0.13801249091262538
+      },
+      "thirds": [
+        {
+          "rms": 0.14905449441645433,
+          "period": {
+            "lag": 130,
+            "cycles": 2.715384615384615,
+            "acf_at_measured_period": 0.9944075809392423,
+            "difference_over_total_energy": 0.007138455575887205
+          },
+          "projection": {
+            "amplitude": 0.0889873623792297,
+            "variance_fraction": 0.16516819477293102
+          }
+        },
+        {
+          "rms": 0.15024132311230268,
+          "period": {
+            "lag": 130,
+            "cycles": 2.715384615384615,
+            "acf_at_measured_period": 0.9962310416211961,
+            "difference_over_total_energy": 0.005186498564954244
+          },
+          "projection": {
+            "amplitude": 0.08782375498125054,
+            "variance_fraction": 0.1717646370088221
+          }
+        },
+        {
+          "rms": 0.13346840574877072,
+          "period": {
+            "lag": 130,
+            "cycles": 2.7076923076923074,
+            "acf_at_measured_period": 0.9862182599281616,
+            "difference_over_total_energy": 0.017054033909623522
+          },
+          "projection": {
+            "amplitude": 0.0578899020827535,
+            "variance_fraction": 0.09417378320592636
+          }
+        }
+      ],
+      "rms": 0.14446703500325583,
+      "third_rms_ratio": 1.1256695715321858,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3786
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.91800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.906009070294786,
+    "window_end_s": 37.93,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 342.28664046115,
+    "measured_candidate_hz": 341.86046511627904,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.13455089856697178,
+    "window_to_context_rms_ratio": 1.0027745387154057,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 129,
+        "cycles": 8.201550387596898,
+        "acf_at_measured_period": 0.9941429394706232,
+        "difference_over_total_energy": 0.010671601055109019
+      },
+      "projection": {
+        "amplitude": 0.07063713080693787,
+        "variance_fraction": 0.13766324405361327
+      },
+      "thirds": [
+        {
+          "rms": 0.14015282875515794,
+          "period": {
+            "lag": 129,
+            "cycles": 2.7364341085271318,
+            "acf_at_measured_period": 0.9923340846330339,
+            "difference_over_total_energy": 0.009831914062829917
+          },
+          "projection": {
+            "amplitude": 0.05693361922057407,
+            "variance_fraction": 0.08585309244396253
+          }
+        },
+        {
+          "rms": 0.13344175877397668,
+          "period": {
+            "lag": 129,
+            "cycles": 2.7364341085271318,
+            "acf_at_measured_period": 0.9960326947878001,
+            "difference_over_total_energy": 0.005096829756265393
+          },
+          "projection": {
+            "amplitude": 0.06653740668055992,
+            "variance_fraction": 0.12508690355249166
+          }
+        },
+        {
+          "rms": 0.13100060082341267,
+          "period": {
+            "lag": 129,
+            "cycles": 2.7286821705426356,
+            "acf_at_measured_period": 0.9916766547283609,
+            "difference_over_total_energy": 0.011122590575453931
+          },
+          "projection": {
+            "amplitude": 0.08839640619484587,
+            "variance_fraction": 0.22981117523264047
+          }
+        }
+      ],
+      "rms": 0.13492421524423845,
+      "third_rms_ratio": 1.0698640149298428,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3787
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.92800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.916009070294784,
+    "window_end_s": 37.94,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 342.28664046115,
+    "measured_candidate_hz": 344.53125,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.12639426027858527,
+    "window_to_context_rms_ratio": 1.0028981441812392,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 128,
+        "cycles": 8.265625,
+        "acf_at_measured_period": 0.9954862241372612,
+        "difference_over_total_energy": 0.008324052498427556
+      },
+      "projection": {
+        "amplitude": 0.07438858258459591,
+        "variance_fraction": 0.17499754410438556
+      },
+      "thirds": [
+        {
+          "rms": 0.1368655534121942,
+          "period": {
+            "lag": 128,
+            "cycles": 2.7578125,
+            "acf_at_measured_period": 0.9953299515090889,
+            "difference_over_total_energy": 0.006210511673852069
+          },
+          "projection": {
+            "amplitude": 0.08284868800843492,
+            "variance_fraction": 0.19382849747693354
+          }
+        },
+        {
+          "rms": 0.12551553447938363,
+          "period": {
+            "lag": 128,
+            "cycles": 2.7578125,
+            "acf_at_measured_period": 0.9951562151678272,
+            "difference_over_total_energy": 0.006633024913938389
+          },
+          "projection": {
+            "amplitude": 0.07107606859352696,
+            "variance_fraction": 0.150117503440398
+          }
+        },
+        {
+          "rms": 0.11709705721417023,
+          "period": {
+            "lag": 128,
+            "cycles": 2.75,
+            "acf_at_measured_period": 0.9973443028956722,
+            "difference_over_total_energy": 0.0034614589483688224
+          },
+          "projection": {
+            "amplitude": 0.06907272104782235,
+            "variance_fraction": 0.18168282460195428
+          }
+        }
+      ],
+      "rms": 0.12676056906855368,
+      "third_rms_ratio": 1.1688214603195999,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3788
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.93800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.92600907029478,
+    "window_end_s": 37.95,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 342.28664046115,
+    "measured_candidate_hz": 347.244094488189,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11888359242580776,
+    "window_to_context_rms_ratio": 0.994390142428692,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 127,
+        "cycles": 8.330708661417322,
+        "acf_at_measured_period": 0.9952728746457297,
+        "difference_over_total_energy": 0.008612168875951658
+      },
+      "projection": {
+        "amplitude": 0.0779822167853524,
+        "variance_fraction": 0.22104043982063631
+      },
+      "thirds": [
+        {
+          "rms": 0.12233172412399855,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9953067630033285,
+            "difference_over_total_energy": 0.0067954036703760665
+          },
+          "projection": {
+            "amplitude": 0.07075163115027118,
+            "variance_fraction": 0.17712215448624588
+          }
+        },
+        {
+          "rms": 0.117888650686711,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.993312951604739,
+            "difference_over_total_energy": 0.008848005690921135
+          },
+          "projection": {
+            "amplitude": 0.08723999945357577,
+            "variance_fraction": 0.25564935610473843
+          }
+        },
+        {
+          "rms": 0.11428109252696558,
+          "period": {
+            "lag": 127,
+            "cycles": 2.7716535433070866,
+            "acf_at_measured_period": 0.9964914513100115,
+            "difference_over_total_energy": 0.004604838707739079
+          },
+          "projection": {
+            "amplitude": 0.08050439320664554,
+            "variance_fraction": 0.2625701169546623
+          }
+        }
+      ],
+      "rms": 0.11821667240473355,
+      "third_rms_ratio": 1.070445875332644,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3789
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.94800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.93600907029479,
+    "window_end_s": 37.96,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 346.03292875334785,
+    "measured_candidate_hz": 347.244094488189,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11149769367771006,
+    "window_to_context_rms_ratio": 0.9846055177254196,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 127,
+        "cycles": 8.330708661417322,
+        "acf_at_measured_period": 0.9954443867362078,
+        "difference_over_total_energy": 0.008294462320763748
+      },
+      "projection": {
+        "amplitude": 0.07385131752135082,
+        "variance_fraction": 0.22882290893755325
+      },
+      "thirds": [
+        {
+          "rms": 0.11750187920842939,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9963094341308658,
+            "difference_over_total_energy": 0.005267523951327372
+          },
+          "projection": {
+            "amplitude": 0.08257727005056739,
+            "variance_fraction": 0.25244502744973696
+          }
+        },
+        {
+          "rms": 0.10764637451251285,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9955486782891168,
+            "difference_over_total_energy": 0.0055170369984496904
+          },
+          "projection": {
+            "amplitude": 0.06540887544970606,
+            "variance_fraction": 0.1771117356908274
+          }
+        },
+        {
+          "rms": 0.10371916341173038,
+          "period": {
+            "lag": 127,
+            "cycles": 2.7716535433070866,
+            "acf_at_measured_period": 0.9954043415991312,
+            "difference_over_total_energy": 0.006093274039827255
+          },
+          "projection": {
+            "amplitude": 0.0730200810766098,
+            "variance_fraction": 0.263252117222113
+          }
+        }
+      ],
+      "rms": 0.10978124440873196,
+      "third_rms_ratio": 1.1328849495438587,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3790
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.95800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.946009070294785,
+    "window_end_s": 37.97,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 346.03292875334785,
+    "measured_candidate_hz": 347.244094488189,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.10321748931461149,
+    "window_to_context_rms_ratio": 1.0191680073544767,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 127,
+        "cycles": 8.330708661417322,
+        "acf_at_measured_period": 0.9945918366058932,
+        "difference_over_total_energy": 0.009857507054078661
+      },
+      "projection": {
+        "amplitude": 0.0810215563816812,
+        "variance_fraction": 0.299436288876056
+      },
+      "thirds": [
+        {
+          "rms": 0.10692262116446637,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9940333277358177,
+            "difference_over_total_energy": 0.007434940800119819
+          },
+          "projection": {
+            "amplitude": 0.06932975971510678,
+            "variance_fraction": 0.21944980087389843
+          }
+        },
+        {
+          "rms": 0.10666699868411425,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9946617703542783,
+            "difference_over_total_energy": 0.007413660795734469
+          },
+          "projection": {
+            "amplitude": 0.09196213930501138,
+            "variance_fraction": 0.35470985596677723
+          }
+        },
+        {
+          "rms": 0.10191344572302267,
+          "period": {
+            "lag": 127,
+            "cycles": 2.7716535433070866,
+            "acf_at_measured_period": 0.9952058851405131,
+            "difference_over_total_energy": 0.0065770892549878715
+          },
+          "projection": {
+            "amplitude": 0.08542149902902348,
+            "variance_fraction": 0.3627956368618647
+          }
+        }
+      ],
+      "rms": 0.10519596290890457,
+      "third_rms_ratio": 1.0491512715118816,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3791
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.96800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.95600907029478,
+    "window_end_s": 37.98,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 346.03292875334785,
+    "measured_candidate_hz": 347.244094488189,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.09724245924375531,
+    "window_to_context_rms_ratio": 0.986178404466081,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 127,
+        "cycles": 8.330708661417322,
+        "acf_at_measured_period": 0.9915673212327516,
+        "difference_over_total_energy": 0.015175986935372828
+      },
+      "projection": {
+        "amplitude": 0.07892758355486128,
+        "variance_fraction": 0.3387899745817201
+      },
+      "thirds": [
+        {
+          "rms": 0.10512231404029478,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9936116790329435,
+            "difference_over_total_energy": 0.008553827162205908
+          },
+          "projection": {
+            "amplitude": 0.08527318968717201,
+            "variance_fraction": 0.3203793590926903
+          }
+        },
+        {
+          "rms": 0.09353149415985136,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9929816213171792,
+            "difference_over_total_energy": 0.008894095137015376
+          },
+          "projection": {
+            "amplitude": 0.07131003040740456,
+            "variance_fraction": 0.2929541868168772
+          }
+        },
+        {
+          "rms": 0.08824217743365308,
+          "period": {
+            "lag": 127,
+            "cycles": 2.7716535433070866,
+            "acf_at_measured_period": 0.9859429336413437,
+            "difference_over_total_energy": 0.01730317649074872
+          },
+          "projection": {
+            "amplitude": 0.07969777720685896,
+            "variance_fraction": 0.42671685594332054
+          }
+        }
+      ],
+      "rms": 0.09589841330336452,
+      "third_rms_ratio": 1.191293291910588,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3792
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.97800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.96600907029478,
+    "window_end_s": 37.99,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 346.03292875334785,
+    "measured_candidate_hz": 344.53125,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.09029465214538936,
+    "window_to_context_rms_ratio": 0.9938472490100202,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 128,
+        "cycles": 8.265625,
+        "acf_at_measured_period": 0.9880318868440456,
+        "difference_over_total_energy": 0.021704726001018724
+      },
+      "projection": {
+        "amplitude": 0.08814152264607492,
+        "variance_fraction": 0.4793500930851472
+      },
+      "thirds": [
+        {
+          "rms": 0.09303753371820153,
+          "period": {
+            "lag": 128,
+            "cycles": 2.7578125,
+            "acf_at_measured_period": 0.9902910629378269,
+            "difference_over_total_energy": 0.01247543552741872
+          },
+          "projection": {
+            "amplitude": 0.07820895071304977,
+            "variance_fraction": 0.34741866973437735
+          }
+        },
+        {
+          "rms": 0.09197970000107991,
+          "period": {
+            "lag": 128,
+            "cycles": 2.7578125,
+            "acf_at_measured_period": 0.9865181943405235,
+            "difference_over_total_energy": 0.018546809690925814
+          },
+          "projection": {
+            "amplitude": 0.09420631390421128,
+            "variance_fraction": 0.5283473192103968
+          }
+        },
+        {
+          "rms": 0.08390587811046457,
+          "period": {
+            "lag": 128,
+            "cycles": 2.75,
+            "acf_at_measured_period": 0.9871587013375027,
+            "difference_over_total_energy": 0.01705029887093512
+          },
+          "projection": {
+            "amplitude": 0.0928036107860179,
+            "variance_fraction": 0.594018818873812
+          }
+        }
+      ],
+      "rms": 0.08973909163501192,
+      "third_rms_ratio": 1.1088321320672536,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3793
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.98800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.976009070294786,
+    "window_end_s": 38.0,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 353.62209714568064,
+    "measured_candidate_hz": 344.53125,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.08492455585177777,
+    "window_to_context_rms_ratio": 0.9735981836659457,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 128,
+        "cycles": 8.265625,
+        "acf_at_measured_period": 0.983071175765484,
+        "difference_over_total_energy": 0.0296502216298841
+      },
+      "projection": {
+        "amplitude": 0.09045545522109848,
+        "variance_fraction": 0.588450740382453
+      },
+      "thirds": [
+        {
+          "rms": 0.08640914765534825,
+          "period": {
+            "lag": 128,
+            "cycles": 2.7578125,
+            "acf_at_measured_period": 0.9835911617245383,
+            "difference_over_total_energy": 0.02174688062227641
+          },
+          "projection": {
+            "amplitude": 0.085499883815971,
+            "variance_fraction": 0.4615844531665921
+          }
+        },
+        {
+          "rms": 0.08198545065213582,
+          "period": {
+            "lag": 128,
+            "cycles": 2.7578125,
+            "acf_at_measured_period": 0.9836913863986186,
+            "difference_over_total_energy": 0.020698870145848355
+          },
+          "projection": {
+            "amplitude": 0.08887105232780348,
+            "variance_fraction": 0.61587119246014
+          }
+        },
+        {
+          "rms": 0.07949537961810983,
+          "period": {
+            "lag": 128,
+            "cycles": 2.75,
+            "acf_at_measured_period": 0.9813077192890627,
+            "difference_over_total_energy": 0.023448326230223002
+          },
+          "projection": {
+            "amplitude": 0.09713379431806203,
+            "variance_fraction": 0.7079167392907184
+          }
+        }
+      ],
+      "rms": 0.082682393325928,
+      "third_rms_ratio": 1.0869706902520835,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3794
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 37.99800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.986009070294784,
+    "window_end_s": 38.01,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 353.62209714568064,
+    "measured_candidate_hz": 347.244094488189,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.07733204680017189,
+    "window_to_context_rms_ratio": 1.0478206169492488,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 127,
+        "cycles": 8.330708661417322,
+        "acf_at_measured_period": 0.9607352784899686,
+        "difference_over_total_energy": 0.06931325463871642
+      },
+      "projection": {
+        "amplitude": 0.09297370206375959,
+        "variance_fraction": 0.6475110250450457
+      },
+      "thirds": [
+        {
+          "rms": 0.08319876723008837,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9768220329651992,
+            "difference_over_total_energy": 0.029837434277260107
+          },
+          "projection": {
+            "amplitude": 0.10005594723816749,
+            "variance_fraction": 0.6779546842662089
+          }
+        },
+        {
+          "rms": 0.08410963328168321,
+          "period": {
+            "lag": 127,
+            "cycles": 2.779527559055118,
+            "acf_at_measured_period": 0.9829191017303557,
+            "difference_over_total_energy": 0.022592887663713403
+          },
+          "projection": {
+            "amplitude": 0.09818297952425711,
+            "variance_fraction": 0.7181488612840613
+          }
+        },
+        {
+          "rms": 0.07548983904894944,
+          "period": {
+            "lag": 127,
+            "cycles": 2.7716535433070866,
+            "acf_at_measured_period": 0.9054339993578553,
+            "difference_over_total_energy": 0.11602725225568139
+          },
+          "projection": {
+            "amplitude": 0.0837279724881663,
+            "variance_fraction": 0.5825757196289493
+          }
+        }
+      ],
+      "rms": 0.08103011298810428,
+      "third_rms_ratio": 1.1141848272738333,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3795
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.00800454,
+    "window_ms": 24.0,
+    "window_start_s": 37.99600907029478,
+    "window_end_s": 38.02,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 353.62209714568064,
+    "measured_candidate_hz": 355.64516129032256,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.0708600669566682,
+    "window_to_context_rms_ratio": 1.012605106966712,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 124,
+        "cycles": 8.532258064516128,
+        "acf_at_measured_period": 0.9562438328339349,
+        "difference_over_total_energy": 0.07843825692045281
+      },
+      "projection": {
+        "amplitude": 0.07589809449300296,
+        "variance_fraction": 0.5611215758617927
+      },
+      "thirds": [
+        {
+          "rms": 0.07509067851011939,
+          "period": {
+            "lag": 124,
+            "cycles": 2.846774193548387,
+            "acf_at_measured_period": 0.9322443045074418,
+            "difference_over_total_energy": 0.08039314461518147
+          },
+          "projection": {
+            "amplitude": 0.08646557706630345,
+            "variance_fraction": 0.6527253129329855
+          }
+        },
+        {
+          "rms": 0.07571739502405142,
+          "period": {
+            "lag": 124,
+            "cycles": 2.846774193548387,
+            "acf_at_measured_period": 0.9609792413214636,
+            "difference_over_total_energy": 0.05276581591970848
+          },
+          "projection": {
+            "amplitude": 0.0796490777450965,
+            "variance_fraction": 0.5747091180830155
+          }
+        },
+        {
+          "rms": 0.06380287183672163,
+          "period": {
+            "lag": 124,
+            "cycles": 2.838709677419355,
+            "acf_at_measured_period": 0.965284174193891,
+            "difference_over_total_energy": 0.04640996766621724
+          },
+          "projection": {
+            "amplitude": 0.06686040447425522,
+            "variance_fraction": 0.5727512318977086
+          }
+        }
+      ],
+      "rms": 0.07175326568032538,
+      "third_rms_ratio": 1.18673960660925,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3796
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.01800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.00600907029479,
+    "window_end_s": 38.03,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 353.62209714568064,
+    "measured_candidate_hz": 358.5365853658537,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.06236349066782017,
+    "window_to_context_rms_ratio": 1.020573040500885,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 123,
+        "cycles": 8.601626016260163,
+        "acf_at_measured_period": 0.9625856071339648,
+        "difference_over_total_energy": 0.06771053745100998
+      },
+      "projection": {
+        "amplitude": 0.06980964861555233,
+        "variance_fraction": 0.6002007147045388
+      },
+      "thirds": [
+        {
+          "rms": 0.07363892242876986,
+          "period": {
+            "lag": 123,
+            "cycles": 2.869918699186992,
+            "acf_at_measured_period": 0.965931775133744,
+            "difference_over_total_energy": 0.04826875118547687
+          },
+          "projection": {
+            "amplitude": 0.0796910606756252,
+            "variance_fraction": 0.5602901801531359
+          }
+        },
+        {
+          "rms": 0.06090496258351994,
+          "period": {
+            "lag": 123,
+            "cycles": 2.869918699186992,
+            "acf_at_measured_period": 0.9696224467588606,
+            "difference_over_total_energy": 0.04259057371915336
+          },
+          "projection": {
+            "amplitude": 0.0665295354035358,
+            "variance_fraction": 0.586707153588565
+          }
+        },
+        {
+          "rms": 0.05493266196216578,
+          "period": {
+            "lag": 123,
+            "cycles": 2.861788617886179,
+            "acf_at_measured_period": 0.9491074482030559,
+            "difference_over_total_energy": 0.06794849789019736
+          },
+          "projection": {
+            "amplitude": 0.0660406436599328,
+            "variance_fraction": 0.7523415998113184
+          }
+        }
+      ],
+      "rms": 0.0636464972871058,
+      "third_rms_ratio": 1.3405307479817343,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3797
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.02800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.016009070294785,
+    "window_end_s": 38.04,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 353.62209714568064,
+    "measured_candidate_hz": 352.8,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.05536812770390526,
+    "window_to_context_rms_ratio": 0.9481084021275363,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 125,
+        "cycles": 8.464,
+        "acf_at_measured_period": 0.9388796737297536,
+        "difference_over_total_energy": 0.10957782751347621
+      },
+      "projection": {
+        "amplitude": 0.06257879445928405,
+        "variance_fraction": 0.7117760114493926
+      },
+      "thirds": [
+        {
+          "rms": 0.058927909632367485,
+          "period": {
+            "lag": 125,
+            "cycles": 2.8240000000000003,
+            "acf_at_measured_period": 0.9432615169901339,
+            "difference_over_total_energy": 0.07602213556388994
+          },
+          "projection": {
+            "amplitude": 0.06611844984427165,
+            "variance_fraction": 0.6292358395607721
+          }
+        },
+        {
+          "rms": 0.051051866577169036,
+          "period": {
+            "lag": 125,
+            "cycles": 2.8240000000000003,
+            "acf_at_measured_period": 0.9423884410747949,
+            "difference_over_total_energy": 0.07041851942556984
+          },
+          "projection": {
+            "amplitude": 0.06335067513032573,
+            "variance_fraction": 0.7460466746736977
+          }
+        },
+        {
+          "rms": 0.04676288720082615,
+          "period": {
+            "lag": 125,
+            "cycles": 2.8160000000000003,
+            "acf_at_measured_period": 0.905685994642013,
+            "difference_over_total_energy": 0.1280266824787841
+          },
+          "projection": {
+            "amplitude": 0.0581877414672385,
+            "variance_fraction": 0.8165271415095335
+          }
+        }
+      ],
+      "rms": 0.05249498708614299,
+      "third_rms_ratio": 1.260142672100161,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3798
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.03800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.02600907029478,
+    "window_end_s": 38.05,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 358.8927388564481,
+    "measured_candidate_hz": 350.0,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.0470185406710857,
+    "window_to_context_rms_ratio": 0.983965674515755,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 126,
+        "cycles": 8.396825396825397,
+        "acf_at_measured_period": 0.9029475016886285,
+        "difference_over_total_energy": 0.17103083595551188
+      },
+      "projection": {
+        "amplitude": 0.057891140154214045,
+        "variance_fraction": 0.7891216881749528
+      },
+      "thirds": [
+        {
+          "rms": 0.05315821421748109,
+          "period": {
+            "lag": 126,
+            "cycles": 2.8015873015873014,
+            "acf_at_measured_period": 0.9460750592629812,
+            "difference_over_total_energy": 0.06930573722787724
+          },
+          "projection": {
+            "amplitude": 0.06645081511409327,
+            "variance_fraction": 0.7929701232917475
+          }
+        },
+        {
+          "rms": 0.043219804802108484,
+          "period": {
+            "lag": 126,
+            "cycles": 2.8015873015873014,
+            "acf_at_measured_period": 0.9024305270893443,
+            "difference_over_total_energy": 0.12552249238350796
+          },
+          "projection": {
+            "amplitude": 0.05680062752342055,
+            "variance_fraction": 0.8225986009280127
+          }
+        },
+        {
+          "rms": 0.04154909951319168,
+          "period": {
+            "lag": 126,
+            "cycles": 2.7936507936507935,
+            "acf_at_measured_period": 0.8219350422564479,
+            "difference_over_total_energy": 0.23084969410679881
+          },
+          "projection": {
+            "amplitude": 0.050822634699536955,
+            "variance_fraction": 0.7882289171233101
+          }
+        }
+      ],
+      "rms": 0.0462646300861713,
+      "third_rms_ratio": 1.2794071313291293,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3799
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.04800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.03600907029478,
+    "window_end_s": 38.06,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 358.8927388564481,
+    "measured_candidate_hz": 352.8,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.04264902423661827,
+    "window_to_context_rms_ratio": 0.9431794389655285,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 125,
+        "cycles": 8.464,
+        "acf_at_measured_period": 0.8329837259281161,
+        "difference_over_total_energy": 0.2975406590682429
+      },
+      "projection": {
+        "amplitude": 0.04987835544621124,
+        "variance_fraction": 0.7696328526629462
+      },
+      "thirds": [
+        {
+          "rms": 0.04195791952667134,
+          "period": {
+            "lag": 125,
+            "cycles": 2.8240000000000003,
+            "acf_at_measured_period": 0.8963911801914455,
+            "difference_over_total_energy": 0.12987370271758555
+          },
+          "projection": {
+            "amplitude": 0.053551849934685265,
+            "variance_fraction": 0.8262024492732373
+          }
+        },
+        {
+          "rms": 0.04060942170119071,
+          "period": {
+            "lag": 125,
+            "cycles": 2.8240000000000003,
+            "acf_at_measured_period": 0.7990494523946513,
+            "difference_over_total_energy": 0.25401627796830506
+          },
+          "projection": {
+            "amplitude": 0.050249881452255396,
+            "variance_fraction": 0.7365882868709057
+          }
+        },
+        {
+          "rms": 0.03800305194192776,
+          "period": {
+            "lag": 125,
+            "cycles": 2.8160000000000003,
+            "acf_at_measured_period": 0.8282158024900186,
+            "difference_over_total_energy": 0.22722693455693752
+          },
+          "projection": {
+            "amplitude": 0.047354325149075026,
+            "variance_fraction": 0.8163245587037068
+          }
+        }
+      ],
+      "rms": 0.040225682751920844,
+      "third_rms_ratio": 1.1040671046837762,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3800
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.05800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.04600907029479,
+    "window_end_s": 38.07,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 358.8927388564481,
+    "measured_candidate_hz": 358.5365853658537,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.03837814873600033,
+    "window_to_context_rms_ratio": 0.9864798451181448,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 123,
+        "cycles": 8.601626016260163,
+        "acf_at_measured_period": 0.8039801990774651,
+        "difference_over_total_energy": 0.3440819787831349
+      },
+      "projection": {
+        "amplitude": 0.04551120678691325,
+        "variance_fraction": 0.7175884061397485
+      },
+      "thirds": [
+        {
+          "rms": 0.040770831579049246,
+          "period": {
+            "lag": 123,
+            "cycles": 2.869918699186992,
+            "acf_at_measured_period": 0.7622074609932228,
+            "difference_over_total_energy": 0.31268867066979456
+          },
+          "projection": {
+            "amplitude": 0.049200986014716015,
+            "variance_fraction": 0.7342192598598111
+          }
+        },
+        {
+          "rms": 0.03548676927600903,
+          "period": {
+            "lag": 123,
+            "cycles": 2.869918699186992,
+            "acf_at_measured_period": 0.840449140813074,
+            "difference_over_total_energy": 0.2054564362098579
+          },
+          "projection": {
+            "amplitude": 0.04573425987201444,
+            "variance_fraction": 0.809741020085288
+          }
+        },
+        {
+          "rms": 0.03712472886060972,
+          "period": {
+            "lag": 123,
+            "cycles": 2.861788617886179,
+            "acf_at_measured_period": 0.8246869089492872,
+            "difference_over_total_energy": 0.24044907264750287
+          },
+          "projection": {
+            "amplitude": 0.04409056600381992,
+            "variance_fraction": 0.7330597763008602
+          }
+        }
+      ],
+      "rms": 0.03785927022101073,
+      "third_rms_ratio": 1.14890232080418,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3801
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.06800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.056009070294785,
+    "window_end_s": 38.08,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 358.8927388564481,
+    "measured_candidate_hz": 364.46280991735534,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.03675628653801585,
+    "window_to_context_rms_ratio": 0.9735105174480456,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 121,
+        "cycles": 8.743801652892563,
+        "acf_at_measured_period": 0.8357488505761408,
+        "difference_over_total_energy": 0.2918599107320648
+      },
+      "projection": {
+        "amplitude": 0.04356238331813431,
+        "variance_fraction": 0.7275193571116121
+      },
+      "thirds": [
+        {
+          "rms": 0.03437342185750664,
+          "period": {
+            "lag": 121,
+            "cycles": 2.9173553719008263,
+            "acf_at_measured_period": 0.8615564323649321,
+            "difference_over_total_energy": 0.17970551047773262
+          },
+          "projection": {
+            "amplitude": 0.04334005580459946,
+            "variance_fraction": 0.8032088430263072
+          }
+        },
+        {
+          "rms": 0.037326984913998246,
+          "period": {
+            "lag": 121,
+            "cycles": 2.9173553719008263,
+            "acf_at_measured_period": 0.7993156515925737,
+            "difference_over_total_energy": 0.2669953173765081
+          },
+          "projection": {
+            "amplitude": 0.0450561749031853,
+            "variance_fraction": 0.7080549030332853
+          }
+        },
+        {
+          "rms": 0.03558531060136276,
+          "period": {
+            "lag": 121,
+            "cycles": 2.909090909090909,
+            "acf_at_measured_period": 0.8369799158343708,
+            "difference_over_total_energy": 0.21005766841410045
+          },
+          "projection": {
+            "amplitude": 0.044454973168246134,
+            "variance_fraction": 0.7692168278206986
+          }
+        }
+      ],
+      "rms": 0.03578263152709245,
+      "third_rms_ratio": 1.0859257791888004,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3802
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.07800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.06600907029478,
+    "window_end_s": 38.09,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 358.8927388564481,
+    "measured_candidate_hz": 364.46280991735534,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.035391440450865175,
+    "window_to_context_rms_ratio": 1.0039593296595324,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 121,
+        "cycles": 8.743801652892563,
+        "acf_at_measured_period": 0.8571793463758783,
+        "difference_over_total_energy": 0.2515316159571154
+      },
+      "projection": {
+        "amplitude": 0.04301695453504538,
+        "variance_fraction": 0.7374277948988663
+      },
+      "thirds": [
+        {
+          "rms": 0.0378040806226478,
+          "period": {
+            "lag": 121,
+            "cycles": 2.9173553719008263,
+            "acf_at_measured_period": 0.8699160326427856,
+            "difference_over_total_energy": 0.17367856200580242
+          },
+          "projection": {
+            "amplitude": 0.044378119729492856,
+            "variance_fraction": 0.7089039325164692
+          }
+        },
+        {
+          "rms": 0.033984765030403756,
+          "period": {
+            "lag": 121,
+            "cycles": 2.9173553719008263,
+            "acf_at_measured_period": 0.8552997623828449,
+            "difference_over_total_energy": 0.19146299537916575
+          },
+          "projection": {
+            "amplitude": 0.042605474444149874,
+            "variance_fraction": 0.7918659498259255
+          }
+        },
+        {
+          "rms": 0.03468711548066557,
+          "period": {
+            "lag": 121,
+            "cycles": 2.909090909090909,
+            "acf_at_measured_period": 0.8637741117812973,
+            "difference_over_total_energy": 0.1767589905479738
+          },
+          "projection": {
+            "amplitude": 0.0420921727043771,
+            "variance_fraction": 0.7222958027664874
+          }
+        }
+      ],
+      "rms": 0.035531566830735856,
+      "third_rms_ratio": 1.1123831690119725,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3803
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.08800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.07600907029479,
+    "window_end_s": 38.1,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 376.44921654302266,
+    "measured_candidate_hz": 367.5,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.03541404289870246,
+    "window_to_context_rms_ratio": 0.9680999824231847,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 120,
+        "cycles": 8.816666666666666,
+        "acf_at_measured_period": 0.8495183579193836,
+        "difference_over_total_energy": 0.26649478466513904
+      },
+      "projection": {
+        "amplitude": 0.04086813633253936,
+        "variance_fraction": 0.7173146521122536
+      },
+      "thirds": [
+        {
+          "rms": 0.033331714442914856,
+          "period": {
+            "lag": 120,
+            "cycles": 2.941666666666667,
+            "acf_at_measured_period": 0.8636206665270223,
+            "difference_over_total_energy": 0.1779308439070082
+          },
+          "projection": {
+            "amplitude": 0.04155735260532169,
+            "variance_fraction": 0.7810172481871355
+          }
+        },
+        {
+          "rms": 0.034686658361922036,
+          "period": {
+            "lag": 120,
+            "cycles": 2.941666666666667,
+            "acf_at_measured_period": 0.8696226494547059,
+            "difference_over_total_energy": 0.1715691439699938
+          },
+          "projection": {
+            "amplitude": 0.04056589872747507,
+            "variance_fraction": 0.6932000559337376
+          }
+        },
+        {
+          "rms": 0.03481642484522891,
+          "period": {
+            "lag": 120,
+            "cycles": 2.933333333333333,
+            "acf_at_measured_period": 0.8533592839258298,
+            "difference_over_total_energy": 0.20505148783138077
+          },
+          "projection": {
+            "amplitude": 0.042375818751186185,
+            "variance_fraction": 0.7526891704940836
+          }
+        }
+      ],
+      "rms": 0.03428433430776776,
+      "third_rms_ratio": 1.0445434753995877,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3804
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.09800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.086009070294786,
+    "window_end_s": 38.11,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 376.44921654302266,
+    "measured_candidate_hz": 367.5,
+    "acoustic_reason": "acoustic_advantage",
+    "context_median_25ms_rms": 0.034383925734318185,
+    "window_to_context_rms_ratio": 1.0301648800944745,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 120,
+        "cycles": 8.816666666666666,
+        "acf_at_measured_period": 0.7906654955410133,
+        "difference_over_total_energy": 0.37249290844033645
+      },
+      "projection": {
+        "amplitude": 0.039403453098218806,
+        "variance_fraction": 0.6116900637032068
+      },
+      "thirds": [
+        {
+          "rms": 0.03443762331695629,
+          "period": {
+            "lag": 120,
+            "cycles": 2.941666666666667,
+            "acf_at_measured_period": 0.8265644920213436,
+            "difference_over_total_energy": 0.23920420174253715
+          },
+          "projection": {
+            "amplitude": 0.04058920851611581,
+            "variance_fraction": 0.6847412301039912
+          }
+        },
+        {
+          "rms": 0.03559769034481353,
+          "period": {
+            "lag": 120,
+            "cycles": 2.941666666666667,
+            "acf_at_measured_period": 0.8543151911449389,
+            "difference_over_total_energy": 0.18956458185703096
+          },
+          "projection": {
+            "amplitude": 0.043529659562501814,
+            "variance_fraction": 0.7376317071885312
+          }
+        },
+        {
+          "rms": 0.0362074548043356,
+          "period": {
+            "lag": 120,
+            "cycles": 2.933333333333333,
+            "acf_at_measured_period": 0.6719543800119829,
+            "difference_over_total_energy": 0.43209081710573116
+          },
+          "projection": {
+            "amplitude": 0.04335389629761567,
+            "variance_fraction": 0.7100429607354724
+          }
+        }
+      ],
+      "rms": 0.03542111273127121,
+      "third_rms_ratio": 1.051392381846162,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3805
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.10800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.096009070294784,
+    "window_end_s": 38.12,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 376.44921654302266,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "unresolved_competing_acoustics",
+    "context_median_25ms_rms": 0.033400843443823686,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3806
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.11800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.10600907029478,
+    "window_end_s": 38.13,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 376.44921654302266,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "unresolved_competing_acoustics",
+    "context_median_25ms_rms": 0.031443231845103545,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3807
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.12800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.11600907029479,
+    "window_end_s": 38.14,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 383.47881453037655,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "unresolved_competing_acoustics",
+    "context_median_25ms_rms": 0.028773545941235233,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3808
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.13800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.126009070294785,
+    "window_end_s": 38.15,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 383.47881453037655,
+    "measured_candidate_hz": 383.4782608695652,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.02514341507748707,
+    "window_to_context_rms_ratio": 1.0076195810622732,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 115,
+        "cycles": 9.2,
+        "acf_at_measured_period": 0.8056311059738365,
+        "difference_over_total_energy": 0.34325604435653484
+      },
+      "projection": {
+        "amplitude": 0.029581338556915294,
+        "variance_fraction": 0.67532732261401
+      },
+      "thirds": [
+        {
+          "rms": 0.028176591855895543,
+          "period": {
+            "lag": 115,
+            "cycles": 3.069565217391304,
+            "acf_at_measured_period": 0.7417328643759313,
+            "difference_over_total_energy": 0.34425975880892445
+          },
+          "projection": {
+            "amplitude": 0.03361873141882423,
+            "variance_fraction": 0.6971614412582634
+          }
+        },
+        {
+          "rms": 0.024427999457421808,
+          "period": {
+            "lag": 115,
+            "cycles": 3.069565217391304,
+            "acf_at_measured_period": 0.8471727714245015,
+            "difference_over_total_energy": 0.20972375235808594
+          },
+          "projection": {
+            "amplitude": 0.02879075922729933,
+            "variance_fraction": 0.6862705463363732
+          }
+        },
+        {
+          "rms": 0.023122176135613907,
+          "period": {
+            "lag": 115,
+            "cycles": 3.060869565217391,
+            "acf_at_measured_period": 0.7994369056985718,
+            "difference_over_total_energy": 0.26708874115491016
+          },
+          "projection": {
+            "amplitude": 0.026606210763246364,
+            "variance_fraction": 0.6679939596678842
+          }
+        }
+      ],
+      "rms": 0.025334997366852366,
+      "third_rms_ratio": 1.2185960218725511,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3809
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.14800454,
+    "window_ms": 24.0,
+    "window_start_s": 38.13600907029478,
+    "window_end_s": 38.16,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 383.47881453037655,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "unresolved_competing_acoustics",
+    "context_median_25ms_rms": 0.021537939428375178,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3810
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.15800454,
+    "window_ms": 96.0,
+    "window_start_s": 38.11,
+    "window_end_s": 38.20600907029478,
+    "category": "state_disagreement_review",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 383.47881453037655,
+    "measured_candidate_hz": 191.7391304347826,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.018038925733855075,
+    "window_to_context_rms_ratio": 1.1453851455005186,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 230,
+        "cycles": 18.40869565217391,
+        "acf_at_measured_period": 0.7463925354765024,
+        "difference_over_total_energy": 0.47256848409072333
+      },
+      "projection": {
+        "amplitude": 0.0003014731727279635,
+        "variance_fraction": 0.00010668844080520392
+      },
+      "thirds": [
+        {
+          "rms": 0.02939307566890553,
+          "period": {
+            "lag": 230,
+            "cycles": 6.139130434782608,
+            "acf_at_measured_period": 0.8023433172519022,
+            "difference_over_total_energy": 0.3338023617142315
+          },
+          "projection": {
+            "amplitude": 0.0010311372194599156,
+            "variance_fraction": 0.0006191312617745615
+          }
+        },
+        {
+          "rms": 0.01848678742871205,
+          "period": {
+            "lag": 230,
+            "cycles": 6.134782608695651,
+            "acf_at_measured_period": 0.6869398068098325,
+            "difference_over_total_energy": 0.5189918713206157
+          },
+          "projection": {
+            "amplitude": 0.0011246814785403408,
+            "variance_fraction": 0.0018511034119365899
+          }
+        },
+        {
+          "rms": 0.008641236650300593,
+          "period": {
+            "lag": 230,
+            "cycles": 6.134782608695651,
+            "acf_at_measured_period": 0.3401274367311678,
+            "difference_over_total_energy": 1.0890059024536647
+          },
+          "projection": {
+            "amplitude": 0.0012232844548762344,
+            "variance_fraction": 0.009854588820377763
+          }
+        }
+      ],
+      "rms": 0.020661517576344643,
+      "third_rms_ratio": 3.4014894925812573,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": {
+      "whole": {
+        "lag": 115,
+        "cycles": 36.817444460807586,
+        "acf_at_measured_period": 0.7281556928255335,
+        "difference_over_total_energy": 0.5232575298703294
+      },
+      "projection": {
+        "amplitude": 0.01949078957807118,
+        "variance_fraction": 0.44320919871542386
+      },
+      "thirds": [
+        {
+          "rms": 0.02939307566890553,
+          "period": {
+            "lag": 115,
+            "cycles": 12.278278596754914,
+            "acf_at_measured_period": 0.7794028743520768,
+            "difference_over_total_energy": 0.40651653688805856
+          },
+          "projection": {
+            "amplitude": 0.03525104016079378,
+            "variance_fraction": 0.7105097117674464
+          }
+        },
+        {
+          "rms": 0.01848678742871205,
+          "period": {
+            "lag": 115,
+            "cycles": 12.269582932026333,
+            "acf_at_measured_period": 0.6812889267154747,
+            "difference_over_total_energy": 0.580329035004362
+          },
+          "projection": {
+            "amplitude": 0.01880000936934879,
+            "variance_fraction": 0.5226469798566312
+          }
+        },
+        {
+          "rms": 0.008641236650300593,
+          "period": {
+            "lag": 115,
+            "cycles": 12.269582932026333,
+            "acf_at_measured_period": 0.2673314285796911,
+            "difference_over_total_energy": 1.3631853678149293
+          },
+          "projection": {
+            "amplitude": 0.0051241658257928455,
+            "variance_fraction": 0.17500337855680828
+          }
+        }
+      ],
+      "rms": 0.020661517576344643,
+      "third_rms_ratio": 3.4014894925812573,
+      "thirds_with_period_test": 3
+    },
+    "state_weaker_on_two_measures_review": false,
+    "trigger_only": true,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3811
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.16800454,
+    "window_ms": 96.0,
+    "window_start_s": 38.12,
+    "window_end_s": 38.21600907029478,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 383.47881453037655,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "adaptive_unresolved",
+    "context_median_25ms_rms": 0.014910278102663222,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3812
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.17800454,
+    "window_ms": 96.0,
+    "window_start_s": 38.13,
+    "window_end_s": 38.226009070294786,
+    "category": "hotspot_context",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "adaptive_unresolved",
+    "context_median_25ms_rms": 0.011968901354085616,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3813
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.18800454,
+    "window_ms": 96.0,
+    "window_start_s": 38.14,
+    "window_end_s": 38.236009070294784,
+    "category": "hotspot_context",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "adaptive_unresolved",
+    "context_median_25ms_rms": 0.00953585277445005,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3814
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.19800454,
+    "window_ms": 96.0,
+    "window_start_s": 38.15,
+    "window_end_s": 38.24600907029478,
+    "category": "hotspot_context",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "adaptive_unresolved",
+    "context_median_25ms_rms": 0.007681276155636514,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3815
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 38.20800454,
+    "window_ms": 96.0,
+    "window_start_s": 38.16,
+    "window_end_s": 38.25600907029479,
+    "category": "hotspot_context",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "adaptive_unresolved",
+    "context_median_25ms_rms": 0.0058790371149179,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 3816
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.41800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.406009070294786,
+    "window_end_s": 53.43,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 463.2314684903201,
+    "measured_candidate_hz": 469.1489361702128,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1310604135206193,
+    "window_to_context_rms_ratio": 1.4093114872052896,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 94,
+        "cycles": 11.25531914893617,
+        "acf_at_measured_period": 0.9923325397670828,
+        "difference_over_total_energy": 0.013986286671204788
+      },
+      "projection": {
+        "amplitude": 0.05608071750872499,
+        "variance_fraction": 0.04642260151882962
+      },
+      "thirds": [
+        {
+          "rms": 0.18770403123991092,
+          "period": {
+            "lag": 94,
+            "cycles": 3.75531914893617,
+            "acf_at_measured_period": 0.9867762863828516,
+            "difference_over_total_energy": 0.019601481745169805
+          },
+          "projection": {
+            "amplitude": 0.08089207817309646,
+            "variance_fraction": 0.09375589700957336
+          }
+        },
+        {
+          "rms": 0.1862111111089724,
+          "period": {
+            "lag": 94,
+            "cycles": 3.75531914893617,
+            "acf_at_measured_period": 0.9967264286489156,
+            "difference_over_total_energy": 0.004767309149240067
+          },
+          "projection": {
+            "amplitude": 0.05177741019476016,
+            "variance_fraction": 0.0374227792425877
+          }
+        },
+        {
+          "rms": 0.1800988901526864,
+          "period": {
+            "lag": 94,
+            "cycles": 3.74468085106383,
+            "acf_at_measured_period": 0.9901112271615735,
+            "difference_over_total_energy": 0.014252728058274433
+          },
+          "projection": {
+            "amplitude": 0.03634287570818794,
+            "variance_fraction": 0.021169673067933135
+          }
+        }
+      ],
+      "rms": 0.18470494629248424,
+      "third_rms_ratio": 1.042227584416411,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5337
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.42800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.416009070294784,
+    "window_end_s": 53.44,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 463.2314684903201,
+    "measured_candidate_hz": 464.2105263157895,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.13018186168657897,
+    "window_to_context_rms_ratio": 1.4200295586105776,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 95,
+        "cycles": 11.136842105263158,
+        "acf_at_measured_period": 0.9890421580581668,
+        "difference_over_total_energy": 0.019848426058267803
+      },
+      "projection": {
+        "amplitude": 0.05029378650027026,
+        "variance_fraction": 0.03708484106361973
+      },
+      "thirds": [
+        {
+          "rms": 0.18682150308514503,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9737814170935851,
+            "difference_over_total_energy": 0.03823064252038123
+          },
+          "projection": {
+            "amplitude": 0.05165637998221234,
+            "variance_fraction": 0.03831234120278276
+          }
+        },
+        {
+          "rms": 0.17835940615915205,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9954596423024592,
+            "difference_over_total_energy": 0.006502980325419622
+          },
+          "projection": {
+            "amplitude": 0.03879891259385296,
+            "variance_fraction": 0.0237763277877086
+          }
+        },
+        {
+          "rms": 0.1892412955628665,
+          "period": {
+            "lag": 95,
+            "cycles": 3.705263157894737,
+            "acf_at_measured_period": 0.9956107852710994,
+            "difference_over_total_energy": 0.006713888069191515
+          },
+          "projection": {
+            "amplitude": 0.06060597378833522,
+            "variance_fraction": 0.051949415806637506
+          }
+        }
+      ],
+      "rms": 0.184862091589896,
+      "third_rms_ratio": 1.0610110206018764,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5338
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.43800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.42600907029478,
+    "window_end_s": 53.45,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 463.2314684903201,
+    "measured_candidate_hz": 464.2105263157895,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1312374972865537,
+    "window_to_context_rms_ratio": 1.4295782859949695,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 95,
+        "cycles": 11.136842105263158,
+        "acf_at_measured_period": 0.9949684718779813,
+        "difference_over_total_energy": 0.009181196216200687
+      },
+      "projection": {
+        "amplitude": 0.049474346289211935,
+        "variance_fraction": 0.03439854858424715
+      },
+      "thirds": [
+        {
+          "rms": 0.1756512027265506,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9966138448631322,
+            "difference_over_total_energy": 0.0048068841306224686
+          },
+          "projection": {
+            "amplitude": 0.04774053481285311,
+            "variance_fraction": 0.03576025221939538
+          }
+        },
+        {
+          "rms": 0.1913652565811444,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9951261127265365,
+            "difference_over_total_energy": 0.0074328250224458894
+          },
+          "projection": {
+            "amplitude": 0.0544742920515382,
+            "variance_fraction": 0.042208042918554955
+          }
+        },
+        {
+          "rms": 0.1952732730752898,
+          "period": {
+            "lag": 95,
+            "cycles": 3.705263157894737,
+            "acf_at_measured_period": 0.9933507500769911,
+            "difference_over_total_energy": 0.009971045962129275
+          },
+          "projection": {
+            "amplitude": 0.04907075566020195,
+            "variance_fraction": 0.03089740951563683
+          }
+        }
+      ],
+      "rms": 0.1876142764291809,
+      "third_rms_ratio": 1.1117104240913531,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5339
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.44800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.43600907029479,
+    "window_end_s": 53.46,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 463.2314684903201,
+    "measured_candidate_hz": 464.2105263157895,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1253345832135817,
+    "window_to_context_rms_ratio": 1.4964015990798507,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 95,
+        "cycles": 11.136842105263158,
+        "acf_at_measured_period": 0.9921509856338375,
+        "difference_over_total_energy": 0.014289153468676253
+      },
+      "projection": {
+        "amplitude": 0.04899606293099655,
+        "variance_fraction": 0.03398885916835668
+      },
+      "thirds": [
+        {
+          "rms": 0.19213834619651202,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9949834847930603,
+            "difference_over_total_energy": 0.0075083199296592205
+          },
+          "projection": {
+            "amplitude": 0.06079069606671235,
+            "variance_fraction": 0.050515822240781987
+          }
+        },
+        {
+          "rms": 0.19173637492909296,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9918251195749163,
+            "difference_over_total_energy": 0.012489491766416515
+          },
+          "projection": {
+            "amplitude": 0.043442326119606856,
+            "variance_fraction": 0.026602251645727593
+          }
+        },
+        {
+          "rms": 0.1784279896539357,
+          "period": {
+            "lag": 95,
+            "cycles": 3.705263157894737,
+            "acf_at_measured_period": 0.9902248578497663,
+            "difference_over_total_energy": 0.014110054140575541
+          },
+          "projection": {
+            "amplitude": 0.04397702679971599,
+            "variance_fraction": 0.029595152838576638
+          }
+        }
+      ],
+      "rms": 0.18755087074081028,
+      "third_rms_ratio": 1.0768397187524659,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5340
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.45800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.446009070294785,
+    "window_end_s": 53.47,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 462.53634469570795,
+    "measured_candidate_hz": 459.375,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.12552848289921992,
+    "window_to_context_rms_ratio": 1.4758039876436864,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 96,
+        "cycles": 11.020833333333334,
+        "acf_at_measured_period": 0.9929964400692752,
+        "difference_over_total_energy": 0.012770453570865894
+      },
+      "projection": {
+        "amplitude": 0.051079828806761325,
+        "variance_fraction": 0.038080259187563636
+      },
+      "thirds": [
+        {
+          "rms": 0.18803171343311262,
+          "period": {
+            "lag": 96,
+            "cycles": 3.6770833333333335,
+            "acf_at_measured_period": 0.9948133014424619,
+            "difference_over_total_energy": 0.007887220417360815
+          },
+          "projection": {
+            "amplitude": 0.04945702146433062,
+            "variance_fraction": 0.035963115952601765
+          }
+        },
+        {
+          "rms": 0.1811967935172598,
+          "period": {
+            "lag": 96,
+            "cycles": 3.6770833333333335,
+            "acf_at_measured_period": 0.9896667849847538,
+            "difference_over_total_energy": 0.014824554772336707
+          },
+          "projection": {
+            "amplitude": 0.04505256099361103,
+            "variance_fraction": 0.029420124085328438
+          }
+        },
+        {
+          "rms": 0.18647200099683164,
+          "period": {
+            "lag": 96,
+            "cycles": 3.6666666666666665,
+            "acf_at_measured_period": 0.995340654460629,
+            "difference_over_total_energy": 0.0070745229974054046
+          },
+          "projection": {
+            "amplitude": 0.062390337042288205,
+            "variance_fraction": 0.057091932183644147
+          }
+        }
+      ],
+      "rms": 0.18525543562553104,
+      "third_rms_ratio": 1.0377209760900197,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5341
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.46800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.45600907029478,
+    "window_end_s": 53.48,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 462.53634469570795,
+    "measured_candidate_hz": 459.375,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.12684736095714022,
+    "window_to_context_rms_ratio": 1.4695156671806557,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 96,
+        "cycles": 11.020833333333334,
+        "acf_at_measured_period": 0.9932462225486404,
+        "difference_over_total_energy": 0.012263486394819466
+      },
+      "projection": {
+        "amplitude": 0.056467481930121036,
+        "variance_fraction": 0.04593426285430217
+      },
+      "thirds": [
+        {
+          "rms": 0.19070406284875496,
+          "period": {
+            "lag": 96,
+            "cycles": 3.6770833333333335,
+            "acf_at_measured_period": 0.9895555197440796,
+            "difference_over_total_energy": 0.015380361132569633
+          },
+          "projection": {
+            "amplitude": 0.05865100381466606,
+            "variance_fraction": 0.04617171732454118
+          }
+        },
+        {
+          "rms": 0.18148547064828602,
+          "period": {
+            "lag": 96,
+            "cycles": 3.6770833333333335,
+            "acf_at_measured_period": 0.998223557455005,
+            "difference_over_total_energy": 0.002787738396221424
+          },
+          "projection": {
+            "amplitude": 0.055890459187374446,
+            "variance_fraction": 0.046367684369289404
+          }
+        },
+        {
+          "rms": 0.1869092781349615,
+          "period": {
+            "lag": 96,
+            "cycles": 3.6666666666666665,
+            "acf_at_measured_period": 0.9929079059310183,
+            "difference_over_total_energy": 0.01058441727505112
+          },
+          "projection": {
+            "amplitude": 0.05568407742237657,
+            "variance_fraction": 0.04598602976036332
+          }
+        }
+      ],
+      "rms": 0.18640418426703736,
+      "third_rms_ratio": 1.050795207834209,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5342
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.47800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.46600907029478,
+    "window_end_s": 53.49,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 462.53634469570795,
+    "measured_candidate_hz": 464.2105263157895,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.12396687839919751,
+    "window_to_context_rms_ratio": 1.4770518084972724,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 95,
+        "cycles": 11.136842105263158,
+        "acf_at_measured_period": 0.9903951537504165,
+        "difference_over_total_energy": 0.017538926150830136
+      },
+      "projection": {
+        "amplitude": 0.05743438834351354,
+        "variance_fraction": 0.0487221418754216
+      },
+      "thirds": [
+        {
+          "rms": 0.18250285184482315,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9780607362440753,
+            "difference_over_total_energy": 0.032114904516876104
+          },
+          "projection": {
+            "amplitude": 0.06096320362467355,
+            "variance_fraction": 0.052959265347707576
+          }
+        },
+        {
+          "rms": 0.18240785793284106,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9925983315243244,
+            "difference_over_total_energy": 0.010653791941375097
+          },
+          "projection": {
+            "amplitude": 0.04640760063756506,
+            "variance_fraction": 0.03359727394922728
+          }
+        },
+        {
+          "rms": 0.18440256864507773,
+          "period": {
+            "lag": 95,
+            "cycles": 3.705263157894737,
+            "acf_at_measured_period": 0.9981518665751156,
+            "difference_over_total_energy": 0.0028798924585567796
+          },
+          "projection": {
+            "amplitude": 0.06669789232738785,
+            "variance_fraction": 0.06311415607618334
+          }
+        }
+      ],
+      "rms": 0.18310550193329614,
+      "third_rms_ratio": 1.0109354428852022,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5343
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.48800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.476009070294786,
+    "window_end_s": 53.5,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 462.53634469570795,
+    "measured_candidate_hz": 464.2105263157895,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.12475676589808271,
+    "window_to_context_rms_ratio": 1.4057297486543603,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 95,
+        "cycles": 11.136842105263158,
+        "acf_at_measured_period": 0.9973908640217318,
+        "difference_over_total_energy": 0.0050342849244136775
+      },
+      "projection": {
+        "amplitude": 0.06114193160325384,
+        "variance_fraction": 0.06054118117706408
+      },
+      "thirds": [
+        {
+          "rms": 0.18118320653174155,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9962992191805857,
+            "difference_over_total_energy": 0.005297712883856183
+          },
+          "projection": {
+            "amplitude": 0.044997186857474135,
+            "variance_fraction": 0.031025608737366955
+          }
+        },
+        {
+          "rms": 0.18151057752893887,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9991053547438461,
+            "difference_over_total_energy": 0.0014525083523482228
+          },
+          "projection": {
+            "amplitude": 0.07000597500845904,
+            "variance_fraction": 0.07406941778918814
+          }
+        },
+        {
+          "rms": 0.16273562204366232,
+          "period": {
+            "lag": 95,
+            "cycles": 3.705263157894737,
+            "acf_at_measured_period": 0.9967676741549846,
+            "difference_over_total_energy": 0.005265595937301519
+          },
+          "projection": {
+            "amplitude": 0.07159132508932764,
+            "variance_fraction": 0.09242859868029193
+          }
+        }
+      ],
+      "rms": 0.17537429716884267,
+      "third_rms_ratio": 1.1153709018928823,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5344
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.49800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.486009070294784,
+    "window_end_s": 53.51,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 462.53634469570795,
+    "measured_candidate_hz": 464.2105263157895,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11908259752463618,
+    "window_to_context_rms_ratio": 1.2762569955302474,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 95,
+        "cycles": 11.136842105263158,
+        "acf_at_measured_period": 0.9941955931309434,
+        "difference_over_total_energy": 0.012471255454409743
+      },
+      "projection": {
+        "amplitude": 0.06912584480901056,
+        "variance_fraction": 0.10452706817684322
+      },
+      "thirds": [
+        {
+          "rms": 0.17918870670563444,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9990642276711944,
+            "difference_over_total_energy": 0.0017651222668523961
+          },
+          "projection": {
+            "amplitude": 0.06335365921068818,
+            "variance_fraction": 0.06482521334434689
+          }
+        },
+        {
+          "rms": 0.1563487558494795,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9954301827639245,
+            "difference_over_total_energy": 0.008572745595840071
+          },
+          "projection": {
+            "amplitude": 0.06966383666116319,
+            "variance_fraction": 0.09442188952958683
+          }
+        },
+        {
+          "rms": 0.11274222008170148,
+          "period": {
+            "lag": 95,
+            "cycles": 3.705263157894737,
+            "acf_at_measured_period": 0.9790644006854549,
+            "difference_over_total_energy": 0.03379930251053519
+          },
+          "projection": {
+            "amplitude": 0.07476866877111318,
+            "variance_fraction": 0.22799937480290394
+          }
+        }
+      ],
+      "rms": 0.15197999813672985,
+      "third_rms_ratio": 1.5893664908831922,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5345
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.50800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.49600907029478,
+    "window_end_s": 53.52,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 465.51139410666747,
+    "measured_candidate_hz": 464.2105263157895,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11955915358702444,
+    "window_to_context_rms_ratio": 1.0245888791319515,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 95,
+        "cycles": 11.136842105263158,
+        "acf_at_measured_period": 0.9831492306135446,
+        "difference_over_total_energy": 0.03179445452140099
+      },
+      "projection": {
+        "amplitude": 0.08466692335127399,
+        "variance_fraction": 0.238743681747328
+      },
+      "thirds": [
+        {
+          "rms": 0.14851866204797198,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9938210649248991,
+            "difference_over_total_energy": 0.013439105889594244
+          },
+          "projection": {
+            "amplitude": 0.0642645829093546,
+            "variance_fraction": 0.09144443617345471
+          }
+        },
+        {
+          "rms": 0.10377984540285806,
+          "period": {
+            "lag": 95,
+            "cycles": 3.7157894736842105,
+            "acf_at_measured_period": 0.9763126539577022,
+            "difference_over_total_energy": 0.033810952408512764
+          },
+          "projection": {
+            "amplitude": 0.0754483491847575,
+            "variance_fraction": 0.26687902206838204
+          }
+        },
+        {
+          "rms": 0.1103718725920101,
+          "period": {
+            "lag": 95,
+            "cycles": 3.705263157894737,
+            "acf_at_measured_period": 0.9744220247010537,
+            "difference_over_total_energy": 0.038059748983091536
+          },
+          "projection": {
+            "amplitude": 0.11284683156150352,
+            "variance_fraction": 0.5291989497271065
+          }
+        }
+      ],
+      "rms": 0.1224989791636942,
+      "third_rms_ratio": 1.4310934986600186,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5346
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.51800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.50600907029479,
+    "window_end_s": 53.53,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 465.51139410666747,
+    "measured_candidate_hz": 469.1489361702128,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.12379022419476148,
+    "window_to_context_rms_ratio": 0.8983025945395534,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 94,
+        "cycles": 11.25531914893617,
+        "acf_at_measured_period": 0.9858922115786788,
+        "difference_over_total_energy": 0.025780218658065495
+      },
+      "projection": {
+        "amplitude": 0.11738702237729055,
+        "variance_fraction": 0.5499290656010718
+      },
+      "thirds": [
+        {
+          "rms": 0.10129646332359143,
+          "period": {
+            "lag": 94,
+            "cycles": 3.75531914893617,
+            "acf_at_measured_period": 0.9820837508905562,
+            "difference_over_total_energy": 0.02529690091799904
+          },
+          "projection": {
+            "amplitude": 0.08421485332370493,
+            "variance_fraction": 0.3366362772219561
+          }
+        },
+        {
+          "rms": 0.11262817626338115,
+          "period": {
+            "lag": 94,
+            "cycles": 3.75531914893617,
+            "acf_at_measured_period": 0.9896526191087085,
+            "difference_over_total_energy": 0.01597277570021929
+          },
+          "projection": {
+            "amplitude": 0.11668316181961168,
+            "variance_fraction": 0.5588189624340618
+          }
+        },
+        {
+          "rms": 0.11897912650602795,
+          "period": {
+            "lag": 94,
+            "cycles": 3.74468085106383,
+            "acf_at_measured_period": 0.9826629968728129,
+            "difference_over_total_energy": 0.02536163656404412
+          },
+          "projection": {
+            "amplitude": 0.15358725270323675,
+            "variance_fraction": 0.7994410224286241
+          }
+        }
+      ],
+      "rms": 0.11120107957278723,
+      "third_rms_ratio": 1.1745634803255596,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5347
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.52800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.516009070294785,
+    "window_end_s": 53.54,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 465.51139410666747,
+    "measured_candidate_hz": 469.1489361702128,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11587660390910667,
+    "window_to_context_rms_ratio": 1.0933162543266994,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 94,
+        "cycles": 11.25531914893617,
+        "acf_at_measured_period": 0.9878210797848826,
+        "difference_over_total_energy": 0.022610012015220025
+      },
+      "projection": {
+        "amplitude": 0.16011275271438102,
+        "variance_fraction": 0.8080391085988446
+      },
+      "thirds": [
+        {
+          "rms": 0.1149222415683561,
+          "period": {
+            "lag": 94,
+            "cycles": 3.75531914893617,
+            "acf_at_measured_period": 0.9901381793645239,
+            "difference_over_total_energy": 0.014955017764527283
+          },
+          "projection": {
+            "amplitude": 0.12433767382369332,
+            "variance_fraction": 0.6059560120872332
+          }
+        },
+        {
+          "rms": 0.12283322061559071,
+          "period": {
+            "lag": 94,
+            "cycles": 3.75531914893617,
+            "acf_at_measured_period": 0.9810585565570863,
+            "difference_over_total_energy": 0.027949527575558793
+          },
+          "projection": {
+            "amplitude": 0.16382637276757364,
+            "variance_fraction": 0.8562671493673653
+          }
+        },
+        {
+          "rms": 0.1409488781253405,
+          "period": {
+            "lag": 94,
+            "cycles": 3.74468085106383,
+            "acf_at_measured_period": 0.990911281256209,
+            "difference_over_total_energy": 0.013905743749348618
+          },
+          "projection": {
+            "amplitude": 0.1924685366730244,
+            "variance_fraction": 0.9686503161709831
+          }
+        }
+      ],
+      "rms": 0.12668977455000308,
+      "third_rms_ratio": 1.2264717099300892,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5348
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.53800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.52600907029478,
+    "window_end_s": 53.55,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 465.51139410666747,
+    "measured_candidate_hz": 469.1489361702128,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11554298462793233,
+    "window_to_context_rms_ratio": 1.0486480526064783,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 94,
+        "cycles": 11.25531914893617,
+        "acf_at_measured_period": 0.9809994048086801,
+        "difference_over_total_energy": 0.03653655036536164
+      },
+      "projection": {
+        "amplitude": 0.16248068774259475,
+        "variance_fraction": 0.8965306213210379
+      },
+      "thirds": [
+        {
+          "rms": 0.12892365851796714,
+          "period": {
+            "lag": 94,
+            "cycles": 3.75531914893617,
+            "acf_at_measured_period": 0.9830674985459203,
+            "difference_over_total_energy": 0.02577412224653959
+          },
+          "projection": {
+            "amplitude": 0.17397358000028235,
+            "variance_fraction": 0.9006173758074264
+          }
+        },
+        {
+          "rms": 0.13592247401803517,
+          "period": {
+            "lag": 94,
+            "cycles": 3.75531914893617,
+            "acf_at_measured_period": 0.9919499008659597,
+            "difference_over_total_energy": 0.013440765225302447
+          },
+          "projection": {
+            "amplitude": 0.18765238818297897,
+            "variance_fraction": 0.9693779366382665
+          }
+        },
+        {
+          "rms": 0.09449640177735232,
+          "period": {
+            "lag": 94,
+            "cycles": 3.74468085106383,
+            "acf_at_measured_period": 0.9606890238016795,
+            "difference_over_total_energy": 0.07079382306819795
+          },
+          "projection": {
+            "amplitude": 0.1275396389445181,
+            "variance_fraction": 0.917309894881045
+          }
+        }
+      ],
+      "rms": 0.1211639258224215,
+      "third_rms_ratio": 1.4383878270655097,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5349
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.54800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.53600907029478,
+    "window_end_s": 53.56,
+    "category": "baseline_unvoiced_review",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": 454.63917525773195,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1172508581411691,
+    "window_to_context_rms_ratio": 0.7731677921018928,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 97,
+        "cycles": 10.90721649484536,
+        "acf_at_measured_period": 0.9248677569145072,
+        "difference_over_total_energy": 0.1413560447620742
+      },
+      "projection": {
+        "amplitude": 0.09852943691156898,
+        "variance_fraction": 0.5960021459748964
+      },
+      "thirds": [
+        {
+          "rms": 0.1270361531566289,
+          "period": {
+            "lag": 97,
+            "cycles": 3.6391752577319587,
+            "acf_at_measured_period": 0.9641649621171243,
+            "difference_over_total_energy": 0.054794787583510765
+          },
+          "projection": {
+            "amplitude": 0.1766375045870167,
+            "variance_fraction": 0.9474977057074248
+          }
+        },
+        {
+          "rms": 0.08198753273241706,
+          "period": {
+            "lag": 97,
+            "cycles": 3.6391752577319587,
+            "acf_at_measured_period": 0.9550632485396301,
+            "difference_over_total_energy": 0.09320534221102621
+          },
+          "projection": {
+            "amplitude": 0.10830781432752386,
+            "variance_fraction": 0.9010676529773306
+          }
+        },
+        {
+          "rms": 0.04214704980891139,
+          "period": {
+            "lag": 97,
+            "cycles": 3.6288659793814433,
+            "acf_at_measured_period": 0.36873872770997557,
+            "difference_over_total_energy": 0.8286411700110639
+          },
+          "projection": {
+            "amplitude": 0.025443053060877515,
+            "variance_fraction": 0.18745985436796733
+          }
+        }
+      ],
+      "rms": 0.09065458711105996,
+      "third_rms_ratio": 3.0141173280832794,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5350
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.55800454,
+    "window_ms": 64.0,
+    "window_start_s": 53.52600907029478,
+    "window_end_s": 53.59,
+    "category": "baseline_unvoiced_review",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": 469.1489361702128,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.1139005425814117,
+    "window_to_context_rms_ratio": 0.7445145324356331,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 94,
+        "cycles": 30.021276595744684,
+        "acf_at_measured_period": 0.7928252718170614,
+        "difference_over_total_energy": 0.3977336963923557
+      },
+      "projection": {
+        "amplitude": 0.06908490469574437,
+        "variance_fraction": 0.33208187857903854
+      },
+      "thirds": [
+        {
+          "rms": 0.12537452441537864,
+          "period": {
+            "lag": 94,
+            "cycles": 10.01063829787234,
+            "acf_at_measured_period": 0.9833749030678921,
+            "difference_over_total_energy": 0.03126578926793731
+          },
+          "projection": {
+            "amplitude": 0.1700951461093476,
+            "variance_fraction": 0.9213697565672035
+          }
+        },
+        {
+          "rms": 0.05165173693722793,
+          "period": {
+            "lag": 94,
+            "cycles": 10.01063829787234,
+            "acf_at_measured_period": 0.418712849093265,
+            "difference_over_total_energy": 0.9520262312890956
+          },
+          "projection": {
+            "amplitude": 0.025591982696174912,
+            "variance_fraction": 0.12285862720591131
+          }
+        },
+        {
+          "rms": 0.05641362138146054,
+          "period": {
+            "lag": 94,
+            "cycles": 10.0,
+            "acf_at_measured_period": 0.256714266545522,
+            "difference_over_total_energy": 1.3181592694297228
+          },
+          "projection": {
+            "amplitude": 0.01939661744210986,
+            "variance_fraction": 0.05910929888216032
+          }
+        }
+      ],
+      "rms": 0.08480060920416466,
+      "third_rms_ratio": 2.4273050985244815,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5351
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.56800454,
+    "window_ms": 96.0,
+    "window_start_s": 53.52,
+    "window_end_s": 53.61600907029479,
+    "category": "baseline_unvoiced_review",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": 464.2105263157895,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11677812531421776,
+    "window_to_context_rms_ratio": 0.6829340123109411,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 95,
+        "cycles": 44.56842105263158,
+        "acf_at_measured_period": 0.7572585672912747,
+        "difference_over_total_energy": 0.47158213798581095
+      },
+      "projection": {
+        "amplitude": 0.05526211226721474,
+        "variance_fraction": 0.23982605906846924
+      },
+      "thirds": [
+        {
+          "rms": 0.11745235650775132,
+          "period": {
+            "lag": 95,
+            "cycles": 14.863157894736842,
+            "acf_at_measured_period": 0.9720129667658616,
+            "difference_over_total_energy": 0.05438530188014596
+          },
+          "projection": {
+            "amplitude": 0.1508864656822543,
+            "variance_fraction": 0.8305209416277654
+          }
+        },
+        {
+          "rms": 0.05270353320878195,
+          "period": {
+            "lag": 95,
+            "cycles": 14.852631578947369,
+            "acf_at_measured_period": 0.14893178660794584,
+            "difference_over_total_energy": 1.6117311382920534
+          },
+          "projection": {
+            "amplitude": 0.010862142691361303,
+            "variance_fraction": 0.021294562494339638
+          }
+        },
+        {
+          "rms": 0.050030381461131805,
+          "period": {
+            "lag": 95,
+            "cycles": 14.852631578947369,
+            "acf_at_measured_period": 0.25427999077440355,
+            "difference_over_total_energy": 1.37444876226399
+          },
+          "projection": {
+            "amplitude": 0.013206524084864875,
+            "variance_fraction": 0.034789572851713114
+          }
+        }
+      ],
+      "rms": 0.0797517536709886,
+      "third_rms_ratio": 2.347620647246096,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5352
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.57800454,
+    "window_ms": 96.0,
+    "window_start_s": 53.53,
+    "window_end_s": 53.626009070294785,
+    "category": "hotspot_context",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "adaptive_unresolved",
+    "context_median_25ms_rms": 0.11589718060119983,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5353
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.58800454,
+    "window_ms": 96.0,
+    "window_start_s": 53.54,
+    "window_end_s": 53.63600907029478,
+    "category": "hotspot_context",
+    "baseline_voiced": false,
+    "baseline_f0_hz": null,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "adaptive_unresolved",
+    "context_median_25ms_rms": 0.11561778230346699,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5354
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.59800454,
+    "window_ms": 96.0,
+    "window_start_s": 53.55,
+    "window_end_s": 53.64600907029479,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 401.27803593019064,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "adaptive_unresolved",
+    "context_median_25ms_rms": 0.11729157584804012,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5355
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.60800454,
+    "window_ms": 96.0,
+    "window_start_s": 53.56,
+    "window_end_s": 53.656009070294786,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 401.27803593019064,
+    "measured_candidate_hz": 412.14953271028037,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11190373877462198,
+    "window_to_context_rms_ratio": 0.7542431885826062,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 107,
+        "cycles": 39.57009345794392,
+        "acf_at_measured_period": 0.7609496784313486,
+        "difference_over_total_energy": 0.46242565960675536
+      },
+      "projection": {
+        "amplitude": 0.04910522085002576,
+        "variance_fraction": 0.1690912961279569
+      },
+      "thirds": [
+        {
+          "rms": 0.05374047216784949,
+          "period": {
+            "lag": 107,
+            "cycles": 13.19626168224299,
+            "acf_at_measured_period": 0.03210485307599282,
+            "difference_over_total_energy": 1.8435719961844497
+          },
+          "projection": {
+            "amplitude": 0.006036558306838353,
+            "variance_fraction": 0.00637619822351655
+          }
+        },
+        {
+          "rms": 0.06249428887167674,
+          "period": {
+            "lag": 107,
+            "cycles": 13.186915887850466,
+            "acf_at_measured_period": 0.5949213669617731,
+            "difference_over_total_energy": 0.7230508510056431
+          },
+          "projection": {
+            "amplitude": 0.03228637499792938,
+            "variance_fraction": 0.13251833497462154
+          }
+        },
+        {
+          "rms": 0.12075115202009788,
+          "period": {
+            "lag": 107,
+            "cycles": 13.186915887850466,
+            "acf_at_measured_period": 0.9542052471514042,
+            "difference_over_total_energy": 0.08495052779353904
+          },
+          "projection": {
+            "amplitude": 0.11930068282218373,
+            "variance_fraction": 0.48263335800988544
+          }
+        }
+      ],
+      "rms": 0.0844026327476859,
+      "third_rms_ratio": 2.2469313563705136,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5356
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.61800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.60600907029478,
+    "window_end_s": 53.63,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 401.27803593019064,
+    "measured_candidate_hz": 393.75,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11679332158739579,
+    "window_to_context_rms_ratio": 0.7015723942214367,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 112,
+        "cycles": 9.446428571428571,
+        "acf_at_measured_period": 0.9457342122387743,
+        "difference_over_total_energy": 0.10378606162147078
+      },
+      "projection": {
+        "amplitude": 0.09937916254850072,
+        "variance_fraction": 0.7326226783846166
+      },
+      "thirds": [
+        {
+          "rms": 0.045001745401824174,
+          "period": {
+            "lag": 112,
+            "cycles": 3.1517857142857144,
+            "acf_at_measured_period": 0.6744205871251819,
+            "difference_over_total_energy": 0.41362366816107915
+          },
+          "projection": {
+            "amplitude": 0.050238834389073665,
+            "variance_fraction": 0.6055924197384213
+          }
+        },
+        {
+          "rms": 0.0783423099873508,
+          "period": {
+            "lag": 112,
+            "cycles": 3.1517857142857144,
+            "acf_at_measured_period": 0.9510494686532955,
+            "difference_over_total_energy": 0.07636397818538038
+          },
+          "projection": {
+            "amplitude": 0.10770385763868509,
+            "variance_fraction": 0.9087884290447219
+          }
+        },
+        {
+          "rms": 0.1095183463968607,
+          "period": {
+            "lag": 112,
+            "cycles": 3.142857142857143,
+            "acf_at_measured_period": 0.977933320192201,
+            "difference_over_total_energy": 0.03488884278113209
+          },
+          "projection": {
+            "amplitude": 0.14185440974339902,
+            "variance_fraction": 0.8720984526814369
+          }
+        }
+      ],
+      "rms": 0.08193897025514348,
+      "third_rms_ratio": 2.433646637901767,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5357
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.62800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.61600907029479,
+    "window_end_s": 53.64,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 401.27803593019064,
+    "measured_candidate_hz": 404.58715596330273,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11390655851278259,
+    "window_to_context_rms_ratio": 0.9283875850404063,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 109,
+        "cycles": 9.706422018348624,
+        "acf_at_measured_period": 0.9498023296724143,
+        "difference_over_total_energy": 0.09266661621506779
+      },
+      "projection": {
+        "amplitude": 0.1268241654406038,
+        "variance_fraction": 0.7285018810598396
+      },
+      "thirds": [
+        {
+          "rms": 0.08846880395911595,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2385321100917426,
+            "acf_at_measured_period": 0.9312352631165334,
+            "difference_over_total_energy": 0.10079116835859274
+          },
+          "projection": {
+            "amplitude": 0.11867619060237687,
+            "variance_fraction": 0.9243595036703824
+          }
+        },
+        {
+          "rms": 0.1086372705793769,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2385321100917426,
+            "acf_at_measured_period": 0.9351462259249779,
+            "difference_over_total_energy": 0.08900534594583799
+          },
+          "projection": {
+            "amplitude": 0.14253824606199164,
+            "variance_fraction": 0.8203875962773723
+          }
+        },
+        {
+          "rms": 0.11801618061591615,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2293577981651373,
+            "acf_at_measured_period": 0.963891140529486,
+            "difference_over_total_energy": 0.05071646429481746
+          },
+          "projection": {
+            "amplitude": 0.1272390336330647,
+            "variance_fraction": 0.6001815881310861
+          }
+        }
+      ],
+      "rms": 0.10574943477794596,
+      "third_rms_ratio": 1.3339863922027804,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5358
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.63800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.626009070294785,
+    "window_end_s": 53.65,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 401.27803593019064,
+    "measured_candidate_hz": 408.3333333333333,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11570748730579396,
+    "window_to_context_rms_ratio": 1.0371079509869023,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 108,
+        "cycles": 9.796296296296296,
+        "acf_at_measured_period": 0.9596070316967787,
+        "difference_over_total_energy": 0.07250768430704234
+      },
+      "projection": {
+        "amplitude": 0.11797547326364276,
+        "variance_fraction": 0.4799294141854331
+      },
+      "thirds": [
+        {
+          "rms": 0.1149948867463612,
+          "period": {
+            "lag": 108,
+            "cycles": 3.268518518518518,
+            "acf_at_measured_period": 0.9230760062287706,
+            "difference_over_total_energy": 0.1071202409796564
+          },
+          "projection": {
+            "amplitude": 0.14336160221482364,
+            "variance_fraction": 0.7873652581270746
+          }
+        },
+        {
+          "rms": 0.11630477223112212,
+          "period": {
+            "lag": 108,
+            "cycles": 3.268518518518518,
+            "acf_at_measured_period": 0.9779817105056462,
+            "difference_over_total_energy": 0.03110504394077663
+          },
+          "projection": {
+            "amplitude": 0.11482281106233598,
+            "variance_fraction": 0.49585324993825497
+          }
+        },
+        {
+          "rms": 0.12828106368976025,
+          "period": {
+            "lag": 108,
+            "cycles": 3.2592592592592586,
+            "acf_at_measured_period": 0.9665069285682124,
+            "difference_over_total_energy": 0.04685847712717547
+          },
+          "projection": {
+            "amplitude": 0.11065033727083912,
+            "variance_fraction": 0.35399469726361865
+          }
+        }
+      ],
+      "rms": 0.120001155073555,
+      "third_rms_ratio": 1.1155371105560872,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5359
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.64800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.63600907029478,
+    "window_end_s": 53.66,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 413.2325667676859,
+    "measured_candidate_hz": 412.14953271028037,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11736702314372899,
+    "window_to_context_rms_ratio": 1.0795120083321774,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 107,
+        "cycles": 9.88785046728972,
+        "acf_at_measured_period": 0.9899629012926928,
+        "difference_over_total_energy": 0.018315302999539842
+      },
+      "projection": {
+        "amplitude": 0.10851553753143396,
+        "variance_fraction": 0.36399437124027795
+      },
+      "thirds": [
+        {
+          "rms": 0.11401776154421105,
+          "period": {
+            "lag": 107,
+            "cycles": 3.2990654205607477,
+            "acf_at_measured_period": 0.983460244696169,
+            "difference_over_total_energy": 0.022775631815658854
+          },
+          "projection": {
+            "amplitude": 0.11336413949872516,
+            "variance_fraction": 0.471726124374413
+          }
+        },
+        {
+          "rms": 0.13179267933662517,
+          "period": {
+            "lag": 107,
+            "cycles": 3.2990654205607477,
+            "acf_at_measured_period": 0.9947996714402647,
+            "difference_over_total_energy": 0.007741793071868793
+          },
+          "projection": {
+            "amplitude": 0.1031604172843795,
+            "variance_fraction": 0.3132310018596018
+          }
+        },
+        {
+          "rms": 0.13339252429860596,
+          "period": {
+            "lag": 107,
+            "cycles": 3.289719626168224,
+            "acf_at_measured_period": 0.9896855414857302,
+            "difference_over_total_energy": 0.014814615870687498
+          },
+          "projection": {
+            "amplitude": 0.10995849360922981,
+            "variance_fraction": 0.33969658057506924
+          }
+        }
+      ],
+      "rms": 0.12669911086585603,
+      "third_rms_ratio": 1.1699275840184096,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5360
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.65800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.64600907029479,
+    "window_end_s": 53.67,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 413.2325667676859,
+    "measured_candidate_hz": 412.14953271028037,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11193323632706913,
+    "window_to_context_rms_ratio": 1.1462793142949106,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 107,
+        "cycles": 9.88785046728972,
+        "acf_at_measured_period": 0.9879809195835161,
+        "difference_over_total_energy": 0.021626442166290786
+      },
+      "projection": {
+        "amplitude": 0.09479923227523136,
+        "variance_fraction": 0.2750375650023509
+      },
+      "thirds": [
+        {
+          "rms": 0.12753019736031887,
+          "period": {
+            "lag": 107,
+            "cycles": 3.2990654205607477,
+            "acf_at_measured_period": 0.9922289559960491,
+            "difference_over_total_energy": 0.010681460735398086
+          },
+          "projection": {
+            "amplitude": 0.09590322748810358,
+            "variance_fraction": 0.28379160675449905
+          }
+        },
+        {
+          "rms": 0.13120999811694364,
+          "period": {
+            "lag": 107,
+            "cycles": 3.2990654205607477,
+            "acf_at_measured_period": 0.9902687822395088,
+            "difference_over_total_energy": 0.014171690182254065
+          },
+          "projection": {
+            "amplitude": 0.10872445845366874,
+            "variance_fraction": 0.3320693848578204
+          }
+        },
+        {
+          "rms": 0.12612009355771475,
+          "period": {
+            "lag": 107,
+            "cycles": 3.289719626168224,
+            "acf_at_measured_period": 0.9856123800147367,
+            "difference_over_total_energy": 0.020365377092980728
+          },
+          "projection": {
+            "amplitude": 0.08168406163985907,
+            "variance_fraction": 0.21752003794689906
+          }
+        }
+      ],
+      "rms": 0.12830675338380299,
+      "third_rms_ratio": 1.0403576021524252,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5361
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.66800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.656009070294786,
+    "window_end_s": 53.68,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 413.2325667676859,
+    "measured_candidate_hz": 408.3333333333333,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11674302450819507,
+    "window_to_context_rms_ratio": 1.0825675052281107,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 108,
+        "cycles": 9.796296296296296,
+        "acf_at_measured_period": 0.9882906253451873,
+        "difference_over_total_energy": 0.02100612059505454
+      },
+      "projection": {
+        "amplitude": 0.07910599563800973,
+        "variance_fraction": 0.19836414695460322
+      },
+      "thirds": [
+        {
+          "rms": 0.12873501099535473,
+          "period": {
+            "lag": 108,
+            "cycles": 3.268518518518518,
+            "acf_at_measured_period": 0.9709626826264861,
+            "difference_over_total_energy": 0.041010726221251514
+          },
+          "projection": {
+            "amplitude": 0.09484983264466913,
+            "variance_fraction": 0.2833701386928882
+          }
+        },
+        {
+          "rms": 0.12581166194786114,
+          "period": {
+            "lag": 108,
+            "cycles": 3.268518518518518,
+            "acf_at_measured_period": 0.9952592258778508,
+            "difference_over_total_energy": 0.006727138142168642
+          },
+          "projection": {
+            "amplitude": 0.0823723723937272,
+            "variance_fraction": 0.20715671143409164
+          }
+        },
+        {
+          "rms": 0.12455846526060081,
+          "period": {
+            "lag": 108,
+            "cycles": 3.2592592592592586,
+            "acf_at_measured_period": 0.9969042874569004,
+            "difference_over_total_energy": 0.004289416667739841
+          },
+          "projection": {
+            "amplitude": 0.06337703791024436,
+            "variance_fraction": 0.13027977188368228
+          }
+        }
+      ],
+      "rms": 0.12638220479462092,
+      "third_rms_ratio": 1.0335308060035564,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5362
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.67800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.666009070294784,
+    "window_end_s": 53.69,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 413.2325667676859,
+    "measured_candidate_hz": 408.3333333333333,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11391438493195002,
+    "window_to_context_rms_ratio": 1.1006287438674975,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 108,
+        "cycles": 9.796296296296296,
+        "acf_at_measured_period": 0.9954649335077519,
+        "difference_over_total_energy": 0.008224870870443296
+      },
+      "projection": {
+        "amplitude": 0.07221693418568312,
+        "variance_fraction": 0.16511428506457318
+      },
+      "thirds": [
+        {
+          "rms": 0.12968435996675884,
+          "period": {
+            "lag": 108,
+            "cycles": 3.268518518518518,
+            "acf_at_measured_period": 0.99548083701691,
+            "difference_over_total_energy": 0.006539356854336164
+          },
+          "projection": {
+            "amplitude": 0.07986599205578453,
+            "variance_fraction": 0.19225324769750377
+          }
+        },
+        {
+          "rms": 0.12815778127803373,
+          "period": {
+            "lag": 108,
+            "cycles": 3.268518518518518,
+            "acf_at_measured_period": 0.9977267479215486,
+            "difference_over_total_energy": 0.003187099262558764
+          },
+          "projection": {
+            "amplitude": 0.07622116328139297,
+            "variance_fraction": 0.18078451607025522
+          }
+        },
+        {
+          "rms": 0.11794464234362759,
+          "period": {
+            "lag": 108,
+            "cycles": 3.2592592592592586,
+            "acf_at_measured_period": 0.9907035689558338,
+            "difference_over_total_energy": 0.01284423082113198
+          },
+          "projection": {
+            "amplitude": 0.05986614645744677,
+            "variance_fraction": 0.12460063102954903
+          }
+        }
+      ],
+      "rms": 0.12537744639609075,
+      "third_rms_ratio": 1.0995358279092322,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5363
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.68800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.67600907029478,
+    "window_end_s": 53.7,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 404.2694946941393,
+    "measured_candidate_hz": 404.58715596330273,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11580215518445935,
+    "window_to_context_rms_ratio": 1.0354807529409673,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 109,
+        "cycles": 9.706422018348624,
+        "acf_at_measured_period": 0.99370056766135,
+        "difference_over_total_energy": 0.011537379160203781
+      },
+      "projection": {
+        "amplitude": 0.06654597959460869,
+        "variance_fraction": 0.15160025542879643
+      },
+      "thirds": [
+        {
+          "rms": 0.12777607399101065,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2385321100917426,
+            "acf_at_measured_period": 0.9878424445398947,
+            "difference_over_total_energy": 0.017126499379350176
+          },
+          "projection": {
+            "amplitude": 0.07556372590451776,
+            "variance_fraction": 0.16814458627256534
+          }
+        },
+        {
+          "rms": 0.12106757914788656,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2385321100917426,
+            "acf_at_measured_period": 0.9971498587601672,
+            "difference_over_total_energy": 0.004362873047103685
+          },
+          "projection": {
+            "amplitude": 0.07042900828577205,
+            "variance_fraction": 0.1766223466633372
+          }
+        },
+        {
+          "rms": 0.1102064599818549,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2293577981651373,
+            "acf_at_measured_period": 0.9967721959590536,
+            "difference_over_total_energy": 0.0045241947850886656
+          },
+          "projection": {
+            "amplitude": 0.054342502921053346,
+            "variance_fraction": 0.11612666928702395
+          }
+        }
+      ],
+      "rms": 0.1199109028425907,
+      "third_rms_ratio": 1.1594245383804953,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5364
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.69800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.68600907029479,
+    "window_end_s": 53.71,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 404.2694946941393,
+    "measured_candidate_hz": 404.58715596330273,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11745200010640106,
+    "window_to_context_rms_ratio": 0.9355061440567697,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 109,
+        "cycles": 9.706422018348624,
+        "acf_at_measured_period": 0.9967026604329235,
+        "difference_over_total_energy": 0.006318606985581872
+      },
+      "projection": {
+        "amplitude": 0.05872106066403102,
+        "variance_fraction": 0.140423006768036
+      },
+      "thirds": [
+        {
+          "rms": 0.11458170918479511,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2385321100917426,
+            "acf_at_measured_period": 0.9962021811853142,
+            "difference_over_total_energy": 0.005607333225120451
+          },
+          "projection": {
+            "amplitude": 0.06424731708195286,
+            "variance_fraction": 0.14997627486883017
+          }
+        },
+        {
+          "rms": 0.11320244637382905,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2385321100917426,
+            "acf_at_measured_period": 0.9972820204421097,
+            "difference_over_total_energy": 0.003938161690440383
+          },
+          "projection": {
+            "amplitude": 0.05956777934147204,
+            "variance_fraction": 0.14456660697962032
+          }
+        },
+        {
+          "rms": 0.10134120902338993,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2293577981651373,
+            "acf_at_measured_period": 0.9965897444539553,
+            "difference_over_total_energy": 0.005419755898850664
+          },
+          "projection": {
+            "amplitude": 0.05178442659756065,
+            "variance_fraction": 0.1242452183958118
+          }
+        }
+      ],
+      "rms": 0.10987706773129455,
+      "third_rms_ratio": 1.130652676132463,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5365
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.70800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.696009070294785,
+    "window_end_s": 53.72,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 404.2694946941393,
+    "measured_candidate_hz": 404.58715596330273,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11196812905935495,
+    "window_to_context_rms_ratio": 0.8854346756599967,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 109,
+        "cycles": 9.706422018348624,
+        "acf_at_measured_period": 0.9919373605609473,
+        "difference_over_total_energy": 0.01518533586682345
+      },
+      "projection": {
+        "amplitude": 0.057010362986872766,
+        "variance_fraction": 0.16307489669678032
+      },
+      "thirds": [
+        {
+          "rms": 0.10796107798387156,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2385321100917426,
+            "acf_at_measured_period": 0.9969448323360217,
+            "difference_over_total_energy": 0.004382825607133261
+          },
+          "projection": {
+            "amplitude": 0.056754210167200725,
+            "variance_fraction": 0.13325072132818766
+          }
+        },
+        {
+          "rms": 0.10142026831914726,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2385321100917426,
+            "acf_at_measured_period": 0.9950693559228978,
+            "difference_over_total_energy": 0.008056349618284466
+          },
+          "projection": {
+            "amplitude": 0.05728838862701265,
+            "variance_fraction": 0.16501775556963594
+          }
+        },
+        {
+          "rms": 0.08682362006763948,
+          "period": {
+            "lag": 109,
+            "cycles": 3.2293577981651373,
+            "acf_at_measured_period": 0.9801287730206714,
+            "difference_over_total_energy": 0.027469327580193822
+          },
+          "projection": {
+            "amplitude": 0.05685982659677517,
+            "variance_fraction": 0.20476415863411856
+          }
+        }
+      ],
+      "rms": 0.0991404640379266,
+      "third_rms_ratio": 1.2434528518825299,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5366
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.71800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.70600907029478,
+    "window_end_s": 53.73,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 404.2694946941393,
+    "measured_candidate_hz": 408.3333333333333,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.11670826423019864,
+    "window_to_context_rms_ratio": 0.6929299758613027,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 108,
+        "cycles": 9.796296296296296,
+        "acf_at_measured_period": 0.977728483659442,
+        "difference_over_total_energy": 0.04628513819676421
+      },
+      "projection": {
+        "amplitude": 0.049590528916046164,
+        "variance_fraction": 0.18681434533632674
+      },
+      "thirds": [
+        {
+          "rms": 0.09898039279730717,
+          "period": {
+            "lag": 108,
+            "cycles": 3.268518518518518,
+            "acf_at_measured_period": 0.9886107908592406,
+            "difference_over_total_energy": 0.01714759791730688
+          },
+          "projection": {
+            "amplitude": 0.06218465246702944,
+            "variance_fraction": 0.19465373016718024
+          }
+        },
+        {
+          "rms": 0.08288381068076682,
+          "period": {
+            "lag": 108,
+            "cycles": 3.268518518518518,
+            "acf_at_measured_period": 0.9921347496085844,
+            "difference_over_total_energy": 0.012063284641798538
+          },
+          "projection": {
+            "amplitude": 0.05836038902137824,
+            "variance_fraction": 0.2503942761197107
+          }
+        },
+        {
+          "rms": 0.05425084893008711,
+          "period": {
+            "lag": 108,
+            "cycles": 3.2592592592592586,
+            "acf_at_measured_period": 0.9023880360488798,
+            "difference_over_total_energy": 0.19550947911867275
+          },
+          "projection": {
+            "amplitude": 0.03158199166688768,
+            "variance_fraction": 0.16247501735901634
+          }
+        }
+      ],
+      "rms": 0.08087065471584608,
+      "third_rms_ratio": 1.824494818963347,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5367
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.72800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.71600907029478,
+    "window_end_s": 53.74,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 404.2694946941393,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "nonstationary",
+    "context_median_25ms_rms": 0.11391583890478246,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5368
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.73800454,
+    "window_ms": 40.0,
+    "window_start_s": 53.718004535147394,
+    "window_end_s": 53.75800453514739,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 355.19145860807197,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "nonstationary",
+    "context_median_25ms_rms": 0.10937841805065046,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5369
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.74800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.736009070294784,
+    "window_end_s": 53.76,
+    "category": "state_disagreement_review",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 355.19145860807197,
+    "measured_candidate_hz": 170.27027027027026,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.10723402490674235,
+    "window_to_context_rms_ratio": 0.18787051310036348,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 259,
+        "cycles": 4.084942084942085,
+        "acf_at_measured_period": 0.749006170856804,
+        "difference_over_total_energy": 0.38362745572594825
+      },
+      "projection": {
+        "amplitude": 0.0007212797666558575,
+        "variance_fraction": 0.0006292120870592592
+      },
+      "thirds": [
+        {
+          "rms": 0.023336227408845674,
+          "period": {
+            "lag": 259,
+            "cycles": 1.3629343629343629,
+            "acf_at_measured_period": 0.949412329439879,
+            "difference_over_total_energy": 0.1561334188830152
+          },
+          "projection": {
+            "amplitude": 0.00394596872225976,
+            "variance_fraction": 0.014199189392534018
+          }
+        },
+        {
+          "rms": 0.01992908098061482,
+          "period": {
+            "lag": 259,
+            "cycles": 1.3629343629343629,
+            "acf_at_measured_period": 0.9413889820536852,
+            "difference_over_total_energy": 0.11822459331926215
+          },
+          "projection": {
+            "amplitude": 0.0037609621486967525,
+            "variance_fraction": 0.016244131412610986
+          }
+        },
+        {
+          "rms": 0.0165975979193095,
+          "period": {
+            "lag": 259,
+            "cycles": 1.359073359073359,
+            "acf_at_measured_period": 0.7021278119905092,
+            "difference_over_total_energy": 0.19362558618318965
+          },
+          "projection": {
+            "amplitude": 0.0036908442051977667,
+            "variance_fraction": 0.025263003929648614
+          }
+        }
+      ],
+      "rms": 0.020146111281046843,
+      "third_rms_ratio": 1.4060002852398608,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": {
+      "whole": {
+        "lag": 124,
+        "cycles": 8.521373315359186,
+        "acf_at_measured_period": 0.7916160750558551,
+        "difference_over_total_energy": 0.3614700086405782
+      },
+      "projection": {
+        "amplitude": 0.017617810799472142,
+        "variance_fraction": 0.3836017236348879
+      },
+      "thirds": [
+        {
+          "rms": 0.023336227408845674,
+          "period": {
+            "lag": 124,
+            "cycles": 2.843142514481846,
+            "acf_at_measured_period": 0.7866697145839897,
+            "difference_over_total_energy": 0.32500639937837406
+          },
+          "projection": {
+            "amplitude": 0.028115393360471606,
+            "variance_fraction": 0.6923102443187908
+          }
+        },
+        {
+          "rms": 0.01992908098061482,
+          "period": {
+            "lag": 124,
+            "cycles": 2.843142514481846,
+            "acf_at_measured_period": 0.8354104816133894,
+            "difference_over_total_energy": 0.25611507045162474
+          },
+          "projection": {
+            "amplitude": 0.024202481404192316,
+            "variance_fraction": 0.7449835109328884
+          }
+        },
+        {
+          "rms": 0.0165975979193095,
+          "period": {
+            "lag": 124,
+            "cycles": 2.835088286395495,
+            "acf_at_measured_period": 0.7994832614705366,
+            "difference_over_total_energy": 0.26970628917751444
+          },
+          "projection": {
+            "amplitude": 0.020175561551728567,
+            "variance_fraction": 0.721630841532813
+          }
+        }
+      ],
+      "rms": 0.020146111281046843,
+      "third_rms_ratio": 1.4060002852398608,
+      "thirds_with_period_test": 3
+    },
+    "state_weaker_on_two_measures_review": false,
+    "trigger_only": true,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5370
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.75800454,
+    "window_ms": 24.0,
+    "window_start_s": 53.74600907029478,
+    "window_end_s": 53.77,
+    "category": "hotspot_context",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 355.19145860807197,
+    "measured_candidate_hz": null,
+    "acoustic_reason": "no_eligible_measured_period",
+    "context_median_25ms_rms": 0.11013941724515759,
+    "window_to_context_rms_ratio": null,
+    "candidate_evidence": null,
+    "state_evidence": null,
+    "state_weaker_on_two_measures_review": null,
+    "trigger_only": false,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5371
+  },
+  {
+    "case": "PREDESTINATI",
+    "time_s": 53.76800454,
+    "window_ms": 96.0,
+    "window_start_s": 53.72,
+    "window_end_s": 53.81600907029478,
+    "category": "state_disagreement_review",
+    "baseline_voiced": true,
+    "baseline_f0_hz": 355.19145860807197,
+    "measured_candidate_hz": 404.58715596330273,
+    "acoustic_reason": "unique_acoustic_candidate",
+    "context_median_25ms_rms": 0.10707910336498395,
+    "window_to_context_rms_ratio": 0.22007177589631863,
+    "candidate_evidence": {
+      "whole": {
+        "lag": 109,
+        "cycles": 38.8440366972477,
+        "acf_at_measured_period": 0.7890729420126341,
+        "difference_over_total_energy": 0.3803446053131244
+      },
+      "projection": {
+        "amplitude": 0.004360692682866573,
+        "variance_fraction": 0.017105403715849184
+      },
+      "thirds": [
+        {
+          "rms": 0.039526123844419156,
+          "period": {
+            "lag": 109,
+            "cycles": 12.95412844036697,
+            "acf_at_measured_period": 0.8119412127788395,
+            "difference_over_total_energy": 0.33126592153332257
+          },
+          "projection": {
+            "amplitude": 0.012706403775547674,
+            "variance_fraction": 0.051494905712734476
+          }
+        },
+        {
+          "rms": 0.009979814534385633,
+          "period": {
+            "lag": 109,
+            "cycles": 12.944954128440365,
+            "acf_at_measured_period": 0.48469745686425425,
+            "difference_over_total_energy": 0.8770056994341572
+          },
+          "projection": {
+            "amplitude": 0.002308637181745175,
+            "variance_fraction": 0.026948778111855958
+          }
+        },
+        {
+          "rms": 0.0018208064405796547,
+          "period": {
+            "lag": 109,
+            "cycles": 12.944954128440365,
+            "acf_at_measured_period": 0.5933098810351458,
+            "difference_over_total_energy": 0.7770383852978202
+          },
+          "projection": {
+            "amplitude": 0.0005623791428395771,
+            "variance_fraction": 0.0478899775301799
+          }
+        }
+      ],
+      "rms": 0.023565088438917487,
+      "third_rms_ratio": 21.708031652082685,
+      "thirds_with_period_test": 3
+    },
+    "state_evidence": {
+      "whole": {
+        "lag": 124,
+        "cycles": 34.101601717609455,
+        "acf_at_measured_period": 0.06757050135591149,
+        "difference_over_total_energy": 1.5485301076592728
+      },
+      "projection": {
+        "amplitude": 0.007688523924733811,
+        "variance_fraction": 0.05335451979467328
+      },
+      "thirds": [
+        {
+          "rms": 0.039526123844419156,
+          "period": {
+            "lag": 124,
+            "cycles": 11.372570057927383,
+            "acf_at_measured_period": 0.0027133219505806314,
+            "difference_over_total_energy": 1.5987356074147723
+          },
+          "projection": {
+            "amplitude": 0.022294108863537804,
+            "variance_fraction": 0.15894486248932604
+          }
+        },
+        {
+          "rms": 0.009979814534385633,
+          "period": {
+            "lag": 124,
+            "cycles": 11.364515829841032,
+            "acf_at_measured_period": 0.5818842413364738,
+            "difference_over_total_energy": 0.697121262528902
+          },
+          "projection": {
+            "amplitude": 0.0062052402328362745,
+            "variance_fraction": 0.19185866106839342
+          }
+        },
+        {
+          "rms": 0.0018208064405796547,
+          "period": {
+            "lag": 124,
+            "cycles": 11.364515829841032,
+            "acf_at_measured_period": 0.23584270851399183,
+            "difference_over_total_energy": 1.4375603108474835
+          },
+          "projection": {
+            "amplitude": 0.001028275828786497,
+            "variance_fraction": 0.1608544864973468
+          }
+        }
+      ],
+      "rms": 0.023565088438917487,
+      "third_rms_ratio": 21.708031652082685,
+      "thirds_with_period_test": 3
+    },
+    "state_weaker_on_two_measures_review": false,
+    "trigger_only": true,
+    "reset_requested": false,
+    "replacement_selected": false,
+    "decision_applied": false,
+    "source_row_index": 5372
+  }
+]
