@@ -6,7 +6,7 @@ import numpy as np
 from .config import ECKFConfig
 from .harmonic_change import HarmonicChangeDetector
 from .matlab_compat import complex_min_matlab_like
-from .silence import is_silent, resolve_silence_energy_threshold
+from .silence import is_silent, resolve_silence_calibration
 from .eckf_trace import ECKFTrace
 from .periodicity import assess_periodicity
 from .pitch_status import PitchStatus, validate_pitch_status
@@ -51,6 +51,7 @@ class ECKFResult:
     lookahead_frames_per_frame: np.ndarray | None = None
     lookahead_reason_per_frame: np.ndarray | None = None
     frame_decision: np.ndarray | None = None
+    silence_calibration: object | None = None
 
 
 def _as_mono_float64(audio: np.ndarray) -> np.ndarray:
@@ -172,12 +173,15 @@ def track_pitch(
     if config is None:
         config = ECKFConfig()
     config.validate()
-    silence_energy_threshold = resolve_silence_energy_threshold(config)
 
     if sample_rate <= 0:
         raise ValueError("sample_rate must be > 0")
 
     y0 = _as_mono_float64(audio)
+    silence_calibration = resolve_silence_calibration(
+        config, audio=y0, sample_rate=sample_rate
+    )
+    silence_energy_threshold = float(silence_calibration.threshold)
     original_length = len(y0)
     block = config.block_size
 
@@ -945,4 +949,5 @@ def track_pitch(
         lookahead_frames_per_frame=lookahead_frames_used,
         lookahead_reason_per_frame=lookahead_reason_per_frame,
         frame_decision=frame_decision,
+        silence_calibration=silence_calibration,
     )

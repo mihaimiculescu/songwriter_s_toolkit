@@ -46,8 +46,9 @@ def main():
     p.add_argument("--nsemitones", type=float, default=2.0)
     p.add_argument("--vocal-floor-hz", type=float, default=60.0)
     p.add_argument(
-        "--silence-mode", choices=["fixed", "adaptive"], default="fixed",
-        help="Silence calibration mode. Only fixed is implemented; adaptive explicitly errors.",
+        "--silence-mode", choices=["fixed", "adaptive"], default=None,
+        help=("Silence calibration mode. Default: adaptive for offline V2; "
+              "fixed historical threshold for --mode matlab."),
     )
     p.add_argument(
         "--silence-energy-threshold", type=float, default=-50.0,
@@ -71,6 +72,8 @@ def main():
             "Input must be mono. No automatic downmix is performed."
         )
 
+    silence_mode = args.silence_mode or ("fixed" if args.mode == "matlab" else "adaptive")
+
     cfg = ECKFConfig(
         block_size=args.block_size,
         c=args.c,
@@ -79,7 +82,7 @@ def main():
         nsemitones=args.nsemitones,
         mode=args.mode,
         vocal_floor_hz=args.vocal_floor_hz,
-        silence_mode=args.silence_mode,
+        silence_mode=silence_mode,
         silence_energy_db_threshold=args.silence_energy_threshold,
         eckf_gain_normalization=args.eckf_gain_normalization,
     )
@@ -89,6 +92,31 @@ def main():
     out = args.csv
     if out is None:
         out = args.wav.with_suffix(args.wav.suffix + ".eckf.csv")
+
+    if cfg.mode == "offline" and result.silence_calibration is not None:
+        silence_out = out.with_suffix(out.suffix + ".silence_calibration.csv")
+        cal = result.silence_calibration
+        with silence_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "mode", "threshold", "method", "block_size", "frame_ms",
+                "min_silence_ms", "min_silence_frames",
+                "search_quantile_percent", "candidate_energy_ceiling",
+                "long_run_count", "selected_frame_count", "selected_duration_s",
+                "selected_energy_median", "selected_energy_p95",
+                "headroom_stat_units",
+            ])
+            writer.writerow([
+                cal.mode, cal.threshold, cal.method, cal.block_size, cal.frame_ms,
+                cal.min_silence_ms, cal.min_silence_frames,
+                "" if cal.search_quantile_percent is None else cal.search_quantile_percent,
+                "" if cal.candidate_energy_ceiling is None else cal.candidate_energy_ceiling,
+                cal.long_run_count, cal.selected_frame_count, cal.selected_duration_s,
+                "" if cal.selected_energy_median is None else cal.selected_energy_median,
+                "" if cal.selected_energy_p95 is None else cal.selected_energy_p95,
+                cal.headroom_stat_units,
+            ])
+        print(f"Silence calibration: {silence_out}")
 
     n = result.original_length
 
@@ -1115,6 +1143,12 @@ def main():
     print(f"harmonic-change threshold: {cfg.nsemitones} semitones")
     if cfg.mode == "offline":
         print(f"Vocal floor: {cfg.vocal_floor_hz:.3f} Hz")
+        if result.silence_calibration is not None:
+            cal = result.silence_calibration
+            print(
+                f"Silence floor: {cal.threshold:.3f} "
+                f"(mode={cal.mode}, method={cal.method})"
+            )
         first_valid_count = int(
             np.sum(
                 offline_validity.first_pass_valid

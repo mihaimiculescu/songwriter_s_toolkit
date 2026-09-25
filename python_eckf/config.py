@@ -35,8 +35,9 @@ class ECKFConfig:
     # so a very low male singer is not clipped at the boundary.
     vocal_floor_hz: float = 60.0
 
-    # Fixed is the ONLY implemented mode. Adaptive calibration will be added later.
-    silence_mode: SilenceMode = "fixed"
+    # Offline V2 defaults to recording-level silence calibration.  MATLAB mode
+    # remains historical/fixed in the CLI unless explicitly overridden.
+    silence_mode: SilenceMode = "adaptive"
     silence_flatness_threshold: float = 0.45
     silence_energy_db_threshold: float = -50.0
     kalman_gain_reset_threshold: float = 0.01
@@ -61,11 +62,6 @@ class ECKFConfig:
             raise ValueError("mode must be 'matlab' or 'offline'")
         if self.silence_mode not in ("fixed", "adaptive"):
             raise ValueError("silence_mode must be 'fixed' or 'adaptive'")
-        if self.silence_mode == "adaptive":
-            raise NotImplementedError(
-                "Adaptive silence calibration is not implemented. "
-                "Use silence_mode='fixed' until its separate validation is complete."
-            )
         if not math.isfinite(self.silence_energy_db_threshold):
             raise ValueError("silence_energy_db_threshold must be finite")
         if not math.isfinite(self.silence_flatness_threshold) or not 0 <= self.silence_flatness_threshold <= 1:

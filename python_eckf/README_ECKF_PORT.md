@@ -112,3 +112,6 @@ The active offline path now also constructs structural gesture units from the fr
 ## V2 interpretation candidates v1
 
 The active offline path now exports `.gesture_candidates.csv`.  This stage is deliberately multi-hypothesis: it preserves possible downstream representations (discrete note sequence, continuous pitch motion, returning ornament topology, oscillatory pitch, legato chain, amplitude modulation) without selecting a winner or emitting MIDI.  No new musical classification thresholds are introduced here.
+
+## V2 adaptive silence calibration
+Offline V2 now defaults to one per-file silence threshold measured from long quiet regions. See `ECKF_V2_ADAPTIVE_SILENCE_V1_README.md` supplied with the package. MATLAB mode remains fixed/historical by default.

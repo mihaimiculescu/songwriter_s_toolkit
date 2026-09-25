@@ -25,6 +25,12 @@ MIN_VALID_WINDOWS=2
 MIN_SUPPORT=0.50
 MIN_SCORE=0.45
 MIN_MARGIN=0.08
+# High-confidence expert route: retain the historical ordinary margin rule,
+# but allow a smaller separation when the absolute harmonic evidence is strong.
+HIGH_CONF_MIN_SCORE=0.80
+HIGH_CONF_MIN_SUPPORT=0.90
+HIGH_CONF_MIN_MARGIN=0.02
+HIGH_CONF_MIN_VALID_WINDOWS=2
 
 @dataclass(frozen=True)
 class DetectiveCandidate:
@@ -104,10 +110,11 @@ def build_harmonic_detective(audio,sr,evidence_rows,bench_rows):
             verdicts.append(DetectiveVerdict(fi,float(b.time_s),b.status,False,0,None,None,None,None,None,None,None,None,None,None,None,None,'not_called_hard_gate_abstention'))
             finals.append(FinalAdjudicationVerdict(fi,float(b.time_s),'abstention','unresolved',None,None,None,b.status,b.abstention_category))
             continue
-        field=[r for r in rows if r.within_49c and _acoustic_admissible(r)]
-        # If an in-range contestant exists outside the 49-cent grouping, do not let
-        # the detective silently erase it. Fail conservative.
-        outside_live=[r for r in rows if (not r.within_49c) and r.range_confidence is not None and float(r.range_confidence)>0]
+        # Score *all* acoustically admissible contestants that survived the hard
+        # range gate.  True <49-cent note groups have already been reduced to one
+        # representative upstream; >=49-cent candidates are intentional singleton
+        # contestants and must remain visible to the expert witness.
+        field=[r for r in rows if _acoustic_admissible(r)]
         scored=[]
         for r in field:
             frames=[];fails=[]
@@ -128,14 +135,26 @@ def build_harmonic_detective(audio,sr,evidence_rows,bench_rows):
         best=scored[0] if scored else None; runner=scored[1] if len(scored)>1 else None
         margin=(best.harmonic_score-runner.harmonic_score) if best and runner else None
         winner=None
-        if outside_live:reason='incomplete_field_outside_49c_contestant'
-        elif len(field)<2:reason='no_cross_note_contest_to_break'
-        elif len(scored)!=len(field):reason='incomplete_competitor_field'
-        elif best is None:reason='no_supported_group_representative'
-        elif best.harmonic_support<MIN_SUPPORT or best.harmonic_score<MIN_SCORE:reason='harmonic_evidence_too_weak'
-        elif margin is None or margin<MIN_MARGIN:reason='harmonic_margin_insufficient'
-        elif runner is not None and best.midi==runner.midi:reason='same_note_representatives_unexpected'
-        else:reason='harmonic_detective_tiebreak';winner=best
+        if len(field)<2:
+            reason='no_cross_note_contest_to_break'
+        elif len(scored)!=len(field):
+            reason='incomplete_competitor_field'
+        elif best is None:
+            reason='no_supported_group_representative'
+        elif best.harmonic_support<MIN_SUPPORT or best.harmonic_score<MIN_SCORE:
+            reason='harmonic_evidence_too_weak'
+        elif runner is not None and best.midi==runner.midi:
+            reason='same_note_representatives_unexpected'
+        elif margin is not None and margin>=MIN_MARGIN:
+            reason='harmonic_detective_tiebreak'; winner=best
+        elif (margin is not None
+              and best.valid_windows>=HIGH_CONF_MIN_VALID_WINDOWS
+              and best.harmonic_score>=HIGH_CONF_MIN_SCORE
+              and best.harmonic_support>=HIGH_CONF_MIN_SUPPORT
+              and margin>=HIGH_CONF_MIN_MARGIN):
+            reason='harmonic_detective_high_confidence_tiebreak'; winner=best
+        else:
+            reason='harmonic_margin_insufficient'
         verdicts.append(DetectiveVerdict(fi,float(b.time_s),b.status,True,len(field),
             None if best is None else best.group_id,None if best is None else best.midi,None if best is None else best.hz,
             None if best is None else best.harmonic_score,None if best is None else best.harmonic_support,
