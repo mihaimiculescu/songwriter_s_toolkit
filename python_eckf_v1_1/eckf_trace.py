@@ -50,22 +50,6 @@ FIELDS = [
     "gain_norm",
     "covariance_norm",
     "state_frequency_hz",
-    "sample_value_real",
-    "predicted_measurement_real",
-    "predicted_measurement_imag",
-    "predicted_measurement_abs",
-    "innovation_real",
-    "innovation_imag",
-    "kalman_denominator_real",
-    "kalman_denominator_imag",
-    "k0_real", "k0_imag", "k0_abs",
-    "k1_real", "k1_imag", "k1_abs",
-    "k2_real", "k2_imag", "k2_abs",
-    "p00_abs", "p11_abs", "p22_abs",
-    "x1_pre_real", "x1_pre_imag", "x1_pre_abs", "f0_pre_hz",
-    "x2_pre_abs", "x3_pre_abs",
-    "x1_post_real", "x1_post_imag", "x1_post_abs",
-    "x2_post_abs", "x3_post_abs",
 ]
 
 
@@ -82,10 +66,6 @@ class ECKFTrace:
         self.end = float(
             os.environ.get("ECKF_TRACE_END", "inf")
         )
-        self.stride_ms = float(os.environ.get("ECKF_TRACE_STRIDE_MS", "10.0"))
-        if not (self.stride_ms > 0):
-            raise ValueError("ECKF_TRACE_STRIDE_MS must be > 0")
-        self.stride_samples = max(1, round(self.sample_rate * self.stride_ms / 1000.0))
 
         self.handle = None
         self.writer = None
@@ -109,12 +89,6 @@ class ECKFTrace:
                 extrasaction="ignore",
             )
             self.writer.writeheader()
-
-    def wants_sample(self, sample: int) -> bool:
-        if not self.enabled:
-            return False
-        t = sample / self.sample_rate
-        return self.start <= t <= self.end and (sample % self.stride_samples == 0)
 
     def emit(self, event: str, sample: int, **values):
         if not self.enabled:

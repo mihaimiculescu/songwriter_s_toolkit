@@ -96,3 +96,19 @@ This mirrors the repository's `test_saw.m` and uses an analytically known
 - whole-gesture classification
 
 Those belong *after* raw ECKF validation.
+
+## V2 expressive lane v2
+
+The active offline path now carries a parallel amplitude-expression lane in
+`expressive_amplitude.py`.  It records raw/local RMS evidence, a gain-robust
+local amplitude residual, modulation depth/rate/periodicity, and correlation
+with pitch residual.  This is observational only; no MIDI CC or ornament label
+is assigned here.
+
+## V2 gesture structure v1
+
+The active offline path now also constructs structural gesture units from the frozen transition/target topology. This stage exports transition features, maximal gesture objects, T-S-T link JOIN/SPLIT/UNRESOLVED evidence, and structural segments. It does not assign musical gesture labels or MIDI actions. The complete pitch and amplitude expressive lanes remain preserved for future ornament, pitch-bend, legato, velocity, and CC rendering.
+
+## V2 interpretation candidates v1
+
+The active offline path now exports `.gesture_candidates.csv`.  This stage is deliberately multi-hypothesis: it preserves possible downstream representations (discrete note sequence, continuous pitch motion, returning ornament topology, oscillatory pitch, legato chain, amplitude modulation) without selecting a winner or emitting MIDI.  No new musical classification thresholds are introduced here.

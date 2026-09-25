@@ -6,10 +6,12 @@ import numpy as np
 from .config import ECKFConfig
 from .harmonic_change import HarmonicChangeDetector
 from .matlab_compat import complex_min_matlab_like
-from .silence import is_silent
+from .silence import is_silent, resolve_silence_energy_threshold
 from .eckf_trace import ECKFTrace
 from .periodicity import assess_periodicity
 from .pitch_status import PitchStatus, validate_pitch_status
+from .initialization_candidates import choose_initialization
+from .octave_reacquisition import reconcile_initialization, inspect_octave_disagreement
 
 @dataclass
 class ECKFResult:
@@ -26,6 +28,14 @@ class ECKFResult:
     padded_length: int
     config: ECKFConfig
     pitch_status: np.ndarray | None = None
+    # V2: frame-aligned evidence. One entry per ECKF frame, not per 100 Hz sample.
+    frame_start_samples: np.ndarray | None = None
+    frame_real_sample_count: np.ndarray | None = None
+    energy_silence_per_frame: np.ndarray | None = None
+    flatness_silence_per_frame: np.ndarray | None = None
+    original_silence_per_frame: np.ndarray | None = None
+    periodicity_voiced_per_frame: np.ndarray | None = None
+    frame_decision: np.ndarray | None = None
 
 
 def _as_mono_float64(audio: np.ndarray) -> np.ndarray:
@@ -64,6 +74,7 @@ def track_pitch(
     if config is None:
         config = ECKFConfig()
     config.validate()
+    silence_energy_threshold = resolve_silence_energy_threshold(config)
 
     if sample_rate <= 0:
         raise ValueError("sample_rate must be > 0")
@@ -86,6 +97,18 @@ def track_pitch(
     onset_samples = []
     spf = []
     energy_track = []
+    # Offline evidence is indexed by the original frame, never by traversal order.
+    # The MATLAB path is intentionally unchanged.
+    frame_start_samples = np.arange(nframes, dtype=np.int64) * block
+    frame_real_sample_count = np.minimum(
+        block, np.maximum(0, original_length - frame_start_samples)
+    ).astype(np.int64)
+    energy_silence = np.zeros(nframes, dtype=np.bool_)
+    flatness_silence = np.zeros(nframes, dtype=np.bool_)
+    original_silence = np.zeros(nframes, dtype=np.bool_)
+    periodicity_voiced = np.zeros(nframes, dtype=np.bool_)
+    frame_decision = np.full(nframes, "NOT_PROCESSED", dtype="U32")
+    previous_frame_eligible = False
 
     if padded_length == 0:
         return ECKFResult(
@@ -99,6 +122,9 @@ def track_pitch(
             padded_length,
             config,
             pitch_status,
+            frame_start_samples, frame_real_sample_count,
+            energy_silence, flatness_silence, original_silence,
+            periodicity_voiced, frame_decision,
         )
 
     Ts = 1.0 / float(sample_rate)
@@ -138,16 +164,44 @@ def track_pitch(
         if config.mode == "offline":
             # Offline: assess EVERY frame, including frames after initialization.
             # A non-periodic frame has no pitch, even when it is loud.
-            silent_prev = silent_cur
+            # Previous *eligibility* is not the preceding measured silence flag.
+            # A periodicity failure or failed initialization may make the previous
+            # frame unavailable even when its sound was not silent.
+            silent_prev = int(not previous_frame_eligible)
             silent_cur, cur_spf, cur_energy = is_silent(
                 y_frame,
                 flatness_threshold=config.silence_flatness_threshold,
-                energy_db_threshold=config.silence_energy_db_threshold,
+                energy_db_threshold=silence_energy_threshold,
             )
             spf.append(cur_spf)
             energy_track.append(cur_energy)
+            fi = start // block
+            original_silence[fi] = bool(silent_cur)
+            energy_silence[fi] = bool(cur_energy < silence_energy_threshold)
+            flatness_silence[fi] = bool(
+                cur_spf >= config.silence_flatness_threshold
+            )
+            # Absolute low-energy detection has priority over normalized
+            # periodicity: even a barely audible sinusoid has ACF near 1.
+            # Retain the historical, non-dBFS energy scale and its threshold.
+            # Flatness alone is NOT an authoritative veto: a pitched consonant
+            # or breath can have a noisy spectrum yet carry genuine F0.
+            if energy_silence[fi]:
+                frame_decision[fi] = "LOW_ENERGY_SILENCE"
+                trace.emit("SILENCE", start, frame_start=start,
+                           frame_time_s=start / sample_rate,
+                           silent_prev=silent_prev, silent_cur=1, flag=flag)
+                P_last = None
+                x_last = None
+                previous_frame_eligible = False
+                flag = 0
+                harm_prev = 0
+                start += block
+                n = start
+                continue
 
             periodicity = assess_periodicity(y_frame, sample_rate)
+            periodicity_voiced[fi] = bool(periodicity.voiced)
             trace.emit(
                 "PERIODICITY_DECISION", start,
                 frame_start=start,
@@ -160,13 +214,14 @@ def track_pitch(
                 reason=periodicity.reason,
             )
             if not periodicity.voiced:
+                frame_decision[fi] = "PERIODICITY_REJECTED"
                 # No oscillator is allowed to survive an unvoiced frame.
                 # Output arrays were initialized to zero: do not fill or interpolate.
                 P_last = None
                 x_last = None
                 flag = 0
                 harm_prev = 0
-                silent_cur = 1  # previous frame is unavailable for harmonic comparison
+                previous_frame_eligible = False
                 start += block
                 n = start
                 continue
@@ -181,32 +236,110 @@ def track_pitch(
                 P_last is None or x_last is None
                 or (harm_prev == 0 and harm_cur == 1)
             )
+            #DIAGNOSTIC ONLY
+            trace.emit(
+                "INITIALIZATION_GATE",
+                start,
+                frame_start=start,
+                periodicity_voiced=int(periodicity.voiced),
+                periodicity_f0_hz=periodicity.acf_frequency_hz,
+                periodicity_acf_peak=periodicity.acf_peak,
+                periodicity_cmndf_minimum=periodicity.cmndf_minimum,
+                state_available=int(P_last is not None and x_last is not None),
+                harm_prev=harm_prev,
+                harm_cur=harm_cur,
+                needs_initialization=int(needs_initialization),
+                existing_f0_hz=(
+                    float(f0[start - 1])
+                    if start > 0 and pitch_status[start - 1] == PitchStatus.VOICED_VALID
+                    else None
+                ),
+            )
+            #END DIAGNOSTIC ONLY
             if needs_initialization:
                 # No lookahead and no backtracking: an unverified frame is never
                 # assigned a pitch based on a different frame.
                 initialization = detector.analyze(None, y_frame, sample_rate)
-                f1 = initialization.f0_hz
-                a1 = initialization.amplitude
-                phi1 = initialization.phase
+                previous_hz = None
+                elapsed_ms = None
+                if start > 0 and pitch_status[start - 1] == PitchStatus.VOICED_VALID:
+                    previous_hz = float(f0[start - 1])
+                    elapsed_ms = 1000.0 * block / sample_rate
+                choice = choose_initialization(
+                    detector, y_frame, sample_rate, start,
+                    initialization, periodicity, previous_hz, elapsed_ms,
+                )
+#DIAGNOSE ONLY
+                trace.emit(
+                    "INITIALIZATION_CHOICE_BEFORE_OCTAVE",
+                    start,
+                    frame_start=start,
+                    spectral_proposal_hz=initialization.f0_hz,
+                    periodicity_hz=periodicity.acf_frequency_hz,
+                    choice_hz=choice.frequency_hz,
+                    choice_source=choice.source,
+                    choice_reason=choice.reason,
+                    choice_harmonics=choice.spectral_harmonics,
+                )
+#END DIAGNOSE ONLY
+                # Independently challenge an octave-related initialization only
+                # when ACF, CMNDF and measured spectral harmonics all agree.
+                choice, octave_evidence = reconcile_initialization(
+                    detector, y_frame, sample_rate, start, choice,
+                    periodicity, previous_hz, elapsed_ms,
+                )
+#DIAGNOSE ONLY
+                trace.emit(
+                    "INITIALIZATION_CHOICE_AFTER_OCTAVE",
+                    start,
+                    frame_start=start,
+                    evidence_state=octave_evidence.state,
+                    evidence_reason=octave_evidence.reason,
+                    evidence_measured_hz=octave_evidence.measured_hz,
+                    final_choice_hz=choice.frequency_hz,
+                    final_choice_source=choice.source,
+                    final_choice_reason=choice.reason,
+                )
+#END DIAGNOSE ONLY
+                trace.emit(
+                    "OCTAVE_INITIALIZATION_AUDIT", start,
+                    frame_start=start, decision=octave_evidence.state,
+                    reason=octave_evidence.reason,
+                    measured_f0_hz=octave_evidence.measured_hz,
+                )
+                f1 = choice.frequency_hz
+                a1 = choice.amplitude
+                phi1 = choice.phase
+                trace.emit(
+                    "INITIALIZATION_CANDIDATES", start,
+                    frame_start=start,
+                    proposed_f0_hz=initialization.f0_hz,
+                    acoustic_f0_hz=periodicity.acf_frequency_hz,
+                    selected_f0_hz=f1,
+                    selected_source=choice.source,
+                    harmonic_support=choice.spectral_harmonics,
+                    transition_penalty=choice.transition_penalty,
+                    reason=choice.reason,
+                )
                 trace.emit(
                     "INITIALIZATION_PROPOSED", start,
                     frame_start=start,
                     frame_time_s=start / sample_rate,
                     count=0,
-                    init_f0_hz=f1,
-                    init_amplitude=a1,
+                    init_f0_hz=initialization.f0_hz,
+                    init_amplitude=initialization.amplitude,
                     flag=1,
                 )
-                if not (np.isfinite(f1) and f1 > 0 and np.isfinite(a1)
-                        and a1 >= 0 and np.isfinite(phi1)):
+                if f1 is None or a1 is None or phi1 is None:
                     trace.emit("INITIALIZATION_REJECTED", start,
-                               frame_start=start, reason="invalid_initialization")
+                               frame_start=start, reason=choice.reason)
                     pitch_status[start:end_exclusive] = PitchStatus.VOICED_UNRESOLVED
+                    frame_decision[fi] = "INITIALIZATION_UNRESOLVED"
                     P_last = None
                     x_last = None
                     flag = 0
                     harm_prev = 0
-                    silent_cur = 1
+                    previous_frame_eligible = False
                     start += block
                     n = start
                     continue
@@ -222,6 +355,7 @@ def track_pitch(
                 trace.emit("RESET_COMPLETED", start,
                            frame_start=start, count=0, init_f0_hz=f1,
                            reset_accepted=1, flag=0)
+            frame_decision[fi] = "VOICED_TRACKED"
             flag = 0
             n = start
         else:
@@ -229,7 +363,7 @@ def track_pitch(
             silent_cur, cur_spf, cur_energy = is_silent(
                 y_frame,
                 flatness_threshold=config.silence_flatness_threshold,
-                energy_db_threshold=config.silence_energy_db_threshold,
+                energy_db_threshold=silence_energy_threshold,
             )
             spf.append(cur_spf)
             energy_track.append(cur_energy)
@@ -566,6 +700,8 @@ def track_pitch(
             x_last = x_next
             n += 1
 
+        if config.mode == "offline":
+            previous_frame_eligible = True
         start += block
         harm_prev = harm_cur
 
@@ -589,4 +725,11 @@ def track_pitch(
         padded_length=padded_length,
         config=config,
         pitch_status=pitch_status,
+        frame_start_samples=frame_start_samples,
+        frame_real_sample_count=frame_real_sample_count,
+        energy_silence_per_frame=energy_silence,
+        flatness_silence_per_frame=flatness_silence,
+        original_silence_per_frame=original_silence,
+        periodicity_voiced_per_frame=periodicity_voiced,
+        frame_decision=frame_decision,
     )

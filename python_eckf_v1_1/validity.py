@@ -4,7 +4,6 @@ from dataclasses import dataclass
 
 import numpy as np
 from .trajectory_resolver import vocal_transition_penalty
-from .frame_evidence import FrameAcousticState, validate_frame_acoustic_states
 
 
 @dataclass
@@ -220,7 +219,6 @@ def analyse_pitch_validity(
     f0_hz: np.ndarray,
     sample_rate: float,
     config: PitchValidityConfig | None = None,
-    frame_acoustic_state: np.ndarray | None = None,
 ) -> PitchValidityResult:
 
     if config is None:
@@ -261,16 +259,6 @@ def analyse_pitch_validity(
         f0_hz[sample_index]
     )
 
-    sampled_frame_state = None
-    if frame_acoustic_state is not None:
-        frame_acoustic_state = np.asarray(frame_acoustic_state)
-        if frame_acoustic_state.shape != f0_hz.shape:
-            raise ValueError(
-                "frame_acoustic_state must have the same shape as f0_hz"
-            )
-        validate_frame_acoustic_states(frame_acoustic_state)
-        sampled_frame_state = frame_acoustic_state[sample_index]
-
     time_s = (
         sample_index.astype(np.float64)
         / sample_rate
@@ -303,59 +291,21 @@ def analyse_pitch_validity(
         & (sampled_f0 <= config.max_vocal_hz)
     )
 
-    if sampled_frame_state is not None:
-        tracked_state = (
-            sampled_frame_state
-            == int(FrameAcousticState.VOICED_TRACKED)
-        )
-        candidate &= tracked_state
-
-        reason[
-            sampled_frame_state
-            == int(FrameAcousticState.LOW_ENERGY_SILENCE)
-        ] = "FRAME_LOW_ENERGY_SILENCE"
-        reason[
-            sampled_frame_state
-            == int(FrameAcousticState.UNVOICED)
-        ] = "FRAME_UNVOICED"
-        reason[
-            sampled_frame_state
-            == int(FrameAcousticState.VOICED_UNRESOLVED)
-        ] = "FRAME_VOICED_UNRESOLVED"
-        reason[
-            sampled_frame_state
-            == int(FrameAcousticState.NOT_PROCESSED)
-        ] = "FRAME_NOT_PROCESSED"
-
-    no_f0_mask = (
+    reason[
         ~np.isfinite(sampled_f0)
         | (sampled_f0 <= 0.0)
-    )
-    if sampled_frame_state is not None:
-        no_f0_mask &= (
-            sampled_frame_state
-            == int(FrameAcousticState.VOICED_TRACKED)
-        )
-    reason[no_f0_mask] = "NO_F0"
+    ] = "NO_F0"
 
-    below_floor = (
+    reason[
         np.isfinite(sampled_f0)
         & (sampled_f0 > 0.0)
         & (sampled_f0 < config.min_vocal_hz)
-    )
-    above_ceiling = (
+    ] = "BELOW_VOCAL_FLOOR"
+
+    reason[
         np.isfinite(sampled_f0)
         & (sampled_f0 > config.max_vocal_hz)
-    )
-    if sampled_frame_state is not None:
-        tracked_state = (
-            sampled_frame_state
-            == int(FrameAcousticState.VOICED_TRACKED)
-        )
-        below_floor &= tracked_state
-        above_ceiling &= tracked_state
-    reason[below_floor] = "BELOW_VOCAL_FLOOR"
-    reason[above_ceiling] = "ABOVE_VOCAL_CEILING"
+    ] = "ABOVE_VOCAL_CEILING"
 
     # ------------------------------------------------------------
     # Offline parameters.
@@ -1304,7 +1254,6 @@ def apply_offline_validity_correction(
     first_pass,
     sample_rate: float,
     config: OfflineValidityCorrectionConfig | None = None,
-    frame_acoustic_state: np.ndarray | None = None,
 ) -> OfflineValidityCorrectionResult:
     """
     Apply an OFFLINE bidirectional correction to the existing first-pass
@@ -1376,19 +1325,6 @@ def apply_offline_validity_correction(
             OfflineValidityCorrectionConfig()
         )
 
-    acoustic_rescuable = np.ones(f0_hz.shape, dtype=bool)
-    acoustic_state = None
-    if frame_acoustic_state is not None:
-        acoustic_state = np.asarray(frame_acoustic_state)
-        if acoustic_state.shape != f0_hz.shape:
-            raise ValueError(
-                "frame_acoustic_state must have the same shape as f0_hz"
-            )
-        validate_frame_acoustic_states(acoustic_state)
-        acoustic_rescuable = (
-            acoustic_state == int(FrameAcousticState.VOICED_TRACKED)
-        )
-
     first_valid = np.asarray(
         first_pass.valid,
         dtype=bool,
@@ -1401,12 +1337,6 @@ def apply_offline_validity_correction(
         raise ValueError(
             "first_pass.valid must have the same "
             "shape as f0_hz"
-        )
-
-    if np.any(first_valid & ~acoustic_rescuable):
-        raise ValueError(
-            "first-pass validity contradicts frame acoustic state: "
-            "only VOICED_TRACKED observations may be valid"
         )
 
     # -------------------------------------------------------------
@@ -1465,18 +1395,6 @@ def apply_offline_validity_correction(
         object
     )
 
-    if acoustic_state is not None:
-        state_reason_map = {
-            int(FrameAcousticState.LOW_ENERGY_SILENCE): "FRAME_LOW_ENERGY_SILENCE",
-            int(FrameAcousticState.UNVOICED): "FRAME_UNVOICED",
-            int(FrameAcousticState.VOICED_UNRESOLVED): "FRAME_VOICED_UNRESOLVED",
-            int(FrameAcousticState.NOT_PROCESSED): "FRAME_NOT_PROCESSED",
-        }
-        for state_value, label in state_reason_map.items():
-            mask = acoustic_state == state_value
-            final_reason[mask] = label
-            correction_reason[mask] = label
-
     midi = _validity_hz_to_midi(
         f0_hz
     )
@@ -1487,7 +1405,7 @@ def apply_offline_validity_correction(
     # We do not let an early rescue alter episode segmentation while
     # processing later candidates.
     rejected_episodes = _true_runs(
-        (~first_valid) & acoustic_rescuable
+        ~first_valid
     )
 
     # Integer-step minimum removes the floating 29.999999 ms issue

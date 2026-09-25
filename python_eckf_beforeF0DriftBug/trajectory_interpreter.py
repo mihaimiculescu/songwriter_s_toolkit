@@ -22,22 +22,13 @@ class TrajectoryInterpreterConfig:
     # Raw corrected F0 is never replaced by this.
     smoothing_ms: float = 50.0
 
-    # Legacy fixed-aperture evidence is retained for regression/audit only.
+    # Current fixed-aperture production rule.  Kept unchanged while the
+    # historical variable-aperture ladder is reintroduced in shadow mode.
     stability_window_ms: float = 120.0
 
-    # Active V2 variable-aperture ladder.
+    # V2 variable-aperture shadow ladder.  These probes DO NOT change
+    # target formation yet; they expose what 24/40/64/96 ms would see.
     variable_apertures_ms: tuple[float, ...] = (24.0, 40.0, 64.0, 96.0)
-
-    # A new stable target must contain a confirmed core whose local pitch
-    # remains coherent continuously from the minimum aperture through this
-    # aperture.  64 ms is conservative enough to reject many transient
-    # decorations while remaining substantially narrower than the old
-    # fixed 120 ms rule.
-    variable_confirmation_aperture_ms: float = 64.0
-
-    # Once a target core is confirmed, the narrowest aperture is allowed to
-    # refine its edges, but only while pitch stays near the confirmed core.
-    variable_edge_aperture_ms: float = 24.0
 
     # Maximum robust pitch spread inside a window.
     stable_range_st: float = 0.65
@@ -97,7 +88,7 @@ class TrajectoryInterpretation:
     local_robust_range_st: np.ndarray
     local_stability_pass: np.ndarray
 
-    # Variable-aperture evidence.  Shape is
+    # Read-only variable-aperture evidence.  Shape is
     # (trajectory_points, number_of_apertures).
     variable_apertures_ms: tuple[float, ...]
     variable_aperture_point_count: np.ndarray
@@ -105,10 +96,6 @@ class TrajectoryInterpretation:
     variable_aperture_pass: np.ndarray
     variable_first_passing_aperture_ms: np.ndarray
     variable_largest_passing_aperture_ms: np.ndarray
-    variable_largest_contiguous_passing_aperture_ms: np.ndarray
-    variable_core_candidate: np.ndarray
-    variable_core_after_duration: np.ndarray
-    variable_edge_grown: np.ndarray
 
     stable_run_duration_ms: np.ndarray
     min_duration_pass: np.ndarray
@@ -366,11 +353,12 @@ def _variable_aperture_shadow_evidence(
     config: TrajectoryInterpreterConfig,
 ) -> tuple[tuple[float, ...], np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
-    V2 variable-aperture evidence.
+    Read-only V2 variable-aperture probe.
 
     Evaluate the historical 24/40/64/96 ms ladder independently at every
-    trusted trajectory point.  Production target formation consumes these
-    measurements below; the full ladder is still exported for audit.
+    trusted trajectory point.  This function deliberately does NOT choose
+    the production stable mask; the current 120 ms fixed-aperture brain is
+    left untouched for the first four-song validation.
 
     Because the active offline trajectory is sampled at ~100 Hz, nominal
     millisecond apertures map to the nearest centered odd number of trajectory
@@ -412,87 +400,6 @@ def _variable_aperture_shadow_evidence(
                     largest_pass[i] = aperture_ms
 
     return apertures, counts, ranges, passes, first_pass, largest_pass
-
-
-def _largest_contiguous_passing_aperture_ms(
-    passes: np.ndarray,
-    apertures: tuple[float, ...],
-) -> np.ndarray:
-    """
-    Largest aperture in the contiguous passing prefix that starts at the
-    narrowest aperture.  This prevents a numerically odd isolated wide-window
-    pass from acting as confirmation when a narrower view already failed.
-    """
-    passes = np.asarray(passes, dtype=bool)
-    out = np.full(passes.shape[0], np.nan, dtype=np.float64)
-    for i in range(passes.shape[0]):
-        for k, aperture_ms in enumerate(apertures):
-            if not passes[i, k]:
-                break
-            out[i] = aperture_ms
-    return out
-
-
-def _aperture_index(
-    apertures: tuple[float, ...],
-    requested_ms: float,
-) -> int:
-    for i, aperture_ms in enumerate(apertures):
-        if np.isclose(aperture_ms, requested_ms, rtol=0.0, atol=1e-9):
-            return i
-    raise ValueError(
-        f"requested aperture {requested_ms:g} ms is not present in "
-        f"variable_apertures_ms={apertures!r}"
-    )
-
-
-def _grow_confirmed_variable_edges(
-    core: np.ndarray,
-    passes: np.ndarray,
-    apertures: tuple[float, ...],
-    structural_pitch: np.ndarray,
-    trusted: np.ndarray,
-    config: TrajectoryInterpreterConfig,
-) -> tuple[np.ndarray, np.ndarray]:
-    """
-    Refine confirmed target boundaries with the narrowest aperture.
-
-    The core median is frozen while growing each side.  Growth therefore
-    cannot walk indefinitely along a glissando by repeatedly redefining the
-    target center.
-    """
-    stable = np.asarray(core, dtype=bool).copy()
-    grown = np.zeros(len(stable), dtype=bool)
-    edge_index = _aperture_index(apertures, config.variable_edge_aperture_ms)
-    edge_pass = passes[:, edge_index]
-
-    # Work from the original confirmed cores.  Each core gets a fixed pitch
-    # center; later growth cannot create a new independent target.
-    for start, end in _true_runs(core):
-        center = float(np.median(structural_pitch[start:end]))
-
-        i = start - 1
-        while i >= 0:
-            if not trusted[i] or not edge_pass[i]:
-                break
-            if abs(float(structural_pitch[i]) - center) > config.same_target_tolerance_st:
-                break
-            stable[i] = True
-            grown[i] = True
-            i -= 1
-
-        i = end
-        while i < len(stable):
-            if not trusted[i] or not edge_pass[i]:
-                break
-            if abs(float(structural_pitch[i]) - center) > config.same_target_tolerance_st:
-                break
-            stable[i] = True
-            grown[i] = True
-            i += 1
-
-    return stable, grown
-
 
 def _stable_run_duration_ms(
     stable: np.ndarray,
@@ -853,54 +760,27 @@ def interpret_pitch_trajectory(
         config,
     )
 
-    variable_largest_contiguous_passing_aperture_ms = (
-        _largest_contiguous_passing_aperture_ms(
-            variable_aperture_pass,
-            variable_apertures_ms,
-        )
-    )
-
-    # Production rule: a new target needs a confirmed coherent core.  The
-    # aperture may expand from 24 -> 40 -> 64 -> 96 ms, and confirmation is
-    # granted only when coherence survives continuously through the configured
-    # confirmation aperture.
-    variable_core_candidate = (
-        trusted
-        & np.isfinite(variable_largest_contiguous_passing_aperture_ms)
-        & (
-            variable_largest_contiguous_passing_aperture_ms
-            >= config.variable_confirmation_aperture_ms
-        )
-    )
-
     stable_run_duration_ms = _stable_run_duration_ms(
-        variable_core_candidate,
+        local_stable,
         config.analysis_hz,
     )
 
-    variable_core_after_duration = _remove_short_stable_runs(
-        variable_core_candidate,
-        config,
-    )
-
-    min_duration_pass = variable_core_after_duration.copy()
-
-    stable_before_merge, variable_edge_grown = (
-        _grow_confirmed_variable_edges(
-            variable_core_after_duration,
-            variable_aperture_pass,
-            variable_apertures_ms,
-            structural_pitch,
-            trusted,
+    stable_after_duration = (
+        _remove_short_stable_runs(
+            local_stable,
             config,
         )
     )
 
-    stable = _merge_same_target_regions(
-        stable_before_merge,
-        structural_pitch,
-        trusted,
-        config,
+    min_duration_pass = stable_after_duration.copy()
+
+    stable = (
+        _merge_same_target_regions(
+            stable_after_duration,
+            structural_pitch,
+            trusted,
+            config,
+        )
     )
 
     target_formation_reason = np.full(
@@ -909,37 +789,23 @@ def interpret_pitch_trajectory(
         dtype=object,
     )
 
-    min_aperture_index = _aperture_index(
-        variable_apertures_ms,
-        config.variable_edge_aperture_ms,
-    )
-
     for i in np.flatnonzero(trusted):
-        if variable_aperture_point_count[i, min_aperture_index] < 3:
+        if local_point_count[i] < 3:
             reason = "TOO_FEW_LOCAL_POINTS"
-        elif not variable_aperture_pass[i, min_aperture_index]:
-            reason = "VARIABLE_MIN_APERTURE_SPREAD_TOO_WIDE"
-        elif not variable_core_candidate[i]:
-            reason = "VARIABLE_NO_CONFIRMING_APERTURE"
-        elif not variable_core_after_duration[i]:
-            reason = "VARIABLE_CORE_TOO_SHORT"
-        elif variable_edge_grown[i]:
-            reason = "VARIABLE_EDGE_REFINEMENT"
+        elif not local_stable[i]:
+            reason = "LOCAL_SPREAD_TOO_WIDE"
+        elif not stable_after_duration[i]:
+            reason = "STABLE_RUN_TOO_SHORT"
         elif stable[i]:
-            reason = "VARIABLE_STABLE_TARGET"
+            reason = "STABLE_TARGET"
         else:
+            # Defensive: should not occur with the current merge-only postpass.
             reason = "NOT_PROMOTED"
         target_formation_reason[i] = reason
 
-    # Edge refinement points are intentionally not members of the confirmed
-    # core, so apply their provenance after the generic loop above.
-    target_formation_reason[variable_edge_grown & stable] = (
-        "VARIABLE_EDGE_REFINEMENT"
-    )
-
     # Samples that became stable only because two same-target regions were
-    # merged across a short trusted interruption get explicit provenance.
-    merged_only = stable & ~stable_before_merge & trusted
+    # merged across a short trusted interruption get an explicit provenance.
+    merged_only = stable & ~stable_after_duration & trusted
     target_formation_reason[merged_only] = "MERGED_SAME_TARGET_GAP"
 
     stable_runs = _true_runs(
@@ -1173,12 +1039,6 @@ def interpret_pitch_trajectory(
         variable_aperture_pass=variable_aperture_pass,
         variable_first_passing_aperture_ms=variable_first_passing_aperture_ms,
         variable_largest_passing_aperture_ms=variable_largest_passing_aperture_ms,
-        variable_largest_contiguous_passing_aperture_ms=(
-            variable_largest_contiguous_passing_aperture_ms
-        ),
-        variable_core_candidate=variable_core_candidate,
-        variable_core_after_duration=variable_core_after_duration,
-        variable_edge_grown=variable_edge_grown,
         stable_run_duration_ms=stable_run_duration_ms,
         min_duration_pass=min_duration_pass,
         target_formation_reason=target_formation_reason,

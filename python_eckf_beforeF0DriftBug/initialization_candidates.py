@@ -110,30 +110,68 @@ def choose_initialization(detector, frame, fs, start_sample,
         if not matching:
             continue
         harmonics = _harmonic_support(detector, frame, fs, hz)
-        # Require multiple distinct harmonics including at least one of
-        # 1..3. This prevents a 400-Hz waveform's fourth/eighth harmonics
-        # from masquerading as 100 Hz. Ambiguous high-only spectra stay
-        # unresolved rather than fabricating a low fundamental.
-        if len(harmonics) < 2 or not any(h <= 3 for h in harmonics):
+        # Peak-grid matches alone can be shared by submultiples. Retain
+        # high-only families for *comparison*, not unconditional acceptance.
+        if len(harmonics) < 2:
             continue
         penalty = None
         if (previous_hz is not None and np.isfinite(previous_hz)
                 and previous_hz > 0 and elapsed_ms is not None):
             penalty = float(vocal_transition_penalty(
                 12 * np.log2(hz / previous_hz), elapsed_ms))
+        # A measured single-sinusoid component at the proposed fundamental
+        # provides independent evidence not supplied by counting harmonics.
+        # In particular, a 201-Hz grid can borrow peaks belonging to a
+        # genuinely ~401-Hz family without having significant 201-Hz energy.
+        amplitude, phase = _measured_amplitude_phase(frame, fs, hz, start_sample)
+        if not (np.isfinite(amplitude) and amplitude > 0 and np.isfinite(phase)):
+            continue
+        representative = min(matching, key=lambda p: abs(1200 * np.log2(hz / p[0])))
         candidates.append((source, hz, harmonics, penalty,
-                           min(abs(1200 * np.log2(hz / p[0])) for p in matching)))
+                           min(abs(1200 * np.log2(hz / p[0])) for p in matching),
+                           amplitude, phase, representative))
 
     if not candidates:
         return InitializationChoice(None, None, None, 'none',
                                     'no_acoustically_supported_candidate', 0, None)
-    # Acoustic eligibility is mandatory above. ACF/YIN's *global* optimum
-    # can be a longer, integer-multiple period (100 Hz for a 400 Hz waveform),
-    # so it must not be an unconditional first-ranked frequency reference.
-    # The transition prior orders independently eligible acoustic candidates;
-    # when the prior is tied or absent, compare the richness of their distinct
-    # spectral harmonics and prefer the shortest *measured* period. Never
-    # derive a new frequency from previous_hz or from a candidate multiple.
+    # Compare directly *measured* periods. A later multiple-lag ACF peak
+    # can be a submultiple illusion: require a separately measured, stronger
+    # shorter period AND substantially stronger energy at that frequency.
+    # This is not pitch multiplication or continuation from previous_hz.
+    def dominates(higher, lower):
+        _, high_hz, _, _, _, high_amp, _, high_period = higher
+        _, low_hz, _, _, _, low_amp, _, low_period = lower
+        if high_hz <= low_hz * 1.4:
+            return False
+        # Compare integer-related period families only; do not suppress a
+        # genuine lower voice just because an unrelated upper pitch exists.
+        ratio = high_hz / low_hz
+        if not (2 <= round(ratio) <= 5 and
+                abs(1200 * np.log2(ratio / round(ratio))) <= max_disagreement_cents):
+            return False
+        clear_period_advantage = (high_period[2] >= low_period[2] + .04 and
+                                  high_period[3] <= low_period[3] - .03)
+        overwhelming_fundamental_advantage = (high_amp >= 8.0 * low_amp and
+                                              high_period[2] >= low_period[2] - .02 and
+                                              high_period[3] <= low_period[3] + .02)
+        return (high_amp >= 3.0 * low_amp and clear_period_advantage
+                or overwhelming_fundamental_advantage)
+
+    candidates = [candidate for candidate in candidates
+                  if not any(dominates(other, candidate) for other in candidates
+                             if other is not candidate)]
+    # A high-only harmonic family is acceptable only when its fundamental
+    # component is independently strong relative to other measured periods.
+    # If all evidence fails this condition, defer rather than manufacture F0.
+    floor = max((candidate[5] for candidate in candidates), default=0.0)
+    candidates = [candidate for candidate in candidates
+                  if any(h <= 3 for h in candidate[2]) or
+                  (candidate[5] >= .25 * floor and candidate[7][2] >= .80
+                   and candidate[7][3] <= .20)]
+    if not candidates:
+        return InitializationChoice(None, None, None, 'none',
+                                    'ambiguous_harmonic_family', 0, None)
+
     a = float(periodicity.acf_frequency_hz)
     b = float(periodicity.cmndf_frequency_hz)
     reliable_reference = (np.isfinite(a) and np.isfinite(b) and a > 0 and b > 0
@@ -142,22 +180,17 @@ def choose_initialization(detector, frame, fs, start_sample,
                           and abs(1200 * np.log2(a / b)) <= max_disagreement_cents)
 
     def ranking(candidate):
-        source, hz, harmonics, penalty, disagreement = candidate
+        source, hz, harmonics, penalty, disagreement, amp, phase, measured_period = candidate
         reference_mismatch = (abs(1200 * np.log2(hz / a))
                               if reliable_reference else 0.0)
-        return (0.0 if penalty is None else penalty,
-                -len(harmonics), -hz,
-                reference_mismatch, disagreement,
+        # Acoustic periodicity and measured fundamental strength precede
+        # incidental peak counts. Prior affects ranking only after evidence.
+        return (-measured_period[2], measured_period[3],
+                -amp, 0.0 if penalty is None else penalty,
+                reference_mismatch, -len(harmonics), disagreement,
                 0 if source == 'spectral_spacing' else 1)
 
     candidates.sort(key=ranking)
-    source, hz, harmonics, penalty, _ = candidates[0]
-    if source == 'spectral_spacing':
-        amplitude, phase = float(proposal.amplitude), float(proposal.phase)
-    else:
-        amplitude, phase = _measured_amplitude_phase(frame, fs, hz, start_sample)
-    if not (np.isfinite(amplitude) and amplitude > 0 and np.isfinite(phase)):
-        return InitializationChoice(None, None, None, 'none',
-                                    'invalid_measured_oscillator', len(harmonics), penalty)
+    source, hz, harmonics, penalty, _, amplitude, phase, _ = candidates[0]
     return InitializationChoice(hz, amplitude, phase, source, 'accepted',
                                 len(harmonics), penalty)

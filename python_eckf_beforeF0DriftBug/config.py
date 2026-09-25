@@ -4,7 +4,6 @@ import math
 
 Mode = Literal["matlab", "offline"]
 SilenceMode = Literal["fixed", "adaptive"]
-GainNormalizationMode = Literal["none", "peak"]
 
 
 @dataclass(frozen=True)
@@ -41,11 +40,6 @@ class ECKFConfig:
     silence_energy_db_threshold: float = -50.0
     kalman_gain_reset_threshold: float = 0.01
 
-    # Offline-only coordinate normalization for the ECKF core.
-    # "peak" maps the arbitrary digital waveform gain onto a unit-peak
-    # internal coordinate system. MATLAB compatibility mode remains untouched.
-    eckf_gain_normalization: GainNormalizationMode = "peak"
-
     def validate(self) -> None:
         if self.block_size <= 0:
             raise ValueError("block_size must be > 0")
@@ -70,7 +64,5 @@ class ECKFConfig:
             raise ValueError("silence_energy_db_threshold must be finite")
         if not math.isfinite(self.silence_flatness_threshold) or not 0 <= self.silence_flatness_threshold <= 1:
             raise ValueError("silence_flatness_threshold must be in [0, 1]")
-        if self.eckf_gain_normalization not in ("none", "peak"):
-            raise ValueError("eckf_gain_normalization must be 'none' or 'peak'")
         if self.vocal_floor_hz <= 0:
             raise ValueError("vocal_floor_hz must be > 0")
