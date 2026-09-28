@@ -11,10 +11,11 @@ kept unchanged: nearest-note anchors, +/-2 semitone plateau extension, then
 
 from dataclasses import dataclass
 from collections import defaultdict
+from bisect import bisect_left, bisect_right
 import math
 import numpy as np
 
-from .trajectory_resolver import vocal_transition_penalty
+from .trajectory_resolver import vocal_transition_penalty, vocal_required_time_ms
 
 
 def _median(vals):
@@ -31,6 +32,29 @@ RANGE_HI_Q = 0.98
 MIN_RANGE_ANCHORS = 40
 RANGE_PLATEAU_EXTENSION_ST = 2.0
 RANGE_SHOULDER_ST = 2.0
+INTERVAL_MAX_ADJACENT_GAP_S = 0.050
+
+
+def _juror_quadratic_transition_penalty(interval_st: float, available_ms: float) -> float:
+    """Juror-only convex refinement of the historical transition prior.
+
+    Upstream ECKF/validity/initialization logic keeps the historical
+    ``vocal_transition_penalty`` unchanged.  Only the interval juror gets the
+    steeper severity requested for grossly impossible leap/time combinations.
+
+    Mild violations remain close to the historical penalty.  Once required
+    time greatly exceeds available time, severity rises quadratically via
+    ``1 + demand_excess**2``.
+    """
+    base = float(vocal_transition_penalty(interval_st, available_ms))
+    if base <= 0.0:
+        return 0.0
+    required = float(vocal_required_time_ms(interval_st))
+    available = max(float(available_ms), 1.0)
+    if required <= available or required <= 0.0:
+        return base
+    demand_excess = max(0.0, required / available - 1.0)
+    return float(base * (1.0 + demand_excess * demand_excess))
 
 
 @dataclass(frozen=True)
@@ -106,13 +130,78 @@ class JurorEvidenceRow:
     range_confidence:float|None
     interval_previous_component:float|None
     interval_following_component:float|None
+    interval_previous_reference_time_s:float|None
+    interval_previous_reference_hz:float|None
+    interval_following_reference_time_s:float|None
+    interval_following_reference_hz:float|None
+    interval_previous_blocked_by_interruption:bool
+    interval_following_blocked_by_interruption:bool
     temporal_prev_same_note:bool
     temporal_next_same_note:bool
     temporal_persistence_count:int
     selected_by_initializer:bool
 
 
-def build_juror_evidence(pitch_candidates, supported_reference_hz) -> tuple[tuple[JurorEvidenceRow,...], RangeCalibration]:
+def _historical_interval_context(range_reference_rows):
+    """Return trusted references and explicit V13 interruption timestamps.
+
+    Historical V22 policy:
+      * references are only rows marked as
+        acoustic_period_supported_source_unverified + diagnostic_settled +
+        usable_as_next_reference;
+      * an explicit interruption is any V13 row with low_energy_flag OR
+        decaying_flag; unresolved F0 alone is NOT treated as silence.
+    """
+    refs=[]
+    interruptions=[]
+    for row in (range_reference_rows or ()): 
+        try:
+            t=float(row.time_s)
+        except Exception:
+            continue
+        if bool(getattr(row, "low_energy_flag", False)) or bool(getattr(row, "decaying_flag", False)):
+            interruptions.append(t)
+        if (
+            getattr(row, "evidence_status", None) == "acoustic_period_supported_source_unverified"
+            and bool(getattr(row, "diagnostic_settled", False))
+            and bool(getattr(row, "usable_as_next_reference", False))
+        ):
+            hz=getattr(row, "selected_measured_hz", None)
+            try:
+                hz=float(hz)
+            except Exception:
+                continue
+            if math.isfinite(hz) and hz > 0.0:
+                refs.append((t,hz))
+    refs.sort()
+    return refs, sorted(set(interruptions))
+
+
+def _adjacent_interval_references(refs, interruptions, t, max_gap_s=INTERVAL_MAX_ADJACENT_GAP_S):
+    """Historical independent past/future lookup with interruption barrier."""
+    if not refs:
+        return None, None, False, False
+    times=[x[0] for x in refs]
+    i=bisect_left(times, t)
+    j=bisect_right(times, t)
+    prev=refs[i-1] if i>0 and 0.0 < t-refs[i-1][0] <= max_gap_s else None
+    nxt=refs[j] if j<len(refs) and 0.0 < refs[j][0]-t <= max_gap_s else None
+    prev_blocked=False
+    next_blocked=False
+    if prev is not None:
+        k=bisect_right(interruptions, prev[0])
+        if k < len(interruptions) and interruptions[k] <= t:
+            prev=None
+            prev_blocked=True
+    if nxt is not None:
+        k=bisect_left(interruptions, t)
+        if k < len(interruptions) and interruptions[k] < nxt[0]:
+            nxt=None
+            next_blocked=True
+    return prev,nxt,prev_blocked,next_blocked
+
+
+def build_juror_evidence(pitch_candidates, supported_reference_hz, range_reference_rows=None) -> tuple[tuple[JurorEvidenceRow,...], RangeCalibration]:
     rows=list(pitch_candidates)
     if not rows:
         return tuple(), derive_v22_range_calibration(supported_reference_hz)
@@ -154,9 +243,10 @@ def build_juror_evidence(pitch_candidates, supported_reference_hz) -> tuple[tupl
             frame_reps[gid]=(rep,grp)
         reps[fi]=frame_reps
 
-    def selected_reference(frame_id):
-        sel=[x for x in by_frame[frame_id] if x.selected_by_initializer]
-        return sel[0] if sel else None
+    # Historical V22 interval context is based on the mature V13 trusted
+    # reference stream, NOT merely the initializer-selected candidate in the
+    # immediately adjacent candidate-bearing frame.
+    interval_refs, interruption_times = _historical_interval_context(range_reference_rows)
 
     out=[]
     for fi in frame_ids:
@@ -173,20 +263,21 @@ def build_juror_evidence(pitch_candidates, supported_reference_hz) -> tuple[tupl
             next_same=bool(within and next_f is not None and f"note:{midi}" in reps.get(next_f,{}))
 
             prev_comp=next_comp=None
-            if prev_f is not None:
-                ref=selected_reference(prev_f)
-                if ref is not None:
-                    dt=max(0.0,(rep.time_s-ref.time_s)*1000.0)
-                    if dt>0:
-                        penalty=float(vocal_transition_penalty(12.0*math.log2(rep.candidate_hz/ref.candidate_hz),dt))
-                        prev_comp=-min(1.0,max(0.0,penalty/2.5))
-            if next_f is not None:
-                ref=selected_reference(next_f)
-                if ref is not None:
-                    dt=max(0.0,(ref.time_s-rep.time_s)*1000.0)
-                    if dt>0:
-                        penalty=float(vocal_transition_penalty(12.0*math.log2(rep.candidate_hz/ref.candidate_hz),dt))
-                        next_comp=-min(1.0,max(0.0,penalty/2.5))
+            prev_ref,next_ref,prev_blocked,next_blocked = _adjacent_interval_references(
+                interval_refs, interruption_times, float(rep.time_s)
+            )
+            if prev_ref is not None:
+                rt,rhz=prev_ref
+                dt=max(0.0,(float(rep.time_s)-float(rt))*1000.0)
+                if dt>0:
+                    penalty=float(_juror_quadratic_transition_penalty(12.0*math.log2(float(rep.candidate_hz)/float(rhz)),dt))
+                    prev_comp=-min(1.0,max(0.0,penalty/2.5))
+            if next_ref is not None:
+                rt,rhz=next_ref
+                dt=max(0.0,(float(rt)-float(rep.time_s))*1000.0)
+                if dt>0:
+                    penalty=float(_juror_quadratic_transition_penalty(12.0*math.log2(float(rep.candidate_hz)/float(rhz)),dt))
+                    next_comp=-min(1.0,max(0.0,penalty/2.5))
 
             out.append(JurorEvidenceRow(
                 frame_index=fi,time_s=float(rep.time_s),group_id=gid,
@@ -199,6 +290,12 @@ def build_juror_evidence(pitch_candidates, supported_reference_hz) -> tuple[tupl
                 component_amplitude_median=_median([x.measured_component_amplitude for x in grp]),
                 range_confidence=_range_confidence(rep.candidate_hz,calibration),
                 interval_previous_component=prev_comp,interval_following_component=next_comp,
+                interval_previous_reference_time_s=(None if prev_ref is None else float(prev_ref[0])),
+                interval_previous_reference_hz=(None if prev_ref is None else float(prev_ref[1])),
+                interval_following_reference_time_s=(None if next_ref is None else float(next_ref[0])),
+                interval_following_reference_hz=(None if next_ref is None else float(next_ref[1])),
+                interval_previous_blocked_by_interruption=bool(prev_blocked),
+                interval_following_blocked_by_interruption=bool(next_blocked),
                 temporal_prev_same_note=prev_same,temporal_next_same_note=next_same,
                 temporal_persistence_count=int(prev_same)+1+int(next_same),
                 selected_by_initializer=any(x.selected_by_initializer for x in grp),

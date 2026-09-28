@@ -51,8 +51,10 @@ def main():
               "fixed historical threshold for --mode matlab."),
     )
     p.add_argument(
-        "--silence-energy-threshold", type=float, default=-50.0,
-        help="Fixed threshold on original 20*log10(sum(frame**2)) scale (NOT dBFS).",
+        "--silence-energy-threshold", type=float, default=None,
+        help=("Silence threshold/fallback on original 20*log10(sum(frame**2)) scale (NOT dBFS). "
+              "Offline V2 default: -27.7734 (~-47 dBFS RMS for 2048-sample frames). "
+              "MATLAB compatibility default remains historical -50."),
     )
     p.add_argument(
         "--eckf-gain-normalization", choices=["none", "peak"], default="peak",
@@ -73,6 +75,11 @@ def main():
         )
 
     silence_mode = args.silence_mode or ("fixed" if args.mode == "matlab" else "adaptive")
+    silence_energy_threshold = (
+        float(args.silence_energy_threshold)
+        if args.silence_energy_threshold is not None
+        else (-50.0 if args.mode == "matlab" else -27.7734)
+    )
 
     cfg = ECKFConfig(
         block_size=args.block_size,
@@ -83,7 +90,7 @@ def main():
         mode=args.mode,
         vocal_floor_hz=args.vocal_floor_hz,
         silence_mode=silence_mode,
-        silence_energy_db_threshold=args.silence_energy_threshold,
+        silence_energy_db_threshold=silence_energy_threshold,
         eckf_gain_normalization=args.eckf_gain_normalization,
     )
 
@@ -105,6 +112,14 @@ def main():
                 "long_run_count", "selected_frame_count", "selected_duration_s",
                 "selected_energy_median", "selected_energy_p95",
                 "headroom_stat_units",
+                "raw_calculated_threshold", "minimum_allowed_threshold",
+                "minimum_threshold_applied",
+                "digital_mute_frame_count", "digital_mute_duration_s",
+                "trustworthy_noise_floor", "trustworthy_run_count",
+                "rejected_nonstationary_run_count",
+                "stationarity_max_spread_db",
+                "stationarity_max_abs_slope_db_per_s",
+                "trust_failure_reason",
             ])
             writer.writerow([
                 cal.mode, cal.threshold, cal.method, cal.block_size, cal.frame_ms,
@@ -115,6 +130,14 @@ def main():
                 "" if cal.selected_energy_median is None else cal.selected_energy_median,
                 "" if cal.selected_energy_p95 is None else cal.selected_energy_p95,
                 cal.headroom_stat_units,
+                "" if cal.raw_calculated_threshold is None else cal.raw_calculated_threshold,
+                cal.minimum_allowed_threshold, int(cal.minimum_threshold_applied),
+                cal.digital_mute_frame_count, cal.digital_mute_duration_s,
+                int(cal.trustworthy_noise_floor), cal.trustworthy_run_count,
+                cal.rejected_nonstationary_run_count,
+                cal.stationarity_max_spread_db,
+                cal.stationarity_max_abs_slope_db_per_s,
+                "" if cal.trust_failure_reason is None else cal.trust_failure_reason,
             ])
         print(f"Silence calibration: {silence_out}")
 
@@ -163,6 +186,7 @@ def main():
     offline_range_reference_result = None
     offline_juror_pairs = None
     offline_juror_bench = None
+    offline_direct_edge_measurements = None
     offline_detective_candidates = None
     offline_detective_verdicts = None
     offline_final_adjudication = None
@@ -302,9 +326,14 @@ def main():
         offline_juror_evidence, offline_range_calibration = build_juror_evidence(
             offline_pitch_candidates,
             supported_reference_hz=offline_range_reference_result.references_hz,
+            range_reference_rows=offline_range_reference_result.rows,
         )
         # Jurors are now seated: verdict-producing, but still observational.
-        offline_juror_pairs, offline_juror_bench = build_juror_bench(offline_juror_evidence)
+        offline_juror_pairs, offline_juror_bench, offline_direct_edge_measurements = build_juror_bench(
+            offline_juror_evidence,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+        )
         # Conditional expert witness: called ONLY on jury abstentions. Existing
         # jury champions are immutable. Hard range/acoustic gate failures are
         # never rescued.
@@ -1147,7 +1176,8 @@ def main():
             cal = result.silence_calibration
             print(
                 f"Silence floor: {cal.threshold:.3f} "
-                f"(mode={cal.mode}, method={cal.method})"
+                f"(mode={cal.mode}, method={cal.method}, "
+                f"trustworthy_noise_floor={cal.trustworthy_noise_floor})"
             )
         first_valid_count = int(
             np.sum(
@@ -1283,6 +1313,9 @@ def main():
                 "acf_median","cmndf_median","harmonic_count_median",
                 "component_amplitude_median","range_confidence",
                 "interval_previous_component","interval_following_component",
+                "interval_previous_reference_time_s","interval_previous_reference_hz",
+                "interval_following_reference_time_s","interval_following_reference_hz",
+                "interval_previous_blocked_by_interruption","interval_following_blocked_by_interruption",
                 "temporal_prev_same_note","temporal_next_same_note",
                 "temporal_persistence_count","selected_by_initializer",
             ])
@@ -1297,6 +1330,11 @@ def main():
                     "" if r.range_confidence is None else r.range_confidence,
                     "" if r.interval_previous_component is None else r.interval_previous_component,
                     "" if r.interval_following_component is None else r.interval_following_component,
+                    "" if r.interval_previous_reference_time_s is None else r.interval_previous_reference_time_s,
+                    "" if r.interval_previous_reference_hz is None else r.interval_previous_reference_hz,
+                    "" if r.interval_following_reference_time_s is None else r.interval_following_reference_time_s,
+                    "" if r.interval_following_reference_hz is None else r.interval_following_reference_hz,
+                    int(r.interval_previous_blocked_by_interruption),int(r.interval_following_blocked_by_interruption),
                     int(r.temporal_prev_same_note),int(r.temporal_next_same_note),
                     r.temporal_persistence_count,int(r.selected_by_initializer),
                 ])
@@ -1306,9 +1344,9 @@ def main():
         pair_path = Path(str(out) + ".juror_pairs.csv")
         with pair_path.open("w", newline="", encoding="utf-8") as f:
             writer=csv.writer(f)
-            writer.writerow(["frame_index","time_s","a_group_id","a_midi","a_hz","b_group_id","b_midi","b_hz","a_range_admitted","b_range_admitted","a_admissible","b_admissible","a_score","b_score","a_spectral","b_spectral","a_temporal","b_temporal","a_interval","b_interval","a_range_component","b_range_component","winner_group_id","winner_midi","winner_hz","outcome","diagnostic"])
+            writer.writerow(["frame_index","time_s","a_group_id","a_midi","a_hz","b_group_id","b_midi","b_hz","a_range_admitted","b_range_admitted","a_admissible","b_admissible","a_score","b_score","a_spectral","b_spectral","a_temporal","b_temporal","temporal_pattern","temporal_paired_measurements","temporal_low_supported_shift_count","temporal_high_supported_shift_count","temporal_low_acf_median","temporal_high_acf_median","a_interval","b_interval","a_range_component","b_range_component","winner_group_id","winner_midi","winner_hz","outcome","diagnostic"])
             for r in offline_juror_pairs:
-                writer.writerow([r.frame_index,r.time_s,r.a_group_id,r.a_midi,r.a_hz,r.b_group_id,r.b_midi,r.b_hz,int(r.a_range_admitted),int(r.b_range_admitted),int(r.a_admissible),int(r.b_admissible),"" if r.a_score is None else r.a_score,"" if r.b_score is None else r.b_score,"" if r.a_spectral is None else r.a_spectral,"" if r.b_spectral is None else r.b_spectral,"" if r.a_temporal is None else r.a_temporal,"" if r.b_temporal is None else r.b_temporal,"" if r.a_interval is None else r.a_interval,"" if r.b_interval is None else r.b_interval,"" if r.a_range_component is None else r.a_range_component,"" if r.b_range_component is None else r.b_range_component,"" if r.winner_group_id is None else r.winner_group_id,"" if r.winner_midi is None else r.winner_midi,"" if r.winner_hz is None else r.winner_hz,r.outcome,r.diagnostic])
+                writer.writerow([r.frame_index,r.time_s,r.a_group_id,r.a_midi,r.a_hz,r.b_group_id,r.b_midi,r.b_hz,int(r.a_range_admitted),int(r.b_range_admitted),int(r.a_admissible),int(r.b_admissible),"" if r.a_score is None else r.a_score,"" if r.b_score is None else r.b_score,"" if r.a_spectral is None else r.a_spectral,"" if r.b_spectral is None else r.b_spectral,"" if r.a_temporal is None else r.a_temporal,"" if r.b_temporal is None else r.b_temporal,r.temporal_pattern,r.temporal_paired_measurements,r.temporal_low_supported_shift_count,r.temporal_high_supported_shift_count,"" if r.temporal_low_acf_median is None else r.temporal_low_acf_median,"" if r.temporal_high_acf_median is None else r.temporal_high_acf_median,"" if r.a_interval is None else r.a_interval,"" if r.b_interval is None else r.b_interval,"" if r.a_range_component is None else r.a_range_component,"" if r.b_range_component is None else r.b_range_component,"" if r.winner_group_id is None else r.winner_group_id,"" if r.winner_midi is None else r.winner_midi,"" if r.winner_hz is None else r.winner_hz,r.outcome,r.diagnostic])
         print(f"Juror pair verdicts: {pair_path}")
 
     if cfg.mode == "offline" and offline_juror_bench is not None:
@@ -1319,6 +1357,15 @@ def main():
             for r in offline_juror_bench:
                 writer.writerow([r.frame_index,r.time_s,r.candidate_count,r.status,"" if r.winner_group_id is None else r.winner_group_id,"" if r.winner_midi is None else r.winner_midi,"" if r.winner_hz is None else r.winner_hz,r.decisive_edges,r.undecided_pairs,r.abstention_category])
         print(f"Juror bench: {bench_path}")
+
+    if cfg.mode == "offline" and offline_direct_edge_measurements is not None:
+        dep = Path(str(out) + ".direct_edge_measurements.csv")
+        with dep.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f)
+            w.writerow(["frame_index","time_s","a_group_id","a_midi","a_hz","b_group_id","b_midi","b_hz","a_testable_views","b_testable_views","a_supported_views","b_supported_views","a_acf_median","b_acf_median","temporal_pattern","original_outcome","direct_outcome","direct_winner_group_id","direct_winner_midi","direct_winner_hz","used_to_complete_edge","diagnostic"])
+            for r in offline_direct_edge_measurements:
+                w.writerow([r.frame_index,r.time_s,r.a_group_id,r.a_midi,r.a_hz,r.b_group_id,r.b_midi,r.b_hz,r.a_testable_views,r.b_testable_views,r.a_supported_views,r.b_supported_views,"" if r.a_acf_median is None else r.a_acf_median,"" if r.b_acf_median is None else r.b_acf_median,r.temporal_pattern,r.original_outcome,r.direct_outcome,r.direct_winner_group_id or "","" if r.direct_winner_midi is None else r.direct_winner_midi,"" if r.direct_winner_hz is None else r.direct_winner_hz,int(r.used_to_complete_edge),r.diagnostic])
+        print(f"Direct missing-edge measurements: {dep}")
 
     if cfg.mode == "offline" and offline_detective_candidates is not None:
         dcp = Path(str(out) + ".harmonic_detective_candidates.csv")

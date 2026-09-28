@@ -24,6 +24,17 @@ class SilenceCalibration:
     selected_energy_median: float | None
     selected_energy_p95: float | None
     headroom_stat_units: float
+    raw_calculated_threshold: float | None
+    minimum_allowed_threshold: float
+    minimum_threshold_applied: bool
+    digital_mute_frame_count: int
+    digital_mute_duration_s: float
+    trustworthy_noise_floor: bool
+    trustworthy_run_count: int
+    rejected_nonstationary_run_count: int
+    stationarity_max_spread_db: float
+    stationarity_max_abs_slope_db_per_s: float
+    trust_failure_reason: str | None
 
 
 def _energy_statistic(frame: np.ndarray) -> float:
@@ -33,10 +44,19 @@ def _energy_statistic(frame: np.ndarray) -> float:
     return -np.inf if sumsq <= 0.0 else float(20.0 * np.log10(sumsq))
 
 
+def _rms_dbfs_frames(frames: np.ndarray) -> np.ndarray:
+    frames = np.asarray(frames, dtype=np.float64)
+    rms = np.sqrt(np.mean(frames * frames, axis=1))
+    out = np.full(len(rms), -np.inf, dtype=np.float64)
+    pos = rms > 0.0
+    out[pos] = 20.0 * np.log10(rms[pos])
+    return out
+
+
 def is_silent(
     x: np.ndarray,
     flatness_threshold: float = 0.45,
-    energy_db_threshold: float = -50.0,
+    energy_db_threshold: float = -27.7734,
 ):
     """
     Translation of eckf_pitch_final/is_silent.m.
@@ -48,8 +68,9 @@ def is_silent(
         silent = spectral_flatness >= 0.45 | energy < threshold;
 
     IMPORTANT: energy_db is the literal MATLAB 20*log10(sum of squares)
-    statistic, NOT RMS dBFS.  Offline V2 can now calibrate its threshold
-    once per recording; MATLAB/fixed mode can still use the historical -50.
+    statistic, NOT RMS dBFS.  In the offline V2 path the default/fallback
+    threshold is -27.7734, approximately -47 dBFS RMS for a 2048-sample frame.
+    MATLAB compatibility mode remains historical unless explicitly overridden.
     """
     x = np.asarray(x, dtype=np.float64).reshape(-1)
     psd = matlab_pwelch_default(x)
@@ -90,6 +111,58 @@ def _true_runs(mask: np.ndarray) -> list[tuple[int, int]]:
     return runs
 
 
+def _linear_slope_db_per_s(values_db: np.ndarray, frame_seconds: float) -> float:
+    values_db = np.asarray(values_db, dtype=np.float64).reshape(-1)
+    finite = np.isfinite(values_db)
+    values_db = values_db[finite]
+    if values_db.size < 2 or frame_seconds <= 0:
+        return 0.0
+    t = np.arange(values_db.size, dtype=np.float64) * frame_seconds
+    t -= np.mean(t)
+    y = values_db - np.mean(values_db)
+    denom = float(np.dot(t, t))
+    if denom <= 0.0:
+        return 0.0
+    return float(np.dot(t, y) / denom)
+
+
+def _stationary_run_interior(
+    run: tuple[int, int],
+    rms_dbfs: np.ndarray,
+    *,
+    frame_seconds: float,
+    edge_trim_ms: float,
+    min_interior_ms: float,
+    max_spread_db: float,
+    max_abs_slope_db_per_s: float,
+) -> tuple[bool, tuple[int, int] | None, float | None, float | None]:
+    """Return whether a candidate run looks like stationary noise-floor silence.
+
+    The test is intentionally simple.  Reverb tails are typically directional
+    decays with a wide level spread; a usable noise-floor region should be
+    comparatively stationary.  We trim the boundaries first so breath/noise or
+    note attacks immediately adjacent to a pause do not contaminate the test.
+    """
+    start, end = run
+    trim = max(0, int(math.ceil((edge_trim_ms / 1000.0) / frame_seconds)))
+    istart = start + trim
+    iend = end - trim
+    min_frames = max(2, int(math.ceil((min_interior_ms / 1000.0) / frame_seconds)))
+    if iend - istart < min_frames:
+        return False, None, None, None
+
+    vals = np.asarray(rms_dbfs[istart:iend], dtype=np.float64)
+    vals = vals[np.isfinite(vals)]
+    if vals.size < min_frames:
+        return False, None, None, None
+
+    p10, p90 = np.percentile(vals, [10.0, 90.0])
+    spread = float(p90 - p10)
+    slope = _linear_slope_db_per_s(vals, frame_seconds)
+    ok = bool(spread <= max_spread_db and abs(slope) <= max_abs_slope_db_per_s)
+    return ok, (istart, iend), spread, slope
+
+
 def calibrate_silence_threshold(
     audio: np.ndarray,
     sample_rate: float,
@@ -98,22 +171,28 @@ def calibrate_silence_threshold(
     min_silence_ms: float = 500.0,
     search_quantiles: tuple[float, ...] = (10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0),
     headroom_stat_units: float = 6.0,
+    minimum_allowed_threshold: float = -27.7734,
+    digital_mute_rms_dbfs: float = -145.0,
+    stationarity_edge_trim_ms: float = 100.0,
+    stationarity_min_interior_ms: float = 250.0,
+    stationarity_max_spread_db: float = 6.0,
+    stationarity_max_abs_slope_db_per_s: float = 6.0,
 ) -> SilenceCalibration:
-    """Estimate one energy threshold from genuinely long quiet regions.
+    """Estimate one per-file threshold from trustworthy long silence regions.
 
-    This intentionally stays simple and recording-level:
+    V4 rules:
+      * digital mute is <= -145 dBFS RMS and is excluded from calibration;
+      * the normal offline fallback/default is -27.7734 on the historical
+        statistic (~-47 dBFS RMS for 2048-sample frames);
+      * an adaptive threshold is accepted only when at least one sufficiently
+        long quiet run contains a stationary interior.  A reverb decay is not
+        considered a trustworthy noise-floor measurement merely because it is
+        quiet and long.
 
-    1. Measure the historical MATLAB energy statistic on real ECKF frames.
-    2. Starting with the quietest 10% of finite frames, look for contiguous
-       runs lasting at least ``min_silence_ms``.  Relax only as far as the
-       quietest 40% if necessary.
-    3. Treat those long quiet runs as the recording's noise-floor sample.
-    4. Threshold = 95th percentile of their finite energies + a small
-       headroom.  ``+6`` on the historical 20*log10(sum-of-squares) statistic
-       corresponds to about +3 dB on an ordinary amplitude-dB scale.
-
-    No pitch result, GroundTruth MIDI, fixed -50 cutoff, or future adjudicator
-    verdict is used to estimate this threshold.
+    Trustworthiness is deliberately uncomplicated: after trimming 100 ms from
+    each edge, the interior must last at least 250 ms, have a P90-P10 RMS-level
+    spread <= 6 dB, and an absolute linear level slope <= 6 dB/s.  If no such
+    run exists, the calibrator falls back to the per-file default/fallback.
     """
     y = np.asarray(audio, dtype=np.float64).reshape(-1)
     if sample_rate <= 0 or block_size <= 0:
@@ -121,107 +200,170 @@ def calibrate_silence_threshold(
 
     nframes = len(y) // block_size
     frame_ms = 1000.0 * block_size / sample_rate
+    frame_seconds = block_size / sample_rate
     min_frames = max(1, int(math.ceil(min_silence_ms / frame_ms)))
 
-    if nframes <= 0:
-        # Empty/too-short input: there is no evidence from which to calibrate.
-        # Keep a deterministic extremely-low threshold rather than borrowing
-        # the historical -50 constant.
+    def make_result(*, threshold, method, chosen_q=None, chosen_ceiling=None,
+                    long_runs=(), selected_idx=None, median=None, p95=None,
+                    raw_threshold=None, mute_count=0, trustworthy=False,
+                    trustworthy_count=0, rejected_nonstationary=0,
+                    trust_failure_reason=None):
+        selected_count = 0 if selected_idx is None else int(len(selected_idx))
         return SilenceCalibration(
-            mode="adaptive", threshold=-300.0, method="no_full_frames",
-            block_size=block_size, frame_ms=frame_ms,
-            min_silence_ms=min_silence_ms, min_silence_frames=min_frames,
-            search_quantile_percent=None, candidate_energy_ceiling=None,
-            long_run_count=0, selected_frame_count=0, selected_duration_s=0.0,
-            selected_energy_median=None, selected_energy_p95=None,
-            headroom_stat_units=headroom_stat_units,
+            mode="adaptive",
+            threshold=float(threshold),
+            method=method,
+            block_size=block_size,
+            frame_ms=frame_ms,
+            min_silence_ms=float(min_silence_ms),
+            min_silence_frames=min_frames,
+            search_quantile_percent=chosen_q,
+            candidate_energy_ceiling=chosen_ceiling,
+            long_run_count=len(long_runs),
+            selected_frame_count=selected_count,
+            selected_duration_s=float(selected_count * block_size / sample_rate),
+            selected_energy_median=median,
+            selected_energy_p95=p95,
+            headroom_stat_units=float(headroom_stat_units),
+            raw_calculated_threshold=raw_threshold,
+            minimum_allowed_threshold=float(minimum_allowed_threshold),
+            minimum_threshold_applied=(raw_threshold is None or raw_threshold < minimum_allowed_threshold),
+            digital_mute_frame_count=int(mute_count),
+            digital_mute_duration_s=float(mute_count * block_size / sample_rate),
+            trustworthy_noise_floor=bool(trustworthy),
+            trustworthy_run_count=int(trustworthy_count),
+            rejected_nonstationary_run_count=int(rejected_nonstationary),
+            stationarity_max_spread_db=float(stationarity_max_spread_db),
+            stationarity_max_abs_slope_db_per_s=float(stationarity_max_abs_slope_db_per_s),
+            trust_failure_reason=trust_failure_reason,
+        )
+
+    if nframes <= 0:
+        return make_result(
+            threshold=minimum_allowed_threshold,
+            method="fallback_no_full_frames",
+            trust_failure_reason="no_full_frames",
         )
 
     frames = y[: nframes * block_size].reshape(nframes, block_size)
+    rms_dbfs = _rms_dbfs_frames(frames)
+    mute_rms_amplitude = 10.0 ** (float(digital_mute_rms_dbfs) / 20.0)
+    rms_linear = np.sqrt(np.mean(frames * frames, axis=1))
+    digitally_muted = rms_linear <= mute_rms_amplitude
+    mute_count = int(np.sum(digitally_muted))
+
     sumsq = np.sum(frames * frames, axis=1)
     energies = np.full(nframes, -np.inf, dtype=np.float64)
     positive = sumsq > 0.0
     energies[positive] = 20.0 * np.log10(sumsq[positive])
 
-    finite = energies[np.isfinite(energies)]
+    calibration_mask = np.isfinite(energies) & ~digitally_muted
+    finite = energies[calibration_mask]
     if finite.size == 0:
-        return SilenceCalibration(
-            mode="adaptive", threshold=-300.0, method="digital_silence",
-            block_size=block_size, frame_ms=frame_ms,
-            min_silence_ms=min_silence_ms, min_silence_frames=min_frames,
-            search_quantile_percent=None, candidate_energy_ceiling=None,
-            long_run_count=1, selected_frame_count=nframes,
-            selected_duration_s=nframes * block_size / sample_rate,
-            selected_energy_median=None, selected_energy_p95=None,
-            headroom_stat_units=headroom_stat_units,
+        return make_result(
+            threshold=minimum_allowed_threshold,
+            method="fallback_all_digital_mute",
+            mute_count=mute_count,
+            trust_failure_reason="all_frames_digital_mute_or_nonfinite",
         )
 
     chosen_q = None
     chosen_ceiling = None
-    chosen_runs: list[tuple[int, int]] = []
+    candidate_runs: list[tuple[int, int]] = []
     for q in search_quantiles:
         ceiling = float(np.percentile(finite, q))
-        quiet = energies <= ceiling
+        quiet = calibration_mask & (energies <= ceiling)
         long_runs = [r for r in _true_runs(quiet) if (r[1] - r[0]) >= min_frames]
         if long_runs:
             chosen_q = float(q)
             chosen_ceiling = ceiling
-            chosen_runs = long_runs
+            candidate_runs = long_runs
             break
 
-    method = "long_quiet_runs"
-    if not chosen_runs:
-        # Rare fallback: if the recording genuinely contains no 500 ms quiet
-        # plateau, use the longest run found at the loosest search quantile.
-        # This remains per-file and is reported explicitly in the audit.
-        chosen_q = float(search_quantiles[-1])
-        chosen_ceiling = float(np.percentile(finite, chosen_q))
-        all_runs = _true_runs(energies <= chosen_ceiling)
-        if all_runs:
-            longest = max(all_runs, key=lambda r: r[1] - r[0])
-            chosen_runs = [longest]
-            method = "longest_quiet_run_fallback"
+    if not candidate_runs:
+        return make_result(
+            threshold=minimum_allowed_threshold,
+            method="fallback_no_long_nonmuted_quiet_run",
+            chosen_q=float(search_quantiles[-1]),
+            chosen_ceiling=float(np.percentile(finite, search_quantiles[-1])),
+            mute_count=mute_count,
+            trust_failure_reason="no_long_nonmuted_quiet_run",
+        )
+
+    trusted_interiors: list[tuple[int, int]] = []
+    rejected_nonstationary = 0
+    for run in candidate_runs:
+        ok, interior, _, _ = _stationary_run_interior(
+            run,
+            rms_dbfs,
+            frame_seconds=frame_seconds,
+            edge_trim_ms=stationarity_edge_trim_ms,
+            min_interior_ms=stationarity_min_interior_ms,
+            max_spread_db=stationarity_max_spread_db,
+            max_abs_slope_db_per_s=stationarity_max_abs_slope_db_per_s,
+        )
+        if ok and interior is not None:
+            trusted_interiors.append(interior)
         else:
-            chosen_runs = []
-            method = "quiet_percentile_fallback"
+            rejected_nonstationary += 1
 
-    if chosen_runs:
-        selected_idx = np.concatenate([
-            np.arange(start, end, dtype=np.int64) for start, end in chosen_runs
-        ])
-        selected = energies[selected_idx]
-    else:
-        selected = energies[energies <= chosen_ceiling]
-        selected_idx = np.flatnonzero(energies <= chosen_ceiling)
+    if not trusted_interiors:
+        return make_result(
+            threshold=minimum_allowed_threshold,
+            method="fallback_no_trustworthy_noise_floor_silence",
+            chosen_q=chosen_q,
+            chosen_ceiling=chosen_ceiling,
+            long_runs=candidate_runs,
+            mute_count=mute_count,
+            trustworthy=False,
+            trustworthy_count=0,
+            rejected_nonstationary=rejected_nonstationary,
+            trust_failure_reason="long_quiet_regions_not_stationary",
+        )
 
+    selected_idx = np.concatenate([
+        np.arange(start, end, dtype=np.int64) for start, end in trusted_interiors
+    ])
+    selected = energies[selected_idx]
     selected_finite = selected[np.isfinite(selected)]
-    if selected_finite.size:
-        median = float(np.median(selected_finite))
-        p95 = float(np.percentile(selected_finite, 95.0))
-        threshold = p95 + float(headroom_stat_units)
-    else:
-        # Selected region is exact digital zero. Any measurable non-zero frame
-        # should be above the silence floor.
-        median = None
-        p95 = None
-        threshold = -300.0
+    if not selected_finite.size:
+        return make_result(
+            threshold=minimum_allowed_threshold,
+            method="fallback_trusted_region_empty",
+            chosen_q=chosen_q,
+            chosen_ceiling=chosen_ceiling,
+            long_runs=candidate_runs,
+            selected_idx=selected_idx,
+            mute_count=mute_count,
+            trustworthy=False,
+            trustworthy_count=len(trusted_interiors),
+            rejected_nonstationary=rejected_nonstationary,
+            trust_failure_reason="trusted_region_nonfinite",
+        )
 
-    return SilenceCalibration(
-        mode="adaptive",
-        threshold=float(threshold),
+    median = float(np.median(selected_finite))
+    p95 = float(np.percentile(selected_finite, 95.0))
+    raw_threshold = p95 + float(headroom_stat_units)
+    threshold = max(float(raw_threshold), float(minimum_allowed_threshold))
+    method = "stationary_noise_floor_runs"
+    if threshold != raw_threshold:
+        method += "+default_floor_clamp"
+
+    return make_result(
+        threshold=threshold,
         method=method,
-        block_size=block_size,
-        frame_ms=frame_ms,
-        min_silence_ms=float(min_silence_ms),
-        min_silence_frames=min_frames,
-        search_quantile_percent=chosen_q,
-        candidate_energy_ceiling=chosen_ceiling,
-        long_run_count=len(chosen_runs),
-        selected_frame_count=int(len(selected_idx)),
-        selected_duration_s=float(len(selected_idx) * block_size / sample_rate),
-        selected_energy_median=median,
-        selected_energy_p95=p95,
-        headroom_stat_units=float(headroom_stat_units),
+        chosen_q=chosen_q,
+        chosen_ceiling=chosen_ceiling,
+        long_runs=candidate_runs,
+        selected_idx=selected_idx,
+        median=median,
+        p95=p95,
+        raw_threshold=raw_threshold,
+        mute_count=mute_count,
+        trustworthy=True,
+        trustworthy_count=len(trusted_interiors),
+        rejected_nonstationary=rejected_nonstationary,
+        trust_failure_reason=None,
     )
 
 
@@ -232,7 +374,7 @@ def resolve_silence_calibration(config, audio=None, sample_rate=None) -> Silence
         return SilenceCalibration(
             mode="fixed",
             threshold=float(config.silence_energy_db_threshold),
-            method="fixed_historical_threshold",
+            method="fixed_threshold",
             block_size=config.block_size,
             frame_ms=frame_ms,
             min_silence_ms=0.0,
@@ -245,12 +387,26 @@ def resolve_silence_calibration(config, audio=None, sample_rate=None) -> Silence
             selected_energy_median=None,
             selected_energy_p95=None,
             headroom_stat_units=0.0,
+            raw_calculated_threshold=float(config.silence_energy_db_threshold),
+            minimum_allowed_threshold=float(config.silence_energy_db_threshold),
+            minimum_threshold_applied=False,
+            digital_mute_frame_count=0,
+            digital_mute_duration_s=0.0,
+            trustworthy_noise_floor=False,
+            trustworthy_run_count=0,
+            rejected_nonstationary_run_count=0,
+            stationarity_max_spread_db=6.0,
+            stationarity_max_abs_slope_db_per_s=6.0,
+            trust_failure_reason="fixed_mode_not_calibrated",
         )
     if config.silence_mode == "adaptive":
         if audio is None or sample_rate is None:
             raise ValueError("adaptive silence calibration requires audio and sample_rate")
         return calibrate_silence_threshold(
-            audio, float(sample_rate), int(config.block_size)
+            audio,
+            float(sample_rate),
+            int(config.block_size),
+            minimum_allowed_threshold=float(config.silence_energy_db_threshold),
         )
     raise ValueError(f"Unknown silence_mode: {config.silence_mode!r}")
 

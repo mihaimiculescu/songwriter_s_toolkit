@@ -39,7 +39,7 @@ class ECKFConfig:
     # remains historical/fixed in the CLI unless explicitly overridden.
     silence_mode: SilenceMode = "adaptive"
     silence_flatness_threshold: float = 0.45
-    silence_energy_db_threshold: float = -50.0
+    silence_energy_db_threshold: float = -27.7734
     kalman_gain_reset_threshold: float = 0.01
 
     # Offline-only coordinate normalization for the ECKF core.
