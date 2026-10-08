@@ -22,15 +22,73 @@ from .gesture_object_splitter import analyse_gesture_object_splits
 from .gesture_structural_splitter import apply_structural_splitting
 from .gesture_hypotheses import build_interpretation_candidates
 from .pitch_candidate_field import build_pitch_candidate_field
-from .juror_evidence import build_juror_evidence
+from .juror_evidence import build_juror_evidence, derive_v22_range_calibration
 from .range_reference_evaluator import build_v13_style_range_references
 from .juror_bench import build_juror_bench
 from .harmonic_detective import build_harmonic_detective
+from .reacquisition_adjudication import apply_reacquisition_adjudication_feedback
+from .register_readjudication_v18 import apply_register_readjudication_v18
+from .interval_authority import build_interval_authority
+from .structural_collaboration import apply_structural_collaboration
 from .validity import (
     PitchValidityConfig,
     analyse_pitch_validity,
     apply_offline_validity_correction,
 )
+
+
+def _build_interpretation_stack(*, offline_validity, sampled_frame_state, analysis_hz, audio, sr, sample_idx):
+    """Build all musical interpretation layers from one authoritative F0 state.
+
+    V3R1 centralizes this previously duplicated block.  It intentionally
+    preserves the V3R0 algorithms and thresholds; only call ordering changes.
+    """
+    interpretation = interpret_pitch_trajectory(
+        clean_f0_hz=offline_validity.clean_f0_hz,
+        valid=offline_validity.valid,
+        analysis_hz=analysis_hz,
+        frame_acoustic_state=sampled_frame_state,
+    )
+    expressive = smooth_expressive_pitch(
+        pitch_st=interpretation.pitch_st,
+        valid=interpretation.valid,
+        analysis_hz=analysis_hz,
+    )
+    expressive_amplitude = analyse_expressive_amplitude(
+        audio=audio, sample_rate=sr, sample_idx=sample_idx,
+        trusted_pitch=interpretation.valid,
+        pitch_residual_st=expressive.residual_pitch_st,
+        analysis_hz=analysis_hz,
+    )
+    transition_geometry = compare_transition_geometry(
+        interpretation=interpretation, smoothing=expressive,
+    )
+    gesture_features = extract_gesture_features(
+        interpretation=interpretation, smoothing=expressive,
+    )
+    gesture_objects = construct_gesture_objects(
+        interpretation=interpretation, features=gesture_features,
+    )
+    gesture_split_evidence = analyse_gesture_object_splits(
+        objects=gesture_objects, features=gesture_features,
+    )
+    gesture_structure = apply_structural_splitting(
+        split_evidence=gesture_split_evidence,
+    )
+    interpretation_candidates = build_interpretation_candidates(
+        structure=gesture_structure,
+        interpretation=interpretation,
+        smoothing=expressive,
+        gesture_features=gesture_features,
+        amplitude_expression=expressive_amplitude,
+        analysis_hz=analysis_hz,
+    )
+    return (
+        interpretation, expressive, expressive_amplitude, transition_geometry,
+        gesture_features, gesture_objects, gesture_split_evidence,
+        gesture_structure, interpretation_candidates,
+    )
+
 
 def main():
     p = argparse.ArgumentParser(
@@ -53,7 +111,7 @@ def main():
     p.add_argument(
         "--silence-energy-threshold", type=float, default=None,
         help=("Silence threshold/fallback on original 20*log10(sum(frame**2)) scale (NOT dBFS). "
-              "Offline V2 default: -27.7734 (~-47 dBFS RMS for 2048-sample frames). "
+              "Offline V2 default: -13.7734 (~-40 dBFS RMS for 2048-sample frames). "
               "MATLAB compatibility default remains historical -50."),
     )
     p.add_argument(
@@ -78,7 +136,7 @@ def main():
     silence_energy_threshold = (
         float(args.silence_energy_threshold)
         if args.silence_energy_threshold is not None
-        else (-50.0 if args.mode == "matlab" else -27.7734)
+        else (-50.0 if args.mode == "matlab" else -13.7734)
     )
 
     cfg = ECKFConfig(
@@ -184,12 +242,16 @@ def main():
     offline_juror_evidence = None
     offline_range_calibration = None
     offline_range_reference_result = None
+    preliminary_range_reference_result = None
+    preliminary_range_calibration = None
     offline_juror_pairs = None
     offline_juror_bench = None
     offline_direct_edge_measurements = None
     offline_detective_candidates = None
     offline_detective_verdicts = None
     offline_final_adjudication = None
+    offline_interval_authority = None
+    offline_structural_collaboration = None
     frame_index = sample_idx // cfg.block_size
 
     if cfg.mode == "offline":
@@ -212,95 +274,14 @@ def main():
             frame_acoustic_state=sampled_frame_state,
         )
 
-        offline_validity = apply_offline_validity_correction(
-            f0_hz=export_f0,
-            first_pass=first_pass_validity,
-            sample_rate=analysis_hz,
-            frame_acoustic_state=sampled_frame_state,
-        )
-
-        # V2 active trajectory stage.  The interpreter consumes the exact
-        # final validity mask and the explicit frame-acoustic-state passport;
-        # it is no longer merely a library helper that callers may bypass.
-        offline_interpretation = interpret_pitch_trajectory(
-            clean_f0_hz=offline_validity.clean_f0_hz,
-            valid=offline_validity.valid,
-            analysis_hz=analysis_hz,
-            frame_acoustic_state=sampled_frame_state,
-        )
-
-        # ---------------------------------------------------------
-        # V2 expressive trajectory lane.
+        # Preliminary per-file range for OFFLINE RESCUE ONLY.
         #
-        # This is deliberately observational.  It preserves three views
-        # of the same trusted trajectory for later ornament/MIDI work:
-        #   raw    = corrected F0, never replaced;
-        #   shape  = light symmetric smoothing for motion geometry;
-        #   center = slower robust centerline;
-        #   residual = shape - center.
-        #
-        # No note quantization and no ornament classification occurs here.
-        # Stable-target formation remains exactly as decided above.
-        # ---------------------------------------------------------
-        offline_expressive = smooth_expressive_pitch(
-            pitch_st=offline_interpretation.pitch_st,
-            valid=offline_interpretation.valid,
-            analysis_hz=analysis_hz,
-        )
-
-        # Parallel amplitude-expression lane.  This preserves raw RMS for
-        # provenance plus gain-robust local modulation evidence for future
-        # note-velocity / CC-expression rendering.  It does not classify
-        # amplitude vibrato or emit MIDI controller decisions.
-        offline_expressive_amplitude = analyse_expressive_amplitude(
-            audio=audio,
-            sample_rate=sr,
-            sample_idx=sample_idx,
-            trusted_pitch=offline_interpretation.valid,
-            pitch_residual_st=offline_expressive.residual_pitch_st,
-            analysis_hz=analysis_hz,
-        )
-
-        offline_transition_geometry = compare_transition_geometry(
-            interpretation=offline_interpretation,
-            smoothing=offline_expressive,
-        )
-
-        # V2 gesture-structure lane. Structural only: no ornament labels,
-        # note quantisation, or MIDI rendering decisions.
-        offline_gesture_features = extract_gesture_features(
-            interpretation=offline_interpretation,
-            smoothing=offline_expressive,
-        )
-
-        offline_gesture_objects = construct_gesture_objects(
-            interpretation=offline_interpretation,
-            features=offline_gesture_features,
-        )
-
-        offline_gesture_split_evidence = analyse_gesture_object_splits(
-            objects=offline_gesture_objects,
-            features=offline_gesture_features,
-        )
-
-        offline_gesture_structure = apply_structural_splitting(
-            split_evidence=offline_gesture_split_evidence,
-        )
-
-        # V2 interpretation-candidate substrate.  This deliberately keeps
-        # multiple possible musical/MIDI representations alive; no ornament
-        # label or rendering winner is selected here.
-        offline_interpretation_candidates = build_interpretation_candidates(
-            structure=offline_gesture_structure,
-            interpretation=offline_interpretation,
-            smoothing=offline_expressive,
-            gesture_features=offline_gesture_features,
-            amplitude_expression=offline_expressive_amplitude,
-            analysis_hz=analysis_hz,
-        )
-
-        # Observational pitch-candidate field for the future adjudication bench.
-        # No juror is seated yet and no existing decision is changed.
+        # This uses the exact same candidate field, historical V13 reference
+        # evaluator, and V22 range geometry as the final juror range, but the
+        # reference population is built strictly from FIRST-PASS-valid F0.
+        # Therefore rescue cannot define the range that later authorizes rescue.
+        # If there are too few anchors, the preliminary calibration is unavailable
+        # and validity correction behaves exactly as before.
         offline_pitch_candidates = build_pitch_candidate_field(
             audio=audio,
             sample_rate=sr,
@@ -308,13 +289,41 @@ def main():
             tracker_result=result,
             frame_acoustic_state_name_fn=frame_acoustic_state_name,
         )
+        preliminary_range_reference_result = build_v13_style_range_references(
+            pitch_candidates=offline_pitch_candidates,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+            sample_frame_index=frame_index,
+            clean_f0_hz=first_pass_validity.cleaned_f0_hz,
+            valid=first_pass_validity.valid,
+        )
+        preliminary_range_calibration = derive_v22_range_calibration(
+            preliminary_range_reference_result.references_hz,
+            source="pre_rescue_first_pass_v13_refs",
+        )
 
-        # Historical V13-style range-reference evaluator restored.  The
-        # range population is no longer "every corrected-valid sample".  A
-        # candidate must first be a unique locally supported measured period,
-        # using the old 35c selection / 70c competitor / ACF+component-strength
-        # contract.  The V22 q02/q98 + plateau/shoulder geometry remains
-        # unchanged downstream.
+        offline_validity = apply_offline_validity_correction(
+            f0_hz=export_f0,
+            first_pass=first_pass_validity,
+            sample_rate=analysis_hz,
+            frame_acoustic_state=sampled_frame_state,
+            range_zero_low_midi=(
+                preliminary_range_calibration.zero_low_midi
+                if preliminary_range_calibration.available else None
+            ),
+            range_zero_high_midi=(
+                preliminary_range_calibration.zero_high_midi
+                if preliminary_range_calibration.available else None
+            ),
+        )
+
+        # V3R1 authoritative ownership ordering.
+        #
+        # The candidate field and preliminary rescue range already exist.
+        # Seat final range/jury/HD now, BEFORE any musical trajectory/gesture
+        # structure is built.  These adjudicators do not consume trajectory or
+        # gesture state, so constructing those layers first was redundant and
+        # allowed provisional pitch ownership to leak into musical structure.
         offline_range_reference_result = build_v13_style_range_references(
             pitch_candidates=offline_pitch_candidates,
             audio=np.asarray(audio, dtype=np.float64),
@@ -328,20 +337,107 @@ def main():
             supported_reference_hz=offline_range_reference_result.references_hz,
             range_reference_rows=offline_range_reference_result.rows,
         )
-        # Jurors are now seated: verdict-producing, but still observational.
         offline_juror_pairs, offline_juror_bench, offline_direct_edge_measurements = build_juror_bench(
             offline_juror_evidence,
             audio=np.asarray(audio, dtype=np.float64),
             sample_rate=sr,
         )
-        # Conditional expert witness: called ONLY on jury abstentions. Existing
-        # jury champions are immutable. Hard range/acoustic gate failures are
-        # never rescued.
         offline_detective_candidates, offline_detective_verdicts, offline_final_adjudication = build_harmonic_detective(
             audio=np.asarray(audio, dtype=np.float64),
             sr=sr,
             evidence_rows=offline_juror_evidence,
             bench_rows=offline_juror_bench,
+            pair_rows=offline_juror_pairs,
+        )
+        offline_interval_authority = build_interval_authority(offline_juror_pairs, offline_juror_evidence)
+
+        # Apply authoritative jury/HD reacquisition feedback BEFORE the first
+        # musical interpretation.  This removes the old build -> adjudicate ->
+        # discard -> rebuild cycle.
+        offline_reacquisition_feedback = apply_reacquisition_adjudication_feedback(
+            offline_validity=offline_validity,
+            sample_times_s=t,
+            sample_frame_index=frame_index,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+            evidence_rows=offline_juror_evidence,
+            bench_rows=offline_juror_bench,
+            pair_rows=offline_juror_pairs,
+            final_adjudication=offline_final_adjudication,
+        )
+
+        (
+            offline_interpretation,
+            offline_expressive,
+            offline_expressive_amplitude,
+            offline_transition_geometry,
+            offline_gesture_features,
+            offline_gesture_objects,
+            offline_gesture_split_evidence,
+            offline_gesture_structure,
+            offline_interpretation_candidates,
+        ) = _build_interpretation_stack(
+            offline_validity=offline_validity,
+            sampled_frame_state=sampled_frame_state,
+            analysis_hz=analysis_hz,
+            audio=audio,
+            sr=sr,
+            sample_idx=sample_idx,
+        )
+
+        # V18 (branched from V17/V14 lineage, not V15/V16): the interval juror is used
+        # only as a trigger for re-adjudication.  If corrected-valid ownership
+        # inside or across adjacent existing V14 trajectory regions contains an abrupt
+        # interval-juror contradiction, solve only that local contradiction
+        # neighborhood from the already-existing in-range candidate field.  Do not
+        # propagate an owner and do not insert a discontinuity wall.
+        offline_register_readjudication = apply_register_readjudication_v18(
+            offline_validity=offline_validity,
+            interpretation=offline_interpretation,
+            sample_times_s=t,
+            sample_frame_index=frame_index,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+            evidence_rows=offline_juror_evidence,
+            pair_rows=offline_juror_pairs,
+            final_adjudication=offline_final_adjudication,
+        )
+
+        if offline_register_readjudication:
+            # Register re-adjudication is the only remaining downstream stage
+            # allowed to change corrected F0 in V3R1, and it is constrained by
+            # the authoritative ownership ledger.  Rebuild the musical stack
+            # once from that explicit ownership change.
+            (
+                offline_interpretation,
+                offline_expressive,
+                offline_expressive_amplitude,
+                offline_transition_geometry,
+                offline_gesture_features,
+                offline_gesture_objects,
+                offline_gesture_split_evidence,
+                offline_gesture_structure,
+                offline_interpretation_candidates,
+            ) = _build_interpretation_stack(
+                offline_validity=offline_validity,
+                sampled_frame_state=sampled_frame_state,
+                analysis_hz=analysis_hz,
+                audio=audio,
+                sr=sr,
+                sample_idx=sample_idx,
+            )
+
+        # Structural collaboration is deliberately LAST. Existing jury/HD
+        # winners remain immutable. Only residual abstentions are eligible.
+        offline_structural_collaboration, offline_final_adjudication = apply_structural_collaboration(
+            final_adjudication=offline_final_adjudication,
+            interpretation=offline_interpretation,
+            gesture_objects=offline_gesture_objects,
+            pitch_candidates=offline_pitch_candidates,
+            sample_times_s=t,
+            sample_rate=sr,
+            expressive=offline_expressive,
+            amplitude_expression=offline_expressive_amplitude,
         )
 
         # Per-sample region kind for diagnostic export.  Untrusted samples
@@ -521,6 +617,8 @@ def main():
                 "periodicity_acf_frequency_hz", "periodicity_cmndf_frequency_hz",
                 "periodicity_reason", "initialization_source",
                 "initialization_frequency_hz", "lookahead_frames", "lookahead_reason",
+                "va_reacquisition_aperture_ms", "va_reacquisition_reason",
+                "va_reacquisition_original_hz", "va_reacquisition_selected_hz",
                 "frame_decision",
             ])
             for fi, start in enumerate(result.frame_start_samples):
@@ -550,6 +648,13 @@ def main():
                      if np.isfinite(result.initialization_frequency_hz_per_frame[fi]) else ""),
                     int(result.lookahead_frames_per_frame[fi]),
                     str(result.lookahead_reason_per_frame[fi]),
+                    (float(result.variable_aperture_ms_per_frame[fi])
+                     if np.isfinite(result.variable_aperture_ms_per_frame[fi]) else ""),
+                    str(result.variable_aperture_reason_per_frame[fi]),
+                    (float(result.variable_aperture_original_hz_per_frame[fi])
+                     if np.isfinite(result.variable_aperture_original_hz_per_frame[fi]) else ""),
+                    (float(result.variable_aperture_selected_hz_per_frame[fi])
+                     if np.isfinite(result.variable_aperture_selected_hz_per_frame[fi]) else ""),
                     str(result.frame_decision[fi]),
                 ])
         print(f"Frame evidence: {frames_out}")
@@ -1208,7 +1313,17 @@ def main():
             f"Rescued:     "
             f"{newly_valid_count} rows"
         )
+    # Export ECKF reset/onset landmarks for downstream musical-articulation
+    # interpretation. These are tracker reset landmarks, not final MIDI Note Ons.
+    onsets_path = Path(str(out) + ".onsets.csv")
+    with onsets_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["onset_index", "sample", "time_s"])
+        for oi, (sample, seconds) in enumerate(zip(result.onset_samples, result.onset_seconds)):
+            writer.writerow([oi, int(sample), float(seconds)])
+
     print(f"Onsets:      {len(result.onset_samples)}")
+    print(f"Onset landmarks: {onsets_path}")
     print(f"CSV:         {out}")
 
     if cfg.mode == "offline" and offline_pitch_candidates is not None:
@@ -1275,6 +1390,34 @@ def main():
                     int(rr.diagnostic_settled),int(rr.usable_as_next_reference),
                 ])
         print(f"Historical range references: {range_refs_path}")
+
+    if cfg.mode == "offline" and preliminary_range_calibration is not None:
+        pre_range_path = Path(str(out) + ".pre_rescue_range_calibration.csv")
+        r = preliminary_range_calibration
+        with pre_range_path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "available","anchor_count","source","low_hz","high_hz",
+                "low_anchor_midi","high_anchor_midi",
+                "plateau_low_midi","plateau_high_midi",
+                "zero_low_midi","zero_high_midi",
+                "lo_quantile","hi_quantile",
+                "plateau_extension_st","shoulder_st",
+            ])
+            writer.writerow([
+                int(r.available), r.anchor_count, r.source,
+                "" if r.low_hz is None else r.low_hz,
+                "" if r.high_hz is None else r.high_hz,
+                "" if r.low_anchor_midi is None else r.low_anchor_midi,
+                "" if r.high_anchor_midi is None else r.high_anchor_midi,
+                "" if r.plateau_low_midi is None else r.plateau_low_midi,
+                "" if r.plateau_high_midi is None else r.plateau_high_midi,
+                "" if r.zero_low_midi is None else r.zero_low_midi,
+                "" if r.zero_high_midi is None else r.zero_high_midi,
+                r.lo_quantile, r.hi_quantile,
+                r.plateau_extension_st, r.shoulder_st,
+            ])
+        print(f"Pre-rescue range calibration: {pre_range_path}")
 
     if cfg.mode == "offline" and offline_range_calibration is not None:
         range_path = Path(str(out) + ".range_calibration.csv")
@@ -1378,6 +1521,50 @@ def main():
             w=csv.writer(f); w.writerow(["frame_index","time_s","jury_status","detective_called","eligible_representatives","best_group_id","best_midi","best_hz","best_score","best_support","runner_group_id","runner_hz","runner_score","harmonic_margin","detective_winner_group_id","detective_winner_midi","detective_winner_hz","reason"])
             for r in offline_detective_verdicts:
                 w.writerow([r.frame_index,r.time_s,r.jury_status,int(r.detective_called),r.eligible_representatives,r.best_group_id or "","" if r.best_midi is None else r.best_midi,"" if r.best_hz is None else r.best_hz,"" if r.best_score is None else r.best_score,"" if r.best_support is None else r.best_support,r.runner_group_id or "","" if r.runner_hz is None else r.runner_hz,"" if r.runner_score is None else r.runner_score,"" if r.harmonic_margin is None else r.harmonic_margin,r.detective_winner_group_id or "","" if r.detective_winner_midi is None else r.detective_winner_midi,"" if r.detective_winner_hz is None else r.detective_winner_hz,r.reason])
+        if offline_structural_collaboration is not None:
+            scp = Path(str(out) + ".structural_collaboration.csv")
+            with scp.open("w", newline="", encoding="utf-8") as f:
+                w=csv.writer(f)
+                w.writerow(["frame_index","time_s","applied","frame_start_s","frame_end_s","trajectory_region_index","trajectory_region_kind","trajectory_overlap_ms","gesture_object_index","gesture_object_kind","gesture_overlap_ms","trusted_point_count","trusted_run_start_s","trusted_run_end_s","structural_reference_st","structural_reference_hz","structural_reference_midi","action","reason"])
+                for r in offline_structural_collaboration:
+                    w.writerow([r.frame_index,r.time_s,int(r.applied),r.frame_start_s,r.frame_end_s,"" if r.trajectory_region_index is None else r.trajectory_region_index,r.trajectory_region_kind,r.trajectory_overlap_ms,"" if r.gesture_object_index is None else r.gesture_object_index,r.gesture_object_kind,r.gesture_overlap_ms,r.trusted_point_count,"" if r.trusted_run_start_s is None else r.trusted_run_start_s,"" if r.trusted_run_end_s is None else r.trusted_run_end_s,"" if r.structural_reference_st is None else r.structural_reference_st,"" if r.structural_reference_hz is None else r.structural_reference_hz,"" if r.structural_reference_midi is None else r.structural_reference_midi,r.action,r.reason])
+            print(f"Structural collaboration: {scp}")
+
+        r17p = Path(str(out) + ".register_readjudication_v18.csv")
+        with r17p.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f)
+            w.writerow([
+                "region_id","peer_region_id","burst_start_s","burst_end_s","frame_index",
+                "original_hz","reviewed_hz","reviewed_midi","source",
+                "trigger_penalty_max","applied_sample_count",
+            ])
+            for r in offline_register_readjudication:
+                w.writerow([
+                    r.region_id,"" if r.peer_region_id is None else r.peer_region_id,r.burst_start_s,r.burst_end_s,r.frame_index,
+                    "" if r.original_hz is None else r.original_hz,
+                    "" if r.reviewed_hz is None else r.reviewed_hz,
+                    "" if r.reviewed_midi is None else r.reviewed_midi,
+                    r.source,r.trigger_penalty_max,r.applied_sample_count,
+                ])
+        print(f"V18 register re-adjudication: {r17p}")
+
+        raf = Path(str(out) + ".reacquisition_feedback.csv")
+        with raf.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f)
+            w.writerow(["frame_index","time_s","original_hz","original_reason","jury_hz","reviewed_hz","reviewed_midi","review_source","detective_best_score","detective_runner_score","detective_margin","applied_sample_count"])
+            for r in offline_reacquisition_feedback:
+                w.writerow([r.frame_index,r.time_s,"" if r.original_hz is None else r.original_hz,r.original_reason,"" if r.jury_hz is None else r.jury_hz,"" if r.reviewed_hz is None else r.reviewed_hz,"" if r.reviewed_midi is None else r.reviewed_midi,r.review_source,"" if r.detective_best_score is None else r.detective_best_score,"" if r.detective_runner_score is None else r.detective_runner_score,"" if r.detective_margin is None else r.detective_margin,r.applied_sample_count])
+        print(f"Reacquisition feedback: {raf}")
+
+        iap = Path(str(out) + ".interval_authority.csv")
+        with iap.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f)
+            w.writerow(["frame_index","time_s","preferred_group_id","preferred_midi","preferred_hz","rejected_group_id","rejected_midi","rejected_hz","preferred_component","rejected_component","authoritative","context_status","reference_time_s","reference_hz","source"])
+            for fi in sorted(offline_interval_authority or {}):
+                for r in (offline_interval_authority or {})[fi]:
+                    w.writerow([r.frame_index,r.time_s,r.preferred_group_id,r.preferred_midi,r.preferred_hz,r.rejected_group_id,r.rejected_midi,r.rejected_hz,r.preferred_component,r.rejected_component,int(bool(r.authoritative)),r.context_status,"" if r.reference_time_s is None else r.reference_time_s,"" if r.reference_hz is None else r.reference_hz,r.source])
+        print(f"Interval authority: {iap}")
+
         fap = Path(str(out) + ".adjudication_final.csv")
         with fap.open("w", newline="", encoding="utf-8") as f:
             w=csv.writer(f); w.writerow(["frame_index","time_s","provenance","status","winner_group_id","winner_midi","winner_hz","original_jury_status","original_abstention_category"])

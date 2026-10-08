@@ -17,10 +17,12 @@ class ECKFConfig:
 
     mode="offline":
         Vocal-only offline behavior. The active offline tracker currently
-        first attempts current-frame initialization, then inspects up to
-        num_buf_to_wait future frames if the current choice fails. The future
-        must belong to the same supported note and acoustic event; filtering
-        returns to the ORIGINAL current audio. Zero disables lookahead.
+        first attempts current-frame initialization. V19 may then adjudicate
+        octave-related reacquisition ambiguity bidirectionally over the
+        24/40/64/96-ms raw waveform aperture ladder. If no seed is established, the historical
+        block-by-block lookahead inspects up to num_buf_to_wait future frames.
+        Future evidence must remain inside the same acoustic event; filtering
+        returns to the ORIGINAL current audio. Zero disables block lookahead.
 
     MATLAB mode remains compatibility-oriented.
     """
@@ -39,7 +41,7 @@ class ECKFConfig:
     # remains historical/fixed in the CLI unless explicitly overridden.
     silence_mode: SilenceMode = "adaptive"
     silence_flatness_threshold: float = 0.45
-    silence_energy_db_threshold: float = -27.7734
+    silence_energy_db_threshold: float = -13.7734
     kalman_gain_reset_threshold: float = 0.01
 
     # Offline-only coordinate normalization for the ECKF core.

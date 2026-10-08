@@ -44,7 +44,7 @@ def _juror_quadratic_transition_penalty(interval_st: float, available_ms: float)
 
     Mild violations remain close to the historical penalty.  Once required
     time greatly exceeds available time, severity rises quadratically via
-    ``1 + demand_excess**2``.
+    ``1 + demand_excess**3``.
     """
     base = float(vocal_transition_penalty(interval_st, available_ms))
     if base <= 0.0:
@@ -54,7 +54,7 @@ def _juror_quadratic_transition_penalty(interval_st: float, available_ms: float)
     if required <= available or required <= 0.0:
         return base
     demand_excess = max(0.0, required / available - 1.0)
-    return float(base * (1.0 + demand_excess * demand_excess))
+    return float(base * (1.0 + demand_excess * demand_excess * demand_excess))
 
 
 @dataclass(frozen=True)

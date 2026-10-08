@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from collections import defaultdict
 import json, math
 import numpy as np
+from .ownership_evidence import acoustically_admissible
 
 WINDOWS_MS=(64.0,96.0)
 HARMONICS=10
@@ -22,6 +23,7 @@ BACKGROUND_HZ=90.0
 SUPPORT_DB=5.0
 MAX_PROMINENCE_DB=24.0
 MIN_VALID_WINDOWS=2
+JURY_DISPUTE_MATCH_CENTS=2.0
 MIN_SUPPORT=0.50
 MIN_SCORE=0.45
 MIN_MARGIN=0.08
@@ -92,12 +94,48 @@ def _harmonic_score(spec,f0):
             'peak_hz':peaks,'rms':rms,'physical_resolution_hz':resolution}
 
 def _acoustic_admissible(r):
-    return (r.range_confidence is not None and math.isfinite(float(r.range_confidence)) and float(r.range_confidence)>0
-            and r.acf_median is not None and math.isfinite(float(r.acf_median)) and float(r.acf_median)>=0.72)
+    return acoustically_admissible(r)
 
-def build_harmonic_detective(audio,sr,evidence_rows,bench_rows):
+def _cents_apart(a_hz,b_hz):
+    if not (math.isfinite(float(a_hz)) and math.isfinite(float(b_hz)) and float(a_hz)>0 and float(b_hz)>0):
+        return float('inf')
+    return abs(1200.0*math.log2(float(a_hz)/float(b_hz)))
+
+def _jury_dispute_group_ids(bench_row,pair_rows):
+    """Return the representatives that constitute the unresolved jury dispute.
+
+    The Detective is a tie-breaker, not a new trial.  For a tournament with
+    multiple undefeated candidates, the dispute is precisely those undefeated
+    nodes.  When no pair was decisive at all, the dispute is the endpoints of
+    the admissible unresolved pair(s).  Other detective-callable abstentions
+    fall back to all range-admitted/acoustically admissible pair endpoints.
+    """
+    admitted=set()
+    incoming=set()
+    unresolved=set()
+    for p in pair_rows:
+        if p.a_range_admitted and p.a_admissible:
+            admitted.add(p.a_group_id)
+        if p.b_range_admitted and p.b_admissible:
+            admitted.add(p.b_group_id)
+        if p.winner_group_id is not None:
+            loser=p.b_group_id if p.winner_group_id==p.a_group_id else p.a_group_id
+            incoming.add(loser)
+        elif p.a_range_admitted and p.b_range_admitted and p.a_admissible and p.b_admissible:
+            unresolved.update((p.a_group_id,p.b_group_id))
+    cat=bench_row.abstention_category
+    if cat=='multiple_undefeated_candidates':
+        out=admitted-incoming
+        return out if out else unresolved
+    if cat=='no_decisive_acoustic_pair':
+        return unresolved if unresolved else admitted
+    return unresolved if unresolved else admitted
+
+def build_harmonic_detective(audio,sr,evidence_rows,bench_rows,pair_rows=()):
     by=defaultdict(list)
     for r in evidence_rows:by[int(r.frame_index)].append(r)
+    pairs_by=defaultdict(list)
+    for p in pair_rows:pairs_by[int(p.frame_index)].append(p)
     candidates=[]; verdicts=[]; finals=[]
     for b in bench_rows:
         fi=int(b.frame_index); rows=by.get(fi,[])
@@ -115,6 +153,9 @@ def build_harmonic_detective(audio,sr,evidence_rows,bench_rows):
         # representative upstream; >=49-cent candidates are intentional singleton
         # contestants and must remain visible to the expert witness.
         field=[r for r in rows if _acoustic_admissible(r)]
+        dispute_ids=_jury_dispute_group_ids(b,pairs_by.get(fi,[]))
+        dispute_rows=[r for r in rows if r.group_id in dispute_ids]
+        dispute_hz=[float(r.representative_hz) for r in dispute_rows]
         scored=[]
         for r in field:
             frames=[];fails=[]
@@ -130,21 +171,26 @@ def build_harmonic_detective(audio,sr,evidence_rows,bench_rows):
                 float(np.median([x['strength'] for x in frames])) if frames else None,
                 json.dumps({str(w):f for w,f in zip(WINDOWS_MS,frames)},separators=(',',':')) if frames else '{}','|'.join(fails))
             candidates.append(dc)
-            if dc.valid_windows>=MIN_VALID_WINDOWS and dc.harmonic_score is not None and dc.harmonic_support is not None:scored.append(dc)
+            relevant=(
+                bool(dispute_hz)
+                and min(_cents_apart(dc.hz,hz) for hz in dispute_hz) <= JURY_DISPUTE_MATCH_CENTS
+            )
+            if (relevant and dc.valid_windows>=MIN_VALID_WINDOWS
+                    and dc.harmonic_score is not None and dc.harmonic_support is not None):
+                scored.append(dc)
+        relevant_field=[r for r in field if dispute_hz and min(_cents_apart(float(r.representative_hz),hz) for hz in dispute_hz) <= JURY_DISPUTE_MATCH_CENTS]
         scored.sort(key=lambda x:(-x.harmonic_score,x.hz))
         best=scored[0] if scored else None; runner=scored[1] if len(scored)>1 else None
         margin=(best.harmonic_score-runner.harmonic_score) if best and runner else None
         winner=None
-        if len(field)<2:
+        if len(relevant_field)<2:
             reason='no_cross_note_contest_to_break'
-        elif len(scored)!=len(field):
+        elif len(scored)!=len(relevant_field):
             reason='incomplete_competitor_field'
         elif best is None:
             reason='no_supported_group_representative'
         elif best.harmonic_support<MIN_SUPPORT or best.harmonic_score<MIN_SCORE:
             reason='harmonic_evidence_too_weak'
-        elif runner is not None and best.midi==runner.midi:
-            reason='same_note_representatives_unexpected'
         elif margin is not None and margin>=MIN_MARGIN:
             reason='harmonic_detective_tiebreak'; winner=best
         elif (margin is not None
@@ -155,7 +201,7 @@ def build_harmonic_detective(audio,sr,evidence_rows,bench_rows):
             reason='harmonic_detective_high_confidence_tiebreak'; winner=best
         else:
             reason='harmonic_margin_insufficient'
-        verdicts.append(DetectiveVerdict(fi,float(b.time_s),b.status,True,len(field),
+        verdicts.append(DetectiveVerdict(fi,float(b.time_s),b.status,True,len(relevant_field),
             None if best is None else best.group_id,None if best is None else best.midi,None if best is None else best.hz,
             None if best is None else best.harmonic_score,None if best is None else best.harmonic_support,
             None if runner is None else runner.group_id,None if runner is None else runner.hz,None if runner is None else runner.harmonic_score,

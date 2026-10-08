@@ -8,7 +8,7 @@ import numpy as np
 
 from .temporal_persistence_v21 import measure_v21_temporal_pair, measure_v21_candidate_shift_acf
 
-W_SPECTRAL=0.60; W_TEMPORAL=0.20; W_INTERVAL=0.15; W_RANGE=0.50
+W_SPECTRAL=0.60; W_TEMPORAL=0.20; W_INTERVAL=0.30; W_RANGE=0.50
 MIN_SCORE_MARGIN=0.20; MIN_ABSOLUTE_SCORE=-0.10; MIN_ACF=0.72
 
 def _finite(v): return v is not None and math.isfinite(float(v))

@@ -56,7 +56,7 @@ def _rms_dbfs_frames(frames: np.ndarray) -> np.ndarray:
 def is_silent(
     x: np.ndarray,
     flatness_threshold: float = 0.45,
-    energy_db_threshold: float = -27.7734,
+    energy_db_threshold: float = -13.7734,
 ):
     """
     Translation of eckf_pitch_final/is_silent.m.
@@ -69,7 +69,7 @@ def is_silent(
 
     IMPORTANT: energy_db is the literal MATLAB 20*log10(sum of squares)
     statistic, NOT RMS dBFS.  In the offline V2 path the default/fallback
-    threshold is -27.7734, approximately -47 dBFS RMS for a 2048-sample frame.
+    threshold is -13.7734, approximately -40 dBFS RMS for a 2048-sample frame.
     MATLAB compatibility mode remains historical unless explicitly overridden.
     """
     x = np.asarray(x, dtype=np.float64).reshape(-1)
@@ -171,7 +171,7 @@ def calibrate_silence_threshold(
     min_silence_ms: float = 500.0,
     search_quantiles: tuple[float, ...] = (10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0),
     headroom_stat_units: float = 6.0,
-    minimum_allowed_threshold: float = -27.7734,
+    minimum_allowed_threshold: float = -13.7734,
     digital_mute_rms_dbfs: float = -145.0,
     stationarity_edge_trim_ms: float = 100.0,
     stationarity_min_interior_ms: float = 250.0,
@@ -182,8 +182,8 @@ def calibrate_silence_threshold(
 
     V4 rules:
       * digital mute is <= -145 dBFS RMS and is excluded from calibration;
-      * the normal offline fallback/default is -27.7734 on the historical
-        statistic (~-47 dBFS RMS for 2048-sample frames);
+      * the normal offline fallback/default is -13.7734 on the historical
+        statistic (~-40 dBFS RMS for 2048-sample frames);
       * an adaptive threshold is accepted only when at least one sufficiently
         long quiet run contains a stationary interior.  A reverb decay is not
         considered a trustworthy noise-floor measurement merely because it is

@@ -17,6 +17,7 @@ from .frame_evidence import (
 )
 from .initialization_candidates import choose_initialization, InitializationChoice, _measured_amplitude_phase
 from .octave_reacquisition import reconcile_initialization, inspect_octave_disagreement
+from .variable_aperture_reacquisition import adjudicate_variable_aperture_reacquisition
 
 @dataclass
 class ECKFResult:
@@ -50,6 +51,10 @@ class ECKFResult:
     initialization_frequency_hz_per_frame: np.ndarray | None = None
     lookahead_frames_per_frame: np.ndarray | None = None
     lookahead_reason_per_frame: np.ndarray | None = None
+    variable_aperture_ms_per_frame: np.ndarray | None = None
+    variable_aperture_reason_per_frame: np.ndarray | None = None
+    variable_aperture_original_hz_per_frame: np.ndarray | None = None
+    variable_aperture_selected_hz_per_frame: np.ndarray | None = None
     frame_decision: np.ndarray | None = None
     silence_calibration: object | None = None
 
@@ -243,6 +248,10 @@ def track_pitch(
     initialization_frequency_hz = np.full(nframes, np.nan, dtype=np.float64)
     lookahead_frames_used = np.zeros(nframes, dtype=np.int16)
     lookahead_reason_per_frame = np.full(nframes, "NOT_REQUESTED", dtype="U64")
+    variable_aperture_ms_per_frame = np.full(nframes, np.nan, dtype=np.float64)
+    variable_aperture_reason_per_frame = np.full(nframes, "NOT_REQUESTED", dtype="U96")
+    variable_aperture_original_hz_per_frame = np.full(nframes, np.nan, dtype=np.float64)
+    variable_aperture_selected_hz_per_frame = np.full(nframes, np.nan, dtype=np.float64)
     frame_decision = np.full(nframes, "NOT_PROCESSED", dtype="U32")
     previous_frame_eligible = False
 
@@ -468,6 +477,38 @@ def track_pitch(
                     frame_start=start, decision=octave_evidence.state,
                     reason=octave_evidence.reason,
                     measured_f0_hz=octave_evidence.measured_hz,
+                )
+                va_decision = adjudicate_variable_aperture_reacquisition(
+                    y=y, raw_y=raw_y, start=start, block=block,
+                    original_length=original_length, fs=sample_rate,
+                    detector=detector, silence_threshold=silence_energy_threshold,
+                    silence_flatness_threshold=config.silence_flatness_threshold,
+                    original_choice=choice, previous_hz=previous_hz,
+                    elapsed_ms=elapsed_ms,
+                )
+                choice = va_decision.choice
+                variable_aperture_ms_per_frame[fi] = (
+                    float(va_decision.aperture_ms)
+                    if va_decision.aperture_ms is not None else np.nan
+                )
+                variable_aperture_reason_per_frame[fi] = str(va_decision.reason)
+                variable_aperture_original_hz_per_frame[fi] = (
+                    float(va_decision.original_hz)
+                    if va_decision.original_hz is not None and np.isfinite(va_decision.original_hz)
+                    else np.nan
+                )
+                variable_aperture_selected_hz_per_frame[fi] = (
+                    float(va_decision.selected_hz)
+                    if va_decision.selected_hz is not None and np.isfinite(va_decision.selected_hz)
+                    else np.nan
+                )
+                trace.emit(
+                    "VARIABLE_APERTURE_REACQUISITION", start,
+                    frame_start=start, state=va_decision.state,
+                    reason=va_decision.reason, aperture_ms=va_decision.aperture_ms,
+                    original_hz=va_decision.original_hz,
+                    selected_hz=va_decision.selected_hz,
+                    competing_groups=','.join(str(x) for x in va_decision.competing_groups),
                 )
                 choice, lookahead_frames, lookahead_reason = (
                     _adaptive_offline_initialization(
@@ -948,6 +989,10 @@ def track_pitch(
         initialization_frequency_hz_per_frame=initialization_frequency_hz,
         lookahead_frames_per_frame=lookahead_frames_used,
         lookahead_reason_per_frame=lookahead_reason_per_frame,
+        variable_aperture_ms_per_frame=variable_aperture_ms_per_frame,
+        variable_aperture_reason_per_frame=variable_aperture_reason_per_frame,
+        variable_aperture_original_hz_per_frame=variable_aperture_original_hz_per_frame,
+        variable_aperture_selected_hz_per_frame=variable_aperture_selected_hz_per_frame,
         frame_decision=frame_decision,
         silence_calibration=silence_calibration,
     )

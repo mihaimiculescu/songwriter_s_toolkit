@@ -1305,6 +1305,8 @@ def apply_offline_validity_correction(
     sample_rate: float,
     config: OfflineValidityCorrectionConfig | None = None,
     frame_acoustic_state: np.ndarray | None = None,
+    range_zero_low_midi: float | None = None,
+    range_zero_high_midi: float | None = None,
 ) -> OfflineValidityCorrectionResult:
     """
     Apply an OFFLINE bidirectional correction to the existing first-pass
@@ -1332,6 +1334,12 @@ def apply_offline_validity_correction(
 
     config:
         Optional OfflineValidityCorrectionConfig.
+
+    range_zero_low_midi / range_zero_high_midi:
+        Optional preliminary per-file V22 zero-support bounds.  These bounds
+        apply ONLY to False -> True rescue promotions.  Existing first-pass
+        valid samples are never invalidated here.  When either bound is absent,
+        rescue behavior is unchanged.
 
     Returns
     -------
@@ -1481,6 +1489,26 @@ def apply_offline_validity_correction(
         f0_hz
     )
 
+    # Preliminary range is a veto on RESCUE ONLY.  It does not revise the
+    # first-pass validity mask and it does not participate in ordinary pitch
+    # detection.  This prevents a later temporal rescue from reintroducing an
+    # F0 that the same per-file range geometry already assigns zero support.
+    range_veto_enabled = (
+        range_zero_low_midi is not None
+        and range_zero_high_midi is not None
+        and np.isfinite(float(range_zero_low_midi))
+        and np.isfinite(float(range_zero_high_midi))
+        and float(range_zero_low_midi) < float(range_zero_high_midi)
+    )
+    if range_veto_enabled:
+        rescue_range_ok = (
+            np.isfinite(midi)
+            & (midi >= float(range_zero_low_midi))
+            & (midi <= float(range_zero_high_midi))
+        )
+    else:
+        rescue_range_ok = np.ones(len(midi), dtype=bool)
+
     # IMPORTANT:
     # Rejected episodes are based on the ORIGINAL first-pass mask.
     #
@@ -1573,6 +1601,17 @@ def apply_offline_validity_correction(
             pitch = midi[
                 subrun_start:subrun_end
             ]
+
+            # Hard zero-support veto for OFFLINE rescue/reacquisition.
+            # Keep the whole coherent subrun rejected if ANY constituent F0
+            # lies beyond the preliminary zero-support bounds; partial rescue
+            # would manufacture an artificial edge inside one coherent run.
+            if range_veto_enabled and not bool(
+                np.all(rescue_range_ok[subrun_start:subrun_end])
+            ):
+                correction_reason[subrun_start:subrun_end] = "RANGE_ZERO_VETO"
+                final_reason[subrun_start:subrun_end] = "RANGE_ZERO_VETO"
+                continue
 
             metrics = (
                 _trajectory_metrics(
@@ -1766,6 +1805,29 @@ def apply_offline_validity_correction(
             correction_reason[
                 subrun_start:subrun_end
             ] = "REJECTED_INTERNAL"
+
+    # -------------------------------------------------------------
+    # V11 HARD RANGE CONSISTENCY GATE.
+    #
+    # Once a preliminary per-file zero-support range is available, NO
+    # corrected-valid F0 outside that range is allowed to enter trajectory
+    # interpretation, irrespective of how it became valid (ordinary first-pass
+    # continuity, future-confirmed reacquisition, offline rescue, etc.).
+    #
+    # This intentionally makes the zero-support bounds authoritative for the
+    # finished offline trajectory.  It does not alter raw ECKF measurements; it
+    # only prevents out-of-range measurements from being promoted as musical F0.
+    # -------------------------------------------------------------
+    if range_veto_enabled:
+        hard_range_veto = (
+            corrected_valid
+            & np.isfinite(midi)
+            & ~rescue_range_ok
+        )
+        if np.any(hard_range_veto):
+            corrected_valid[hard_range_veto] = False
+            final_reason[hard_range_veto] = "RANGE_ZERO_VETO"
+            correction_reason[hard_range_veto] = "RANGE_ZERO_VETO"
 
     # -------------------------------------------------------------
     # Never synthesize/interpolate F0 here.
