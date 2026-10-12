@@ -1,4 +1,0 @@
-frame_index,time_s,applied,frame_start_s,frame_end_s,trajectory_region_index,trajectory_region_kind,trajectory_overlap_ms,gesture_object_index,gesture_object_kind,gesture_overlap_ms,trusted_point_count,trusted_run_start_s,trusted_run_end_s,structural_reference_st,structural_reference_hz,structural_reference_midi,action,reason
-105,4.876190476190477,1,4.876190476190477,4.922630385487528,10,UNRESOLVED,42.630385487528066,,,0.0,5,4.88,4.96,,,,right_attack,trusted_run_continues_right_only;subframe_pitch_amplitude_context_assigns_attack_ownership
-120,5.572789115646258,1,5.572789115646258,5.61922902494331,14,UNRESOLVED,46.43990929705222,,,0.0,4,5.53,5.94,,,,right_attack,through_run_but_existing_amplitude_context_is_attack_dominant
-909,42.21387755102041,1,42.21387755102041,42.26031746031746,208,TRANSITION,6.122448979589024,80,TRANSITION_TARGET_TRANSITION,6.122448979589024,0,,,,,,gesture_absorb,largest_frame_span_overlap_is_frozen_transition_covered_by_gesture

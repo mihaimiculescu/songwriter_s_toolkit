@@ -1,3 +1,0 @@
-region_id,peer_region_id,burst_start_s,burst_end_s,frame_index,original_hz,reviewed_hz,reviewed_midi,source,trigger_penalty_max,applied_sample_count
-105,,30.46,30.47,655,266.0,272.22222222222223,61,interval_trigger_readjudication,137.52273510845183,5
-105,,30.46,30.47,656,186.77288305015279,,,interval_trigger_readjudication_abstain,137.52273510845183,5

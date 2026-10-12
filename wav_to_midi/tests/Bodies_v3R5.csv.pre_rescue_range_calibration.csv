@@ -1,2 +1,0 @@
-available,anchor_count,source,low_hz,high_hz,low_anchor_midi,high_anchor_midi,plateau_low_midi,plateau_high_midi,zero_low_midi,zero_high_midi,lo_quantile,hi_quantile,plateau_extension_st,shoulder_st
-1,1104,pre_rescue_first_pass_v13_refs,196.0,469.1489361702128,55,70,53.0,72.0,51.0,74.0,0.02,0.98,2.0,2.0

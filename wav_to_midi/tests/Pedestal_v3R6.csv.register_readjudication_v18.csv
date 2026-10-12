@@ -1,6 +1,0 @@
-region_id,peer_region_id,burst_start_s,burst_end_s,frame_index,original_hz,reviewed_hz,reviewed_midi,source,trigger_penalty_max,applied_sample_count
-131,,32.69,32.71,703,439.6188118906417,450.0,69,interval_trigger_readjudication,36960.39676912937,5
-131,,32.69,32.71,704,467.54027628879885,464.2105263157895,70,interval_trigger_readjudication,36960.39676912937,5
-131,,32.74,32.78,705,348.70292323528344,469.1489361702128,70,interval_trigger_readjudication,38069.473516732556,4
-131,,32.79,32.81,706,456.3049564222276,464.2105263157895,70,interval_trigger_readjudication,34447.0033513322,5
-231,,50.52,50.53,1088,255.0114743462634,,,interval_trigger_readjudication_abstain,4.340778402648914,5
