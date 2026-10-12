@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
+from .analysis_timing import DEFAULT_OFFLINE_ANALYSIS_HZ
 from scipy.signal import savgol_filter
 
 
@@ -25,10 +26,10 @@ class ExpressiveSmoothingConfig:
     island. Validity holes are absolute walls.
     """
 
-    analysis_hz: float = 100.0
+    analysis_hz: float = DEFAULT_OFFLINE_ANALYSIS_HZ
 
     # Nominal symmetric window.
-    # At 100 Hz this becomes 5 samples = 50 ms.
+    # At the default 135 Hz this becomes 7 samples ≈ 52 ms.
     window_ms: float = 50.0
 
     # Quadratic Savitzky-Golay.
@@ -36,7 +37,7 @@ class ExpressiveSmoothingConfig:
     # Slower robust centerline.
     #
     # This is deliberately much slower than the 50 ms expressive SG.
-    # At 100 Hz, 250 ms -> 25 samples.
+    # At the default 135 Hz, 250 ms -> about 34 samples before odd-window adjustment.
     #
     # FIRST DIAGNOSTIC VALUE ONLY. Do not freeze until inspected.
     center_window_ms: float = 250.0    
@@ -125,8 +126,8 @@ def _window_steps(
     of analysis samples.
 
     Example:
-        50 ms @ 100 Hz
-        = 5 samples.
+        50 ms @ 135 Hz
+        ≈ 7 samples.
     """
 
     steps = int(
@@ -249,7 +250,7 @@ def _center_window_steps(
     """
     Convert centerline duration to an odd number of analysis samples.
 
-    250 ms @ 100 Hz -> 25 samples.
+    250 ms @ 135 Hz -> about 34 samples before odd-window adjustment.
     """
 
     steps = int(

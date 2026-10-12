@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 import numpy as np
+from .analysis_timing import DEFAULT_OFFLINE_ANALYSIS_HZ
 
 
 # ---------------------------------------------------------------------
@@ -27,7 +28,7 @@ class TrajectoryClass(str, Enum):
 
 @dataclass
 class ResolverConfig:
-    analysis_hz: float = 100.0
+    analysis_hz: float = DEFAULT_OFFLINE_ANALYSIS_HZ
 
     # Trusted context inspected on each side.
     context_ms: float = 200.0

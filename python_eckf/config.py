@@ -6,7 +6,6 @@ Mode = Literal["matlab", "offline"]
 SilenceMode = Literal["fixed", "adaptive"]
 GainNormalizationMode = Literal["none", "peak"]
 
-
 @dataclass(frozen=True)
 class ECKFConfig:
     """

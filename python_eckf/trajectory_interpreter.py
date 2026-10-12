@@ -5,6 +5,7 @@ from enum import Enum, auto
 
 import numpy as np
 
+from .analysis_timing import DEFAULT_OFFLINE_ANALYSIS_HZ
 from .frame_evidence import FrameAcousticState, validate_frame_acoustic_states
 
 
@@ -16,7 +17,7 @@ class RegionKind(Enum):
 
 @dataclass(frozen=True)
 class TrajectoryInterpreterConfig:
-    analysis_hz: float = 100.0
+    analysis_hz: float = DEFAULT_OFFLINE_ANALYSIS_HZ
 
     # Structural smoothing only.
     # Raw corrected F0 is never replaced by this.
@@ -372,10 +373,10 @@ def _variable_aperture_shadow_evidence(
     trusted trajectory point.  Production target formation consumes these
     measurements below; the full ladder is still exported for audit.
 
-    Because the active offline trajectory is sampled at ~100 Hz, nominal
+    Because the active offline trajectory is rate-aware, nominal
     millisecond apertures map to the nearest centered odd number of trajectory
     samples (minimum three).  The nominal aperture is retained in output so
-    the mapping is explicit rather than silently pretending 100 Hz can express
+    the mapping is explicit rather than silently pretending a fixed grid can express
     every millisecond width exactly.
     """
     apertures = _validated_variable_apertures(config)

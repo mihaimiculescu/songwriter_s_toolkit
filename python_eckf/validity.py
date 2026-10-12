@@ -3,19 +3,20 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
+from .analysis_timing import DEFAULT_OFFLINE_ANALYSIS_HZ
 from .trajectory_resolver import vocal_transition_penalty
 from .frame_evidence import FrameAcousticState, validate_frame_acoustic_states
 
 
 @dataclass
 class PitchValidityConfig:
-    analysis_hz: float = 100.0
+    analysis_hz: float = DEFAULT_OFFLINE_ANALYSIS_HZ
 
     min_vocal_hz: float = 120.0
     max_vocal_hz: float = 1500.0
 
     # Maximum instantaneous movement between adjacent accepted
-    # 10 ms observations.
+    # interpretation-grid observations.
     max_step_semitones: float = 4.0
 
     # Tiny interruptions shorter than this can be bridged when the

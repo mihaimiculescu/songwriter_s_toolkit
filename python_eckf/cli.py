@@ -10,6 +10,7 @@ from dataclasses import fields
 from enum import Enum
 
 from .config import ECKFConfig
+from .analysis_timing import DEFAULT_OFFLINE_ANALYSIS_HZ, resolve_offline_analysis_grid
 from .tracker import track_pitch
 from .frame_evidence import frame_acoustic_state_name
 from .trajectory_interpreter import interpret_pitch_trajectory
@@ -30,6 +31,7 @@ from .reacquisition_adjudication import apply_reacquisition_adjudication_feedbac
 from .register_readjudication_v18 import apply_register_readjudication_v18
 from .interval_authority import build_interval_authority
 from .structural_collaboration import apply_structural_collaboration
+from .primary_reconciliation_v3r9 import apply_primary_reconciliation_v3r9
 from .validity import (
     PitchValidityConfig,
     analyse_pitch_validity,
@@ -103,6 +105,16 @@ def main():
     p.add_argument("--npeaks", type=int, default=3)
     p.add_argument("--nsemitones", type=float, default=2.0)
     p.add_argument("--vocal-floor-hz", type=float, default=60.0)
+    p.add_argument(
+        "--analysis-hz",
+        type=float,
+        default=DEFAULT_OFFLINE_ANALYSIS_HZ,
+        help=(
+            "Requested OFFLINE interpretation-trajectory rate in Hz. "
+            "The ECKF core remains full sample-resolution. Default: "
+            f"{DEFAULT_OFFLINE_ANALYSIS_HZ:g} Hz."
+        ),
+    )
     p.add_argument(
         "--silence-mode", choices=["fixed", "adaptive"], default=None,
         help=("Silence calibration mode. Default: adaptive for offline V2; "
@@ -201,14 +213,16 @@ def main():
 
     n = result.original_length
 
-    # Diagnostic export only.
-    # The ECKF itself remains full sample-resolution.
-    EXPORT_HZ = 100.0
-
-    export_step = max(
-        1,
-        int(round(sr / EXPORT_HZ)),
-    )
+    # OFFLINE interpretation trajectory only.
+    # The ECKF itself remains full audio-sample resolution.  The requested rate
+    # is converted to an integer audio-sample hop; every downstream stage gets
+    # the resulting measured analysis_hz rather than assuming a fixed grid.
+    requested_analysis_hz = float(args.analysis_hz)
+    try:
+        analysis_grid = resolve_offline_analysis_grid(sr, requested_analysis_hz)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    export_step = analysis_grid.hop_samples
 
     sample_idx = np.arange(
         0,
@@ -224,7 +238,7 @@ def main():
     #
     # IMPORTANT:
     # The ECKF itself remains full sample-resolution.
-    # Validity operates only on the 100 Hz offline trajectory.
+    # Validity operates only on the rate-aware offline interpretation trajectory.
     # MATLAB mode is left completely untouched.
     # -------------------------------------------------------------
 
@@ -252,14 +266,13 @@ def main():
     offline_final_adjudication = None
     offline_interval_authority = None
     offline_structural_collaboration = None
+    offline_primary_reconciliation = None
     frame_index = sample_idx // cfg.block_size
 
     if cfg.mode == "offline":
         export_f0 = result.f0_hz[sample_idx]
 
-        analysis_hz = (
-            sr / float(export_step)
-        )
+        analysis_hz = analysis_grid.actual_hz
 
         validity_config = PitchValidityConfig(
             analysis_hz=analysis_hz,
@@ -365,6 +378,36 @@ def main():
             pair_rows=offline_juror_pairs,
             final_adjudication=offline_final_adjudication,
         )
+
+        # V3R9: preserve strong primary periodicity evidence BEFORE musical
+        # interpretation.  This is tracker responsibility: repair rejected or
+        # non-register-drifted ECKF ownership only when the audio itself supplies
+        # coherent, range-valid primary evidence.  No MIDI/attack GT is consumed.
+        offline_primary_reconciliation = apply_primary_reconciliation_v3r9(
+            offline_validity=offline_validity,
+            sample_times_s=t,
+            sample_frame_index=frame_index,
+            frame_start_times_s=(np.asarray(result.frame_start_samples, dtype=np.float64) / float(sr)),
+            frame_acoustic_state=result.frame_acoustic_state,
+            periodicity_acf_peak_per_frame=result.periodicity_acf_peak_per_frame,
+            periodicity_cmndf_minimum_per_frame=result.periodicity_cmndf_minimum_per_frame,
+            periodicity_acf_frequency_hz_per_frame=result.periodicity_acf_frequency_hz_per_frame,
+            periodicity_cmndf_frequency_hz_per_frame=result.periodicity_cmndf_frequency_hz_per_frame,
+            range_zero_low_midi=(
+                offline_range_calibration.zero_low_midi
+                if offline_range_calibration.available else None
+            ),
+            range_zero_high_midi=(
+                offline_range_calibration.zero_high_midi
+                if offline_range_calibration.available else None
+            ),
+        )
+
+        # V3R9 may promote a frame passport from unresolved/rejected to
+        # VOICED_TRACKED together with primary-evidence pitch ownership.
+        # sampled_frame_state was created before reconciliation, so refresh it
+        # before trajectory validation/interpretation.
+        sampled_frame_state = result.frame_acoustic_state[frame_index]
 
         (
             offline_interpretation,
@@ -658,6 +701,46 @@ def main():
                     str(result.frame_decision[fi]),
                 ])
         print(f"Frame evidence: {frames_out}")
+
+        if offline_primary_reconciliation is not None:
+            pr_out = out.with_suffix(out.suffix + ".primary_reconciliation_v3r9.csv")
+            with pr_out.open("w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    "frame_index", "frame_start_time_s", "acoustic_state",
+                    "acf_peak", "cmndf_minimum",
+                    "acf_frequency_hz", "cmndf_frequency_hz",
+                    "candidate_hz", "candidate_source",
+                    "coherent_support", "trusted_context_support",
+                    "trajectory_candidate_support_count",
+                    "trajectory_current_support_count",
+                    "trajectory_inconclusive_count",
+                    "trajectory_jump_guard_count",
+                    "continuous_persistence_count",
+                    "hysteresis_shoulder_count",
+                    "embedded_register_outlier_count",
+                    "promoted_sample_count", "replaced_sample_count",
+                    "action", "reason",
+                ])
+                for r in offline_primary_reconciliation:
+                    writer.writerow([
+                        r.frame_index, r.frame_start_time_s, r.acoustic_state,
+                        r.acf_peak, r.cmndf_minimum,
+                        r.acf_frequency_hz, r.cmndf_frequency_hz,
+                        "" if r.candidate_hz is None else r.candidate_hz,
+                        r.candidate_source, int(r.coherent_support),
+                        int(r.trusted_context_support),
+                        r.trajectory_candidate_support_count,
+                        r.trajectory_current_support_count,
+                        r.trajectory_inconclusive_count,
+                        r.trajectory_jump_guard_count,
+                        r.continuous_persistence_count,
+                        r.hysteresis_shoulder_count,
+                        r.embedded_register_outlier_count,
+                        r.promoted_sample_count, r.replaced_sample_count,
+                        r.action, r.reason,
+                    ])
+            print(f"V3R9 primary reconciliation: {pr_out}")
 
         trajectory_out = out.with_suffix(out.suffix + ".trajectory.csv")
         with trajectory_out.open("w", newline="", encoding="utf-8") as f:
@@ -1574,8 +1657,10 @@ def main():
         print(f"Final adjudication: {fap}")
 
     print(
-        f"CSV rate:    {EXPORT_HZ:g} Hz "
-        f"(every {export_step} samples)"
+        f"Interpretation rate: requested {analysis_grid.requested_hz:g} Hz; "
+        f"actual {analysis_grid.actual_hz:.6f} Hz "
+        f"(dt={analysis_grid.dt_s * 1000.0:.3f} ms, "
+        f"every {analysis_grid.hop_samples} audio samples)"
     )
 
 if __name__ == "__main__":

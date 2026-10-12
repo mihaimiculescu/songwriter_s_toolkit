@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
+from .analysis_timing import DEFAULT_OFFLINE_ANALYSIS_HZ
 from scipy.signal import savgol_filter
 
 
@@ -24,9 +25,9 @@ class ExpressiveAmplitudeConfig:
     numerical dust and clipping).
     """
 
-    analysis_hz: float = 100.0
+    analysis_hz: float = DEFAULT_OFFLINE_ANALYSIS_HZ
 
-    # RMS analysis around each 100 Hz sample.  20 ms keeps attack timing fairly
+    # RMS analysis around each interpretation-grid sample.  20 ms keeps attack timing fairly
     # local while still integrating enough waveform samples for a stable RMS.
     rms_window_ms: float = 20.0
 
@@ -235,7 +236,7 @@ def analyse_expressive_amplitude(
     config: ExpressiveAmplitudeConfig | None = None,
 ) -> ExpressiveAmplitudeResult:
     """
-    Build the amplitude-expression lane at the same 100 Hz timeline used by
+    Build the amplitude-expression lane at the same rate-aware timeline used by
     the pitch expressive lane.
 
     Global gain invariance:
