@@ -4,7 +4,7 @@
 *.zip
 *.npz
 __pycache__/
-extract/
+**/extract/
 **/tests/*
 !**/tests/*/
 !**/tests/**/*.py
