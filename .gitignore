@@ -1,0 +1,9 @@
+# gitignore file dev branch
+*.wav
+*.mid
+*.zip
+*.npz
+__pycache__/
+extract/
+tests/*
+!tests/*.py
