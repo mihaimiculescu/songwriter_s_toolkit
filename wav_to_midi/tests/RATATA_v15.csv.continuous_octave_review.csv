@@ -1,0 +1,2 @@
+frame_index,time_s,original_hz,replacement_hz,original_midi,replacement_midi,anchor_frame_index,anchor_hz,original_interval_penalty,replacement_interval_penalty,applied_sample_count
+232,9.92,232.9390884997733,233.0097087378641,57.98939074225249,58,231,311.68831168831167,0.08256510307346228,0.07980967676603404,5

@@ -1,0 +1,774 @@
+================================================================================================================================================
+MIDI <-> FROZEN WAV STRUCTURE CORRESPONDENCE V3
+================================================================================================================================================
+MIDI: tests/GroundTruthPREDESTINATItype1.mid
+ECKF: tests/PREDESTINATI.wav.eckf.csv
+MIDI notes=135  rows=6730  analysis=100.000Hz
+regions=156 objects=45 links=24
+JOIN=2 SPLIT=14 UNRESOLVED=8
+alignment=FIXED independent V1 offset; WAV_time=MIDI_time+offset; offset=+0.210s
+  EARLY  +0.165s score=0.9944
+  MIDDLE +0.165s score=0.9880
+  LATE   +0.195s score=0.9950
+position=bar|beat|sixteenth-slot(+fraction)
+soft timing prior: one-eighth base with sublinear tempo correction; reference=120 BPM alpha=0.2
+flags are INSPECTION FLAGS ONLY; no structural decision is changed.
+
+================================================================================================================================================
+EVERY V3.1 LINK -> NEAREST GT PITCH-CHANGE BOUNDARY
+================================================================================================================================================
+SPLIT      O02 L1 S6   WAVmid=   6.135s 3|3|3+0.66   
+    nearest GT pitch change: GT005 D#4->C4 (-3st) MIDI=   6.111s 3|4|1         WAV=   6.321s
+    timing: Δ= -186.1ms  beats=-0.335  eighths=-0.670  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  60.09st dur=150ms  harmonic-warning=-
+    WAV stable context: R4:63.08st -> S6:60.09st -> R8:53.82st
+    connector=-                        boundary=DURATION,CENTER/SHAPE,TOPOLOGY           families C/B=0/3
+UNRESOLVED O04 L1 S13  WAVmid=  10.005s 5|2|3+0.52   
+    nearest GT pitch change: GT009 D#4->G3 (-8st) MIDI=  10.278s 5|3|3         WAV=  10.488s
+    timing: Δ= -482.8ms  beats=-0.869  eighths=-1.738  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    central stable:  62.70st dur=110ms  harmonic-warning=-
+    WAV stable context: R11:53.81st -> S13:62.70st -> R16:55.08st
+    connector=-                        boundary=-                                        families C/B=0/0
+SPLIT      O09 L1 S24  WAVmid=  18.005s 9|1|1+0.12   
+    nearest GT pitch change: GT019 A#3->G#4 (+10st) MIDI=  17.778s 9|1|1         WAV=  17.988s
+    timing: Δ=  +17.2ms  beats=+0.031  eighths=+0.062  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  67.90st dur=130ms  harmonic-warning=-
+    WAV stable context: R20:60.11st -> S24:67.90st -> R26:62.90st
+    connector=-                        boundary=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY      families C/B=0/4
+JOIN       O09 L2 S26  WAVmid=  18.395s 9|1|3+0.93   
+    nearest GT pitch change: GT020 G#4->G4 (-1st) MIDI=  18.056s 9|1|3         WAV=  18.266s
+    timing: Δ= +129.4ms  beats=+0.233  eighths=+0.466  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  62.90st dur=110ms  harmonic-warning=-
+    WAV stable context: R24:67.90st -> S26:62.90st -> R28:68.25st
+    connector=EXCURSION,SIMILAR        boundary=RESIDUAL                                 families C/B=2/1
+SPLIT      O09 L3 S28  WAVmid=  18.830s 9|2|3+0.06   
+    nearest GT pitch change: GT022 D#4->G#4 (+5st) MIDI=  18.611s 9|2|3         WAV=  18.821s
+    timing: Δ=   +8.9ms  beats=+0.016  eighths=+0.032  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  68.25st dur=100ms  harmonic-warning=-
+    WAV stable context: R26:62.90st -> S28:68.25st -> R30:66.98st
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O09 L4 S30  WAVmid=  19.050s 9|2|4+0.65   
+    nearest GT pitch change: GT023 G#4->G4 (-1st) MIDI=  18.889s 9|3|1         WAV=  19.099s
+    timing: Δ=  -48.9ms  beats=-0.088  eighths=-0.176  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  66.98st dur=140ms  harmonic-warning=-
+    WAV stable context: R28:68.25st -> S30:66.98st -> R34:65.05st
+    connector=-                        boundary=PATH,TOPOLOGY                            families C/B=0/2
+UNRESOLVED O13 L1 S41  WAVmid=  24.395s 11|4|3+0.13  
+    nearest GT pitch change: GT032 D#4->C4 (-3st) MIDI=  23.889s 11|4|1        WAV=  24.099s
+    timing: Δ= +296.1ms  beats=+0.533  eighths=+1.066  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    central stable:  60.02st dur=150ms  harmonic-warning=-
+    WAV stable context: R38:63.29st -> S41:60.02st -> R44:55.81st
+    connector=SIMILAR                  boundary=TOPOLOGY                                 families C/B=1/1
+UNRESOLVED O18 L1 S60  WAVmid=  35.860s 17|1|1+0.68  
+    nearest GT pitch change: GT050 A#3->G#4 (+10st) MIDI=  35.556s 17|1|1        WAV=  35.766s
+    timing: Δ=  +94.4ms  beats=+0.170  eighths=+0.340  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  67.41st dur=160ms  harmonic-warning=-
+    WAV stable context: R57:72.93st -> S60:67.41st -> R62:61.93st
+    connector=-                        boundary=-                                        families C/B=0/0
+UNRESOLVED O18 L2 S62  WAVmid=  36.240s 17|1|4+0.42  
+    nearest GT pitch change: GT052 G4->D#4 (-4st) MIDI=  36.111s 17|2|1        WAV=  36.321s
+    timing: Δ=  -81.1ms  beats=-0.146  eighths=-0.292  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  61.93st dur=80ms  harmonic-warning=-
+    WAV stable context: R60:67.41st -> S62:61.93st -> R64:76.36st
+    connector=-                        boundary=RESIDUAL                                 families C/B=0/1
+SPLIT      O20 L1 S69  WAVmid=  37.205s 17|3|3+0.36  
+    nearest GT pitch change: GT055 G4->D#4 (-4st) MIDI=  36.944s 17|3|3        WAV=  37.154s
+    timing: Δ=  +50.5ms  beats=+0.091  eighths=+0.182  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  62.78st dur=90ms  harmonic-warning=-
+    WAV stable context: R67:61.95st -> S69:62.78st -> R71:71.69st
+    connector=-                        boundary=DURATION,PATH,RESIDUAL,TOPOLOGY          families C/B=0/4
+SPLIT      O21 L1 S74  WAVmid=  40.815s 19|2|1+0.36  
+    nearest GT pitch change: GT058 F4->D#4 (-2st) MIDI=  40.278s 19|1|3        WAV=  40.488s
+    timing: Δ= +327.2ms  beats=+0.589  eighths=+1.178  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    central stable:  62.50st dur=130ms  harmonic-warning=-
+    WAV stable context: R72:63.32st -> S74:62.50st -> R77:59.61st
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O23 L1 S81  WAVmid=  43.470s 20|2|4+0.47  
+    nearest GT pitch change: GT065 A#4->D4 (-8st) MIDI=  42.500s 20|1|3        WAV=  42.710s
+    timing: Δ= +760.0ms  beats=+1.368  eighths=+2.736  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    central stable:  61.94st dur=120ms  harmonic-warning=-
+    WAV stable context: R79:74.01st -> S81:61.94st -> R84:62.94st
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O25 L1 S87  WAVmid=  45.195s 21|1|4+0.89  
+    nearest GT pitch change: GT075 D#4->G4 (+4st) MIDI=  45.556s 21|3|1        WAV=  45.766s
+    timing: Δ= -570.6ms  beats=-1.027  eighths=-2.054  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    central stable:  62.92st dur=90ms  harmonic-warning=-
+    WAV stable context: R84:62.94st -> S87:62.92st -> R90:65.04st
+    connector=-                        boundary=RESIDUAL,TOPOLOGY                        families C/B=0/2
+UNRESOLVED O26 L1 S95  WAVmid=  48.115s 22|3|1+0.92  
+    nearest GT pitch change: GT080 D#4->G#4 (+5st) MIDI=  47.778s 22|3|1        WAV=  47.988s
+    timing: Δ= +127.2ms  beats=+0.229  eighths=+0.458  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  68.07st dur=90ms  harmonic-warning=-
+    WAV stable context: R93:65.54st -> S95:68.07st -> R97:79.39st
+    connector=SIMILAR                  boundary=TOPOLOGY                                 families C/B=1/1
+SPLIT      O27 L1 S100 WAVmid=  49.010s 22|4|4+0.36  
+    nearest GT pitch change: GT083 G#4->G4 (-1st) MIDI=  48.889s 23|1|1        WAV=  49.099s
+    timing: Δ=  -88.9ms  beats=-0.160  eighths=-0.320  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  67.10st dur=100ms  harmonic-warning=-
+    WAV stable context: R98:67.50st -> S100:67.10st -> R103:78.93st
+    connector=-                        boundary=PATH,TOPOLOGY                            families C/B=0/2
+UNRESOLVED O36 L1 S123 WAVmid=  55.040s 25|3|3+0.78  
+    nearest GT pitch change: GT101 F4->D#4 (-2st) MIDI=  54.861s 25|3|4        WAV=  55.071s
+    timing: Δ=  -31.2ms  beats=-0.056  eighths=-0.112  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  61.67st dur=100ms  harmonic-warning=-
+    WAV stable context: R121:65.10st -> S123:61.67st -> R125:64.86st
+    connector=-                        boundary=-                                        families C/B=0/0
+JOIN       O36 L2 S125 WAVmid=  55.410s 25|4|2+0.44  
+    nearest GT pitch change: GT102 D#4->F4 (+2st) MIDI=  55.139s 25|4|2        WAV=  55.349s
+    timing: Δ=  +61.1ms  beats=+0.110  eighths=+0.220  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  64.86st dur=120ms  harmonic-warning=-
+    WAV stable context: R123:61.67st -> S125:64.86st -> R127:67.01st
+    connector=DIRECT                   boundary=TOPOLOGY                                 families C/B=1/1
+SPLIT      O37 L1 S129 WAVmid=  56.015s 26|1|2+0.80  
+    nearest GT pitch change: GT104 G4->F4 (-2st) MIDI=  55.833s 26|1|3        WAV=  56.043s
+    timing: Δ=  -28.4ms  beats=-0.051  eighths=-0.102  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  64.84st dur=110ms  harmonic-warning=-
+    WAV stable context: R127:67.01st -> S129:64.84st -> R132:68.04st
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O38 L1 S132 WAVmid=  56.990s 26|3|1+0.82  
+    nearest GT pitch change: GT106 D#4->G#4 (+5st) MIDI=  56.667s 26|3|1        WAV=  56.877s
+    timing: Δ= +113.3ms  beats=+0.204  eighths=+0.408  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  68.04st dur=80ms  harmonic-warning=-
+    WAV stable context: R129:64.84st -> S132:68.04st -> R134:66.95st
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+UNRESOLVED O40 L1 S138 WAVmid=  58.320s 27|1|3+0.39  
+    nearest GT pitch change: GT110 G4->F4 (-2st) MIDI=  58.194s 27|1|4        WAV=  58.404s
+    timing: Δ=  -84.5ms  beats=-0.152  eighths=-0.304  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  66.95st dur=100ms  harmonic-warning=-
+    WAV stable context: R135:67.34st -> S138:66.95st -> R140:62.06st
+    connector=-                        boundary=PATH                                     families C/B=0/1
+UNRESOLVED O41 L1 S142 WAVmid=  60.770s 28|2|1+0.03  
+    nearest GT pitch change: GT116 C4->A#3 (-2st) MIDI=  60.556s 28|2|1        WAV=  60.766s
+    timing: Δ=   +4.4ms  beats=+0.008  eighths=+0.016  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  58.03st dur=100ms  harmonic-warning=-
+    WAV stable context: R140:62.06st -> S142:58.03st -> R144:55.49st
+    connector=-                        boundary=PATH                                     families C/B=0/1
+SPLIT      O42 L1 S146 WAVmid=  62.285s 28|4|3+0.94  
+    nearest GT pitch change: GT118 D#4->A#4 (+7st) MIDI=  61.944s 28|4|3        WAV=  62.154s
+    timing: Δ= +130.5ms  beats=+0.235  eighths=+0.470  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  70.03st dur=190ms  harmonic-warning=-
+    WAV stable context: R144:55.49st -> S146:70.03st -> R149:64.93st
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O44 L1 S151 WAVmid=  64.270s 29|4|2+0.23  
+    nearest GT pitch change: GT127 D#4->F4 (+2st) MIDI=  63.889s 29|4|1        WAV=  64.099s
+    timing: Δ= +171.1ms  beats=+0.308  eighths=+0.616  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  65.43st dur=80ms  harmonic-warning=-
+    WAV stable context: R149:64.93st -> S151:65.43st -> R154:63.04st
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O45 L1 S154 WAVmid=  66.895s 31|1|1+0.13  
+    nearest GT pitch change: GT135 F4->D#4 (-2st) MIDI=  66.667s 31|1|1        WAV=  66.877s
+    timing: Δ=  +18.3ms  beats=+0.033  eighths=+0.066  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    central stable:  63.04st dur=150ms  harmonic-warning=-
+    WAV stable context: R151:65.43st -> S154:63.04st -> -
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+
+================================================================================================================================================
+JOIN INSPECTION — DOES AN INTENDED GT PITCH CHANGE OCCUR INSIDE/NEAR THE JOIN?
+================================================================================================================================================
+JOIN O09 L2 S26 18.340-18.450s 9|1|3+0.93
+    GT pitch-change inside central stable interval: none
+    nearest: GT020 G#4->G4
+    timing: Δ= +129.4ms  beats=+0.233  eighths=+0.466  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    evidence: C=EXCURSION,SIMILAR B=RESIDUAL
+JOIN O36 L2 S125 55.350-55.470s 25|4|2+0.44
+    GT pitch-change inside central stable interval: none
+    nearest: GT102 D#4->F4
+    timing: Δ=  +61.1ms  beats=+0.110  eighths=+0.220  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    evidence: C=DIRECT B=TOPOLOGY
+
+================================================================================================================================================
+UNRESOLVED INSPECTION — AMBIGUITY PRESERVED
+================================================================================================================================================
+UNRESOLVED O04 L1 S13 WAV=10.005s 5|2|3+0.52
+    nearest GT change GT009 D#4->G3
+    timing: Δ= -482.8ms  beats=-0.869  eighths=-1.738  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    evidence: C=- B=-
+UNRESOLVED O13 L1 S41 WAV=24.395s 11|4|3+0.13
+    nearest GT change GT032 D#4->C4
+    timing: Δ= +296.1ms  beats=+0.533  eighths=+1.066  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    evidence: C=SIMILAR B=TOPOLOGY
+UNRESOLVED O18 L1 S60 WAV=35.860s 17|1|1+0.68
+    nearest GT change GT050 A#3->G#4
+    timing: Δ=  +94.4ms  beats=+0.170  eighths=+0.340  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    evidence: C=- B=-
+UNRESOLVED O18 L2 S62 WAV=36.240s 17|1|4+0.42
+    nearest GT change GT052 G4->D#4
+    timing: Δ=  -81.1ms  beats=-0.146  eighths=-0.292  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    evidence: C=- B=RESIDUAL
+UNRESOLVED O26 L1 S95 WAV=48.115s 22|3|1+0.92
+    nearest GT change GT080 D#4->G#4
+    timing: Δ= +127.2ms  beats=+0.229  eighths=+0.458  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    evidence: C=SIMILAR B=TOPOLOGY
+UNRESOLVED O36 L1 S123 WAV=55.040s 25|3|3+0.78
+    nearest GT change GT101 F4->D#4
+    timing: Δ=  -31.2ms  beats=-0.056  eighths=-0.112  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    evidence: C=- B=-
+UNRESOLVED O40 L1 S138 WAV=58.320s 27|1|3+0.39
+    nearest GT change GT110 G4->F4
+    timing: Δ=  -84.5ms  beats=-0.152  eighths=-0.304  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    evidence: C=- B=PATH
+UNRESOLVED O41 L1 S142 WAV=60.770s 28|2|1+0.03
+    nearest GT change GT116 C4->A#3
+    timing: Δ=   +4.4ms  beats=+0.008  eighths=+0.016  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    evidence: C=- B=PATH
+
+================================================================================================================================================
+GT PITCH CHANGES -> NEAREST V3.1 LINK
+================================================================================================================================================
+GT002 D#4->G4 (+4st) MIDI=4.861s 3|1|4         WAV=5.071s
+    nearest link: SPLIT O02 L1 S6 interval-dist=988.9ms midpointΔ=+1063.9ms
+    timing: Δ=+1063.9ms  beats=+1.915  eighths=+3.830  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=60.09st harmonic-warning=- C=- B=DURATION,CENTER/SHAPE,TOPOLOGY
+GT003 G4->D4 (-5st) MIDI=5.278s 3|2|3         WAV=5.488s
+    nearest link: SPLIT O02 L1 S6 interval-dist=572.2ms midpointΔ=+647.2ms
+    timing: Δ= +647.2ms  beats=+1.165  eighths=+2.330  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=60.09st harmonic-warning=- C=- B=DURATION,CENTER/SHAPE,TOPOLOGY
+GT004 D4->D#4 (+1st) MIDI=5.694s 3|3|2         WAV=5.904s
+    nearest link: SPLIT O02 L1 S6 interval-dist=155.6ms midpointΔ=+230.6ms
+    timing: Δ= +230.6ms  beats=+0.415  eighths=+0.830  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=60.09st harmonic-warning=- C=- B=DURATION,CENTER/SHAPE,TOPOLOGY
+GT005 D#4->C4 (-3st) MIDI=6.111s 3|4|1         WAV=6.321s
+    nearest link: SPLIT O02 L1 S6 interval-dist=111.1ms midpointΔ=-186.1ms
+    timing: Δ= -186.1ms  beats=-0.335  eighths=-0.670  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=60.09st harmonic-warning=- C=- B=DURATION,CENTER/SHAPE,TOPOLOGY
+GT006 C4->A#3 (-2st) MIDI=8.889s 5|1|1         WAV=9.099s
+    nearest link: UNRESOLVED O04 L1 S13 interval-dist=851.1ms midpointΔ=+906.1ms
+    timing: Δ= +906.1ms  beats=+1.631  eighths=+3.262  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=62.70st harmonic-warning=- C=- B=-
+GT007 A#3->D#4 (+5st) MIDI=9.306s 5|1|4         WAV=9.516s
+    nearest link: UNRESOLVED O04 L1 S13 interval-dist=434.4ms midpointΔ=+489.4ms
+    timing: Δ= +489.4ms  beats=+0.881  eighths=+1.762  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=62.70st harmonic-warning=- C=- B=-
+GT009 D#4->G3 (-8st) MIDI=10.278s 5|3|3         WAV=10.488s
+    nearest link: UNRESOLVED O04 L1 S13 interval-dist=427.8ms midpointΔ=-482.8ms
+    timing: Δ= -482.8ms  beats=-0.869  eighths=-1.738  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=62.70st harmonic-warning=- C=- B=-
+GT011 G3->A#3 (+3st) MIDI=13.056s 6|4|3         WAV=13.266s
+    nearest link: UNRESOLVED O04 L1 S13 interval-dist=3205.6ms midpointΔ=-3260.6ms
+    timing: Δ=-3260.6ms  beats=-5.869  eighths=-11.738  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=62.70st harmonic-warning=- C=- B=-
+GT012 A#3->D#4 (+5st) MIDI=13.333s 7|1|1         WAV=13.543s
+    nearest link: UNRESOLVED O04 L1 S13 interval-dist=3483.3ms midpointΔ=-3538.3ms
+    timing: Δ=-3538.3ms  beats=-6.369  eighths=-12.738  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=62.70st harmonic-warning=- C=- B=-
+GT013 D#4->G4 (+4st) MIDI=13.750s 7|1|4         WAV=13.960s
+    nearest link: UNRESOLVED O04 L1 S13 interval-dist=3900.0ms midpointΔ=-3955.0ms
+    timing: Δ=-3955.0ms  beats=-7.119  eighths=-14.238  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=62.70st harmonic-warning=- C=- B=-
+GT014 G4->D4 (-5st) MIDI=14.167s 7|2|3         WAV=14.377s
+    nearest link: SPLIT O09 L1 S24 interval-dist=3563.3ms midpointΔ=+3628.3ms
+    timing: Δ=+3628.3ms  beats=+6.531  eighths=+13.062  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.90st harmonic-warning=- C=- B=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY
+GT015 D4->D#4 (+1st) MIDI=14.583s 7|3|2         WAV=14.793s
+    nearest link: SPLIT O09 L1 S24 interval-dist=3146.7ms midpointΔ=+3211.7ms
+    timing: Δ=+3211.7ms  beats=+5.781  eighths=+11.562  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.90st harmonic-warning=- C=- B=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY
+GT016 D#4->C4 (-3st) MIDI=14.861s 7|3|4         WAV=15.071s
+    nearest link: SPLIT O09 L1 S24 interval-dist=2868.9ms midpointΔ=+2933.9ms
+    timing: Δ=+2933.9ms  beats=+5.281  eighths=+10.562  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.90st harmonic-warning=- C=- B=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY
+GT017 C4->D#4 (+3st) MIDI=15.417s 7|4|4         WAV=15.627s
+    nearest link: SPLIT O09 L1 S24 interval-dist=2313.3ms midpointΔ=+2378.3ms
+    timing: Δ=+2378.3ms  beats=+4.281  eighths=+8.562  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.90st harmonic-warning=- C=- B=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY
+GT018 D#4->A#3 (-5st) MIDI=17.500s 8|4|3         WAV=17.710s
+    nearest link: SPLIT O09 L1 S24 interval-dist=230.0ms midpointΔ=+295.0ms
+    timing: Δ= +295.0ms  beats=+0.531  eighths=+1.062  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=67.90st harmonic-warning=- C=- B=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY
+GT019 A#3->G#4 (+10st) MIDI=17.778s 9|1|1         WAV=17.988s
+    nearest link: SPLIT O09 L1 S24 interval-dist=0.0ms midpointΔ=+17.2ms
+    timing: Δ=  +17.2ms  beats=+0.031  eighths=+0.062  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=67.90st harmonic-warning=- C=- B=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY
+GT020 G#4->G4 (-1st) MIDI=18.056s 9|1|3         WAV=18.266s
+    nearest link: JOIN O09 L2 S26 interval-dist=74.4ms midpointΔ=+129.4ms
+    timing: Δ= +129.4ms  beats=+0.233  eighths=+0.466  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=62.90st harmonic-warning=- C=EXCURSION,SIMILAR B=RESIDUAL
+GT021 G4->D#4 (-4st) MIDI=18.333s 9|2|1         WAV=18.543s
+    nearest link: JOIN O09 L2 S26 interval-dist=93.3ms midpointΔ=-148.3ms
+    timing: Δ= -148.3ms  beats=-0.267  eighths=-0.534  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=62.90st harmonic-warning=- C=EXCURSION,SIMILAR B=RESIDUAL
+GT022 D#4->G#4 (+5st) MIDI=18.611s 9|2|3         WAV=18.821s
+    nearest link: SPLIT O09 L3 S28 interval-dist=0.0ms midpointΔ=+8.9ms
+    timing: Δ=   +8.9ms  beats=+0.016  eighths=+0.032  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=68.25st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT023 G#4->G4 (-1st) MIDI=18.889s 9|3|1         WAV=19.099s
+    nearest link: SPLIT O09 L4 S30 interval-dist=0.0ms midpointΔ=-48.9ms
+    timing: Δ=  -48.9ms  beats=-0.088  eighths=-0.176  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=66.98st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT024 G4->D#4 (-4st) MIDI=19.167s 9|3|3         WAV=19.377s
+    nearest link: SPLIT O09 L4 S30 interval-dist=256.7ms midpointΔ=-326.7ms
+    timing: Δ= -326.7ms  beats=-0.588  eighths=-1.176  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=66.98st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT025 D#4->C4 (-3st) MIDI=19.444s 9|4|1         WAV=19.654s
+    nearest link: SPLIT O09 L4 S30 interval-dist=534.5ms midpointΔ=-604.5ms
+    timing: Δ= -604.5ms  beats=-1.088  eighths=-2.176  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=66.98st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT026 C4->A#3 (-2st) MIDI=19.722s 9|4|3         WAV=19.932s
+    nearest link: SPLIT O09 L4 S30 interval-dist=812.2ms midpointΔ=-882.2ms
+    timing: Δ= -882.2ms  beats=-1.588  eighths=-3.176  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=66.98st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT027 A#3->D#4 (+5st) MIDI=22.222s 11|1|1        WAV=22.432s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=1887.8ms midpointΔ=+1962.8ms
+    timing: Δ=+1962.8ms  beats=+3.533  eighths=+7.066  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT028 D#4->F4 (+2st) MIDI=22.639s 11|1|4        WAV=22.849s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=1471.1ms midpointΔ=+1546.1ms
+    timing: Δ=+1546.1ms  beats=+2.783  eighths=+5.566  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT029 F4->G4 (+2st) MIDI=22.778s 11|2|1        WAV=22.988s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=1332.2ms midpointΔ=+1407.2ms
+    timing: Δ=+1407.2ms  beats=+2.533  eighths=+5.066  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT030 G4->D4 (-5st) MIDI=23.056s 11|2|3        WAV=23.266s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=1054.4ms midpointΔ=+1129.4ms
+    timing: Δ=+1129.4ms  beats=+2.033  eighths=+4.066  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT031 D4->D#4 (+1st) MIDI=23.472s 11|3|2        WAV=23.682s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=637.8ms midpointΔ=+712.8ms
+    timing: Δ= +712.8ms  beats=+1.283  eighths=+2.566  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT032 D#4->C4 (-3st) MIDI=23.889s 11|4|1        WAV=24.099s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=221.1ms midpointΔ=+296.1ms
+    timing: Δ= +296.1ms  beats=+0.533  eighths=+1.066  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT033 C4->A3 (-3st) MIDI=24.722s 12|1|3        WAV=24.932s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=462.2ms midpointΔ=-537.2ms
+    timing: Δ= -537.2ms  beats=-0.967  eighths=-1.934  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT034 A3->A#3 (+1st) MIDI=24.861s 12|1|4        WAV=25.071s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=601.1ms midpointΔ=-676.1ms
+    timing: Δ= -676.1ms  beats=-1.217  eighths=-2.434  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT035 A#3->D#4 (+5st) MIDI=25.000s 12|2|1        WAV=25.210s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=740.0ms midpointΔ=-815.0ms
+    timing: Δ= -815.0ms  beats=-1.467  eighths=-2.934  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT036 D#4->A#3 (-5st) MIDI=26.667s 13|1|1        WAV=26.877s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=2406.7ms midpointΔ=-2481.7ms
+    timing: Δ=-2481.7ms  beats=-4.467  eighths=-8.934  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT037 A#3->D#4 (+5st) MIDI=27.083s 13|1|4        WAV=27.293s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=2823.4ms midpointΔ=-2898.4ms
+    timing: Δ=-2898.4ms  beats=-5.217  eighths=-10.434  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT039 D#4->G3 (-8st) MIDI=27.917s 13|3|2        WAV=28.127s
+    nearest link: UNRESOLVED O13 L1 S41 interval-dist=3656.7ms midpointΔ=-3731.7ms
+    timing: Δ=-3731.7ms  beats=-6.717  eighths=-13.434  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=60.02st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT041 G3->D#4 (+8st) MIDI=31.111s 15|1|1        WAV=31.321s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=4458.9ms midpointΔ=+4538.9ms
+    timing: Δ=+4538.9ms  beats=+8.170  eighths=+16.340  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.41st harmonic-warning=- C=- B=-
+GT042 D#4->G4 (+4st) MIDI=31.528s 15|1|4        WAV=31.738s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=4042.2ms midpointΔ=+4122.2ms
+    timing: Δ=+4122.2ms  beats=+7.420  eighths=+14.840  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.41st harmonic-warning=- C=- B=-
+GT043 G4->D4 (-5st) MIDI=31.944s 15|2|3        WAV=32.154s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=3625.5ms midpointΔ=+3705.5ms
+    timing: Δ=+3705.5ms  beats=+6.670  eighths=+13.340  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.41st harmonic-warning=- C=- B=-
+GT044 D4->D#4 (+1st) MIDI=32.361s 15|3|2        WAV=32.571s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=3208.9ms midpointΔ=+3288.9ms
+    timing: Δ=+3288.9ms  beats=+5.920  eighths=+11.840  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.41st harmonic-warning=- C=- B=-
+GT045 D#4->A#3 (-5st) MIDI=32.778s 15|4|1        WAV=32.988s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=2792.2ms midpointΔ=+2872.2ms
+    timing: Δ=+2872.2ms  beats=+5.170  eighths=+10.340  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.41st harmonic-warning=- C=- B=-
+GT046 A#3->B3 (+1st) MIDI=32.917s 15|4|2        WAV=33.127s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=2653.3ms midpointΔ=+2733.3ms
+    timing: Δ=+2733.3ms  beats=+4.920  eighths=+9.840  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.41st harmonic-warning=- C=- B=-
+GT047 B3->C4 (+1st) MIDI=33.056s 15|4|3        WAV=33.266s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=2514.4ms midpointΔ=+2594.4ms
+    timing: Δ=+2594.4ms  beats=+4.670  eighths=+9.340  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.41st harmonic-warning=- C=- B=-
+GT048 C4->A#3 (-2st) MIDI=33.611s 16|1|3        WAV=33.821s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=1958.9ms midpointΔ=+2038.9ms
+    timing: Δ=+2038.9ms  beats=+3.670  eighths=+7.340  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.41st harmonic-warning=- C=- B=-
+GT050 A#3->G#4 (+10st) MIDI=35.556s 17|1|1        WAV=35.766s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=14.4ms midpointΔ=+94.4ms
+    timing: Δ=  +94.4ms  beats=+0.170  eighths=+0.340  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=67.41st harmonic-warning=- C=- B=-
+GT051 G#4->G4 (-1st) MIDI=35.833s 17|1|3        WAV=36.043s
+    nearest link: UNRESOLVED O18 L1 S60 interval-dist=103.4ms midpointΔ=-183.4ms
+    timing: Δ= -183.4ms  beats=-0.330  eighths=-0.660  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=67.41st harmonic-warning=- C=- B=-
+GT052 G4->D#4 (-4st) MIDI=36.111s 17|2|1        WAV=36.321s
+    nearest link: UNRESOLVED O18 L2 S62 interval-dist=41.1ms midpointΔ=-81.1ms
+    timing: Δ=  -81.1ms  beats=-0.146  eighths=-0.292  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=61.93st harmonic-warning=- C=- B=RESIDUAL
+GT053 D#4->G#4 (+5st) MIDI=36.389s 17|2|3        WAV=36.599s
+    nearest link: UNRESOLVED O18 L2 S62 interval-dist=318.9ms midpointΔ=-358.9ms
+    timing: Δ= -358.9ms  beats=-0.646  eighths=-1.292  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=61.93st harmonic-warning=- C=- B=RESIDUAL
+GT054 G#4->G4 (-1st) MIDI=36.667s 17|3|1        WAV=36.877s
+    nearest link: SPLIT O20 L1 S69 interval-dist=283.3ms midpointΔ=+328.3ms
+    timing: Δ= +328.3ms  beats=+0.591  eighths=+1.182  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=62.78st harmonic-warning=- C=- B=DURATION,PATH,RESIDUAL,TOPOLOGY
+GT055 G4->D#4 (-4st) MIDI=36.944s 17|3|3        WAV=37.154s
+    nearest link: SPLIT O20 L1 S69 interval-dist=5.5ms midpointΔ=+50.5ms
+    timing: Δ=  +50.5ms  beats=+0.091  eighths=+0.182  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=62.78st harmonic-warning=- C=- B=DURATION,PATH,RESIDUAL,TOPOLOGY
+GT057 D#4->F4 (+2st) MIDI=37.500s 17|4|3        WAV=37.710s
+    nearest link: SPLIT O20 L1 S69 interval-dist=460.0ms midpointΔ=-505.0ms
+    timing: Δ= -505.0ms  beats=-0.909  eighths=-1.818  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=62.78st harmonic-warning=- C=- B=DURATION,PATH,RESIDUAL,TOPOLOGY
+GT058 F4->D#4 (-2st) MIDI=40.278s 19|1|3        WAV=40.488s
+    nearest link: SPLIT O21 L1 S74 interval-dist=262.2ms midpointΔ=+327.2ms
+    timing: Δ= +327.2ms  beats=+0.589  eighths=+1.178  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=62.50st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT063 D#4->G4 (+4st) MIDI=41.667s 19|4|1        WAV=41.877s
+    nearest link: SPLIT O21 L1 S74 interval-dist=996.7ms midpointΔ=-1061.7ms
+    timing: Δ=-1061.7ms  beats=-1.911  eighths=-3.822  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=62.50st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT064 G4->A#4 (+3st) MIDI=42.083s 19|4|4        WAV=42.293s
+    nearest link: SPLIT O23 L1 S81 interval-dist=1116.6ms midpointΔ=+1176.6ms
+    timing: Δ=+1176.6ms  beats=+2.118  eighths=+4.236  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=61.94st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT065 A#4->D4 (-8st) MIDI=42.500s 20|1|3        WAV=42.710s
+    nearest link: SPLIT O23 L1 S81 interval-dist=700.0ms midpointΔ=+760.0ms
+    timing: Δ= +760.0ms  beats=+1.368  eighths=+2.736  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=61.94st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT071 D4->D#4 (+1st) MIDI=44.306s 20|4|4        WAV=44.516s
+    nearest link: SPLIT O25 L1 S87 interval-dist=634.4ms midpointΔ=+679.4ms
+    timing: Δ= +679.4ms  beats=+1.223  eighths=+2.446  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=62.92st harmonic-warning=- C=- B=RESIDUAL,TOPOLOGY
+GT075 D#4->G4 (+4st) MIDI=45.556s 21|3|1        WAV=45.766s
+    nearest link: SPLIT O25 L1 S87 interval-dist=525.6ms midpointΔ=-570.6ms
+    timing: Δ= -570.6ms  beats=-1.027  eighths=-2.054  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=62.92st harmonic-warning=- C=- B=RESIDUAL,TOPOLOGY
+GT076 G4->F4 (-2st) MIDI=45.972s 21|3|4        WAV=46.182s
+    nearest link: SPLIT O25 L1 S87 interval-dist=942.3ms midpointΔ=-987.3ms
+    timing: Δ= -987.3ms  beats=-1.777  eighths=-3.554  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=62.92st harmonic-warning=- C=- B=RESIDUAL,TOPOLOGY
+GT077 F4->D#4 (-2st) MIDI=46.389s 21|4|3        WAV=46.599s
+    nearest link: SPLIT O25 L1 S87 interval-dist=1358.9ms midpointΔ=-1403.9ms
+    timing: Δ=-1403.9ms  beats=-2.527  eighths=-5.054  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=62.92st harmonic-warning=- C=- B=RESIDUAL,TOPOLOGY
+GT078 D#4->F4 (+2st) MIDI=46.528s 21|4|4        WAV=46.738s
+    nearest link: UNRESOLVED O26 L1 S95 interval-dist=1332.2ms midpointΔ=+1377.2ms
+    timing: Δ=+1377.2ms  beats=+2.479  eighths=+4.958  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=68.07st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT079 F4->D#4 (-2st) MIDI=46.944s 22|1|3        WAV=47.154s
+    nearest link: UNRESOLVED O26 L1 S95 interval-dist=915.5ms midpointΔ=+960.5ms
+    timing: Δ= +960.5ms  beats=+1.729  eighths=+3.458  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=68.07st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT080 D#4->G#4 (+5st) MIDI=47.778s 22|3|1        WAV=47.988s
+    nearest link: UNRESOLVED O26 L1 S95 interval-dist=82.2ms midpointΔ=+127.2ms
+    timing: Δ= +127.2ms  beats=+0.229  eighths=+0.458  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=68.07st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT081 G#4->G4 (-1st) MIDI=48.194s 22|3|4        WAV=48.404s
+    nearest link: UNRESOLVED O26 L1 S95 interval-dist=244.5ms midpointΔ=-289.5ms
+    timing: Δ= -289.5ms  beats=-0.521  eighths=-1.042  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=68.07st harmonic-warning=- C=SIMILAR B=TOPOLOGY
+GT082 G4->G#4 (+1st) MIDI=48.611s 22|4|3        WAV=48.821s
+    nearest link: SPLIT O27 L1 S100 interval-dist=138.8ms midpointΔ=+188.8ms
+    timing: Δ= +188.8ms  beats=+0.340  eighths=+0.680  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=67.10st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT083 G#4->G4 (-1st) MIDI=48.889s 23|1|1        WAV=49.099s
+    nearest link: SPLIT O27 L1 S100 interval-dist=38.9ms midpointΔ=-88.9ms
+    timing: Δ=  -88.9ms  beats=-0.160  eighths=-0.320  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=67.10st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT084 G4->F4 (-2st) MIDI=49.444s 23|2|1        WAV=49.654s
+    nearest link: SPLIT O27 L1 S100 interval-dist=594.5ms midpointΔ=-644.5ms
+    timing: Δ= -644.5ms  beats=-1.160  eighths=-2.320  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=67.10st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT085 F4->G4 (+2st) MIDI=50.000s 23|3|1        WAV=50.210s
+    nearest link: SPLIT O27 L1 S100 interval-dist=1150.0ms midpointΔ=-1200.0ms
+    timing: Δ=-1200.0ms  beats=-2.160  eighths=-4.320  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.10st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT086 G4->A#4 (+3st) MIDI=50.417s 23|3|4        WAV=50.627s
+    nearest link: SPLIT O27 L1 S100 interval-dist=1566.7ms midpointΔ=-1616.7ms
+    timing: Δ=-1616.7ms  beats=-2.910  eighths=-5.820  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.10st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT087 A#4->D4 (-8st) MIDI=50.833s 23|4|3        WAV=51.043s
+    nearest link: SPLIT O27 L1 S100 interval-dist=1983.4ms midpointΔ=-2033.4ms
+    timing: Δ=-2033.4ms  beats=-3.660  eighths=-7.320  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.10st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT089 D4->C4 (-2st) MIDI=51.528s 24|1|4        WAV=51.738s
+    nearest link: SPLIT O27 L1 S100 interval-dist=2677.8ms midpointΔ=-2727.8ms
+    timing: Δ=-2727.8ms  beats=-4.910  eighths=-9.820  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.10st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT090 C4->A#3 (-2st) MIDI=51.667s 24|2|1        WAV=51.877s
+    nearest link: SPLIT O27 L1 S100 interval-dist=2816.7ms midpointΔ=-2866.7ms
+    timing: Δ=-2866.7ms  beats=-5.160  eighths=-10.320  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=67.10st harmonic-warning=- C=- B=PATH,TOPOLOGY
+GT091 A#3->D#4 (+5st) MIDI=52.500s 24|3|3        WAV=52.710s
+    nearest link: UNRESOLVED O36 L1 S123 interval-dist=2280.0ms midpointΔ=+2330.0ms
+    timing: Δ=+2330.0ms  beats=+4.194  eighths=+8.388  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=61.67st harmonic-warning=- C=- B=-
+GT093 D#4->A#4 (+7st) MIDI=53.056s 24|4|3        WAV=53.266s
+    nearest link: UNRESOLVED O36 L1 S123 interval-dist=1724.4ms midpointΔ=+1774.4ms
+    timing: Δ=+1774.4ms  beats=+3.194  eighths=+6.388  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=61.67st harmonic-warning=- C=- B=-
+GT095 A#4->G#4 (-2st) MIDI=53.611s 25|1|3        WAV=53.821s
+    nearest link: UNRESOLVED O36 L1 S123 interval-dist=1168.8ms midpointΔ=+1218.8ms
+    timing: Δ=+1218.8ms  beats=+2.194  eighths=+4.388  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=61.67st harmonic-warning=- C=- B=-
+GT097 G#4->G4 (-1st) MIDI=54.028s 25|2|2        WAV=54.238s
+    nearest link: UNRESOLVED O36 L1 S123 interval-dist=752.2ms midpointΔ=+802.2ms
+    timing: Δ= +802.2ms  beats=+1.444  eighths=+2.888  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=61.67st harmonic-warning=- C=- B=-
+GT099 G4->F4 (-2st) MIDI=54.444s 25|3|1        WAV=54.654s
+    nearest link: UNRESOLVED O36 L1 S123 interval-dist=335.5ms midpointΔ=+385.5ms
+    timing: Δ= +385.5ms  beats=+0.694  eighths=+1.388  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=61.67st harmonic-warning=- C=- B=-
+GT101 F4->D#4 (-2st) MIDI=54.861s 25|3|4        WAV=55.071s
+    nearest link: UNRESOLVED O36 L1 S123 interval-dist=0.0ms midpointΔ=-31.2ms
+    timing: Δ=  -31.2ms  beats=-0.056  eighths=-0.112  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=61.67st harmonic-warning=- C=- B=-
+GT102 D#4->F4 (+2st) MIDI=55.139s 25|4|2        WAV=55.349s
+    nearest link: JOIN O36 L2 S125 interval-dist=1.1ms midpointΔ=+61.1ms
+    timing: Δ=  +61.1ms  beats=+0.110  eighths=+0.220  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=64.86st harmonic-warning=- C=DIRECT B=TOPOLOGY
+GT103 F4->G4 (+2st) MIDI=55.417s 25|4|4        WAV=55.627s
+    nearest link: JOIN O36 L2 S125 interval-dist=156.7ms midpointΔ=-216.7ms
+    timing: Δ= -216.7ms  beats=-0.390  eighths=-0.780  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=64.86st harmonic-warning=- C=DIRECT B=TOPOLOGY
+GT104 G4->F4 (-2st) MIDI=55.833s 26|1|3        WAV=56.043s
+    nearest link: SPLIT O37 L1 S129 interval-dist=0.0ms midpointΔ=-28.4ms
+    timing: Δ=  -28.4ms  beats=-0.051  eighths=-0.102  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=64.84st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT105 F4->D#4 (-2st) MIDI=56.111s 26|2|1        WAV=56.321s
+    nearest link: SPLIT O37 L1 S129 interval-dist=251.2ms midpointΔ=-306.2ms
+    timing: Δ= -306.2ms  beats=-0.551  eighths=-1.102  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=64.84st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT106 D#4->G#4 (+5st) MIDI=56.667s 26|3|1        WAV=56.877s
+    nearest link: SPLIT O38 L1 S132 interval-dist=73.3ms midpointΔ=+113.3ms
+    timing: Δ= +113.3ms  beats=+0.204  eighths=+0.408  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=68.04st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT107 G#4->G4 (-1st) MIDI=57.083s 26|3|4        WAV=57.293s
+    nearest link: SPLIT O38 L1 S132 interval-dist=263.4ms midpointΔ=-303.4ms
+    timing: Δ= -303.4ms  beats=-0.546  eighths=-1.092  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=68.04st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT108 G4->G#4 (+1st) MIDI=57.500s 26|4|3        WAV=57.710s
+    nearest link: UNRESOLVED O40 L1 S138 interval-dist=560.0ms midpointΔ=+610.0ms
+    timing: Δ= +610.0ms  beats=+1.098  eighths=+2.196  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=66.95st harmonic-warning=- C=- B=PATH
+GT109 G#4->G4 (-1st) MIDI=57.778s 27|1|1        WAV=57.988s
+    nearest link: UNRESOLVED O40 L1 S138 interval-dist=282.2ms midpointΔ=+332.2ms
+    timing: Δ= +332.2ms  beats=+0.598  eighths=+1.196  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=66.95st harmonic-warning=- C=- B=PATH
+GT110 G4->F4 (-2st) MIDI=58.194s 27|1|4        WAV=58.404s
+    nearest link: UNRESOLVED O40 L1 S138 interval-dist=34.5ms midpointΔ=-84.5ms
+    timing: Δ=  -84.5ms  beats=-0.152  eighths=-0.304  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=66.95st harmonic-warning=- C=- B=PATH
+GT111 F4->G4 (+2st) MIDI=58.889s 27|3|1        WAV=59.099s
+    nearest link: UNRESOLVED O40 L1 S138 interval-dist=728.9ms midpointΔ=-778.9ms
+    timing: Δ= -778.9ms  beats=-1.402  eighths=-2.804  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=66.95st harmonic-warning=- C=- B=PATH
+GT112 G4->A#4 (+3st) MIDI=59.306s 27|3|4        WAV=59.516s
+    nearest link: UNRESOLVED O40 L1 S138 interval-dist=1145.6ms midpointΔ=-1195.6ms
+    timing: Δ=-1195.6ms  beats=-2.152  eighths=-4.304  BPM=108.00  eyebrow=272.0ms  flag=EXTREME
+    stable=66.95st harmonic-warning=- C=- B=PATH
+GT113 A#4->D#4 (-7st) MIDI=59.722s 27|4|3        WAV=59.932s
+    nearest link: UNRESOLVED O41 L1 S142 interval-dist=787.7ms midpointΔ=+837.7ms
+    timing: Δ= +837.7ms  beats=+1.508  eighths=+3.016  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=58.03st harmonic-warning=- C=- B=PATH
+GT114 D#4->D4 (-1st) MIDI=60.000s 28|1|1        WAV=60.210s
+    nearest link: UNRESOLVED O41 L1 S142 interval-dist=510.0ms midpointΔ=+560.0ms
+    timing: Δ= +560.0ms  beats=+1.008  eighths=+2.016  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=58.03st harmonic-warning=- C=- B=PATH
+GT115 D4->C4 (-2st) MIDI=60.417s 28|1|4        WAV=60.627s
+    nearest link: UNRESOLVED O41 L1 S142 interval-dist=93.3ms midpointΔ=+143.3ms
+    timing: Δ= +143.3ms  beats=+0.258  eighths=+0.516  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=58.03st harmonic-warning=- C=- B=PATH
+GT116 C4->A#3 (-2st) MIDI=60.556s 28|2|1        WAV=60.766s
+    nearest link: UNRESOLVED O41 L1 S142 interval-dist=0.0ms midpointΔ=+4.4ms
+    timing: Δ=   +4.4ms  beats=+0.008  eighths=+0.016  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=58.03st harmonic-warning=- C=- B=PATH
+GT117 A#3->D#4 (+5st) MIDI=61.667s 28|4|1        WAV=61.877s
+    nearest link: SPLIT O42 L1 S146 interval-dist=313.3ms midpointΔ=+408.3ms
+    timing: Δ= +408.3ms  beats=+0.735  eighths=+1.470  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=70.03st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT118 D#4->A#4 (+7st) MIDI=61.944s 28|4|3        WAV=62.154s
+    nearest link: SPLIT O42 L1 S146 interval-dist=35.5ms midpointΔ=+130.5ms
+    timing: Δ= +130.5ms  beats=+0.235  eighths=+0.470  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=70.03st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT120 A#4->G#4 (-2st) MIDI=62.500s 29|1|3        WAV=62.710s
+    nearest link: SPLIT O42 L1 S146 interval-dist=330.1ms midpointΔ=-425.1ms
+    timing: Δ= -425.1ms  beats=-0.765  eighths=-1.530  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=70.03st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT122 G#4->G4 (-1st) MIDI=62.917s 29|2|2        WAV=63.127s
+    nearest link: SPLIT O42 L1 S146 interval-dist=746.7ms midpointΔ=-841.7ms
+    timing: Δ= -841.7ms  beats=-1.515  eighths=-3.030  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=70.03st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT124 G4->F4 (-2st) MIDI=63.333s 29|3|1        WAV=63.543s
+    nearest link: SPLIT O44 L1 S151 interval-dist=686.6ms midpointΔ=+726.6ms
+    timing: Δ= +726.6ms  beats=+1.308  eighths=+2.616  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=65.43st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT126 F4->D#4 (-2st) MIDI=63.750s 29|3|4        WAV=63.960s
+    nearest link: SPLIT O44 L1 S151 interval-dist=269.9ms midpointΔ=+309.9ms
+    timing: Δ= +309.9ms  beats=+0.558  eighths=+1.116  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=65.43st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT127 D#4->F4 (+2st) MIDI=63.889s 29|4|1        WAV=64.099s
+    nearest link: SPLIT O44 L1 S151 interval-dist=131.1ms midpointΔ=+171.1ms
+    timing: Δ= +171.1ms  beats=+0.308  eighths=+0.616  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=65.43st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT128 F4->G4 (+2st) MIDI=64.306s 29|4|4        WAV=64.516s
+    nearest link: SPLIT O44 L1 S151 interval-dist=205.6ms midpointΔ=-245.6ms
+    timing: Δ= -245.6ms  beats=-0.442  eighths=-0.884  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=65.43st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT129 G4->F4 (-2st) MIDI=64.722s 30|1|3        WAV=64.932s
+    nearest link: SPLIT O44 L1 S151 interval-dist=622.3ms midpointΔ=-662.3ms
+    timing: Δ= -662.3ms  beats=-1.192  eighths=-2.384  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=65.43st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT130 F4->D#4 (-2st) MIDI=65.000s 30|2|1        WAV=65.210s
+    nearest link: SPLIT O44 L1 S151 interval-dist=900.1ms midpointΔ=-940.1ms
+    timing: Δ= -940.1ms  beats=-1.692  eighths=-3.384  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=65.43st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT131 D#4->A#3 (-5st) MIDI=65.833s 30|3|3        WAV=66.043s
+    nearest link: SPLIT O45 L1 S154 interval-dist=776.6ms midpointΔ=+851.6ms
+    timing: Δ= +851.6ms  beats=+1.533  eighths=+3.066  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=63.04st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT132 A#3->F4 (+7st) MIDI=66.111s 30|4|1        WAV=66.321s
+    nearest link: SPLIT O45 L1 S154 interval-dist=498.8ms midpointΔ=+573.8ms
+    timing: Δ= +573.8ms  beats=+1.033  eighths=+2.066  BPM=108.00  eyebrow=272.0ms  flag=LARGE
+    stable=63.04st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT133 F4->D#4 (-2st) MIDI=66.389s 30|4|3        WAV=66.599s
+    nearest link: SPLIT O45 L1 S154 interval-dist=221.1ms midpointΔ=+296.1ms
+    timing: Δ= +296.1ms  beats=+0.533  eighths=+1.066  BPM=108.00  eyebrow=272.0ms  flag=EYEBROW
+    stable=63.04st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT134 D#4->F4 (+2st) MIDI=66.528s 30|4|4        WAV=66.738s
+    nearest link: SPLIT O45 L1 S154 interval-dist=82.2ms midpointΔ=+157.2ms
+    timing: Δ= +157.2ms  beats=+0.283  eighths=+0.566  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=63.04st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+GT135 F4->D#4 (-2st) MIDI=66.667s 31|1|1        WAV=66.877s
+    nearest link: SPLIT O45 L1 S154 interval-dist=0.0ms midpointΔ=+18.3ms
+    timing: Δ=  +18.3ms  beats=+0.033  eighths=+0.066  BPM=108.00  eyebrow=272.0ms  flag=ordinary
+    stable=63.04st harmonic-warning=- C=- B=DURATION,PATH,TOPOLOGY
+
+================================================================================================================================================
+BPM-ADAPTIVE INSPECTION QUEUES
+================================================================================================================================================
+These are not error declarations. Artistic anticipation/posticipation remains possible.
+
+A) SPLIT whose nearest GT pitch-change timing raises >= EYEBROW:
+  EYEBROW O21 L1 S74 40.815s 19|2|1+0.36   GT058 Δ=+327.2ms (+0.589 beats, +1.178 eighths) threshold=272.0ms harmonic=-
+  LARGE   O23 L1 S81 43.470s 20|2|4+0.47   GT065 Δ=+760.0ms (+1.368 beats, +2.736 eighths) threshold=272.0ms harmonic=-
+  LARGE   O25 L1 S87 45.195s 21|1|4+0.89   GT075 Δ=-570.6ms (-1.027 beats, -2.054 eighths) threshold=272.0ms harmonic=-
+
+B) JOIN close to an intended GT pitch change (within its adaptive eyebrow threshold):
+  O09 L2 S26 GT020 Δ=+129.4ms (+0.466 eighths) threshold=272.0ms C=EXCURSION,SIMILAR B=RESIDUAL
+  O36 L2 S125 GT102 Δ=+61.1ms (+0.220 eighths) threshold=272.0ms C=DIRECT B=TOPOLOGY
+
+C) GT pitch changes whose nearest V3.1 link midpoint raises >= EYEBROW:
+  LARGE   GT002 D#4->G4 3|1|4         nearest=SPLIT O02 L1 interval-dist=988.9ms midpointΔ=+1063.9ms (+3.830 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT003 G4->D4 3|2|3         nearest=SPLIT O02 L1 interval-dist=572.2ms midpointΔ=+647.2ms (+2.330 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT006 C4->A#3 5|1|1         nearest=UNRESOLVED O04 L1 interval-dist=851.1ms midpointΔ=+906.1ms (+3.262 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT007 A#3->D#4 5|1|4         nearest=UNRESOLVED O04 L1 interval-dist=434.4ms midpointΔ=+489.4ms (+1.762 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT009 D#4->G3 5|3|3         nearest=UNRESOLVED O04 L1 interval-dist=427.8ms midpointΔ=-482.8ms (-1.738 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT011 G3->A#3 6|4|3         nearest=UNRESOLVED O04 L1 interval-dist=3205.6ms midpointΔ=-3260.6ms (-11.738 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT012 A#3->D#4 7|1|1         nearest=UNRESOLVED O04 L1 interval-dist=3483.3ms midpointΔ=-3538.3ms (-12.738 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT013 D#4->G4 7|1|4         nearest=UNRESOLVED O04 L1 interval-dist=3900.0ms midpointΔ=-3955.0ms (-14.238 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT014 G4->D4 7|2|3         nearest=SPLIT O09 L1 interval-dist=3563.3ms midpointΔ=+3628.3ms (+13.062 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT015 D4->D#4 7|3|2         nearest=SPLIT O09 L1 interval-dist=3146.7ms midpointΔ=+3211.7ms (+11.562 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT016 D#4->C4 7|3|4         nearest=SPLIT O09 L1 interval-dist=2868.9ms midpointΔ=+2933.9ms (+10.562 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT017 C4->D#4 7|4|4         nearest=SPLIT O09 L1 interval-dist=2313.3ms midpointΔ=+2378.3ms (+8.562 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT018 D#4->A#3 8|4|3         nearest=SPLIT O09 L1 interval-dist=230.0ms midpointΔ=+295.0ms (+1.062 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT024 G4->D#4 9|3|3         nearest=SPLIT O09 L4 interval-dist=256.7ms midpointΔ=-326.7ms (-1.176 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT025 D#4->C4 9|4|1         nearest=SPLIT O09 L4 interval-dist=534.5ms midpointΔ=-604.5ms (-2.176 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT026 C4->A#3 9|4|3         nearest=SPLIT O09 L4 interval-dist=812.2ms midpointΔ=-882.2ms (-3.176 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT027 A#3->D#4 11|1|1        nearest=UNRESOLVED O13 L1 interval-dist=1887.8ms midpointΔ=+1962.8ms (+7.066 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT028 D#4->F4 11|1|4        nearest=UNRESOLVED O13 L1 interval-dist=1471.1ms midpointΔ=+1546.1ms (+5.566 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT029 F4->G4 11|2|1        nearest=UNRESOLVED O13 L1 interval-dist=1332.2ms midpointΔ=+1407.2ms (+5.066 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT030 G4->D4 11|2|3        nearest=UNRESOLVED O13 L1 interval-dist=1054.4ms midpointΔ=+1129.4ms (+4.066 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT031 D4->D#4 11|3|2        nearest=UNRESOLVED O13 L1 interval-dist=637.8ms midpointΔ=+712.8ms (+2.566 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT032 D#4->C4 11|4|1        nearest=UNRESOLVED O13 L1 interval-dist=221.1ms midpointΔ=+296.1ms (+1.066 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT033 C4->A3 12|1|3        nearest=UNRESOLVED O13 L1 interval-dist=462.2ms midpointΔ=-537.2ms (-1.934 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT034 A3->A#3 12|1|4        nearest=UNRESOLVED O13 L1 interval-dist=601.1ms midpointΔ=-676.1ms (-2.434 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT035 A#3->D#4 12|2|1        nearest=UNRESOLVED O13 L1 interval-dist=740.0ms midpointΔ=-815.0ms (-2.934 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT036 D#4->A#3 13|1|1        nearest=UNRESOLVED O13 L1 interval-dist=2406.7ms midpointΔ=-2481.7ms (-8.934 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT037 A#3->D#4 13|1|4        nearest=UNRESOLVED O13 L1 interval-dist=2823.4ms midpointΔ=-2898.4ms (-10.434 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT039 D#4->G3 13|3|2        nearest=UNRESOLVED O13 L1 interval-dist=3656.7ms midpointΔ=-3731.7ms (-13.434 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT041 G3->D#4 15|1|1        nearest=UNRESOLVED O18 L1 interval-dist=4458.9ms midpointΔ=+4538.9ms (+16.340 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT042 D#4->G4 15|1|4        nearest=UNRESOLVED O18 L1 interval-dist=4042.2ms midpointΔ=+4122.2ms (+14.840 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT043 G4->D4 15|2|3        nearest=UNRESOLVED O18 L1 interval-dist=3625.5ms midpointΔ=+3705.5ms (+13.340 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT044 D4->D#4 15|3|2        nearest=UNRESOLVED O18 L1 interval-dist=3208.9ms midpointΔ=+3288.9ms (+11.840 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT045 D#4->A#3 15|4|1        nearest=UNRESOLVED O18 L1 interval-dist=2792.2ms midpointΔ=+2872.2ms (+10.340 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT046 A#3->B3 15|4|2        nearest=UNRESOLVED O18 L1 interval-dist=2653.3ms midpointΔ=+2733.3ms (+9.840 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT047 B3->C4 15|4|3        nearest=UNRESOLVED O18 L1 interval-dist=2514.4ms midpointΔ=+2594.4ms (+9.340 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT048 C4->A#3 16|1|3        nearest=UNRESOLVED O18 L1 interval-dist=1958.9ms midpointΔ=+2038.9ms (+7.340 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT053 D#4->G#4 17|2|3        nearest=UNRESOLVED O18 L2 interval-dist=318.9ms midpointΔ=-358.9ms (-1.292 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT054 G#4->G4 17|3|1        nearest=SPLIT O20 L1 interval-dist=283.3ms midpointΔ=+328.3ms (+1.182 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT057 D#4->F4 17|4|3        nearest=SPLIT O20 L1 interval-dist=460.0ms midpointΔ=-505.0ms (-1.818 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT058 F4->D#4 19|1|3        nearest=SPLIT O21 L1 interval-dist=262.2ms midpointΔ=+327.2ms (+1.178 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT063 D#4->G4 19|4|1        nearest=SPLIT O21 L1 interval-dist=996.7ms midpointΔ=-1061.7ms (-3.822 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT064 G4->A#4 19|4|4        nearest=SPLIT O23 L1 interval-dist=1116.6ms midpointΔ=+1176.6ms (+4.236 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT065 A#4->D4 20|1|3        nearest=SPLIT O23 L1 interval-dist=700.0ms midpointΔ=+760.0ms (+2.736 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT071 D4->D#4 20|4|4        nearest=SPLIT O25 L1 interval-dist=634.4ms midpointΔ=+679.4ms (+2.446 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT075 D#4->G4 21|3|1        nearest=SPLIT O25 L1 interval-dist=525.6ms midpointΔ=-570.6ms (-2.054 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT076 G4->F4 21|3|4        nearest=SPLIT O25 L1 interval-dist=942.3ms midpointΔ=-987.3ms (-3.554 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT077 F4->D#4 21|4|3        nearest=SPLIT O25 L1 interval-dist=1358.9ms midpointΔ=-1403.9ms (-5.054 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT078 D#4->F4 21|4|4        nearest=UNRESOLVED O26 L1 interval-dist=1332.2ms midpointΔ=+1377.2ms (+4.958 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT079 F4->D#4 22|1|3        nearest=UNRESOLVED O26 L1 interval-dist=915.5ms midpointΔ=+960.5ms (+3.458 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT081 G#4->G4 22|3|4        nearest=UNRESOLVED O26 L1 interval-dist=244.5ms midpointΔ=-289.5ms (-1.042 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT084 G4->F4 23|2|1        nearest=SPLIT O27 L1 interval-dist=594.5ms midpointΔ=-644.5ms (-2.320 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT085 F4->G4 23|3|1        nearest=SPLIT O27 L1 interval-dist=1150.0ms midpointΔ=-1200.0ms (-4.320 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT086 G4->A#4 23|3|4        nearest=SPLIT O27 L1 interval-dist=1566.7ms midpointΔ=-1616.7ms (-5.820 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT087 A#4->D4 23|4|3        nearest=SPLIT O27 L1 interval-dist=1983.4ms midpointΔ=-2033.4ms (-7.320 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT089 D4->C4 24|1|4        nearest=SPLIT O27 L1 interval-dist=2677.8ms midpointΔ=-2727.8ms (-9.820 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT090 C4->A#3 24|2|1        nearest=SPLIT O27 L1 interval-dist=2816.7ms midpointΔ=-2866.7ms (-10.320 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT091 A#3->D#4 24|3|3        nearest=UNRESOLVED O36 L1 interval-dist=2280.0ms midpointΔ=+2330.0ms (+8.388 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT093 D#4->A#4 24|4|3        nearest=UNRESOLVED O36 L1 interval-dist=1724.4ms midpointΔ=+1774.4ms (+6.388 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT095 A#4->G#4 25|1|3        nearest=UNRESOLVED O36 L1 interval-dist=1168.8ms midpointΔ=+1218.8ms (+4.388 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT097 G#4->G4 25|2|2        nearest=UNRESOLVED O36 L1 interval-dist=752.2ms midpointΔ=+802.2ms (+2.888 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT099 G4->F4 25|3|1        nearest=UNRESOLVED O36 L1 interval-dist=335.5ms midpointΔ=+385.5ms (+1.388 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT105 F4->D#4 26|2|1        nearest=SPLIT O37 L1 interval-dist=251.2ms midpointΔ=-306.2ms (-1.102 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT107 G#4->G4 26|3|4        nearest=SPLIT O38 L1 interval-dist=263.4ms midpointΔ=-303.4ms (-1.092 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT108 G4->G#4 26|4|3        nearest=UNRESOLVED O40 L1 interval-dist=560.0ms midpointΔ=+610.0ms (+2.196 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT109 G#4->G4 27|1|1        nearest=UNRESOLVED O40 L1 interval-dist=282.2ms midpointΔ=+332.2ms (+1.196 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT111 F4->G4 27|3|1        nearest=UNRESOLVED O40 L1 interval-dist=728.9ms midpointΔ=-778.9ms (-2.804 eighths) threshold=272.0ms harmonic=-
+  EXTREME GT112 G4->A#4 27|3|4        nearest=UNRESOLVED O40 L1 interval-dist=1145.6ms midpointΔ=-1195.6ms (-4.304 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT113 A#4->D#4 27|4|3        nearest=UNRESOLVED O41 L1 interval-dist=787.7ms midpointΔ=+837.7ms (+3.016 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT114 D#4->D4 28|1|1        nearest=UNRESOLVED O41 L1 interval-dist=510.0ms midpointΔ=+560.0ms (+2.016 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT117 A#3->D#4 28|4|1        nearest=SPLIT O42 L1 interval-dist=313.3ms midpointΔ=+408.3ms (+1.470 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT120 A#4->G#4 29|1|3        nearest=SPLIT O42 L1 interval-dist=330.1ms midpointΔ=-425.1ms (-1.530 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT122 G#4->G4 29|2|2        nearest=SPLIT O42 L1 interval-dist=746.7ms midpointΔ=-841.7ms (-3.030 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT124 G4->F4 29|3|1        nearest=SPLIT O44 L1 interval-dist=686.6ms midpointΔ=+726.6ms (+2.616 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT126 F4->D#4 29|3|4        nearest=SPLIT O44 L1 interval-dist=269.9ms midpointΔ=+309.9ms (+1.116 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT129 G4->F4 30|1|3        nearest=SPLIT O44 L1 interval-dist=622.3ms midpointΔ=-662.3ms (-2.384 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT130 F4->D#4 30|2|1        nearest=SPLIT O44 L1 interval-dist=900.1ms midpointΔ=-940.1ms (-3.384 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT131 D#4->A#3 30|3|3        nearest=SPLIT O45 L1 interval-dist=776.6ms midpointΔ=+851.6ms (+3.066 eighths) threshold=272.0ms harmonic=-
+  LARGE   GT132 A#3->F4 30|4|1        nearest=SPLIT O45 L1 interval-dist=498.8ms midpointΔ=+573.8ms (+2.066 eighths) threshold=272.0ms harmonic=-
+  EYEBROW GT133 F4->D#4 30|4|3        nearest=SPLIT O45 L1 interval-dist=221.1ms midpointΔ=+296.1ms (+1.066 eighths) threshold=272.0ms harmonic=-
+
+D) SPLIT with no GT pitch-change inside its central stable interval:
+  O02 L1 S6 6.060-6.210s 3|3|3+0.66    nearestGT=GT005 midpointΔ=-186.1ms (-0.670 eighths) ordinary
+  O20 L1 S69 37.160-37.250s 17|3|3+0.36   nearestGT=GT055 midpointΔ=+50.5ms (+0.182 eighths) ordinary
+  O21 L1 S74 40.750-40.880s 19|2|1+0.36   nearestGT=GT058 midpointΔ=+327.2ms (+1.178 eighths) EYEBROW
+  O23 L1 S81 43.410-43.530s 20|2|4+0.47   nearestGT=GT065 midpointΔ=+760.0ms (+2.736 eighths) LARGE
+  O25 L1 S87 45.150-45.240s 21|1|4+0.89   nearestGT=GT075 midpointΔ=-570.6ms (-2.054 eighths) LARGE
+  O27 L1 S100 48.960-49.060s 22|4|4+0.36   nearestGT=GT083 midpointΔ=-88.9ms (-0.320 eighths) ordinary
+  O38 L1 S132 56.950-57.030s 26|3|1+0.82   nearestGT=GT106 midpointΔ=+113.3ms (+0.408 eighths) ordinary
+  O42 L1 S146 62.190-62.380s 28|4|3+0.94   nearestGT=GT118 midpointΔ=+130.5ms (+0.470 eighths) ordinary
+  O44 L1 S151 64.230-64.310s 29|4|2+0.23   nearestGT=GT127 midpointΔ=+171.1ms (+0.616 eighths) ordinary
+
+================================================================================================================================================
+DESCRIPTIVE FIXED-MS BINS (retained only for cross-song comparability)
+================================================================================================================================================
+SPLIT midpoint -> GT change    n=  14 median=  101.1ms p90=  497.6ms
+    within  50 ms:    5/  14 ( 35.7%)
+    within 100 ms:    7/  14 ( 50.0%)
+    within 150 ms:    9/  14 ( 64.3%)
+    within 250 ms:   11/  14 ( 78.6%)
+JOIN midpoint -> GT change     n=   2 median=   95.2ms p90=  122.6ms
+    within  50 ms:    0/   2 (  0.0%)
+    within 100 ms:    1/   2 ( 50.0%)
+    within 150 ms:    2/   2 (100.0%)
+    within 250 ms:    2/   2 (100.0%)
+UNRES midpoint -> GT change    n=   8 median=   89.5ms p90=  352.1ms
+    within  50 ms:    2/   8 ( 25.0%)
+    within 100 ms:    5/   8 ( 62.5%)
+    within 150 ms:    6/   8 ( 75.0%)
+    within 250 ms:    6/   8 ( 75.0%)
+
+================================================================================================================================================
+INVARIANTS
+================================================================================================================================================
+JOIN + SPLIT + UNRESOLVED = 2+14+8=24
+anchors represented exactly once: 24/24
+V1 alignment independent. No gesture labels. No frozen threshold changed.
+BPM-adaptive timing flags are observational only.

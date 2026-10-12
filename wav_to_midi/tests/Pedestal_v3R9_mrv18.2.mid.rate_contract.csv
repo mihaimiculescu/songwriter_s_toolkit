@@ -1,0 +1,72 @@
+field,value,units,policy
+renderer_version,V18.2_unsupported_borrowed_start_retraction,,renderer-only; frozen V3R9 input
+v17_1_residual_min_stable_factor,1.0,x upstream min_stable,V17.1 cannot promote micro residuals below the existing target-former stability scale
+v17_1_existing_attack_anchor_tolerance,0.01,s,accepted attack may predate first trustworthy residual F0 only when its frozen pitch anchor lies in that run
+v17_1_same_family_join_max_gap,0.06,s,maximum gap for residual ownership transfer into immediately preceding same-family event
+v17_1_same_family_tail_gap,0.75,semitones,preceding sounding tail must agree with residual family
+v17_1_reattack_proof_window,0.02,s,accepted physical reattack near residual start preserves a separate Note-On
+v18_breath_backdate_min_lag,0.07,s,minimum early-attack lag before breath/noise backdating adjudication
+v18_breath_replacement_max_preanchor,0.09,s,later accepted trusted/reset attack must lie near the same pitch anchor
+v18_ultrashort_max,0.035,s,ultra-short same-owner WAV rearticulation cleanup ceiling
+v18_transient_head_max,0.12,s,short backdated transient head eligible for PB folding
+v18_acoustic_rescue_min_acf,0.68,ratio,moderate primary rescue requires independent strong WAV attack
+v18_acoustic_rescue_max_cmndf,0.3,ratio,moderate primary rescue requires ACF/CMNDF pitch agreement
+v18_subharmonic_min_octave_dominance,30.0,dB,extreme octave-up spectral certificate plus local-context improvement
+v18_1_weak_backdate_start,-45.0,dBFS,weak borrowed starts may use near-anchor primary periodicity
+v18_1_weak_backdate_min_lag,0.07,s,minimum lag for calibrated weak-start fallback
+v18_1_weak_island_max,0.055,s,short weak trusted island eligible for PB folding
+v18_1_weak_island_start,-45.0,dBFS,absolute weak-start threshold
+v18_1_weak_island_next_gain,8.0,dB,following owner must be materially stronger
+v18_1_terminal_decay_max,0.14,s,terminal decay island ceiling
+v18_1_terminal_decay_left_depth,7.0,dB,decay morphology: substantial left collapse
+v18_1_terminal_decay_right_depth,1.5,dB,decay morphology: no right restart
+v18_1_repeat_min_score,30.0,z-score composite,asymmetric repetition attack strength
+v18_1_repeat_left_depth,1.8,dB,minimum left dip for isolated asymmetric repeat
+v18_1_repeat_right_depth,6.0,dB,minimum right restart for repetition
+v18_1_decay_subharmonic_head1,30.0,dB,octave-up dominance at decaying event head
+v18_1_decay_subharmonic_head2,18.0,dB,second early octave-up support sample
+v18_1_decay_subharmonic_rms_fall,12.0,dB,required decay across event
+v18_1_fast_pb_trend_half_window,0.075,s,local least-squares trend half-window
+v18_1_fast_pb_half_cycle_min,0.03,s,fast alternating residual minimum half-cycle
+v18_1_fast_pb_half_cycle_max,0.13,s,fast alternating residual maximum half-cycle
+v18_1_fast_pb_residual_factor,0.9,ratio,only alternating residual is compressed; local trend is unchanged
+v18_2_unsupported_backdate_min_lag,0.09,s,minimum unsupported borrowed lead
+v18_2_unsupported_backdate_start,-48.0,dBFS,maximum weak start level
+v18_2_unsupported_backdate_median,-40.0,dBFS,maximum median level of borrowed corridor
+v18_2_unsupported_backdate_min_remaining,0.055,s,do not expose a new micro-note
+v18_2_unsupported_primary_min_acf,0.45,ratio,moderate primary support veto
+v18_2_unsupported_primary_max_cmndf,0.55,ratio,moderate primary support veto
+v18_2_unsupported_primary_max_disagreement,150.0,cents,ACF/CMNDF agreement veto
+v18_2_unsupported_primary_family_gap,1.75,st,target-family periodicity veto
+interpretation_dt,0.007414965986395572,s,measured from input; grid-dependent logic derives from this
+interpretation_hz,134.86238532108248,Hz,diagnostic only; no 100-Hz assumption
+attack_lane_hop,0.004988662131519274,s,physical WAV-analysis hop
+reset_post_attack_grace,0.01,s,physical acoustic/reset association tolerance
+primary_query_preroll,0.01,s,physical primary-frame query tolerance
+primary_bridge_postroll,0.02,s,physical primary-frame bridge tolerance
+corridor_long_unpitched,0.14,s,physical inherited V15/V16 owner-corridor threshold
+corridor_early_primary_support,0.1,s,physical inherited V15/V16 owner-corridor threshold
+corridor_primary_delay_fraction,0.9,ratio,fraction of attack->owner lag
+corridor_attack_floor_margin,18.0,dB,recording-adaptive near-floor gate
+corridor_owner_level_gain,5.0,dB,later trusted owner must be materially stronger
+motion_window,0.07,s,physical trusted-curve continuity aperture
+motion_active_span,1.0,semitones,minimum local excursion for strict directed motion
+motion_large_span,2.5,semitones,large-gliss directed-motion threshold
+motion_strict_monotonic_fraction,0.95,ratio,strict small/medium gliss directionality
+motion_large_monotonic_fraction,0.8,ratio,large-gliss directionality
+motion_transition_radius,0.07,s,physical proximity to tracker transition for false-rearticulation protection
+reattack_min_bilateral_depth,5.0,dB,independent physical reattack requires envelope collapse and restart
+directed_crossing_half_window,0.06,s,trusted pitch must move on both sides of a suppressed structural boundary
+directed_crossing_min_slope,9.5,st/s,minimum same-direction slope on each side
+directed_crossing_max_slope_ratio,2.5,ratio,pre/post slope magnitudes must describe one coherent ramp
+post_structural_duplicate_window,0.025,s,suppresses detector echo immediately after an already-owned stable-target boundary
+short_island_smoothing_guard,0.22,s,do not smooth away late articulation in short trusted islands
+short_island_late_attack,0.1,s,late-attack threshold for short-island coverage guard
+handoff_max_gap,0.14,s,V16.1 only: maximum V16-created corridor gap eligible for continuity handoff
+handoff_min_acf,0.45,ratio,V16.1 transition evidence; cannot create Note-On or pitch family
+handoff_max_cmndf,0.46,ratio,V16.1 transition evidence; cannot create Note-On or pitch family
+handoff_max_acf_cmndf_disagreement,150.0,cents,V16.1 transition ACF/CMNDF family agreement
+handoff_endpoint_margin,2.5,semitones,V16.1 transition candidate must remain bracketed by adjacent trusted owners
+handoff_min_audible_margin,3.0,dB,V16.1 transition gap must remain above recording-adaptive floor
+pitch_only_future_match,3.0,semitones,suppressed articulation may hand PB authority only to a corroborated future trusted family
+pitch_only_max_future_lag,0.22,s,maximum pitch-only handoff lookahead; no Note-On is created

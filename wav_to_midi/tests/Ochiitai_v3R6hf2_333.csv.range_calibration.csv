@@ -1,0 +1,2 @@
+available,anchor_count,source,low_hz,high_hz,low_anchor_midi,high_anchor_midi,plateau_low_midi,plateau_high_midi,zero_low_midi,zero_high_midi,lo_quantile,hi_quantile,plateau_extension_st,shoulder_st,w_range
+1,775,v13_style_unique_local_support_v2,243.6,493.0,59,71,57.0,73.0,55.0,75.0,0.02,0.98,2.0,2.0,0.5

@@ -1,0 +1,14 @@
+frame_index,time_s,applied,frame_start_s,frame_end_s,trajectory_region_index,trajectory_region_kind,trajectory_overlap_ms,gesture_object_index,gesture_object_kind,gesture_overlap_ms,trusted_point_count,trusted_run_start_s,trusted_run_end_s,structural_reference_st,structural_reference_hz,structural_reference_midi,action,reason
+200,8.533333333333333,1,8.533333333333333,8.576,15,TRANSITION,6.666666666665932,4,TRANSITION_TARGET_TRANSITION,6.666666666665932,0,,,,,,gesture_absorb,largest_frame_span_overlap_is_frozen_transition_covered_by_gesture
+208,8.874666666666666,1,8.874666666666666,8.917333333333334,17,UNRESOLVED,37.333333333332774,,,0.0,4,8.88,8.91,,,,left_release,isolated_run_with_existing_amplitude_release_direction
+220,9.386666666666667,1,9.386666666666667,9.429333333333334,,,0.0,,,0.0,0,,,,,,nonmusical_absorb,no_trusted_trajectory_points_inside_physical_frame
+240,10.24,1,10.24,10.282666666666668,27,TRANSITION,42.6666666666673,6,TRANSITION_TARGET_TRANSITION,42.6666666666673,5,10.24,10.28,,,,gesture_absorb,largest_frame_span_overlap_is_frozen_transition_covered_by_gesture
+283,12.074666666666667,1,12.074666666666667,12.117333333333333,39,UNRESOLVED,37.333333333332774,,,0.0,4,12.08,12.15,,,,right_attack,trusted_run_continues_right_only;subframe_pitch_amplitude_context_assigns_attack_ownership
+408,17.408,1,17.408,17.450666666666667,77,UNRESOLVED,42.66666666666552,,,0.0,5,17.33,17.53,,,,continuous_motion,through_run_and_bic_prefers_linear_existing_pitch_shape
+510,21.76,1,21.76,21.802666666666667,,,0.0,,,0.0,0,,,,,,nonmusical_absorb,no_trusted_trajectory_points_inside_physical_frame
+539,22.997333333333334,1,22.997333333333334,23.04,,,0.0,,,0.0,0,,,,,,nonmusical_absorb,no_trusted_trajectory_points_inside_physical_frame
+1033,44.074666666666666,1,44.074666666666666,44.117333333333335,263,TRANSITION,42.66666666666907,84,TRANSITION_TARGET_TRANSITION,42.66666666666907,4,44.08,44.11,,,,gesture_absorb,largest_frame_span_overlap_is_frozen_transition_covered_by_gesture
+1047,44.672,1,44.672,44.714666666666666,268,STABLE_TARGET,24.66666666666839,85,TRANSITION_TARGET_TRANSITION,34.6666666666664,4,44.68,44.71,67.06379681154837,393.4426229508197,67,stable_target_authority,largest_frame_span_overlap_is_frozen_stable_target
+1071,45.696,1,45.696,45.73866666666667,277,UNRESOLVED,38.666666666664185,,,0.0,4,45.7,45.73,,,,right_attack,isolated_run_with_existing_amplitude_attack_direction
+1121,47.82933333333333,1,47.82933333333333,47.872,288,UNRESOLVED,0.6666666666674814,,,0.0,0,,,,,,nonmusical_absorb,no_trusted_trajectory_points_inside_physical_frame
+1674,71.424,1,71.424,71.46666666666667,332,TRANSITION,42.66666666666197,95,TRANSITION_CHAIN,42.66666666666197,4,71.43,71.46,,,,gesture_absorb,largest_frame_span_overlap_is_frozen_transition_covered_by_gesture

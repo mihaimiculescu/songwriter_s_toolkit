@@ -1,0 +1,2 @@
+mode,threshold,method,block_size,frame_ms,min_silence_ms,min_silence_frames,search_quantile_percent,candidate_energy_ceiling,long_run_count,selected_frame_count,selected_duration_s,selected_energy_median,selected_energy_p95,headroom_stat_units,raw_calculated_threshold,minimum_allowed_threshold,minimum_threshold_applied,digital_mute_frame_count,digital_mute_duration_s
+fixed,-27.7734,fixed_historical_threshold,2048,46.439909297052154,0.0,0,,,0,0,0.0,,,0.0,-27.7734,-27.7734,0,0,0.0

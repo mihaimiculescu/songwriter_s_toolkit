@@ -1,0 +1,4 @@
+frame_index,time_s,applied,trajectory_region_index,trajectory_region_kind,gesture_object_index,gesture_object_kind,structural_reference_st,structural_reference_hz,structural_reference_midi,action,reason
+105,4.876190476190477,0,,,,,,,,none,no_stable_target_or_covering_transition_gesture
+120,5.572789115646258,0,12,UNRESOLVED,,,,,,none,no_stable_target_or_covering_transition_gesture
+909,42.21387755102041,1,217,TRANSITION,79,TRANSITION_TARGET_TRANSITION,,,,gesture_absorb,frozen_transition_is_covered_by_existing_gesture_object

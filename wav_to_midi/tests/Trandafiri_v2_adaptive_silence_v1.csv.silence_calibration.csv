@@ -1,0 +1,2 @@
+mode,threshold,method,block_size,frame_ms,min_silence_ms,min_silence_frames,search_quantile_percent,candidate_energy_ceiling,long_run_count,selected_frame_count,selected_duration_s,selected_energy_median,selected_energy_p95,headroom_stat_units
+adaptive,-94.91253963469802,long_quiet_runs,2048,46.439909297052154,500.0,11,40.0,-100.86252776665367,3,35,1.6253968253968254,-101.04343385561889,-100.91253963469802,6.0

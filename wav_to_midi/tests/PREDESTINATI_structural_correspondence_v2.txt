@@ -1,0 +1,780 @@
+====================================================================================================================================
+MIDI <-> FROZEN WAV STRUCTURE CORRESPONDENCE V2
+====================================================================================================================================
+MIDI notes: 135  rows: 6730  rate: 100.000Hz
+regions: 156  objects: 45  links: 24
+JOIN=2 SPLIT=14 UNRESOLVED=8
+alignment: FIXED independent V1 offset; WAV_time=MIDI_time+offset; offset=+0.210s
+  EARLY  +0.165s score=0.9944
+  MIDDLE +0.165s score=0.9880
+  LATE   +0.195s score=0.9950
+position format: bar|beat|sixteenth-slot; +fraction means between sixteenth slots
+
+====================================================================================================================================
+GT MIDI ONSETS -> FROZEN WAV STRUCTURE
+====================================================================================================================================
+GT001 D#4  MIDI=   4.444s 3|1|1         WAV=   4.654s
+    region boundary    4.990s 3|1|3+0.42    Δ= +335.6ms R0(STABLE_TARGET)->R1(TRANSITION)
+    V3.1 link         6.060-   6.210s 3|3|3+0.66    dist=1405.6ms edgeΔ=+1405.6 SPLIT O2 L1 S6
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist=1405.6ms edgeΔ=+1405.6 O2 L1
+GT002 G4   MIDI=   4.861s 3|1|4         WAV=   5.071s
+    region boundary    4.990s 3|1|3+0.42    Δ=  -81.1ms R0(STABLE_TARGET)->R1(TRANSITION)
+    V3.1 link         6.060-   6.210s 3|3|3+0.66    dist= 988.9ms edgeΔ= +988.9 SPLIT O2 L1 S6
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist= 988.9ms edgeΔ= +988.9 O2 L1
+GT003 D4   MIDI=   5.278s 3|2|3         WAV=   5.488s
+    region boundary    5.625s 3|2|3+0.99    Δ= +137.2ms R2(UNRESOLVED)->R3(STABLE_TARGET)
+    V3.1 link         6.060-   6.210s 3|3|3+0.66    dist= 572.2ms edgeΔ= +572.2 SPLIT O2 L1 S6
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist= 572.2ms edgeΔ= +572.2 O2 L1
+GT004 D#4  MIDI=   5.694s 3|3|2         WAV=   5.904s
+    region boundary    5.910s 3|3|2+0.04    Δ=   +5.6ms R4(STABLE_TARGET)->R5(TRANSITION)
+    V3.1 link         6.060-   6.210s 3|3|3+0.66    dist= 155.6ms edgeΔ= +155.6 SPLIT O2 L1 S6
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist= 155.6ms edgeΔ= +155.6 O2 L1
+GT005 C4   MIDI=   6.111s 3|4|1         WAV=   6.321s
+    region boundary    6.210s 3|3|4+0.20    Δ= -111.1ms R6(STABLE_TARGET)->R7(TRANSITION)
+    V3.1 link         6.060-   6.210s 3|3|3+0.66    dist= 111.1ms edgeΔ= -111.1 SPLIT O2 L1 S6
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist= 111.1ms edgeΔ= -111.1 O2 L1
+GT006 A#3  MIDI=   8.889s 5|1|1         WAV=   9.099s
+    region boundary    9.150s 5|1|1+0.37    Δ=  +51.1ms R9(STABLE_TARGET)->R10(TRANSITION)
+    V3.1 link         9.950-  10.060s 5|2|3+0.52    dist= 851.1ms edgeΔ= +851.1 UNRESOLVED O4 L1 S13
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist=2888.9ms edgeΔ=-2888.9 O2 L1
+GT007 D#4  MIDI=   9.306s 5|1|4         WAV=   9.516s
+    region boundary    9.665s 5|2|1+0.08    Δ= +149.4ms R10(TRANSITION)->R11(STABLE_TARGET)
+    V3.1 link         9.950-  10.060s 5|2|3+0.52    dist= 434.4ms edgeΔ= +434.4 UNRESOLVED O4 L1 S13
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist=3305.6ms edgeΔ=-3305.6 O2 L1
+GT008 D#4  MIDI=   9.722s 5|2|3         WAV=   9.932s
+    region boundary    9.950s 5|2|3+0.13    Δ=  +17.8ms R12(TRANSITION)->R13(STABLE_TARGET)
+    V3.1 link         9.950-  10.060s 5|2|3+0.52    dist=  17.8ms edgeΔ=  +17.8 UNRESOLVED O4 L1 S13
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist=3722.2ms edgeΔ=-3722.2 O2 L1
+GT009 G3   MIDI=  10.278s 5|3|3         WAV=  10.488s
+    region boundary   10.480s 5|3|2+0.94    Δ=   -7.8ms R15(TRANSITION)->R16(STABLE_TARGET)
+    V3.1 link         9.950-  10.060s 5|2|3+0.52    dist= 427.8ms edgeΔ= -427.8 UNRESOLVED O4 L1 S13
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist=4277.8ms edgeΔ=-4277.8 O2 L1
+GT010 G3   MIDI=  10.556s 5|4|1         WAV=  10.766s
+    region boundary   10.780s 5|4|1+0.10    Δ=  +14.4ms R16(STABLE_TARGET)->R17(TRANSITION)
+    V3.1 link         9.950-  10.060s 5|2|3+0.52    dist= 705.6ms edgeΔ= -705.6 UNRESOLVED O4 L1 S13
+    nearest SPLIT     6.060-   6.210s 3|3|3+0.66    dist=4555.6ms edgeΔ=-4555.6 O2 L1
+GT011 A#3  MIDI=  13.056s 6|4|3         WAV=  13.266s
+    region boundary   13.635s 7|1|1+0.66    Δ= +369.4ms R18(STABLE_TARGET)->R19(TRANSITION)
+    V3.1 link         9.950-  10.060s 5|2|3+0.52    dist=3205.6ms edgeΔ=-3205.6 UNRESOLVED O4 L1 S13
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist=4674.4ms edgeΔ=+4674.4 O9 L1
+GT012 D#4  MIDI=  13.333s 7|1|1         WAV=  13.543s
+    region boundary   13.635s 7|1|1+0.66    Δ=  +91.7ms R18(STABLE_TARGET)->R19(TRANSITION)
+    V3.1 link         9.950-  10.060s 5|2|3+0.52    dist=3483.3ms edgeΔ=-3483.3 UNRESOLVED O4 L1 S13
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist=4396.7ms edgeΔ=+4396.7 O9 L1
+GT013 G4   MIDI=  13.750s 7|1|4         WAV=  13.960s
+    region boundary   13.635s 7|1|1+0.66    Δ= -325.0ms R18(STABLE_TARGET)->R19(TRANSITION)
+    V3.1 link         9.950-  10.060s 5|2|3+0.52    dist=3900.0ms edgeΔ=-3900.0 UNRESOLVED O4 L1 S13
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist=3980.0ms edgeΔ=+3980.0 O9 L1
+GT014 D4   MIDI=  14.167s 7|2|3         WAV=  14.377s
+    region boundary   15.050s 7|3|3+0.85    Δ= +673.3ms R19(TRANSITION)->R20(STABLE_TARGET)
+    V3.1 link        17.940-  18.070s 9|1|1+0.12    dist=3563.3ms edgeΔ=+3563.3 SPLIT O9 L1 S24
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist=3563.3ms edgeΔ=+3563.3 O9 L1
+GT015 D#4  MIDI=  14.583s 7|3|2         WAV=  14.793s
+    region boundary   15.050s 7|3|3+0.85    Δ= +256.7ms R19(TRANSITION)->R20(STABLE_TARGET)
+    V3.1 link        17.940-  18.070s 9|1|1+0.12    dist=3146.7ms edgeΔ=+3146.7 SPLIT O9 L1 S24
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist=3146.7ms edgeΔ=+3146.7 O9 L1
+GT016 C4   MIDI=  14.861s 7|3|4         WAV=  15.071s
+    region boundary   15.050s 7|3|3+0.85    Δ=  -21.1ms R19(TRANSITION)->R20(STABLE_TARGET)
+    V3.1 link        17.940-  18.070s 9|1|1+0.12    dist=2868.9ms edgeΔ=+2868.9 SPLIT O9 L1 S24
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist=2868.9ms edgeΔ=+2868.9 O9 L1
+GT017 D#4  MIDI=  15.417s 7|4|4         WAV=  15.627s
+    region boundary   15.420s 7|4|2+0.51    Δ= -206.7ms R20(STABLE_TARGET)->R21(TRANSITION)
+    V3.1 link        17.940-  18.070s 9|1|1+0.12    dist=2313.3ms edgeΔ=+2313.3 SPLIT O9 L1 S24
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist=2313.3ms edgeΔ=+2313.3 O9 L1
+GT018 A#3  MIDI=  17.500s 8|4|3         WAV=  17.710s
+    region boundary   17.755s 8|4|3+0.32    Δ=  +45.0ms R22(UNRESOLVED)->R23(TRANSITION)
+    V3.1 link        17.940-  18.070s 9|1|1+0.12    dist= 230.0ms edgeΔ= +230.0 SPLIT O9 L1 S24
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist= 230.0ms edgeΔ= +230.0 O9 L1
+GT019 G#4  MIDI=  17.778s 9|1|1         WAV=  17.988s
+    region boundary   17.940s 8|4|4+0.66    Δ=  -47.8ms R23(TRANSITION)->R24(STABLE_TARGET)
+    V3.1 link        17.940-  18.070s 9|1|1+0.12    dist=   0.0ms edgeΔ=   +0.0 SPLIT O9 L1 S24
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist=   0.0ms edgeΔ=   +0.0 O9 L1
+GT020 G4   MIDI=  18.056s 9|1|3         WAV=  18.266s
+    region boundary   18.340s 9|1|3+0.54    Δ=  +74.4ms R25(TRANSITION)->R26(STABLE_TARGET)
+    V3.1 link        18.340-  18.450s 9|1|3+0.93    dist=  74.4ms edgeΔ=  +74.4 JOIN O9 L2 S26
+    nearest SPLIT    17.940-  18.070s 9|1|1+0.12    dist= 195.6ms edgeΔ= -195.6 O9 L1
+GT021 D#4  MIDI=  18.333s 9|2|1         WAV=  18.543s
+    region boundary   18.450s 9|1|4+0.33    Δ=  -93.3ms R26(STABLE_TARGET)->R27(TRANSITION)
+    V3.1 link        18.340-  18.450s 9|1|3+0.93    dist=  93.3ms edgeΔ=  -93.3 JOIN O9 L2 S26
+    nearest SPLIT    18.780-  18.880s 9|2|3+0.06    dist= 236.7ms edgeΔ= +236.7 O9 L3
+GT022 G#4  MIDI=  18.611s 9|2|3         WAV=  18.821s
+    region boundary   18.780s 9|2|2+0.70    Δ=  -41.1ms R27(TRANSITION)->R28(STABLE_TARGET)
+    V3.1 link        18.780-  18.880s 9|2|3+0.06    dist=   0.0ms edgeΔ=   +0.0 SPLIT O9 L3 S28
+    nearest SPLIT    18.780-  18.880s 9|2|3+0.06    dist=   0.0ms edgeΔ=   +0.0 O9 L3
+GT023 G4   MIDI=  18.889s 9|3|1         WAV=  19.099s
+    region boundary   19.120s 9|3|1+0.15    Δ=  +21.1ms R30(STABLE_TARGET)->R31(TRANSITION)
+    V3.1 link        18.980-  19.120s 9|2|4+0.65    dist=   0.0ms edgeΔ=   +0.0 SPLIT O9 L4 S30
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=   0.0ms edgeΔ=   +0.0 O9 L4
+GT024 D#4  MIDI=  19.167s 9|3|3         WAV=  19.377s
+    region boundary   19.555s 9|3|4+0.28    Δ= +178.3ms R31(TRANSITION)->R32(UNRESOLVED)
+    V3.1 link        18.980-  19.120s 9|2|4+0.65    dist= 256.7ms edgeΔ= -256.7 SPLIT O9 L4 S30
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist= 256.7ms edgeΔ= -256.7 O9 L4
+GT025 C4   MIDI=  19.444s 9|4|1         WAV=  19.654s
+    region boundary   19.555s 9|3|4+0.28    Δ=  -99.5ms R31(TRANSITION)->R32(UNRESOLVED)
+    V3.1 link        18.980-  19.120s 9|2|4+0.65    dist= 534.5ms edgeΔ= -534.5 SPLIT O9 L4 S30
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist= 534.5ms edgeΔ= -534.5 O9 L4
+GT026 A#3  MIDI=  19.722s 9|4|3         WAV=  19.932s
+    region boundary   19.555s 9|3|4+0.28    Δ= -377.2ms R31(TRANSITION)->R32(UNRESOLVED)
+    V3.1 link        18.980-  19.120s 9|2|4+0.65    dist= 812.2ms edgeΔ= -812.2 SPLIT O9 L4 S30
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist= 812.2ms edgeΔ= -812.2 O9 L4
+GT027 D#4  MIDI=  22.222s 11|1|1        WAV=  22.432s
+    region boundary   22.600s 11|1|2+0.21   Δ= +167.8ms R33(UNRESOLVED)->R34(STABLE_TARGET)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=1887.8ms edgeΔ=+1887.8 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=3312.2ms edgeΔ=-3312.2 O9 L4
+GT028 F4   MIDI=  22.639s 11|1|4        WAV=  22.849s
+    region boundary   22.780s 11|1|3+0.50   Δ=  -68.9ms R34(STABLE_TARGET)->R35(TRANSITION)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=1471.1ms edgeΔ=+1471.1 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=3728.9ms edgeΔ=-3728.9 O9 L4
+GT029 G4   MIDI=  22.778s 11|2|1        WAV=  22.988s
+    region boundary   23.040s 11|2|1+0.38   Δ=  +52.2ms R35(TRANSITION)->R36(STABLE_TARGET)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=1332.2ms edgeΔ=+1332.2 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=3867.8ms edgeΔ=-3867.8 O9 L4
+GT030 D4   MIDI=  23.056s 11|2|3        WAV=  23.266s
+    region boundary   23.240s 11|2|2+0.82   Δ=  -25.6ms R36(STABLE_TARGET)->R37(TRANSITION)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=1054.4ms edgeΔ=+1054.4 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=4145.6ms edgeΔ=-4145.6 O9 L4
+GT031 D#4  MIDI=  23.472s 11|3|2        WAV=  23.682s
+    region boundary   23.580s 11|3|1+0.26   Δ= -102.2ms R38(STABLE_TARGET)->R39(TRANSITION)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist= 637.8ms edgeΔ= +637.8 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=4562.2ms edgeΔ=-4562.2 O9 L4
+GT032 C4   MIDI=  23.889s 11|4|1        WAV=  24.099s
+    region boundary   24.320s 11|4|2+0.59   Δ= +221.1ms R40(TRANSITION)->R41(STABLE_TARGET)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist= 221.1ms edgeΔ= +221.1 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=4978.9ms edgeΔ=-4978.9 O9 L4
+GT033 A3   MIDI=  24.722s 12|1|3        WAV=  24.932s
+    region boundary   25.130s 12|1|4+0.42   Δ= +197.8ms R42(TRANSITION)->R43(UNRESOLVED)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist= 462.2ms edgeΔ= -462.2 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=5812.2ms edgeΔ=-5812.2 O9 L4
+GT034 A#3  MIDI=  24.861s 12|1|4        WAV=  25.071s
+    region boundary   25.130s 12|1|4+0.42   Δ=  +58.9ms R42(TRANSITION)->R43(UNRESOLVED)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist= 601.1ms edgeΔ= -601.1 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=5951.1ms edgeΔ=-5951.1 O9 L4
+GT035 D#4  MIDI=  25.000s 12|2|1        WAV=  25.210s
+    region boundary   25.130s 12|1|4+0.42   Δ=  -80.0ms R42(TRANSITION)->R43(UNRESOLVED)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist= 740.0ms edgeΔ= -740.0 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=6090.0ms edgeΔ=-6090.0 O9 L4
+GT036 A#3  MIDI=  26.667s 13|1|1        WAV=  26.877s
+    region boundary   26.610s 12|4|3+0.08   Δ= -266.7ms R44(STABLE_TARGET)->R45(TRANSITION)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=2406.7ms edgeΔ=-2406.7 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=7756.7ms edgeΔ=-7756.7 O9 L4
+GT037 D#4  MIDI=  27.083s 13|1|4        WAV=  27.293s
+    region boundary   27.360s 13|1|4+0.48   Δ=  +66.6ms R45(TRANSITION)->R46(UNRESOLVED)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=2823.4ms edgeΔ=-2823.4 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=8173.4ms edgeΔ=-8173.4 O9 L4
+GT038 D#4  MIDI=  27.500s 13|2|3        WAV=  27.710s
+    region boundary   27.360s 13|1|4+0.48   Δ= -350.0ms R45(TRANSITION)->R46(UNRESOLVED)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=3240.0ms edgeΔ=-3240.0 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=8590.0ms edgeΔ=-8590.0 O9 L4
+GT039 G3   MIDI=  27.917s 13|3|2        WAV=  28.127s
+    region boundary   28.260s 13|3|2+0.96   Δ= +133.3ms R46(UNRESOLVED)->R47(TRANSITION)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=3656.7ms edgeΔ=-3656.7 UNRESOLVED O13 L1 S41
+    nearest SPLIT    18.980-  19.120s 9|2|4+0.65    dist=9006.7ms edgeΔ=-9006.7 O9 L4
+GT040 G3   MIDI=  28.333s 13|4|1        WAV=  28.543s
+    region boundary   28.700s 13|4|2+0.13   Δ= +156.6ms R47(TRANSITION)->R48(STABLE_TARGET)
+    V3.1 link        24.320-  24.470s 11|4|3+0.13   dist=4073.4ms edgeΔ=-4073.4 UNRESOLVED O13 L1 S41
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=8616.6ms edgeΔ=+8616.6 O20 L1
+GT041 D#4  MIDI=  31.111s 15|1|1        WAV=  31.321s
+    region boundary   31.610s 15|1|3+0.08   Δ= +288.9ms R49(STABLE_TARGET)->R50(TRANSITION)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=4458.9ms edgeΔ=+4458.9 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=5838.9ms edgeΔ=+5838.9 O20 L1
+GT042 G4   MIDI=  31.528s 15|1|4        WAV=  31.738s
+    region boundary   31.610s 15|1|3+0.08   Δ= -127.8ms R49(STABLE_TARGET)->R50(TRANSITION)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=4042.2ms edgeΔ=+4042.2 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=5422.2ms edgeΔ=+5422.2 O20 L1
+GT043 D4   MIDI=  31.944s 15|2|3        WAV=  32.154s
+    region boundary   31.915s 15|2|1+0.28   Δ= -239.5ms R50(TRANSITION)->R51(UNRESOLVED)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=3625.5ms edgeΔ=+3625.5 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=5005.5ms edgeΔ=+5005.5 O20 L1
+GT044 D#4  MIDI=  32.361s 15|3|2        WAV=  32.571s
+    region boundary   32.515s 15|3|1+0.60   Δ=  -56.1ms R51(UNRESOLVED)->R52(STABLE_TARGET)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=3208.9ms edgeΔ=+3208.9 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=4588.9ms edgeΔ=+4588.9 O20 L1
+GT045 A#3  MIDI=  32.778s 15|4|1        WAV=  32.988s
+    region boundary   32.865s 15|3|4+0.12   Δ= -122.8ms R52(STABLE_TARGET)->R53(TRANSITION)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=2792.2ms edgeΔ=+2792.2 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=4172.2ms edgeΔ=+4172.2 O20 L1
+GT046 B3   MIDI=  32.917s 15|4|2        WAV=  33.127s
+    region boundary   33.180s 15|4|2+0.38   Δ=  +53.3ms R53(TRANSITION)->R54(STABLE_TARGET)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=2653.3ms edgeΔ=+2653.3 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=4033.3ms edgeΔ=+4033.3 O20 L1
+GT047 C4   MIDI=  33.056s 15|4|3        WAV=  33.266s
+    region boundary   33.180s 15|4|2+0.38   Δ=  -85.6ms R53(TRANSITION)->R54(STABLE_TARGET)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=2514.4ms edgeΔ=+2514.4 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=3894.4ms edgeΔ=+3894.4 O20 L1
+GT048 A#3  MIDI=  33.611s 16|1|3        WAV=  33.821s
+    region boundary   33.585s 16|1|1+0.30   Δ= -236.1ms R55(UNRESOLVED)->R56(UNRESOLVED)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=1958.9ms edgeΔ=+1958.9 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=3338.9ms edgeΔ=+3338.9 O20 L1
+GT049 A#3  MIDI=  35.278s 16|4|3        WAV=  35.488s
+    region boundary   35.510s 16|4|3+0.16   Δ=  +22.2ms R58(UNRESOLVED)->R59(TRANSITION)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist= 292.2ms edgeΔ= +292.2 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=1672.2ms edgeΔ=+1672.2 O20 L1
+GT050 G#4  MIDI=  35.556s 17|1|1        WAV=  35.766s
+    region boundary   35.780s 17|1|1+0.10   Δ=  +14.4ms R59(TRANSITION)->R60(STABLE_TARGET)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist=  14.4ms edgeΔ=  +14.4 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=1394.4ms edgeΔ=+1394.4 O20 L1
+GT051 G4   MIDI=  35.833s 17|1|3        WAV=  36.043s
+    region boundary   35.940s 17|1|2+0.26   Δ= -103.4ms R60(STABLE_TARGET)->R61(TRANSITION)
+    V3.1 link        35.780-  35.940s 17|1|1+0.68   dist= 103.4ms edgeΔ= -103.4 UNRESOLVED O18 L1 S60
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=1116.6ms edgeΔ=+1116.6 O20 L1
+GT052 D#4  MIDI=  36.111s 17|2|1        WAV=  36.321s
+    region boundary   36.280s 17|1|4+0.70   Δ=  -41.1ms R62(STABLE_TARGET)->R63(TRANSITION)
+    V3.1 link        36.200-  36.280s 17|1|4+0.42   dist=  41.1ms edgeΔ=  -41.1 UNRESOLVED O18 L2 S62
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist= 838.9ms edgeΔ= +838.9 O20 L1
+GT053 G#4  MIDI=  36.389s 17|2|3        WAV=  36.599s
+    region boundary   36.555s 17|2|2+0.68   Δ=  -43.9ms R63(TRANSITION)->R64(STABLE_TARGET)
+    V3.1 link        36.200-  36.280s 17|1|4+0.42   dist= 318.9ms edgeΔ= -318.9 UNRESOLVED O18 L2 S62
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist= 561.1ms edgeΔ= +561.1 O20 L1
+GT054 G4   MIDI=  36.667s 17|3|1        WAV=  36.877s
+    region boundary   36.880s 17|3|1+0.02   Δ=   +3.3ms R65(TRANSITION)->R66(STABLE_TARGET)
+    V3.1 link        37.160-  37.250s 17|3|3+0.36   dist= 283.3ms edgeΔ= +283.3 SPLIT O20 L1 S69
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist= 283.3ms edgeΔ= +283.3 O20 L1
+GT055 D#4  MIDI=  36.944s 17|3|3        WAV=  37.154s
+    region boundary   37.160s 17|3|3+0.04   Δ=   +5.5ms R68(TRANSITION)->R69(STABLE_TARGET)
+    V3.1 link        37.160-  37.250s 17|3|3+0.36   dist=   5.5ms edgeΔ=   +5.5 SPLIT O20 L1 S69
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist=   5.5ms edgeΔ=   +5.5 O20 L1
+GT056 D#4  MIDI=  37.222s 17|4|1        WAV=  37.432s
+    region boundary   37.250s 17|3|3+0.69   Δ= -182.3ms R69(STABLE_TARGET)->R70(TRANSITION)
+    V3.1 link        37.160-  37.250s 17|3|3+0.36   dist= 182.3ms edgeΔ= -182.3 SPLIT O20 L1 S69
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist= 182.3ms edgeΔ= -182.3 O20 L1
+GT057 F4   MIDI=  37.500s 17|4|3        WAV=  37.710s
+    region boundary   37.250s 17|3|3+0.69   Δ= -460.0ms R69(STABLE_TARGET)->R70(TRANSITION)
+    V3.1 link        37.160-  37.250s 17|3|3+0.36   dist= 460.0ms edgeΔ= -460.0 SPLIT O20 L1 S69
+    nearest SPLIT    37.160-  37.250s 17|3|3+0.36   dist= 460.0ms edgeΔ= -460.0 O20 L1
+GT058 D#4  MIDI=  40.278s 19|1|3        WAV=  40.488s
+    region boundary   40.340s 19|1|1+0.94   Δ= -147.8ms R71(STABLE_TARGET)->R72(STABLE_TARGET)
+    V3.1 link        40.750-  40.880s 19|2|1+0.36   dist= 262.2ms edgeΔ= +262.2 SPLIT O21 L1 S74
+    nearest SPLIT    40.750-  40.880s 19|2|1+0.36   dist= 262.2ms edgeΔ= +262.2 O21 L1
+GT059 D#4  MIDI=  40.556s 19|2|1        WAV=  40.766s
+    region boundary   40.750s 19|1|4+0.89   Δ=  -15.6ms R73(TRANSITION)->R74(STABLE_TARGET)
+    V3.1 link        40.750-  40.880s 19|2|1+0.36   dist=   0.0ms edgeΔ=   +0.0 SPLIT O21 L1 S74
+    nearest SPLIT    40.750-  40.880s 19|2|1+0.36   dist=   0.0ms edgeΔ=   +0.0 O21 L1
+GT060 D#4  MIDI=  40.833s 19|2|3        WAV=  41.043s
+    region boundary   40.880s 19|2|1+0.82   Δ= -163.4ms R74(STABLE_TARGET)->R75(TRANSITION)
+    V3.1 link        40.750-  40.880s 19|2|1+0.36   dist= 163.4ms edgeΔ= -163.4 SPLIT O21 L1 S74
+    nearest SPLIT    40.750-  40.880s 19|2|1+0.36   dist= 163.4ms edgeΔ= -163.4 O21 L1
+GT061 D#4  MIDI=  41.111s 19|3|1        WAV=  41.321s
+    region boundary   41.640s 19|3|3+0.30   Δ= +318.9ms R75(TRANSITION)->R76(UNRESOLVED)
+    V3.1 link        40.750-  40.880s 19|2|1+0.36   dist= 441.1ms edgeΔ= -441.1 SPLIT O21 L1 S74
+    nearest SPLIT    40.750-  40.880s 19|2|1+0.36   dist= 441.1ms edgeΔ= -441.1 O21 L1
+GT062 D#4  MIDI=  41.389s 19|3|3        WAV=  41.599s
+    region boundary   41.640s 19|3|3+0.30   Δ=  +41.1ms R75(TRANSITION)->R76(UNRESOLVED)
+    V3.1 link        40.750-  40.880s 19|2|1+0.36   dist= 718.9ms edgeΔ= -718.9 SPLIT O21 L1 S74
+    nearest SPLIT    40.750-  40.880s 19|2|1+0.36   dist= 718.9ms edgeΔ= -718.9 O21 L1
+GT063 G4   MIDI=  41.667s 19|4|1        WAV=  41.877s
+    region boundary   41.640s 19|3|3+0.30   Δ= -236.7ms R75(TRANSITION)->R76(UNRESOLVED)
+    V3.1 link        40.750-  40.880s 19|2|1+0.36   dist= 996.7ms edgeΔ= -996.7 SPLIT O21 L1 S74
+    nearest SPLIT    40.750-  40.880s 19|2|1+0.36   dist= 996.7ms edgeΔ= -996.7 O21 L1
+GT064 A#4  MIDI=  42.083s 19|4|4        WAV=  42.293s
+    region boundary   42.265s 19|4|3+0.80   Δ=  -28.4ms R76(UNRESOLVED)->R77(STABLE_TARGET)
+    V3.1 link        43.410-  43.530s 20|2|4+0.47   dist=1116.6ms edgeΔ=+1116.6 SPLIT O23 L1 S81
+    nearest SPLIT    43.410-  43.530s 20|2|4+0.47   dist=1116.6ms edgeΔ=+1116.6 O23 L1
+GT065 D4   MIDI=  42.500s 20|1|3        WAV=  42.710s
+    region boundary   42.660s 20|1|2+0.64   Δ=  -50.0ms R77(STABLE_TARGET)->R78(TRANSITION)
+    V3.1 link        43.410-  43.530s 20|2|4+0.47   dist= 700.0ms edgeΔ= +700.0 SPLIT O23 L1 S81
+    nearest SPLIT    43.410-  43.530s 20|2|4+0.47   dist= 700.0ms edgeΔ= +700.0 O23 L1
+GT066 D4   MIDI=  42.778s 20|2|1        WAV=  42.988s
+    region boundary   42.785s 20|1|3+0.54   Δ= -202.8ms R78(TRANSITION)->R79(STABLE_TARGET)
+    V3.1 link        43.410-  43.530s 20|2|4+0.47   dist= 422.2ms edgeΔ= +422.2 SPLIT O23 L1 S81
+    nearest SPLIT    43.410-  43.530s 20|2|4+0.47   dist= 422.2ms edgeΔ= +422.2 O23 L1
+GT067 D4   MIDI=  43.056s 20|2|3        WAV=  43.266s
+    region boundary   43.310s 20|2|3+0.32   Δ=  +44.4ms R79(STABLE_TARGET)->R80(TRANSITION)
+    V3.1 link        43.410-  43.530s 20|2|4+0.47   dist= 144.4ms edgeΔ= +144.4 SPLIT O23 L1 S81
+    nearest SPLIT    43.410-  43.530s 20|2|4+0.47   dist= 144.4ms edgeΔ= +144.4 O23 L1
+GT068 D4   MIDI=  43.333s 20|3|1        WAV=  43.543s
+    region boundary   43.530s 20|2|4+0.90   Δ=  -13.4ms R81(STABLE_TARGET)->R82(TRANSITION)
+    V3.1 link        43.410-  43.530s 20|2|4+0.47   dist=  13.4ms edgeΔ=  -13.4 SPLIT O23 L1 S81
+    nearest SPLIT    43.410-  43.530s 20|2|4+0.47   dist=  13.4ms edgeΔ=  -13.4 O23 L1
+GT069 D4   MIDI=  43.611s 20|3|3        WAV=  43.821s
+    region boundary   43.870s 20|3|3+0.35   Δ=  +48.9ms R82(TRANSITION)->R83(UNRESOLVED)
+    V3.1 link        43.410-  43.530s 20|2|4+0.47   dist= 291.1ms edgeΔ= -291.1 SPLIT O23 L1 S81
+    nearest SPLIT    43.410-  43.530s 20|2|4+0.47   dist= 291.1ms edgeΔ= -291.1 O23 L1
+GT070 D4   MIDI=  43.889s 20|4|1        WAV=  44.099s
+    region boundary   44.290s 20|4|2+0.38   Δ= +191.1ms R83(UNRESOLVED)->R84(STABLE_TARGET)
+    V3.1 link        43.410-  43.530s 20|2|4+0.47   dist= 568.9ms edgeΔ= -568.9 SPLIT O23 L1 S81
+    nearest SPLIT    43.410-  43.530s 20|2|4+0.47   dist= 568.9ms edgeΔ= -568.9 O23 L1
+GT071 D#4  MIDI=  44.306s 20|4|4        WAV=  44.516s
+    region boundary   44.530s 20|4|4+0.10   Δ=  +14.4ms R84(STABLE_TARGET)->R85(TRANSITION)
+    V3.1 link        45.150-  45.240s 21|1|4+0.89   dist= 634.4ms edgeΔ= +634.4 SPLIT O25 L1 S87
+    nearest SPLIT    45.150-  45.240s 21|1|4+0.89   dist= 634.4ms edgeΔ= +634.4 O25 L1
+GT072 D#4  MIDI=  44.722s 21|1|3        WAV=  44.932s
+    region boundary   44.795s 21|1|2+0.01   Δ= -137.3ms R85(TRANSITION)->R86(TRANSITION)
+    V3.1 link        45.150-  45.240s 21|1|4+0.89   dist= 217.7ms edgeΔ= +217.7 SPLIT O25 L1 S87
+    nearest SPLIT    45.150-  45.240s 21|1|4+0.89   dist= 217.7ms edgeΔ= +217.7 O25 L1
+GT073 D#4  MIDI=  45.000s 21|2|1        WAV=  45.210s
+    region boundary   45.240s 21|2|1+0.22   Δ=  +30.0ms R87(STABLE_TARGET)->R88(TRANSITION)
+    V3.1 link        45.150-  45.240s 21|1|4+0.89   dist=   0.0ms edgeΔ=   +0.0 SPLIT O25 L1 S87
+    nearest SPLIT    45.150-  45.240s 21|1|4+0.89   dist=   0.0ms edgeΔ=   +0.0 O25 L1
+GT074 D#4  MIDI=  45.278s 21|2|3        WAV=  45.488s
+    region boundary   45.665s 21|2|4+0.28   Δ= +177.2ms R88(TRANSITION)->R89(UNRESOLVED)
+    V3.1 link        45.150-  45.240s 21|1|4+0.89   dist= 247.8ms edgeΔ= -247.8 SPLIT O25 L1 S87
+    nearest SPLIT    45.150-  45.240s 21|1|4+0.89   dist= 247.8ms edgeΔ= -247.8 O25 L1
+GT075 G4   MIDI=  45.556s 21|3|1        WAV=  45.766s
+    region boundary   45.665s 21|2|4+0.28   Δ= -100.6ms R88(TRANSITION)->R89(UNRESOLVED)
+    V3.1 link        45.150-  45.240s 21|1|4+0.89   dist= 525.6ms edgeΔ= -525.6 SPLIT O25 L1 S87
+    nearest SPLIT    45.150-  45.240s 21|1|4+0.89   dist= 525.6ms edgeΔ= -525.6 O25 L1
+GT076 F4   MIDI=  45.972s 21|3|4        WAV=  46.182s
+    region boundary   45.980s 21|3|2+0.54   Δ= -202.3ms R89(UNRESOLVED)->R90(STABLE_TARGET)
+    V3.1 link        45.150-  45.240s 21|1|4+0.89   dist= 942.3ms edgeΔ= -942.3 SPLIT O25 L1 S87
+    nearest SPLIT    45.150-  45.240s 21|1|4+0.89   dist= 942.3ms edgeΔ= -942.3 O25 L1
+GT077 D#4  MIDI=  46.389s 21|4|3        WAV=  46.599s
+    region boundary   46.605s 21|4|3+0.04   Δ=   +6.1ms R90(STABLE_TARGET)->R91(UNRESOLVED)
+    V3.1 link        45.150-  45.240s 21|1|4+0.89   dist=1358.9ms edgeΔ=-1358.9 SPLIT O25 L1 S87
+    nearest SPLIT    45.150-  45.240s 21|1|4+0.89   dist=1358.9ms edgeΔ=-1358.9 O25 L1
+GT078 F4   MIDI=  46.528s 21|4|4        WAV=  46.738s
+    region boundary   46.605s 21|4|3+0.04   Δ= -132.8ms R90(STABLE_TARGET)->R91(UNRESOLVED)
+    V3.1 link        48.070-  48.160s 22|3|1+0.92   dist=1332.2ms edgeΔ=+1332.2 UNRESOLVED O26 L1 S95
+    nearest SPLIT    45.150-  45.240s 21|1|4+0.89   dist=1497.8ms edgeΔ=-1497.8 O25 L1
+GT079 D#4  MIDI=  46.944s 22|1|3        WAV=  47.154s
+    region boundary   47.375s 22|1|4+0.59   Δ= +220.5ms R91(UNRESOLVED)->R92(STABLE_TARGET)
+    V3.1 link        48.070-  48.160s 22|3|1+0.92   dist= 915.5ms edgeΔ= +915.5 UNRESOLVED O26 L1 S95
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist=1805.5ms edgeΔ=+1805.5 O27 L1
+GT080 G#4  MIDI=  47.778s 22|3|1        WAV=  47.988s
+    region boundary   47.940s 22|2|4+0.66   Δ=  -47.8ms R93(STABLE_TARGET)->R94(TRANSITION)
+    V3.1 link        48.070-  48.160s 22|3|1+0.92   dist=  82.2ms edgeΔ=  +82.2 UNRESOLVED O26 L1 S95
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist= 972.2ms edgeΔ= +972.2 O27 L1
+GT081 G4   MIDI=  48.194s 22|3|4        WAV=  48.404s
+    region boundary   48.535s 22|3|4+0.94   Δ= +130.5ms R96(TRANSITION)->R97(STABLE_TARGET)
+    V3.1 link        48.070-  48.160s 22|3|1+0.92   dist= 244.5ms edgeΔ= -244.5 UNRESOLVED O26 L1 S95
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist= 555.5ms edgeΔ= +555.5 O27 L1
+GT082 G#4  MIDI=  48.611s 22|4|3        WAV=  48.821s
+    region boundary   48.890s 22|4|3+0.50   Δ=  +68.8ms R98(STABLE_TARGET)->R99(TRANSITION)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist= 138.8ms edgeΔ= +138.8 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist= 138.8ms edgeΔ= +138.8 O27 L1
+GT083 G4   MIDI=  48.889s 23|1|1        WAV=  49.099s
+    region boundary   49.060s 22|4|4+0.72   Δ=  -38.9ms R100(STABLE_TARGET)->R101(TRANSITION)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist=  38.9ms edgeΔ=  -38.9 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist=  38.9ms edgeΔ=  -38.9 O27 L1
+GT084 F4   MIDI=  49.444s 23|2|1        WAV=  49.654s
+    region boundary   49.560s 23|1|4+0.32   Δ=  -94.5ms R104(STABLE_TARGET)->R105(TRANSITION)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist= 594.5ms edgeΔ= -594.5 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist= 594.5ms edgeΔ= -594.5 O27 L1
+GT085 G4   MIDI=  50.000s 23|3|1        WAV=  50.210s
+    region boundary   50.320s 23|3|1+0.79   Δ= +110.0ms R106(TRANSITION)->R107(STABLE_TARGET)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist=1150.0ms edgeΔ=-1150.0 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist=1150.0ms edgeΔ=-1150.0 O27 L1
+GT086 A#4  MIDI=  50.417s 23|3|4        WAV=  50.627s
+    region boundary   50.715s 23|3|4+0.64   Δ=  +88.3ms R107(STABLE_TARGET)->R108(STABLE_TARGET)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist=1566.7ms edgeΔ=-1566.7 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist=1566.7ms edgeΔ=-1566.7 O27 L1
+GT087 D4   MIDI=  50.833s 23|4|3        WAV=  51.043s
+    region boundary   50.840s 23|4|1+0.54   Δ= -203.4ms R108(STABLE_TARGET)->R109(TRANSITION)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist=1983.4ms edgeΔ=-1983.4 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist=1983.4ms edgeΔ=-1983.4 O27 L1
+GT088 D4   MIDI=  51.111s 24|1|1        WAV=  51.321s
+    region boundary   51.395s 24|1|1+0.53   Δ=  +73.8ms R109(TRANSITION)->R110(STABLE_TARGET)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist=2261.2ms edgeΔ=-2261.2 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist=2261.2ms edgeΔ=-2261.2 O27 L1
+GT089 C4   MIDI=  51.528s 24|1|4        WAV=  51.738s
+    region boundary   51.880s 24|2|1+0.02   Δ= +142.2ms R110(STABLE_TARGET)->R111(TRANSITION)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist=2677.8ms edgeΔ=-2677.8 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist=2677.8ms edgeΔ=-2677.8 O27 L1
+GT090 A#3  MIDI=  51.667s 24|2|1        WAV=  51.877s
+    region boundary   51.880s 24|2|1+0.02   Δ=   +3.3ms R110(STABLE_TARGET)->R111(TRANSITION)
+    V3.1 link        48.960-  49.060s 22|4|4+0.36   dist=2816.7ms edgeΔ=-2816.7 SPLIT O27 L1 S100
+    nearest SPLIT    48.960-  49.060s 22|4|4+0.36   dist=2816.7ms edgeΔ=-2816.7 O27 L1
+GT091 D#4  MIDI=  52.500s 24|3|3        WAV=  52.710s
+    region boundary   52.575s 24|3|2+0.03   Δ= -135.0ms R112(STABLE_TARGET)->R113(UNRESOLVED)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist=2280.0ms edgeΔ=+2280.0 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=3250.0ms edgeΔ=+3250.0 O37 L1
+GT092 D#4  MIDI=  52.778s 24|4|1        WAV=  52.988s
+    region boundary   53.315s 24|4|3+0.36   Δ= +327.2ms R113(UNRESOLVED)->R114(STABLE_TARGET)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist=2002.2ms edgeΔ=+2002.2 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=2972.2ms edgeΔ=+2972.2 O37 L1
+GT093 A#4  MIDI=  53.056s 24|4|3        WAV=  53.266s
+    region boundary   53.315s 24|4|3+0.36   Δ=  +49.4ms R113(UNRESOLVED)->R114(STABLE_TARGET)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist=1724.4ms edgeΔ=+1724.4 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=2694.4ms edgeΔ=+2694.4 O37 L1
+GT094 A#4  MIDI=  53.333s 25|1|1        WAV=  53.543s
+    region boundary   53.500s 24|4|4+0.69   Δ=  -43.4ms R114(STABLE_TARGET)->R115(TRANSITION)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist=1446.6ms edgeΔ=+1446.6 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=2416.6ms edgeΔ=+2416.6 O37 L1
+GT095 G#4  MIDI=  53.611s 25|1|3        WAV=  53.821s
+    region boundary   53.920s 25|1|3+0.71   Δ=  +98.8ms R116(STABLE_TARGET)->R117(TRANSITION)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist=1168.8ms edgeΔ=+1168.8 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=2138.8ms edgeΔ=+2138.8 O37 L1
+GT096 G#4  MIDI=  53.889s 25|2|1        WAV=  54.099s
+    region boundary   54.115s 25|2|1+0.12   Δ=  +16.1ms R118(STABLE_TARGET)->R119(STABLE_TARGET)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist= 891.1ms edgeΔ= +891.1 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=1861.1ms edgeΔ=+1861.1 O37 L1
+GT097 G4   MIDI=  54.028s 25|2|2        WAV=  54.238s
+    region boundary   54.260s 25|2|2+0.16   Δ=  +22.2ms R119(STABLE_TARGET)->R120(TRANSITION)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist= 752.2ms edgeΔ= +752.2 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=1722.2ms edgeΔ=+1722.2 O37 L1
+GT098 G4   MIDI=  54.306s 25|2|4        WAV=  54.516s
+    region boundary   54.575s 25|2|4+0.43   Δ=  +59.4ms R121(STABLE_TARGET)->R122(TRANSITION)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist= 474.4ms edgeΔ= +474.4 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=1444.4ms edgeΔ=+1444.4 O37 L1
+GT099 F4   MIDI=  54.444s 25|3|1        WAV=  54.654s
+    region boundary   54.575s 25|2|4+0.43   Δ=  -79.5ms R121(STABLE_TARGET)->R122(TRANSITION)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist= 335.5ms edgeΔ= +335.5 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=1305.5ms edgeΔ=+1305.5 O37 L1
+GT100 F4   MIDI=  54.583s 25|3|2        WAV=  54.793s
+    region boundary   54.990s 25|3|3+0.42   Δ= +196.6ms R122(TRANSITION)->R123(STABLE_TARGET)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist= 196.6ms edgeΔ= +196.6 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=1166.6ms edgeΔ=+1166.6 O37 L1
+GT101 D#4  MIDI=  54.861s 25|3|4        WAV=  55.071s
+    region boundary   55.090s 25|3|4+0.14   Δ=  +18.8ms R123(STABLE_TARGET)->R124(TRANSITION)
+    V3.1 link        54.990-  55.090s 25|3|3+0.78   dist=   0.0ms edgeΔ=   +0.0 UNRESOLVED O36 L1 S123
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist= 888.8ms edgeΔ= +888.8 O37 L1
+GT102 F4   MIDI=  55.139s 25|4|2        WAV=  55.349s
+    region boundary   55.350s 25|4|2        Δ=   +1.1ms R124(TRANSITION)->R125(STABLE_TARGET)
+    V3.1 link        55.350-  55.470s 25|4|2+0.44   dist=   1.1ms edgeΔ=   +1.1 JOIN O36 L2 S125
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist= 611.1ms edgeΔ= +611.1 O37 L1
+GT103 G4   MIDI=  55.417s 25|4|4        WAV=  55.627s
+    region boundary   55.580s 25|4|3+0.66   Δ=  -46.7ms R126(TRANSITION)->R127(STABLE_TARGET)
+    V3.1 link        55.350-  55.470s 25|4|2+0.44   dist= 156.7ms edgeΔ= -156.7 JOIN O36 L2 S125
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist= 333.3ms edgeΔ= +333.3 O37 L1
+GT104 F4   MIDI=  55.833s 26|1|3        WAV=  56.043s
+    region boundary   56.070s 26|1|3+0.19   Δ=  +26.6ms R129(STABLE_TARGET)->R130(TRANSITION)
+    V3.1 link        55.960-  56.070s 26|1|2+0.80   dist=   0.0ms edgeΔ=   +0.0 SPLIT O37 L1 S129
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist=   0.0ms edgeΔ=   +0.0 O37 L1
+GT105 D#4  MIDI=  56.111s 26|2|1        WAV=  56.321s
+    region boundary   56.550s 26|2|2+0.65   Δ= +228.8ms R130(TRANSITION)->R131(TRANSITION)
+    V3.1 link        55.960-  56.070s 26|1|2+0.80   dist= 251.2ms edgeΔ= -251.2 SPLIT O37 L1 S129
+    nearest SPLIT    55.960-  56.070s 26|1|2+0.80   dist= 251.2ms edgeΔ= -251.2 O37 L1
+GT106 G#4  MIDI=  56.667s 26|3|1        WAV=  56.877s
+    region boundary   56.950s 26|3|1+0.53   Δ=  +73.3ms R131(TRANSITION)->R132(STABLE_TARGET)
+    V3.1 link        56.950-  57.030s 26|3|1+0.82   dist=  73.3ms edgeΔ=  +73.3 SPLIT O38 L1 S132
+    nearest SPLIT    56.950-  57.030s 26|3|1+0.82   dist=  73.3ms edgeΔ=  +73.3 O38 L1
+GT107 G4   MIDI=  57.083s 26|3|4        WAV=  57.293s
+    region boundary   57.120s 26|3|2+0.75   Δ= -173.4ms R133(TRANSITION)->R134(STABLE_TARGET)
+    V3.1 link        56.950-  57.030s 26|3|1+0.82   dist= 263.4ms edgeΔ= -263.4 SPLIT O38 L1 S132
+    nearest SPLIT    56.950-  57.030s 26|3|1+0.82   dist= 263.4ms edgeΔ= -263.4 O38 L1
+GT108 G#4  MIDI=  57.500s 26|4|3        WAV=  57.710s
+    region boundary   57.620s 26|4|2+0.35   Δ=  -90.0ms R135(STABLE_TARGET)->R136(TRANSITION)
+    V3.1 link        58.270-  58.370s 27|1|3+0.39   dist= 560.0ms edgeΔ= +560.0 UNRESOLVED O40 L1 S138
+    nearest SPLIT    56.950-  57.030s 26|3|1+0.82   dist= 680.0ms edgeΔ= -680.0 O38 L1
+GT109 G4   MIDI=  57.778s 27|1|1        WAV=  57.988s
+    region boundary   58.100s 27|1|1+0.81   Δ= +112.2ms R136(TRANSITION)->R137(TRANSITION)
+    V3.1 link        58.270-  58.370s 27|1|3+0.39   dist= 282.2ms edgeΔ= +282.2 UNRESOLVED O40 L1 S138
+    nearest SPLIT    56.950-  57.030s 26|3|1+0.82   dist= 957.8ms edgeΔ= -957.8 O38 L1
+GT110 F4   MIDI=  58.194s 27|1|4        WAV=  58.404s
+    region boundary   58.370s 27|1|3+0.75   Δ=  -34.5ms R138(STABLE_TARGET)->R139(TRANSITION)
+    V3.1 link        58.270-  58.370s 27|1|3+0.39   dist=  34.5ms edgeΔ=  -34.5 UNRESOLVED O40 L1 S138
+    nearest SPLIT    56.950-  57.030s 26|3|1+0.82   dist=1374.5ms edgeΔ=-1374.5 O38 L1
+GT111 G4   MIDI=  58.889s 27|3|1        WAV=  59.099s
+    region boundary   59.310s 27|3|2+0.52   Δ= +211.1ms R139(TRANSITION)->R140(STABLE_TARGET)
+    V3.1 link        58.270-  58.370s 27|1|3+0.39   dist= 728.9ms edgeΔ= -728.9 UNRESOLVED O40 L1 S138
+    nearest SPLIT    56.950-  57.030s 26|3|1+0.82   dist=2068.9ms edgeΔ=-2068.9 O38 L1
+GT112 A#4  MIDI=  59.306s 27|3|4        WAV=  59.516s
+    region boundary   59.310s 27|3|2+0.52   Δ= -205.6ms R139(TRANSITION)->R140(STABLE_TARGET)
+    V3.1 link        58.270-  58.370s 27|1|3+0.39   dist=1145.6ms edgeΔ=-1145.6 UNRESOLVED O40 L1 S138
+    nearest SPLIT    56.950-  57.030s 26|3|1+0.82   dist=2485.6ms edgeΔ=-2485.6 O38 L1
+GT113 D#4  MIDI=  59.722s 27|4|3        WAV=  59.932s
+    region boundary   60.190s 27|4|4+0.86   Δ= +257.7ms R140(STABLE_TARGET)->R141(TRANSITION)
+    V3.1 link        60.720-  60.820s 28|2|1+0.03   dist= 787.7ms edgeΔ= +787.7 UNRESOLVED O41 L1 S142
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist=2257.7ms edgeΔ=+2257.7 O42 L1
+GT114 D4   MIDI=  60.000s 28|1|1        WAV=  60.210s
+    region boundary   60.190s 27|4|4+0.86   Δ=  -20.0ms R140(STABLE_TARGET)->R141(TRANSITION)
+    V3.1 link        60.720-  60.820s 28|2|1+0.03   dist= 510.0ms edgeΔ= +510.0 UNRESOLVED O41 L1 S142
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist=1980.0ms edgeΔ=+1980.0 O42 L1
+GT115 C4   MIDI=  60.417s 28|1|4        WAV=  60.627s
+    region boundary   60.720s 28|1|4+0.67   Δ=  +93.3ms R141(TRANSITION)->R142(STABLE_TARGET)
+    V3.1 link        60.720-  60.820s 28|2|1+0.03   dist=  93.3ms edgeΔ=  +93.3 UNRESOLVED O41 L1 S142
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist=1563.3ms edgeΔ=+1563.3 O42 L1
+GT116 A#3  MIDI=  60.556s 28|2|1        WAV=  60.766s
+    region boundary   60.720s 28|1|4+0.67   Δ=  -45.6ms R141(TRANSITION)->R142(STABLE_TARGET)
+    V3.1 link        60.720-  60.820s 28|2|1+0.03   dist=   0.0ms edgeΔ=   +0.0 UNRESOLVED O41 L1 S142
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist=1424.4ms edgeΔ=+1424.4 O42 L1
+GT117 D#4  MIDI=  61.667s 28|4|1        WAV=  61.877s
+    region boundary   61.635s 28|3|3+0.26   Δ= -241.7ms R144(STABLE_TARGET)->R145(TRANSITION)
+    V3.1 link        62.190-  62.380s 28|4|3+0.94   dist= 313.3ms edgeΔ= +313.3 SPLIT O42 L1 S146
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist= 313.3ms edgeΔ= +313.3 O42 L1
+GT118 A#4  MIDI=  61.944s 28|4|3        WAV=  62.154s
+    region boundary   62.190s 28|4|3+0.26   Δ=  +35.5ms R145(TRANSITION)->R146(STABLE_TARGET)
+    V3.1 link        62.190-  62.380s 28|4|3+0.94   dist=  35.5ms edgeΔ=  +35.5 SPLIT O42 L1 S146
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist=  35.5ms edgeΔ=  +35.5 O42 L1
+GT119 A#4  MIDI=  62.222s 29|1|1        WAV=  62.432s
+    region boundary   62.380s 28|4|4+0.62   Δ=  -52.3ms R146(STABLE_TARGET)->R147(TRANSITION)
+    V3.1 link        62.190-  62.380s 28|4|3+0.94   dist=  52.3ms edgeΔ=  -52.3 SPLIT O42 L1 S146
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist=  52.3ms edgeΔ=  -52.3 O42 L1
+GT120 G#4  MIDI=  62.500s 29|1|3        WAV=  62.710s
+    region boundary   62.955s 29|1|4+0.76   Δ= +244.9ms R147(TRANSITION)->R148(TRANSITION)
+    V3.1 link        62.190-  62.380s 28|4|3+0.94   dist= 330.1ms edgeΔ= -330.1 SPLIT O42 L1 S146
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist= 330.1ms edgeΔ= -330.1 O42 L1
+GT121 G#4  MIDI=  62.639s 29|1|4        WAV=  62.849s
+    region boundary   62.955s 29|1|4+0.76   Δ= +106.1ms R147(TRANSITION)->R148(TRANSITION)
+    V3.1 link        62.190-  62.380s 28|4|3+0.94   dist= 468.9ms edgeΔ= -468.9 SPLIT O42 L1 S146
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist= 468.9ms edgeΔ= -468.9 O42 L1
+GT122 G4   MIDI=  62.917s 29|2|2        WAV=  63.127s
+    region boundary   62.955s 29|1|4+0.76   Δ= -171.7ms R147(TRANSITION)->R148(TRANSITION)
+    V3.1 link        62.190-  62.380s 28|4|3+0.94   dist= 746.7ms edgeΔ= -746.7 SPLIT O42 L1 S146
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist= 746.7ms edgeΔ= -746.7 O42 L1
+GT123 G4   MIDI=  63.056s 29|2|3        WAV=  63.266s
+    region boundary   62.955s 29|1|4+0.76   Δ= -310.6ms R147(TRANSITION)->R148(TRANSITION)
+    V3.1 link        62.190-  62.380s 28|4|3+0.94   dist= 885.6ms edgeΔ= -885.6 SPLIT O42 L1 S146
+    nearest SPLIT    62.190-  62.380s 28|4|3+0.94   dist= 885.6ms edgeΔ= -885.6 O42 L1
+GT124 F4   MIDI=  63.333s 29|3|1        WAV=  63.543s
+    region boundary   63.990s 29|3|4+0.22   Δ= +446.6ms R148(TRANSITION)->R149(STABLE_TARGET)
+    V3.1 link        64.230-  64.310s 29|4|2+0.23   dist= 686.6ms edgeΔ= +686.6 SPLIT O44 L1 S151
+    nearest SPLIT    64.230-  64.310s 29|4|2+0.23   dist= 686.6ms edgeΔ= +686.6 O44 L1
+GT125 F4   MIDI=  63.611s 29|3|3        WAV=  63.821s
+    region boundary   63.990s 29|3|4+0.22   Δ= +168.8ms R148(TRANSITION)->R149(STABLE_TARGET)
+    V3.1 link        64.230-  64.310s 29|4|2+0.23   dist= 408.8ms edgeΔ= +408.8 SPLIT O44 L1 S151
+    nearest SPLIT    64.230-  64.310s 29|4|2+0.23   dist= 408.8ms edgeΔ= +408.8 O44 L1
+GT126 D#4  MIDI=  63.750s 29|3|4        WAV=  63.960s
+    region boundary   63.990s 29|3|4+0.22   Δ=  +29.9ms R148(TRANSITION)->R149(STABLE_TARGET)
+    V3.1 link        64.230-  64.310s 29|4|2+0.23   dist= 269.9ms edgeΔ= +269.9 SPLIT O44 L1 S151
+    nearest SPLIT    64.230-  64.310s 29|4|2+0.23   dist= 269.9ms edgeΔ= +269.9 O44 L1
+GT127 F4   MIDI=  63.889s 29|4|1        WAV=  64.099s
+    region boundary   64.115s 29|4|1+0.12   Δ=  +16.1ms R149(STABLE_TARGET)->R150(TRANSITION)
+    V3.1 link        64.230-  64.310s 29|4|2+0.23   dist= 131.1ms edgeΔ= +131.1 SPLIT O44 L1 S151
+    nearest SPLIT    64.230-  64.310s 29|4|2+0.23   dist= 131.1ms edgeΔ= +131.1 O44 L1
+GT128 G4   MIDI=  64.306s 29|4|4        WAV=  64.516s
+    region boundary   64.310s 29|4|2+0.52   Δ= -205.6ms R151(STABLE_TARGET)->R152(TRANSITION)
+    V3.1 link        64.230-  64.310s 29|4|2+0.23   dist= 205.6ms edgeΔ= -205.6 SPLIT O44 L1 S151
+    nearest SPLIT    64.230-  64.310s 29|4|2+0.23   dist= 205.6ms edgeΔ= -205.6 O44 L1
+GT129 F4   MIDI=  64.722s 30|1|3        WAV=  64.932s
+    region boundary   64.310s 29|4|2+0.52   Δ= -622.3ms R151(STABLE_TARGET)->R152(TRANSITION)
+    V3.1 link        64.230-  64.310s 29|4|2+0.23   dist= 622.3ms edgeΔ= -622.3 SPLIT O44 L1 S151
+    nearest SPLIT    64.230-  64.310s 29|4|2+0.23   dist= 622.3ms edgeΔ= -622.3 O44 L1
+GT130 D#4  MIDI=  65.000s 30|2|1        WAV=  65.210s
+    region boundary   65.765s 30|2|4+1.00   Δ= +554.9ms R152(TRANSITION)->R153(TRANSITION)
+    V3.1 link        64.230-  64.310s 29|4|2+0.23   dist= 900.1ms edgeΔ= -900.1 SPLIT O44 L1 S151
+    nearest SPLIT    64.230-  64.310s 29|4|2+0.23   dist= 900.1ms edgeΔ= -900.1 O44 L1
+GT131 A#3  MIDI=  65.833s 30|3|3        WAV=  66.043s
+    region boundary   65.765s 30|2|4+1.00   Δ= -278.4ms R152(TRANSITION)->R153(TRANSITION)
+    V3.1 link        66.820-  66.970s 31|1|1+0.13   dist= 776.6ms edgeΔ= +776.6 SPLIT O45 L1 S154
+    nearest SPLIT    66.820-  66.970s 31|1|1+0.13   dist= 776.6ms edgeΔ= +776.6 O45 L1
+GT132 F4   MIDI=  66.111s 30|4|1        WAV=  66.321s
+    region boundary   66.820s 30|4|4+0.59   Δ= +498.8ms R153(TRANSITION)->R154(STABLE_TARGET)
+    V3.1 link        66.820-  66.970s 31|1|1+0.13   dist= 498.8ms edgeΔ= +498.8 SPLIT O45 L1 S154
+    nearest SPLIT    66.820-  66.970s 31|1|1+0.13   dist= 498.8ms edgeΔ= +498.8 O45 L1
+GT133 D#4  MIDI=  66.389s 30|4|3        WAV=  66.599s
+    region boundary   66.820s 30|4|4+0.59   Δ= +221.1ms R153(TRANSITION)->R154(STABLE_TARGET)
+    V3.1 link        66.820-  66.970s 31|1|1+0.13   dist= 221.1ms edgeΔ= +221.1 SPLIT O45 L1 S154
+    nearest SPLIT    66.820-  66.970s 31|1|1+0.13   dist= 221.1ms edgeΔ= +221.1 O45 L1
+GT134 F4   MIDI=  66.528s 30|4|4        WAV=  66.738s
+    region boundary   66.820s 30|4|4+0.59   Δ=  +82.2ms R153(TRANSITION)->R154(STABLE_TARGET)
+    V3.1 link        66.820-  66.970s 31|1|1+0.13   dist=  82.2ms edgeΔ=  +82.2 SPLIT O45 L1 S154
+    nearest SPLIT    66.820-  66.970s 31|1|1+0.13   dist=  82.2ms edgeΔ=  +82.2 O45 L1
+GT135 D#4  MIDI=  66.667s 31|1|1        WAV=  66.877s
+    region boundary   66.820s 30|4|4+0.59   Δ=  -56.7ms R153(TRANSITION)->R154(STABLE_TARGET)
+    V3.1 link        66.820-  66.970s 31|1|1+0.13   dist=   0.0ms edgeΔ=   +0.0 SPLIT O45 L1 S154
+    nearest SPLIT    66.820-  66.970s 31|1|1+0.13   dist=   0.0ms edgeΔ=   +0.0 O45 L1
+
+====================================================================================================================================
+V3.1 LINKS -> NEAREST GT MIDI ONSET
+====================================================================================================================================
+SPLIT      O02 L1 S6   WAV=   6.060-   6.210s MID=   6.135s 3|3|3+0.66   
+    stable= 60.09st dur=  150ms nearestGT=GT005 C4   3|4|1         dist= 111.1ms edgeΔ= -111.1ms
+    connector=-                        boundary=DURATION,CENTER/SHAPE,TOPOLOGY           families C/B=0/3
+UNRESOLVED O04 L1 S13  WAV=   9.950-  10.060s MID=  10.005s 5|2|3+0.52   
+    stable= 62.70st dur=  110ms nearestGT=GT008 D#4  5|2|3         dist=  17.8ms edgeΔ=  +17.8ms
+    connector=-                        boundary=-                                        families C/B=0/0
+SPLIT      O09 L1 S24  WAV=  17.940-  18.070s MID=  18.005s 9|1|1+0.12   
+    stable= 67.90st dur=  130ms nearestGT=GT019 G#4  9|1|1         dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=PATH,CENTER/SHAPE,RESIDUAL,TOPOLOGY      families C/B=0/4
+JOIN       O09 L2 S26  WAV=  18.340-  18.450s MID=  18.395s 9|1|3+0.93   
+    stable= 62.90st dur=  110ms nearestGT=GT020 G4   9|1|3         dist=  74.4ms edgeΔ=  +74.4ms
+    connector=EXCURSION,SIMILAR        boundary=RESIDUAL                                 families C/B=2/1
+SPLIT      O09 L3 S28  WAV=  18.780-  18.880s MID=  18.830s 9|2|3+0.06   
+    stable= 68.25st dur=  100ms nearestGT=GT022 G#4  9|2|3         dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O09 L4 S30  WAV=  18.980-  19.120s MID=  19.050s 9|2|4+0.65   
+    stable= 66.98st dur=  140ms nearestGT=GT023 G4   9|3|1         dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=PATH,TOPOLOGY                            families C/B=0/2
+UNRESOLVED O13 L1 S41  WAV=  24.320-  24.470s MID=  24.395s 11|4|3+0.13  
+    stable= 60.02st dur=  150ms nearestGT=GT032 C4   11|4|1        dist= 221.1ms edgeΔ= +221.1ms
+    connector=SIMILAR                  boundary=TOPOLOGY                                 families C/B=1/1
+UNRESOLVED O18 L1 S60  WAV=  35.780-  35.940s MID=  35.860s 17|1|1+0.68  
+    stable= 67.41st dur=  160ms nearestGT=GT050 G#4  17|1|1        dist=  14.4ms edgeΔ=  +14.4ms
+    connector=-                        boundary=-                                        families C/B=0/0
+UNRESOLVED O18 L2 S62  WAV=  36.200-  36.280s MID=  36.240s 17|1|4+0.42  
+    stable= 61.93st dur=   80ms nearestGT=GT052 D#4  17|2|1        dist=  41.1ms edgeΔ=  -41.1ms
+    connector=-                        boundary=RESIDUAL                                 families C/B=0/1
+SPLIT      O20 L1 S69  WAV=  37.160-  37.250s MID=  37.205s 17|3|3+0.36  
+    stable= 62.78st dur=   90ms nearestGT=GT055 D#4  17|3|3        dist=   5.5ms edgeΔ=   +5.5ms
+    connector=-                        boundary=DURATION,PATH,RESIDUAL,TOPOLOGY          families C/B=0/4
+SPLIT      O21 L1 S74  WAV=  40.750-  40.880s MID=  40.815s 19|2|1+0.36  
+    stable= 62.50st dur=  130ms nearestGT=GT059 D#4  19|2|1        dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O23 L1 S81  WAV=  43.410-  43.530s MID=  43.470s 20|2|4+0.47  
+    stable= 61.94st dur=  120ms nearestGT=GT068 D4   20|3|1        dist=  13.4ms edgeΔ=  -13.4ms
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O25 L1 S87  WAV=  45.150-  45.240s MID=  45.195s 21|1|4+0.89  
+    stable= 62.92st dur=   90ms nearestGT=GT073 D#4  21|2|1        dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=RESIDUAL,TOPOLOGY                        families C/B=0/2
+UNRESOLVED O26 L1 S95  WAV=  48.070-  48.160s MID=  48.115s 22|3|1+0.92  
+    stable= 68.07st dur=   90ms nearestGT=GT080 G#4  22|3|1        dist=  82.2ms edgeΔ=  +82.2ms
+    connector=SIMILAR                  boundary=TOPOLOGY                                 families C/B=1/1
+SPLIT      O27 L1 S100 WAV=  48.960-  49.060s MID=  49.010s 22|4|4+0.36  
+    stable= 67.10st dur=  100ms nearestGT=GT083 G4   23|1|1        dist=  38.9ms edgeΔ=  -38.9ms
+    connector=-                        boundary=PATH,TOPOLOGY                            families C/B=0/2
+UNRESOLVED O36 L1 S123 WAV=  54.990-  55.090s MID=  55.040s 25|3|3+0.78  
+    stable= 61.67st dur=  100ms nearestGT=GT101 D#4  25|3|4        dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=-                                        families C/B=0/0
+JOIN       O36 L2 S125 WAV=  55.350-  55.470s MID=  55.410s 25|4|2+0.44  
+    stable= 64.86st dur=  120ms nearestGT=GT102 F4   25|4|2        dist=   1.1ms edgeΔ=   +1.1ms
+    connector=DIRECT                   boundary=TOPOLOGY                                 families C/B=1/1
+SPLIT      O37 L1 S129 WAV=  55.960-  56.070s MID=  56.015s 26|1|2+0.80  
+    stable= 64.84st dur=  110ms nearestGT=GT104 F4   26|1|3        dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O38 L1 S132 WAV=  56.950-  57.030s MID=  56.990s 26|3|1+0.82  
+    stable= 68.04st dur=   80ms nearestGT=GT106 G#4  26|3|1        dist=  73.3ms edgeΔ=  +73.3ms
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+UNRESOLVED O40 L1 S138 WAV=  58.270-  58.370s MID=  58.320s 27|1|3+0.39  
+    stable= 66.95st dur=  100ms nearestGT=GT110 F4   27|1|4        dist=  34.5ms edgeΔ=  -34.5ms
+    connector=-                        boundary=PATH                                     families C/B=0/1
+UNRESOLVED O41 L1 S142 WAV=  60.720-  60.820s MID=  60.770s 28|2|1+0.03  
+    stable= 58.03st dur=  100ms nearestGT=GT116 A#3  28|2|1        dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=PATH                                     families C/B=0/1
+SPLIT      O42 L1 S146 WAV=  62.190-  62.380s MID=  62.285s 28|4|3+0.94  
+    stable= 70.03st dur=  190ms nearestGT=GT118 A#4  28|4|3        dist=  35.5ms edgeΔ=  +35.5ms
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O44 L1 S151 WAV=  64.230-  64.310s MID=  64.270s 29|4|2+0.23  
+    stable= 65.43st dur=   80ms nearestGT=GT127 F4   29|4|1        dist= 131.1ms edgeΔ= +131.1ms
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+SPLIT      O45 L1 S154 WAV=  66.820-  66.970s MID=  66.895s 31|1|1+0.13  
+    stable= 63.04st dur=  150ms nearestGT=GT135 D#4  31|1|1        dist=   0.0ms edgeΔ=   +0.0ms
+    connector=-                        boundary=DURATION,PATH,TOPOLOGY                   families C/B=0/3
+
+====================================================================================================================================
+TEMPORAL CORRESPONDENCE SUMMARY
+====================================================================================================================================
+Bins are descriptive only; NOT correctness thresholds.
+
+GT -> frozen region boundary   n= 135 median=   94.5ms p90=  301.9ms
+    within  50 ms:   42/ 135 ( 31.1%)
+    within 100 ms:   70/ 135 ( 51.9%)
+    within 150 ms:   88/ 135 ( 65.2%)
+    within 250 ms:  116/ 135 ( 85.9%)
+GT -> any V3.1 link            n= 135 median=  534.5ms p90= 2820.7ms
+    within  50 ms:   18/ 135 ( 13.3%)
+    within 100 ms:   25/ 135 ( 18.5%)
+    within 150 ms:   30/ 135 ( 22.2%)
+    within 250 ms:   42/ 135 ( 31.1%)
+GT -> SPLIT                    n= 135 median=  972.2ms p90= 4578.2ms
+    within  50 ms:   11/ 135 (  8.1%)
+    within 100 ms:   14/ 135 ( 10.4%)
+    within 150 ms:   18/ 135 ( 13.3%)
+    within 250 ms:   28/ 135 ( 20.7%)
+
+SPLIT -> nearest GT            n=  14 median=    2.8ms p90=   99.8ms
+    within  50 ms:   11/  14 ( 78.6%)
+    within 100 ms:   12/  14 ( 85.7%)
+    within 150 ms:   14/  14 (100.0%)
+    within 250 ms:   14/  14 (100.0%)
+JOIN -> nearest GT             n=   2 median=   37.7ms p90=   67.1ms
+    within  50 ms:    1/   2 ( 50.0%)
+    within 100 ms:    2/   2 (100.0%)
+    within 150 ms:    2/   2 (100.0%)
+    within 250 ms:    2/   2 (100.0%)
+UNRESOLVED -> nearest GT       n=   8 median=   26.1ms p90=  123.9ms
+    within  50 ms:    6/   8 ( 75.0%)
+    within 100 ms:    7/   8 ( 87.5%)
+    within 150 ms:    7/   8 ( 87.5%)
+    within 250 ms:    8/   8 (100.0%)
+
+====================================================================================================================================
+INSPECTION QUEUES
+====================================================================================================================================
+SPLIT farther than 250ms from every GT onset:
+  none
+
+JOIN within 150ms of a GT onset:
+  O09 L2 S26 18.395s 9|1|3+0.93 nearestGT=74.4ms C=EXCURSION,SIMILAR B=RESIDUAL
+  O36 L2 S125 55.410s 25|4|2+0.44 nearestGT=1.1ms C=DIRECT B=TOPOLOGY
+
+GT farther than 250ms from every V3.1 link interval:
+  GT001 D#4  3|1|1         MIDI=4.444s WAV=4.654s nearestLink=1405.6ms
+  GT002 G4   3|1|4         MIDI=4.861s WAV=5.071s nearestLink=988.9ms
+  GT003 D4   3|2|3         MIDI=5.278s WAV=5.488s nearestLink=572.2ms
+  GT006 A#3  5|1|1         MIDI=8.889s WAV=9.099s nearestLink=851.1ms
+  GT007 D#4  5|1|4         MIDI=9.306s WAV=9.516s nearestLink=434.4ms
+  GT009 G3   5|3|3         MIDI=10.278s WAV=10.488s nearestLink=427.8ms
+  GT010 G3   5|4|1         MIDI=10.556s WAV=10.766s nearestLink=705.6ms
+  GT011 A#3  6|4|3         MIDI=13.056s WAV=13.266s nearestLink=3205.6ms
+  GT012 D#4  7|1|1         MIDI=13.333s WAV=13.543s nearestLink=3483.3ms
+  GT013 G4   7|1|4         MIDI=13.750s WAV=13.960s nearestLink=3900.0ms
+  GT014 D4   7|2|3         MIDI=14.167s WAV=14.377s nearestLink=3563.3ms
+  GT015 D#4  7|3|2         MIDI=14.583s WAV=14.793s nearestLink=3146.7ms
+  GT016 C4   7|3|4         MIDI=14.861s WAV=15.071s nearestLink=2868.9ms
+  GT017 D#4  7|4|4         MIDI=15.417s WAV=15.627s nearestLink=2313.3ms
+  GT024 D#4  9|3|3         MIDI=19.167s WAV=19.377s nearestLink=256.7ms
+  GT025 C4   9|4|1         MIDI=19.444s WAV=19.654s nearestLink=534.5ms
+  GT026 A#3  9|4|3         MIDI=19.722s WAV=19.932s nearestLink=812.2ms
+  GT027 D#4  11|1|1        MIDI=22.222s WAV=22.432s nearestLink=1887.8ms
+  GT028 F4   11|1|4        MIDI=22.639s WAV=22.849s nearestLink=1471.1ms
+  GT029 G4   11|2|1        MIDI=22.778s WAV=22.988s nearestLink=1332.2ms
+  GT030 D4   11|2|3        MIDI=23.056s WAV=23.266s nearestLink=1054.4ms
+  GT031 D#4  11|3|2        MIDI=23.472s WAV=23.682s nearestLink=637.8ms
+  GT033 A3   12|1|3        MIDI=24.722s WAV=24.932s nearestLink=462.2ms
+  GT034 A#3  12|1|4        MIDI=24.861s WAV=25.071s nearestLink=601.1ms
+  GT035 D#4  12|2|1        MIDI=25.000s WAV=25.210s nearestLink=740.0ms
+  GT036 A#3  13|1|1        MIDI=26.667s WAV=26.877s nearestLink=2406.7ms
+  GT037 D#4  13|1|4        MIDI=27.083s WAV=27.293s nearestLink=2823.4ms
+  GT038 D#4  13|2|3        MIDI=27.500s WAV=27.710s nearestLink=3240.0ms
+  GT039 G3   13|3|2        MIDI=27.917s WAV=28.127s nearestLink=3656.7ms
+  GT040 G3   13|4|1        MIDI=28.333s WAV=28.543s nearestLink=4073.4ms
+  GT041 D#4  15|1|1        MIDI=31.111s WAV=31.321s nearestLink=4458.9ms
+  GT042 G4   15|1|4        MIDI=31.528s WAV=31.738s nearestLink=4042.2ms
+  GT043 D4   15|2|3        MIDI=31.944s WAV=32.154s nearestLink=3625.5ms
+  GT044 D#4  15|3|2        MIDI=32.361s WAV=32.571s nearestLink=3208.9ms
+  GT045 A#3  15|4|1        MIDI=32.778s WAV=32.988s nearestLink=2792.2ms
+  GT046 B3   15|4|2        MIDI=32.917s WAV=33.127s nearestLink=2653.3ms
+  GT047 C4   15|4|3        MIDI=33.056s WAV=33.266s nearestLink=2514.4ms
+  GT048 A#3  16|1|3        MIDI=33.611s WAV=33.821s nearestLink=1958.9ms
+  GT049 A#3  16|4|3        MIDI=35.278s WAV=35.488s nearestLink=292.2ms
+  GT053 G#4  17|2|3        MIDI=36.389s WAV=36.599s nearestLink=318.9ms
+  GT054 G4   17|3|1        MIDI=36.667s WAV=36.877s nearestLink=283.3ms
+  GT057 F4   17|4|3        MIDI=37.500s WAV=37.710s nearestLink=460.0ms
+  GT058 D#4  19|1|3        MIDI=40.278s WAV=40.488s nearestLink=262.2ms
+  GT061 D#4  19|3|1        MIDI=41.111s WAV=41.321s nearestLink=441.1ms
+  GT062 D#4  19|3|3        MIDI=41.389s WAV=41.599s nearestLink=718.9ms
+  GT063 G4   19|4|1        MIDI=41.667s WAV=41.877s nearestLink=996.7ms
+  GT064 A#4  19|4|4        MIDI=42.083s WAV=42.293s nearestLink=1116.6ms
+  GT065 D4   20|1|3        MIDI=42.500s WAV=42.710s nearestLink=700.0ms
+  GT066 D4   20|2|1        MIDI=42.778s WAV=42.988s nearestLink=422.2ms
+  GT069 D4   20|3|3        MIDI=43.611s WAV=43.821s nearestLink=291.1ms
+  GT070 D4   20|4|1        MIDI=43.889s WAV=44.099s nearestLink=568.9ms
+  GT071 D#4  20|4|4        MIDI=44.306s WAV=44.516s nearestLink=634.4ms
+  GT075 G4   21|3|1        MIDI=45.556s WAV=45.766s nearestLink=525.6ms
+  GT076 F4   21|3|4        MIDI=45.972s WAV=46.182s nearestLink=942.3ms
+  GT077 D#4  21|4|3        MIDI=46.389s WAV=46.599s nearestLink=1358.9ms
+  GT078 F4   21|4|4        MIDI=46.528s WAV=46.738s nearestLink=1332.2ms
+  GT079 D#4  22|1|3        MIDI=46.944s WAV=47.154s nearestLink=915.5ms
+  GT084 F4   23|2|1        MIDI=49.444s WAV=49.654s nearestLink=594.5ms
+  GT085 G4   23|3|1        MIDI=50.000s WAV=50.210s nearestLink=1150.0ms
+  GT086 A#4  23|3|4        MIDI=50.417s WAV=50.627s nearestLink=1566.7ms
+  GT087 D4   23|4|3        MIDI=50.833s WAV=51.043s nearestLink=1983.4ms
+  GT088 D4   24|1|1        MIDI=51.111s WAV=51.321s nearestLink=2261.2ms
+  GT089 C4   24|1|4        MIDI=51.528s WAV=51.738s nearestLink=2677.8ms
+  GT090 A#3  24|2|1        MIDI=51.667s WAV=51.877s nearestLink=2816.7ms
+  GT091 D#4  24|3|3        MIDI=52.500s WAV=52.710s nearestLink=2280.0ms
+  GT092 D#4  24|4|1        MIDI=52.778s WAV=52.988s nearestLink=2002.2ms
+  GT093 A#4  24|4|3        MIDI=53.056s WAV=53.266s nearestLink=1724.4ms
+  GT094 A#4  25|1|1        MIDI=53.333s WAV=53.543s nearestLink=1446.6ms
+  GT095 G#4  25|1|3        MIDI=53.611s WAV=53.821s nearestLink=1168.8ms
+  GT096 G#4  25|2|1        MIDI=53.889s WAV=54.099s nearestLink=891.1ms
+  GT097 G4   25|2|2        MIDI=54.028s WAV=54.238s nearestLink=752.2ms
+  GT098 G4   25|2|4        MIDI=54.306s WAV=54.516s nearestLink=474.4ms
+  GT099 F4   25|3|1        MIDI=54.444s WAV=54.654s nearestLink=335.5ms
+  GT105 D#4  26|2|1        MIDI=56.111s WAV=56.321s nearestLink=251.2ms
+  GT107 G4   26|3|4        MIDI=57.083s WAV=57.293s nearestLink=263.4ms
+  GT108 G#4  26|4|3        MIDI=57.500s WAV=57.710s nearestLink=560.0ms
+  GT109 G4   27|1|1        MIDI=57.778s WAV=57.988s nearestLink=282.2ms
+  GT111 G4   27|3|1        MIDI=58.889s WAV=59.099s nearestLink=728.9ms
+  GT112 A#4  27|3|4        MIDI=59.306s WAV=59.516s nearestLink=1145.6ms
+  GT113 D#4  27|4|3        MIDI=59.722s WAV=59.932s nearestLink=787.7ms
+  GT114 D4   28|1|1        MIDI=60.000s WAV=60.210s nearestLink=510.0ms
+  GT117 D#4  28|4|1        MIDI=61.667s WAV=61.877s nearestLink=313.3ms
+  GT120 G#4  29|1|3        MIDI=62.500s WAV=62.710s nearestLink=330.1ms
+  GT121 G#4  29|1|4        MIDI=62.639s WAV=62.849s nearestLink=468.9ms
+  GT122 G4   29|2|2        MIDI=62.917s WAV=63.127s nearestLink=746.7ms
+  GT123 G4   29|2|3        MIDI=63.056s WAV=63.266s nearestLink=885.6ms
+  GT124 F4   29|3|1        MIDI=63.333s WAV=63.543s nearestLink=686.6ms
+  GT125 F4   29|3|3        MIDI=63.611s WAV=63.821s nearestLink=408.8ms
+  GT126 D#4  29|3|4        MIDI=63.750s WAV=63.960s nearestLink=269.9ms
+  GT129 F4   30|1|3        MIDI=64.722s WAV=64.932s nearestLink=622.3ms
+  GT130 D#4  30|2|1        MIDI=65.000s WAV=65.210s nearestLink=900.1ms
+  GT131 A#3  30|3|3        MIDI=65.833s WAV=66.043s nearestLink=776.6ms
+  GT132 F4   30|4|1        MIDI=66.111s WAV=66.321s nearestLink=498.8ms
+
+====================================================================================================================================
+INVARIANTS
+====================================================================================================================================
+JOIN + SPLIT + UNRESOLVED = 2+14+8=24
+anchors represented exactly once: 24/24
+No musical gesture labels. No frozen threshold changed.
