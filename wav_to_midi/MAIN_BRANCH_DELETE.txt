@@ -1,0 +1,14 @@
+Remove these Stage-6 development-only files when replacing the existing python_eckf directory:
+
+python_eckf/cli.py
+python_eckf/gesture_features.py
+python_eckf/gesture_hypotheses.py
+python_eckf/gesture_object_splitter.py
+python_eckf/gesture_objects.py
+python_eckf/gesture_structural_splitter.py
+python_eckf/structural_collaboration.py
+python_eckf/transition_geometry.py
+python_eckf/warmup.py
+
+Also remove the Stage-6 benchmark files and CLEANUP_MANIFEST.txt if present.
+The production dependency file is requirements.txt (replacing requirements-eckf.txt).
