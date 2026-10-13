@@ -3,8 +3,10 @@
 *.mid
 *.zip
 *.npz
-__pycache__/
+**/__pycache__/
 **/extract/
+**/Projects/
+**/node_modules/
 **/tests/*
 !**/tests/*/
 !**/tests/**/*.py
