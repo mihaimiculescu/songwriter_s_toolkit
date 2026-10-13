@@ -1,9 +1,12 @@
-# gitignore file dev branch
+# gitignore file main branch
 *.wav
 *.mid
 *.zip
 *.npz
-__pycache__/
-extract/
-tests/*
-!tests/*.py
+**/__pycache__/
+**/extract/
+**/Projects/
+**/node_modules/
+**/tests/*
+!**/tests/*/
+!**/tests/**/*.py
