@@ -1,0 +1,23 @@
+###For scaffolding a brand new project
+sudo docker build -t songwriters-toolkit-dev .
+sudo docker run --rm -it   -v "$PWD":/app   -w /app   songwriters-toolkit-dev   npx sv create .
+# choices: Ok to proceed? (y) y; Directory not empty. Continue? yes; minimal; Add type checking with TypeScript? ● Yes, using TypeScript syntax;
+# ☑ prettier ☑ eslint ☑ vitest ☑ playwright ☑ Tailwind CSS ☑ sveltekit-adapter → Node ; vitest: What do you want to use vitest for? ◼ unit testing ◼ component testing;
+# tailwindcss: Which plugins would you like to add? - nothing; ◆  Which package manager do you want to install dependencies with? ● npm;
+sudo docker run --rm -it   -p 5173:5173   -v "$PWD":/app   -w /app   songwriters-toolkit-dev
+printf 'LOCAL_UID=%s\nLOCAL_GID=%s\n' "$(id -u)" "$(id -g)" > .env
+sudo chown -R "$(id -u):$(id -g)" .
+sudo docker compose -f compose.dev.yaml run --rm frontend npm install
+sudo docker compose -f compose.dev.yaml up
+#########
+###For installing this project's dev tree as such
+mkdir songwriter_s_toolkit
+cd songwriter_s_toolkit
+git clone -b main https://github.com/mihaimiculescu/songwriter_s_toolkit main
+git clone -b dev https://github.com/mihaimiculescu/songwriter_s_toolkit dev 
+cd dev/gui
+printf 'LOCAL_UID=%s\nLOCAL_GID=%s\n' "$(id -u)" "$(id -g)" > .env # only if the .env file does not exist
+sudo docker compose -f compose.dev.yaml build
+sudo docker compose -f compose.dev.yaml run --rm frontend npm install
+sudo docker compose -f compose.dev.yaml up
+

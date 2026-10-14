@@ -1,0 +1,16 @@
+export const keys = [
+    'C',
+    'C♯',
+    'Db',
+    'D',
+    'D♯',
+    'Eb',
+    'E',
+    'F',
+    'F♯',
+    'G',
+    'Ab',
+    'A',
+    'Bb',
+    'B',
+] as const;

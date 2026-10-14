@@ -1,0 +1,1877 @@
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+import numpy as np
+import soundfile as sf
+import csv
+from dataclasses import fields
+from enum import Enum
+from typing import Iterable
+
+from .config import ECKFConfig
+from .kalman_accel import resolve_kalman_engine
+from .runtime_resources import detect_runtime_resources
+from .traffic_control import PersistentTrafficController
+from .analysis_timing import DEFAULT_OFFLINE_ANALYSIS_HZ, resolve_offline_analysis_grid
+from .tracker import track_pitch
+from .frame_evidence import frame_acoustic_state_name
+from .trajectory_interpreter import interpret_pitch_trajectory
+from .expressive_smoothing import smooth_expressive_pitch
+from .expressive_amplitude import analyse_expressive_amplitude
+from .transition_geometry import compare_transition_geometry
+from .gesture_features import extract_gesture_features
+from .gesture_objects import construct_gesture_objects
+from .gesture_object_splitter import analyse_gesture_object_splits
+from .gesture_structural_splitter import apply_structural_splitting
+from .gesture_hypotheses import build_interpretation_candidates
+from .pitch_candidate_field import build_pitch_candidate_field
+from .juror_evidence import build_juror_evidence, derive_v22_range_calibration
+from .range_reference_evaluator import build_v13_style_range_references
+from .juror_bench import build_juror_bench
+from .harmonic_detective import build_harmonic_detective
+from .reacquisition_adjudication import apply_reacquisition_adjudication_feedback
+from .register_readjudication_v18 import apply_register_readjudication_v18
+from .interval_authority import build_interval_authority
+from .structural_collaboration import apply_structural_collaboration
+from .primary_reconciliation_v3r9 import apply_primary_reconciliation_v3r9
+from .validity import (
+    PitchValidityConfig,
+    analyse_pitch_validity,
+    apply_offline_validity_correction,
+)
+
+
+def _build_interpretation_stack(*, offline_validity, sampled_frame_state, analysis_hz, audio, sr, sample_idx, runtime_resources=None, traffic_controller=None, interpretation_parallel="off", amplitude_parallel="off", report_parallel=False):
+    """Build all musical interpretation layers from one authoritative F0 state.
+
+    V3R1 centralizes this previously duplicated block.  It intentionally
+    preserves the V3R0 algorithms and thresholds; only call ordering changes.
+    """
+    interpretation = interpret_pitch_trajectory(
+        clean_f0_hz=offline_validity.clean_f0_hz,
+        valid=offline_validity.valid,
+        analysis_hz=analysis_hz,
+        frame_acoustic_state=sampled_frame_state,
+        runtime_resources=runtime_resources,
+        traffic_controller=traffic_controller,
+        parallel_mode=interpretation_parallel,
+        report_parallel=report_parallel,
+    )
+    expressive = smooth_expressive_pitch(
+        pitch_st=interpretation.pitch_st,
+        valid=interpretation.valid,
+        analysis_hz=analysis_hz,
+    )
+    expressive_amplitude = analyse_expressive_amplitude(
+        audio=audio, sample_rate=sr, sample_idx=sample_idx,
+        trusted_pitch=interpretation.valid,
+        pitch_residual_st=expressive.residual_pitch_st,
+        analysis_hz=analysis_hz,
+        runtime_resources=runtime_resources,
+        traffic_controller=traffic_controller,
+        parallel_mode=amplitude_parallel,
+        report_parallel=report_parallel,
+    )
+    transition_geometry = compare_transition_geometry(
+        interpretation=interpretation, smoothing=expressive,
+    )
+    gesture_features = extract_gesture_features(
+        interpretation=interpretation, smoothing=expressive,
+    )
+    gesture_objects = construct_gesture_objects(
+        interpretation=interpretation, features=gesture_features,
+    )
+    gesture_split_evidence = analyse_gesture_object_splits(
+        objects=gesture_objects, features=gesture_features,
+    )
+    gesture_structure = apply_structural_splitting(
+        split_evidence=gesture_split_evidence,
+    )
+    interpretation_candidates = build_interpretation_candidates(
+        structure=gesture_structure,
+        interpretation=interpretation,
+        smoothing=expressive,
+        gesture_features=gesture_features,
+        amplitude_expression=expressive_amplitude,
+        analysis_hz=analysis_hz,
+    )
+    return (
+        interpretation, expressive, expressive_amplitude, transition_geometry,
+        gesture_features, gesture_objects, gesture_split_evidence,
+        gesture_structure, interpretation_candidates,
+    )
+
+
+def main(argv: Iterable[str] | None = None) -> Path:
+    p = argparse.ArgumentParser(
+        description="ECKF monophonic pitch tracker: MATLAB-compatible / vocal-offline modes"
+    )
+    p.add_argument("wav", type=Path)
+    p.add_argument("--mode", choices=["matlab", "offline"], default="offline")
+    p.add_argument("--block-size", type=int, default=2048)
+    p.add_argument("--c", type=float, default=7.0)
+    p.add_argument("--wait", type=int, default=2,
+                   help="MATLAB: fixed skip; offline: maximum adaptive lookahead frames (0 disables).")
+    p.add_argument("--npeaks", type=int, default=3)
+    p.add_argument("--nsemitones", type=float, default=2.0)
+    p.add_argument("--vocal-floor-hz", type=float, default=60.0)
+    p.add_argument(
+        "--analysis-hz",
+        type=float,
+        default=DEFAULT_OFFLINE_ANALYSIS_HZ,
+        help=(
+            "Requested OFFLINE interpretation-trajectory rate in Hz. "
+            "The ECKF core remains full sample-resolution. Default: "
+            f"{DEFAULT_OFFLINE_ANALYSIS_HZ:g} Hz."
+        ),
+    )
+    p.add_argument(
+        "--silence-mode", choices=["fixed", "adaptive"], default=None,
+        help=("Silence calibration mode. Default: adaptive for offline V2; "
+              "fixed historical threshold for --mode matlab."),
+    )
+    p.add_argument(
+        "--silence-energy-threshold", type=float, default=None,
+        help=("Silence threshold/fallback on original 20*log10(sum(frame**2)) scale (NOT dBFS). "
+              "Offline V2 default: -13.7734 (~-40 dBFS RMS for 2048-sample frames). "
+              "MATLAB compatibility default remains historical -50."),
+    )
+    p.add_argument(
+        "--eckf-gain-normalization", choices=["none", "peak"], default="peak",
+        help="Offline ECKF internal coordinate normalization. peak is gain-invariant; MATLAB mode is always historical/raw.",
+    )
+    p.add_argument(
+        "--csv",
+        type=Path,
+        default=None,
+        help="Output CSV path (default: <wav>.eckf.csv)",
+    )
+    p.add_argument(
+        "--kalman-engine", choices=["auto", "python", "numba"], default="auto",
+        help=(
+            "R4 ECKF execution engine. auto uses cached Numba when available; "
+            "python forces the frozen reference loop for regression testing."
+        ),
+    )
+    p.add_argument(
+        "--workers", type=int, default=None,
+        help=(
+            "Maximum worker budget for parallel-safe R4 stages. Default: 75%% "
+            "of logical CPUs available to this process."
+        ),
+    )
+    p.add_argument(
+        "--memory-budget-mib", type=int, default=None,
+        help=(
+            "Maximum R4 working-memory budget in MiB. Default: 40%% of currently "
+            "available RAM; conservative fallback if detection fails."
+        ),
+    )
+    p.add_argument(
+        "--frame-preflight", choices=["auto", "serial", "off"], default="auto",
+        help=(
+            "R4 Stage 2 acoustic preflight. auto uses the bounded traffic-police "
+            "worker pool; serial builds the same cache on one worker; off restores "
+            "the frozen on-demand V3R9 measurements for regression testing."
+        ),
+    )
+    p.add_argument(
+        "--harmonic-preflight", choices=["auto", "serial", "off"], default="auto",
+        help=(
+            "R4 Stage 4 harmonic-detector preflight. auto measures pure per-frame "
+            "spectral/harmonic-change evidence in the persistent crew; serial builds "
+            "the same cache on the parent; off restores on-demand detector calls."
+        ),
+    )
+    p.add_argument(
+        "--aperture-preflight", choices=["auto", "serial", "off"], default="auto",
+        help=(
+            "R4 Stage 4 variable-aperture acoustic preflight. auto measures "
+            "eligible 24/40/64/96-ms windows in the persistent worker crew; "
+            "serial builds the same cache on the parent; off restores on-demand "
+            "V3R9/V3R5 aperture measurements."
+        ),
+    )
+    p.add_argument(
+        "--initialization-preflight", choices=["auto", "serial", "off"], default="auto",
+        help=(
+            "R4 Stage 6 exact measured-period initialization preflight. auto runs "
+            "the unchanged historical period measurement on predicted reset frames "
+            "in the persistent crew; off restores on-demand measurement."
+        ),
+    )
+    p.add_argument(
+        "--candidate-parallel", choices=["auto", "serial", "off"], default="auto",
+        help=(
+            "R4 Stage 3 observational candidate-field execution. auto uses the "
+            "bounded worker pool; serial/off use the frozen serial path."
+        ),
+    )
+    p.add_argument(
+        "--juror-parallel", choices=["auto", "serial", "off"], default="auto",
+        help=(
+            "R4 Stage 3 juror-pair execution. auto measures independent pair "
+            "evidence in the bounded worker pool; serial/off use the frozen path."
+        ),
+    )
+    p.add_argument(
+        "--interpretation-parallel", choices=["auto", "serial", "off"], default="auto",
+        help=(
+            "R4 Stage 5 trajectory evidence execution. auto measures the pure "
+            "variable-aperture rows in the persistent crew; serial/off use the "
+            "frozen parent-process calculation."
+        ),
+    )
+    p.add_argument(
+        "--amplitude-parallel", choices=["auto", "serial", "off"], default="auto",
+        help=(
+            "R4 Stage 5 expressive-amplitude execution. auto measures independent "
+            "local modulation rows in the persistent crew; serial/off use the "
+            "frozen parent-process calculation."
+        ),
+    )
+    args = p.parse_args(list(argv) if argv is not None else None)
+
+    resources = detect_runtime_resources(
+        workers_override=args.workers,
+        memory_budget_mib_override=args.memory_budget_mib,
+    )
+    try:
+        resolved_engine = resolve_kalman_engine(args.kalman_engine)
+    except (ValueError, RuntimeError) as exc:
+        p.error(str(exc))
+
+    available_ram_text = (
+        f"{resources.available_ram_mib:.0f} MiB"
+        if resources.available_ram_mib is not None
+        else "unknown"
+    )
+    print(
+        "R4 runtime: "
+        f"logical CPUs={resources.logical_cpus} ({resources.cpu_detection}); "
+        f"worker budget={resources.worker_budget} (reserved for parallel-safe stages); "
+        f"available RAM={available_ram_text} ({resources.ram_detection}); "
+        f"memory budget={resources.memory_budget_mib:.0f} MiB; "
+        f"Kalman engine={resolved_engine}"
+    )
+
+    traffic_controller = PersistentTrafficController(resources)
+    print(
+        "R4 traffic police: persistent crew capacity="
+        f"{traffic_controller.max_workers}/{resources.worker_budget}; "
+        f"RAM cap permits {traffic_controller.memory_worker_cap}; "
+        "one crew reused across parallel-safe stages"
+    )
+
+    audio, sr = sf.read(args.wav, always_2d=False, dtype="float64")
+    if np.asarray(audio).ndim != 1:
+        raise SystemExit(
+            "Input must be mono. No automatic downmix is performed."
+        )
+
+    silence_mode = args.silence_mode or ("fixed" if args.mode == "matlab" else "adaptive")
+    silence_energy_threshold = (
+        float(args.silence_energy_threshold)
+        if args.silence_energy_threshold is not None
+        else (-50.0 if args.mode == "matlab" else -13.7734)
+    )
+
+    cfg = ECKFConfig(
+        block_size=args.block_size,
+        c=args.c,
+        num_buf_to_wait=args.wait,
+        npeaks=args.npeaks,
+        nsemitones=args.nsemitones,
+        mode=args.mode,
+        vocal_floor_hz=args.vocal_floor_hz,
+        silence_mode=silence_mode,
+        silence_energy_db_threshold=silence_energy_threshold,
+        eckf_gain_normalization=args.eckf_gain_normalization,
+    )
+
+    result = track_pitch(
+        audio, sr, cfg,
+        kalman_engine=resolved_engine,
+        runtime_resources=resources,
+        frame_preflight_mode=args.frame_preflight,
+        harmonic_preflight_mode=args.harmonic_preflight,
+        variable_aperture_preflight_mode=args.aperture_preflight,
+        initialization_period_preflight_mode=args.initialization_preflight,
+        traffic_controller=traffic_controller,
+    )
+    if result.frame_preflight_plan is not None:
+        plan = result.frame_preflight_plan
+        print(
+            "R4 traffic police: "
+            f"frame workers={plan.effective_workers}/{plan.host_worker_budget}; "
+            f"RAM cap permits {plan.memory_worker_cap}; "
+            f"periodicity engine={result.frame_preflight_engine}; "
+            f"silence={result.frame_preflight_silence_seconds:.3f}s; "
+            f"periodicity={result.frame_preflight_periodicity_seconds:.3f}s; "
+            f"preflight total={result.frame_preflight_elapsed_seconds:.3f}s"
+        )
+    else:
+        print("R4 traffic police: frame preflight=off (frozen on-demand measurements)")
+
+    if result.harmonic_preflight_plan is not None:
+        plan = result.harmonic_preflight_plan
+        print(
+            "R4 traffic police: "
+            f"harmonic workers={plan.effective_workers}/{plan.host_worker_budget}; "
+            f"RAM cap permits {plan.memory_worker_cap}; "
+            f"engine={result.harmonic_preflight_engine}; "
+            f"eligible frames={result.harmonic_preflight_frames}; "
+            f"elapsed={result.harmonic_preflight_elapsed_seconds:.3f}s"
+        )
+    elif args.harmonic_preflight == "off":
+        print("R4 traffic police: harmonic preflight=off (frozen on-demand measurements)")
+
+    if result.variable_aperture_preflight_plan is not None:
+        plan = result.variable_aperture_preflight_plan
+        print(
+            "R4 traffic police: "
+            f"aperture workers={plan.effective_workers}/{plan.host_worker_budget}; "
+            f"RAM cap permits {plan.memory_worker_cap}; "
+            f"engine={result.variable_aperture_preflight_engine}; "
+            f"eligible frames={result.variable_aperture_preflight_frames}; "
+            f"elapsed={result.variable_aperture_preflight_elapsed_seconds:.3f}s"
+        )
+    elif args.aperture_preflight == "off":
+        print("R4 traffic police: aperture preflight=off (frozen on-demand measurements)")
+
+    if result.initialization_period_preflight_plan is not None:
+        plan = result.initialization_period_preflight_plan
+        print(
+            "R4 traffic police: "
+            f"initialization-period workers={plan.effective_workers}/{plan.host_worker_budget}; "
+            f"RAM cap permits {plan.memory_worker_cap}; "
+            f"engine={result.initialization_period_preflight_engine}; "
+            f"eligible frames={result.initialization_period_preflight_frames}; "
+            f"elapsed={result.initialization_period_preflight_elapsed_seconds:.3f}s"
+        )
+    elif args.initialization_preflight == "off":
+        print("R4 traffic police: initialization-period preflight=off (frozen on-demand measurement)")
+
+    out = args.csv
+    if out is None:
+        out = args.wav.with_suffix(args.wav.suffix + ".eckf.csv")
+
+    if cfg.mode == "offline" and result.silence_calibration is not None:
+        silence_out = out.with_suffix(out.suffix + ".silence_calibration.csv")
+        cal = result.silence_calibration
+        with silence_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "mode", "threshold", "method", "block_size", "frame_ms",
+                "min_silence_ms", "min_silence_frames",
+                "search_quantile_percent", "candidate_energy_ceiling",
+                "long_run_count", "selected_frame_count", "selected_duration_s",
+                "selected_energy_median", "selected_energy_p95",
+                "headroom_stat_units",
+                "raw_calculated_threshold", "minimum_allowed_threshold",
+                "minimum_threshold_applied",
+                "digital_mute_frame_count", "digital_mute_duration_s",
+                "trustworthy_noise_floor", "trustworthy_run_count",
+                "rejected_nonstationary_run_count",
+                "stationarity_max_spread_db",
+                "stationarity_max_abs_slope_db_per_s",
+                "trust_failure_reason",
+            ])
+            writer.writerow([
+                cal.mode, cal.threshold, cal.method, cal.block_size, cal.frame_ms,
+                cal.min_silence_ms, cal.min_silence_frames,
+                "" if cal.search_quantile_percent is None else cal.search_quantile_percent,
+                "" if cal.candidate_energy_ceiling is None else cal.candidate_energy_ceiling,
+                cal.long_run_count, cal.selected_frame_count, cal.selected_duration_s,
+                "" if cal.selected_energy_median is None else cal.selected_energy_median,
+                "" if cal.selected_energy_p95 is None else cal.selected_energy_p95,
+                cal.headroom_stat_units,
+                "" if cal.raw_calculated_threshold is None else cal.raw_calculated_threshold,
+                cal.minimum_allowed_threshold, int(cal.minimum_threshold_applied),
+                cal.digital_mute_frame_count, cal.digital_mute_duration_s,
+                int(cal.trustworthy_noise_floor), cal.trustworthy_run_count,
+                cal.rejected_nonstationary_run_count,
+                cal.stationarity_max_spread_db,
+                cal.stationarity_max_abs_slope_db_per_s,
+                "" if cal.trust_failure_reason is None else cal.trust_failure_reason,
+            ])
+        print(f"Silence calibration: {silence_out}")
+
+    n = result.original_length
+
+    # OFFLINE interpretation trajectory only.
+    # The ECKF itself remains full audio-sample resolution.  The requested rate
+    # is converted to an integer audio-sample hop; every downstream stage gets
+    # the resulting measured analysis_hz rather than assuming a fixed grid.
+    requested_analysis_hz = float(args.analysis_hz)
+    try:
+        analysis_grid = resolve_offline_analysis_grid(sr, requested_analysis_hz)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    export_step = analysis_grid.hop_samples
+
+    sample_idx = np.arange(
+        0,
+        n,
+        export_step,
+        dtype=np.int64,
+    )
+
+    t = sample_idx.astype(np.float64) / sr
+
+    # -------------------------------------------------------------
+    # Offline trajectory validity / bidirectional correction.
+    #
+    # IMPORTANT:
+    # The ECKF itself remains full sample-resolution.
+    # Validity operates only on the rate-aware offline interpretation trajectory.
+    # MATLAB mode is left completely untouched.
+    # -------------------------------------------------------------
+
+    offline_validity = None
+    offline_interpretation = None
+    offline_expressive = None
+    offline_transition_geometry = None
+    offline_expressive_amplitude = None
+    offline_gesture_features = None
+    offline_gesture_objects = None
+    offline_gesture_split_evidence = None
+    offline_gesture_structure = None
+    offline_interpretation_candidates = None
+    offline_pitch_candidates = None
+    offline_juror_evidence = None
+    offline_range_calibration = None
+    offline_range_reference_result = None
+    preliminary_range_reference_result = None
+    preliminary_range_calibration = None
+    offline_juror_pairs = None
+    offline_juror_bench = None
+    offline_direct_edge_measurements = None
+    offline_detective_candidates = None
+    offline_detective_verdicts = None
+    offline_final_adjudication = None
+    offline_interval_authority = None
+    offline_structural_collaboration = None
+    offline_primary_reconciliation = None
+    frame_index = sample_idx // cfg.block_size
+
+    if cfg.mode == "offline":
+        export_f0 = result.f0_hz[sample_idx]
+
+        analysis_hz = analysis_grid.actual_hz
+
+        validity_config = PitchValidityConfig(
+            analysis_hz=analysis_hz,
+        )
+
+        sampled_frame_state = result.frame_acoustic_state[frame_index]
+
+        first_pass_validity = analyse_pitch_validity(
+            f0_hz=export_f0,
+            sample_rate=analysis_hz,
+            config=validity_config,
+            frame_acoustic_state=sampled_frame_state,
+        )
+
+        # Preliminary per-file range for OFFLINE RESCUE ONLY.
+        #
+        # This uses the exact same candidate field, historical V13 reference
+        # evaluator, and V22 range geometry as the final juror range, but the
+        # reference population is built strictly from FIRST-PASS-valid F0.
+        # Therefore rescue cannot define the range that later authorizes rescue.
+        # If there are too few anchors, the preliminary calibration is unavailable
+        # and validity correction behaves exactly as before.
+        offline_pitch_candidates = build_pitch_candidate_field(
+            audio=audio,
+            sample_rate=sr,
+            config=cfg,
+            tracker_result=result,
+            frame_acoustic_state_name_fn=frame_acoustic_state_name,
+            runtime_resources=resources,
+            parallel_mode=args.candidate_parallel,
+            report=True,
+            traffic_controller=traffic_controller,
+        )
+        preliminary_range_reference_result = build_v13_style_range_references(
+            pitch_candidates=offline_pitch_candidates,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+            sample_frame_index=frame_index,
+            clean_f0_hz=first_pass_validity.cleaned_f0_hz,
+            valid=first_pass_validity.valid,
+        )
+        preliminary_range_calibration = derive_v22_range_calibration(
+            preliminary_range_reference_result.references_hz,
+            source="pre_rescue_first_pass_v13_refs",
+        )
+
+        offline_validity = apply_offline_validity_correction(
+            f0_hz=export_f0,
+            first_pass=first_pass_validity,
+            sample_rate=analysis_hz,
+            frame_acoustic_state=sampled_frame_state,
+            range_zero_low_midi=(
+                preliminary_range_calibration.zero_low_midi
+                if preliminary_range_calibration.available else None
+            ),
+            range_zero_high_midi=(
+                preliminary_range_calibration.zero_high_midi
+                if preliminary_range_calibration.available else None
+            ),
+        )
+
+        # V3R1 authoritative ownership ordering.
+        #
+        # The candidate field and preliminary rescue range already exist.
+        # Seat final range/jury/HD now, BEFORE any musical trajectory/gesture
+        # structure is built.  These adjudicators do not consume trajectory or
+        # gesture state, so constructing those layers first was redundant and
+        # allowed provisional pitch ownership to leak into musical structure.
+        offline_range_reference_result = build_v13_style_range_references(
+            pitch_candidates=offline_pitch_candidates,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+            sample_frame_index=frame_index,
+            clean_f0_hz=offline_validity.clean_f0_hz,
+            valid=offline_validity.valid,
+        )
+        offline_juror_evidence, offline_range_calibration = build_juror_evidence(
+            offline_pitch_candidates,
+            supported_reference_hz=offline_range_reference_result.references_hz,
+            range_reference_rows=offline_range_reference_result.rows,
+        )
+        offline_juror_pairs, offline_juror_bench, offline_direct_edge_measurements = build_juror_bench(
+            offline_juror_evidence,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+            runtime_resources=resources,
+            parallel_mode=args.juror_parallel,
+            report=True,
+            traffic_controller=traffic_controller,
+        )
+        offline_detective_candidates, offline_detective_verdicts, offline_final_adjudication = build_harmonic_detective(
+            audio=np.asarray(audio, dtype=np.float64),
+            sr=sr,
+            evidence_rows=offline_juror_evidence,
+            bench_rows=offline_juror_bench,
+            pair_rows=offline_juror_pairs,
+        )
+        offline_interval_authority = build_interval_authority(offline_juror_pairs, offline_juror_evidence)
+
+        # Apply authoritative jury/HD reacquisition feedback BEFORE the first
+        # musical interpretation.  This removes the old build -> adjudicate ->
+        # discard -> rebuild cycle.
+        offline_reacquisition_feedback = apply_reacquisition_adjudication_feedback(
+            offline_validity=offline_validity,
+            sample_times_s=t,
+            sample_frame_index=frame_index,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+            evidence_rows=offline_juror_evidence,
+            bench_rows=offline_juror_bench,
+            pair_rows=offline_juror_pairs,
+            final_adjudication=offline_final_adjudication,
+        )
+
+        # V3R9: preserve strong primary periodicity evidence BEFORE musical
+        # interpretation.  This is tracker responsibility: repair rejected or
+        # non-register-drifted ECKF ownership only when the audio itself supplies
+        # coherent, range-valid primary evidence.  No MIDI/attack GT is consumed.
+        offline_primary_reconciliation = apply_primary_reconciliation_v3r9(
+            offline_validity=offline_validity,
+            sample_times_s=t,
+            sample_frame_index=frame_index,
+            frame_start_times_s=(np.asarray(result.frame_start_samples, dtype=np.float64) / float(sr)),
+            frame_acoustic_state=result.frame_acoustic_state,
+            periodicity_acf_peak_per_frame=result.periodicity_acf_peak_per_frame,
+            periodicity_cmndf_minimum_per_frame=result.periodicity_cmndf_minimum_per_frame,
+            periodicity_acf_frequency_hz_per_frame=result.periodicity_acf_frequency_hz_per_frame,
+            periodicity_cmndf_frequency_hz_per_frame=result.periodicity_cmndf_frequency_hz_per_frame,
+            range_zero_low_midi=(
+                offline_range_calibration.zero_low_midi
+                if offline_range_calibration.available else None
+            ),
+            range_zero_high_midi=(
+                offline_range_calibration.zero_high_midi
+                if offline_range_calibration.available else None
+            ),
+        )
+
+        # V3R9 may promote a frame passport from unresolved/rejected to
+        # VOICED_TRACKED together with primary-evidence pitch ownership.
+        # sampled_frame_state was created before reconciliation, so refresh it
+        # before trajectory validation/interpretation.
+        sampled_frame_state = result.frame_acoustic_state[frame_index]
+
+        (
+            offline_interpretation,
+            offline_expressive,
+            offline_expressive_amplitude,
+            offline_transition_geometry,
+            offline_gesture_features,
+            offline_gesture_objects,
+            offline_gesture_split_evidence,
+            offline_gesture_structure,
+            offline_interpretation_candidates,
+        ) = _build_interpretation_stack(
+            offline_validity=offline_validity,
+            sampled_frame_state=sampled_frame_state,
+            analysis_hz=analysis_hz,
+            audio=audio,
+            sr=sr,
+            sample_idx=sample_idx,
+            runtime_resources=resources,
+            traffic_controller=traffic_controller,
+            interpretation_parallel=args.interpretation_parallel,
+            amplitude_parallel=args.amplitude_parallel,
+            report_parallel=True,
+        )
+
+        # V18 (branched from V17/V14 lineage, not V15/V16): the interval juror is used
+        # only as a trigger for re-adjudication.  If corrected-valid ownership
+        # inside or across adjacent existing V14 trajectory regions contains an abrupt
+        # interval-juror contradiction, solve only that local contradiction
+        # neighborhood from the already-existing in-range candidate field.  Do not
+        # propagate an owner and do not insert a discontinuity wall.
+        offline_register_readjudication = apply_register_readjudication_v18(
+            offline_validity=offline_validity,
+            interpretation=offline_interpretation,
+            sample_times_s=t,
+            sample_frame_index=frame_index,
+            audio=np.asarray(audio, dtype=np.float64),
+            sample_rate=sr,
+            evidence_rows=offline_juror_evidence,
+            pair_rows=offline_juror_pairs,
+            final_adjudication=offline_final_adjudication,
+        )
+
+        if offline_register_readjudication:
+            # Register re-adjudication is the only remaining downstream stage
+            # allowed to change corrected F0 in V3R1, and it is constrained by
+            # the authoritative ownership ledger.  Rebuild the musical stack
+            # once from that explicit ownership change.
+            (
+                offline_interpretation,
+                offline_expressive,
+                offline_expressive_amplitude,
+                offline_transition_geometry,
+                offline_gesture_features,
+                offline_gesture_objects,
+                offline_gesture_split_evidence,
+                offline_gesture_structure,
+                offline_interpretation_candidates,
+            ) = _build_interpretation_stack(
+                offline_validity=offline_validity,
+                sampled_frame_state=sampled_frame_state,
+                analysis_hz=analysis_hz,
+                audio=audio,
+                sr=sr,
+                sample_idx=sample_idx,
+                runtime_resources=resources,
+                traffic_controller=traffic_controller,
+                interpretation_parallel=args.interpretation_parallel,
+                amplitude_parallel=args.amplitude_parallel,
+                report_parallel=True,
+            )
+
+        # Stage 5 keeps the persistent crew through trajectory/amplitude evidence.
+        traffic_controller.shutdown()
+
+        # Structural collaboration is deliberately LAST. Existing jury/HD
+        # winners remain immutable. Only residual abstentions are eligible.
+        offline_structural_collaboration, offline_final_adjudication = apply_structural_collaboration(
+            final_adjudication=offline_final_adjudication,
+            interpretation=offline_interpretation,
+            gesture_objects=offline_gesture_objects,
+            pitch_candidates=offline_pitch_candidates,
+            sample_times_s=t,
+            sample_rate=sr,
+            expressive=offline_expressive,
+            amplitude_expression=offline_expressive_amplitude,
+        )
+
+        # Per-sample region kind for diagnostic export.  Untrusted samples
+        # remain empty rather than being silently classified as trajectory.
+        trajectory_region_kind = np.full(
+            len(sample_idx),
+            "",
+            dtype=object,
+        )
+        for region in offline_interpretation.regions:
+            trajectory_region_kind[
+                region.start_index:region.end_index
+            ] = region.kind.name
+
+    if cfg.mode == "offline":
+        with out.open(
+            "w",
+            newline="",
+            encoding="utf-8",
+        ) as f:
+            writer = csv.writer(f)
+
+            writer.writerow(
+                [
+                    "sample",
+                    "time_s",
+                    "f0_hz",
+                    "amplitude",
+                    "phase",
+                    "fundamental_real",
+                    "fundamental_imag",
+                    "first_pass_valid",
+                    "corrected_valid",
+                    "clean_f0_hz",
+                    "first_pass_reason",
+                    "validity_reason",
+                    "correction_reason",
+                    "pitch_status",
+                    "frame_start_sample",
+                    "frame_real_sample_count",
+                    "energy_silence",
+                    "flatness_silence",
+                    "original_silence",
+                    "periodicity_voiced",
+                    "frame_acoustic_state",
+                    "frame_acoustic_state_name",
+                    "periodicity_acf_peak",
+                    "periodicity_cmndf_minimum",
+                    "periodicity_acf_frequency_hz",
+                    "periodicity_cmndf_frequency_hz",
+                    "periodicity_reason",
+                    "initialization_source",
+                    "initialization_frequency_hz",
+                    "lookahead_frames",
+                    "lookahead_reason",
+                    "frame_decision",
+                    "trajectory_region_id",
+                    "trajectory_region_kind",
+                    "trajectory_stable",
+                    "pitch_st",
+                    "structural_pitch_st",
+                ]
+            )
+
+            for j, sample in enumerate(
+                sample_idx
+            ):
+                writer.writerow(
+                    [
+                        int(sample),
+                        float(t[j]),
+                        float(
+                            result.f0_hz[sample]
+                        ),
+                        float(
+                            result.amplitude[sample]
+                        ),
+                        float(
+                            result.phase[sample]
+                        ),
+                        float(
+                            np.real(
+                                result.fundamental[
+                                    sample
+                                ]
+                            )
+                        ),
+                        float(
+                            np.imag(
+                                result.fundamental[
+                                    sample
+                                ]
+                            )
+                        ),
+                        int(
+                            offline_validity.first_pass_valid[
+                                j
+                            ]
+                        ),
+                        int(
+                            offline_validity.valid[
+                                j
+                            ]
+                        ),
+                        (
+                            float(
+                                offline_validity.clean_f0_hz[
+                                    j
+                                ]
+                            )
+                            if np.isfinite(
+                                offline_validity.clean_f0_hz[
+                                    j
+                                ]
+                            )
+                            else ""
+                        ),
+                        str(
+                            offline_validity.first_pass_reason[
+                                j
+                            ]
+                        ),
+                        str(
+                            offline_validity.reason[
+                                j
+                            ]
+                        ),
+                        str(
+                            offline_validity.correction_reason[
+                                j
+                            ]
+                        ),
+                        int(result.pitch_status[sample]),
+                        int(result.frame_start_samples[frame_index[j]]),
+                        int(result.frame_real_sample_count[frame_index[j]]),
+                        int(result.energy_silence_per_frame[frame_index[j]]),
+                        int(result.flatness_silence_per_frame[frame_index[j]]),
+                        int(result.original_silence_per_frame[frame_index[j]]),
+                        int(result.periodicity_voiced_per_frame[frame_index[j]]),
+                        int(result.frame_acoustic_state[frame_index[j]]),
+                        frame_acoustic_state_name(result.frame_acoustic_state[frame_index[j]]),
+                        (float(result.periodicity_acf_peak_per_frame[frame_index[j]])
+                         if np.isfinite(result.periodicity_acf_peak_per_frame[frame_index[j]]) else ""),
+                        (float(result.periodicity_cmndf_minimum_per_frame[frame_index[j]])
+                         if np.isfinite(result.periodicity_cmndf_minimum_per_frame[frame_index[j]]) else ""),
+                        (float(result.periodicity_acf_frequency_hz_per_frame[frame_index[j]])
+                         if np.isfinite(result.periodicity_acf_frequency_hz_per_frame[frame_index[j]]) else ""),
+                        (float(result.periodicity_cmndf_frequency_hz_per_frame[frame_index[j]])
+                         if np.isfinite(result.periodicity_cmndf_frequency_hz_per_frame[frame_index[j]]) else ""),
+                        str(result.periodicity_reason_per_frame[frame_index[j]]),
+                        str(result.initialization_source_per_frame[frame_index[j]]),
+                        (float(result.initialization_frequency_hz_per_frame[frame_index[j]])
+                         if np.isfinite(result.initialization_frequency_hz_per_frame[frame_index[j]]) else ""),
+                        int(result.lookahead_frames_per_frame[frame_index[j]]),
+                        str(result.lookahead_reason_per_frame[frame_index[j]]),
+                        str(result.frame_decision[frame_index[j]]),
+                        int(offline_interpretation.region_id[j]),
+                        str(trajectory_region_kind[j]),
+                        int(offline_interpretation.stable_mask[j]),
+                        (float(offline_interpretation.pitch_st[j])
+                         if np.isfinite(offline_interpretation.pitch_st[j]) else ""),
+                        (float(offline_interpretation.structural_pitch_st[j])
+                         if np.isfinite(offline_interpretation.structural_pitch_st[j]) else ""),
+                    ]
+                )
+
+        frames_out = out.with_suffix(out.suffix + ".frames.csv")
+        with frames_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "frame_index", "start_sample", "start_time_s",
+                "real_end_sample_exclusive", "real_sample_count",
+                "energy_on_matlab_scale", "spectral_flatness",
+                "energy_silence", "flatness_silence", "original_silence",
+                "periodicity_voiced", "frame_acoustic_state", "frame_acoustic_state_name",
+                "periodicity_acf_peak", "periodicity_cmndf_minimum",
+                "periodicity_acf_frequency_hz", "periodicity_cmndf_frequency_hz",
+                "periodicity_reason", "initialization_source",
+                "initialization_frequency_hz", "lookahead_frames", "lookahead_reason",
+                "va_reacquisition_aperture_ms", "va_reacquisition_reason",
+                "va_reacquisition_original_hz", "va_reacquisition_selected_hz",
+                "frame_decision",
+            ])
+            for fi, start in enumerate(result.frame_start_samples):
+                writer.writerow([
+                    fi, int(start), float(start / sr),
+                    int(start + result.frame_real_sample_count[fi]),
+                    int(result.frame_real_sample_count[fi]),
+                    float(result.energy_db_per_frame[fi]),
+                    float(result.spectral_flatness_per_frame[fi]),
+                    int(result.energy_silence_per_frame[fi]),
+                    int(result.flatness_silence_per_frame[fi]),
+                    int(result.original_silence_per_frame[fi]),
+                    int(result.periodicity_voiced_per_frame[fi]),
+                    int(result.frame_acoustic_state[fi]),
+                    frame_acoustic_state_name(result.frame_acoustic_state[fi]),
+                    (float(result.periodicity_acf_peak_per_frame[fi])
+                     if np.isfinite(result.periodicity_acf_peak_per_frame[fi]) else ""),
+                    (float(result.periodicity_cmndf_minimum_per_frame[fi])
+                     if np.isfinite(result.periodicity_cmndf_minimum_per_frame[fi]) else ""),
+                    (float(result.periodicity_acf_frequency_hz_per_frame[fi])
+                     if np.isfinite(result.periodicity_acf_frequency_hz_per_frame[fi]) else ""),
+                    (float(result.periodicity_cmndf_frequency_hz_per_frame[fi])
+                     if np.isfinite(result.periodicity_cmndf_frequency_hz_per_frame[fi]) else ""),
+                    str(result.periodicity_reason_per_frame[fi]),
+                    str(result.initialization_source_per_frame[fi]),
+                    (float(result.initialization_frequency_hz_per_frame[fi])
+                     if np.isfinite(result.initialization_frequency_hz_per_frame[fi]) else ""),
+                    int(result.lookahead_frames_per_frame[fi]),
+                    str(result.lookahead_reason_per_frame[fi]),
+                    (float(result.variable_aperture_ms_per_frame[fi])
+                     if np.isfinite(result.variable_aperture_ms_per_frame[fi]) else ""),
+                    str(result.variable_aperture_reason_per_frame[fi]),
+                    (float(result.variable_aperture_original_hz_per_frame[fi])
+                     if np.isfinite(result.variable_aperture_original_hz_per_frame[fi]) else ""),
+                    (float(result.variable_aperture_selected_hz_per_frame[fi])
+                     if np.isfinite(result.variable_aperture_selected_hz_per_frame[fi]) else ""),
+                    str(result.frame_decision[fi]),
+                ])
+        print(f"Frame evidence: {frames_out}")
+
+        if offline_primary_reconciliation is not None:
+            pr_out = out.with_suffix(out.suffix + ".primary_reconciliation_v3r9.csv")
+            with pr_out.open("w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    "frame_index", "frame_start_time_s", "acoustic_state",
+                    "acf_peak", "cmndf_minimum",
+                    "acf_frequency_hz", "cmndf_frequency_hz",
+                    "candidate_hz", "candidate_source",
+                    "coherent_support", "trusted_context_support",
+                    "trajectory_candidate_support_count",
+                    "trajectory_current_support_count",
+                    "trajectory_inconclusive_count",
+                    "trajectory_jump_guard_count",
+                    "continuous_persistence_count",
+                    "hysteresis_shoulder_count",
+                    "embedded_register_outlier_count",
+                    "promoted_sample_count", "replaced_sample_count",
+                    "action", "reason",
+                ])
+                for r in offline_primary_reconciliation:
+                    writer.writerow([
+                        r.frame_index, r.frame_start_time_s, r.acoustic_state,
+                        r.acf_peak, r.cmndf_minimum,
+                        r.acf_frequency_hz, r.cmndf_frequency_hz,
+                        "" if r.candidate_hz is None else r.candidate_hz,
+                        r.candidate_source, int(r.coherent_support),
+                        int(r.trusted_context_support),
+                        r.trajectory_candidate_support_count,
+                        r.trajectory_current_support_count,
+                        r.trajectory_inconclusive_count,
+                        r.trajectory_jump_guard_count,
+                        r.continuous_persistence_count,
+                        r.hysteresis_shoulder_count,
+                        r.embedded_register_outlier_count,
+                        r.promoted_sample_count, r.replaced_sample_count,
+                        r.action, r.reason,
+                    ])
+            print(f"V3R9 primary reconciliation: {pr_out}")
+
+        trajectory_out = out.with_suffix(out.suffix + ".trajectory.csv")
+        with trajectory_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "region_index", "kind",
+                "start_index", "end_index",
+                "start_time_s", "end_time_s", "duration_ms",
+                "median_pitch_st", "min_pitch_st", "max_pitch_st",
+                "span_st", "raw_median_pitch_st",
+                "previous_target_st", "next_target_st",
+            ])
+            for region in offline_interpretation.regions:
+                writer.writerow([
+                    int(region.index),
+                    region.kind.name,
+                    int(region.start_index),
+                    int(region.end_index),
+                    float(region.start_time_s),
+                    float(region.end_time_s),
+                    float(region.duration_ms),
+                    (float(region.median_pitch_st) if np.isfinite(region.median_pitch_st) else ""),
+                    (float(region.min_pitch_st) if np.isfinite(region.min_pitch_st) else ""),
+                    (float(region.max_pitch_st) if np.isfinite(region.max_pitch_st) else ""),
+                    (float(region.span_st) if np.isfinite(region.span_st) else ""),
+                    (float(region.raw_median_pitch_st) if np.isfinite(region.raw_median_pitch_st) else ""),
+                    (float(region.previous_target_st) if np.isfinite(region.previous_target_st) else ""),
+                    (float(region.next_target_st) if np.isfinite(region.next_target_st) else ""),
+                ])
+        print(f"Trajectory regions: {trajectory_out}")
+
+        target_out = out.with_suffix(out.suffix + ".target_formation.csv")
+        with target_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "trajectory_index", "sample", "time_s",
+                "corrected_valid", "clean_f0_hz",
+                "pitch_st", "structural_pitch_st",
+                "local_stability_point_count",
+                "local_robust_range_st",
+                "stable_range_threshold_st",
+                "local_stability_pass",
+                "va_first_passing_aperture_ms",
+                "va_largest_passing_aperture_ms",
+                "va_largest_contiguous_passing_aperture_ms",
+                "va_core_candidate",
+                "va_core_after_duration",
+                "va_edge_grown",
+                "va_24_point_count", "va_24_robust_range_st", "va_24_pass",
+                "va_40_point_count", "va_40_robust_range_st", "va_40_pass",
+                "va_64_point_count", "va_64_robust_range_st", "va_64_pass",
+                "va_96_point_count", "va_96_robust_range_st", "va_96_pass",
+                "stable_run_duration_ms",
+                "min_stable_threshold_ms",
+                "min_duration_pass",
+                "final_stable",
+                "target_formation_reason",
+                "trajectory_region_id",
+                "trajectory_region_kind",
+            ])
+            for j, sample in enumerate(sample_idx):
+                writer.writerow([
+                    int(j),
+                    int(sample),
+                    float(t[j]),
+                    int(offline_validity.valid[j]),
+                    (float(offline_validity.clean_f0_hz[j])
+                     if np.isfinite(offline_validity.clean_f0_hz[j]) else ""),
+                    (float(offline_interpretation.pitch_st[j])
+                     if np.isfinite(offline_interpretation.pitch_st[j]) else ""),
+                    (float(offline_interpretation.structural_pitch_st[j])
+                     if np.isfinite(offline_interpretation.structural_pitch_st[j]) else ""),
+                    int(offline_interpretation.local_stability_point_count[j]),
+                    (float(offline_interpretation.local_robust_range_st[j])
+                     if np.isfinite(offline_interpretation.local_robust_range_st[j]) else ""),
+                    float(offline_interpretation.stable_range_threshold_st),
+                    int(offline_interpretation.local_stability_pass[j]),
+                    (float(offline_interpretation.variable_first_passing_aperture_ms[j])
+                     if np.isfinite(offline_interpretation.variable_first_passing_aperture_ms[j]) else ""),
+                    (float(offline_interpretation.variable_largest_passing_aperture_ms[j])
+                     if np.isfinite(offline_interpretation.variable_largest_passing_aperture_ms[j]) else ""),
+                    (float(offline_interpretation.variable_largest_contiguous_passing_aperture_ms[j])
+                     if np.isfinite(offline_interpretation.variable_largest_contiguous_passing_aperture_ms[j]) else ""),
+                    int(offline_interpretation.variable_core_candidate[j]),
+                    int(offline_interpretation.variable_core_after_duration[j]),
+                    int(offline_interpretation.variable_edge_grown[j]),
+                    int(offline_interpretation.variable_aperture_point_count[j, 0]),
+                    (float(offline_interpretation.variable_aperture_robust_range_st[j, 0])
+                     if np.isfinite(offline_interpretation.variable_aperture_robust_range_st[j, 0]) else ""),
+                    int(offline_interpretation.variable_aperture_pass[j, 0]),
+                    int(offline_interpretation.variable_aperture_point_count[j, 1]),
+                    (float(offline_interpretation.variable_aperture_robust_range_st[j, 1])
+                     if np.isfinite(offline_interpretation.variable_aperture_robust_range_st[j, 1]) else ""),
+                    int(offline_interpretation.variable_aperture_pass[j, 1]),
+                    int(offline_interpretation.variable_aperture_point_count[j, 2]),
+                    (float(offline_interpretation.variable_aperture_robust_range_st[j, 2])
+                     if np.isfinite(offline_interpretation.variable_aperture_robust_range_st[j, 2]) else ""),
+                    int(offline_interpretation.variable_aperture_pass[j, 2]),
+                    int(offline_interpretation.variable_aperture_point_count[j, 3]),
+                    (float(offline_interpretation.variable_aperture_robust_range_st[j, 3])
+                     if np.isfinite(offline_interpretation.variable_aperture_robust_range_st[j, 3]) else ""),
+                    int(offline_interpretation.variable_aperture_pass[j, 3]),
+                    float(offline_interpretation.stable_run_duration_ms[j]),
+                    float(offline_interpretation.min_stable_threshold_ms),
+                    int(offline_interpretation.min_duration_pass[j]),
+                    int(offline_interpretation.stable_mask[j]),
+                    str(offline_interpretation.target_formation_reason[j]),
+                    int(offline_interpretation.region_id[j]),
+                    str(trajectory_region_kind[j]),
+                ])
+        print(f"Target formation audit: {target_out}")
+
+        # -------------------------------------------------------------
+        # Expressive lane sample export.
+        #
+        # This file is intentionally future-MIDI-friendly: the raw
+        # corrected trajectory is kept beside a light shape trajectory
+        # and a slower centerline.  Later code can decide whether a
+        # movement becomes discrete notes, pitch bend, or remains
+        # unresolved without reconstructing information discarded here.
+        # -------------------------------------------------------------
+        expressive_out = out.with_suffix(out.suffix + ".expressive.csv")
+        with expressive_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "trajectory_index", "sample", "time_s",
+                "corrected_valid",
+                "trajectory_region_id", "trajectory_region_kind",
+                "trajectory_stable",
+                "raw_pitch_st",
+                "shape_pitch_st",
+                "center_pitch_st",
+                "residual_pitch_st",
+                "raw_rms_linear",
+                "raw_rms_dbfs",
+                "shape_rms_dbfs",
+                "baseline_rms_dbfs",
+                "amplitude_residual_db",
+                "amplitude_mod_depth_peak_to_peak_db",
+                "amplitude_mod_depth_rms_db",
+                "amplitude_mod_rate_hz",
+                "amplitude_mod_periodicity",
+                "pitch_amplitude_residual_correlation",
+            ])
+            for j, sample in enumerate(sample_idx):
+                writer.writerow([
+                    int(j),
+                    int(sample),
+                    float(t[j]),
+                    int(offline_interpretation.valid[j]),
+                    int(offline_interpretation.region_id[j]),
+                    str(trajectory_region_kind[j]),
+                    int(offline_interpretation.stable_mask[j]),
+                    (float(offline_expressive.raw_pitch_st[j])
+                     if np.isfinite(offline_expressive.raw_pitch_st[j]) else ""),
+                    (float(offline_expressive.shape_pitch_st[j])
+                     if np.isfinite(offline_expressive.shape_pitch_st[j]) else ""),
+                    (float(offline_expressive.center_pitch_st[j])
+                     if np.isfinite(offline_expressive.center_pitch_st[j]) else ""),
+                    (float(offline_expressive.residual_pitch_st[j])
+                     if np.isfinite(offline_expressive.residual_pitch_st[j]) else ""),
+                    (float(offline_expressive_amplitude.raw_rms_linear[j])
+                     if np.isfinite(offline_expressive_amplitude.raw_rms_linear[j]) else ""),
+                    (float(offline_expressive_amplitude.raw_rms_dbfs[j])
+                     if np.isfinite(offline_expressive_amplitude.raw_rms_dbfs[j]) else ""),
+                    (float(offline_expressive_amplitude.shape_rms_dbfs[j])
+                     if np.isfinite(offline_expressive_amplitude.shape_rms_dbfs[j]) else ""),
+                    (float(offline_expressive_amplitude.baseline_rms_dbfs[j])
+                     if np.isfinite(offline_expressive_amplitude.baseline_rms_dbfs[j]) else ""),
+                    (float(offline_expressive_amplitude.residual_db[j])
+                     if np.isfinite(offline_expressive_amplitude.residual_db[j]) else ""),
+                    (float(offline_expressive_amplitude.local_depth_peak_to_peak_db[j])
+                     if np.isfinite(offline_expressive_amplitude.local_depth_peak_to_peak_db[j]) else ""),
+                    (float(offline_expressive_amplitude.local_depth_rms_db[j])
+                     if np.isfinite(offline_expressive_amplitude.local_depth_rms_db[j]) else ""),
+                    (float(offline_expressive_amplitude.local_modulation_rate_hz[j])
+                     if np.isfinite(offline_expressive_amplitude.local_modulation_rate_hz[j]) else ""),
+                    (float(offline_expressive_amplitude.local_modulation_periodicity[j])
+                     if np.isfinite(offline_expressive_amplitude.local_modulation_periodicity[j]) else ""),
+                    (float(offline_expressive_amplitude.local_pitch_amplitude_correlation[j])
+                     if np.isfinite(offline_expressive_amplitude.local_pitch_amplitude_correlation[j]) else ""),
+                ])
+        print(f"Expressive trajectory: {expressive_out}")
+
+        # -------------------------------------------------------------
+        # Dedicated amplitude-expression export.
+        #
+        # Raw dBFS is kept for provenance.  The residual/depth/rate fields
+        # are relative local-dynamics evidence and are the future-facing
+        # representation for amplitude vibrato/tremolo and MIDI expression.
+        # No MIDI CC or ornament label is assigned here.
+        # -------------------------------------------------------------
+        amplitude_out = out.with_suffix(out.suffix + ".amplitude_expression.csv")
+        with amplitude_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "trajectory_index", "sample", "time_s",
+                "corrected_valid", "trajectory_region_id", "trajectory_region_kind",
+                "trajectory_stable",
+                "raw_rms_linear", "raw_rms_dbfs",
+                "shape_rms_dbfs", "baseline_rms_dbfs",
+                "amplitude_residual_db",
+                "mod_depth_peak_to_peak_db", "mod_depth_rms_db",
+                "mod_rate_hz", "mod_periodicity",
+                "pitch_amplitude_residual_correlation",
+            ])
+            for j, sample in enumerate(sample_idx):
+                writer.writerow([
+                    int(j), int(sample), float(t[j]),
+                    int(offline_interpretation.valid[j]),
+                    int(offline_interpretation.region_id[j]),
+                    str(trajectory_region_kind[j]),
+                    int(offline_interpretation.stable_mask[j]),
+                    (float(offline_expressive_amplitude.raw_rms_linear[j])
+                     if np.isfinite(offline_expressive_amplitude.raw_rms_linear[j]) else ""),
+                    (float(offline_expressive_amplitude.raw_rms_dbfs[j])
+                     if np.isfinite(offline_expressive_amplitude.raw_rms_dbfs[j]) else ""),
+                    (float(offline_expressive_amplitude.shape_rms_dbfs[j])
+                     if np.isfinite(offline_expressive_amplitude.shape_rms_dbfs[j]) else ""),
+                    (float(offline_expressive_amplitude.baseline_rms_dbfs[j])
+                     if np.isfinite(offline_expressive_amplitude.baseline_rms_dbfs[j]) else ""),
+                    (float(offline_expressive_amplitude.residual_db[j])
+                     if np.isfinite(offline_expressive_amplitude.residual_db[j]) else ""),
+                    (float(offline_expressive_amplitude.local_depth_peak_to_peak_db[j])
+                     if np.isfinite(offline_expressive_amplitude.local_depth_peak_to_peak_db[j]) else ""),
+                    (float(offline_expressive_amplitude.local_depth_rms_db[j])
+                     if np.isfinite(offline_expressive_amplitude.local_depth_rms_db[j]) else ""),
+                    (float(offline_expressive_amplitude.local_modulation_rate_hz[j])
+                     if np.isfinite(offline_expressive_amplitude.local_modulation_rate_hz[j]) else ""),
+                    (float(offline_expressive_amplitude.local_modulation_periodicity[j])
+                     if np.isfinite(offline_expressive_amplitude.local_modulation_periodicity[j]) else ""),
+                    (float(offline_expressive_amplitude.local_pitch_amplitude_correlation[j])
+                     if np.isfinite(offline_expressive_amplitude.local_pitch_amplitude_correlation[j]) else ""),
+                ])
+        print(f"Amplitude expression: {amplitude_out}")
+
+        # -------------------------------------------------------------
+        # Transition geometry export.
+        #
+        # Each existing TRANSITION region is measured twice:
+        #   raw   = untouched corrected trajectory
+        #   shape = lightly smoothed trajectory
+        # This is geometry only.  No glissando/portamento/mordent/etc.
+        # label is assigned.
+        # -------------------------------------------------------------
+        transition_out = out.with_suffix(out.suffix + ".transitions.csv")
+        with transition_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "region_index",
+                "start_index", "end_index",
+                "start_time_s", "end_time_s", "duration_ms",
+                "source_target_st", "destination_target_st",
+                "has_source", "has_destination", "target_interval_st",
+                "raw_start_pitch_st", "raw_end_pitch_st",
+                "raw_median_pitch_st", "raw_span_st",
+                "raw_net_movement_st", "raw_path_length_st",
+                "raw_path_efficiency",
+                "raw_upward_fraction", "raw_downward_fraction",
+                "raw_dominant_direction", "raw_monotonic_fraction",
+                "raw_direction_reversals",
+                "raw_max_adjacent_step_st", "raw_median_adjacent_step_st",
+                "raw_overshoot_above_st", "raw_undershoot_below_st",
+                "raw_min_distance_source_st",
+                "raw_min_distance_destination_st",
+                "raw_fraction_near_source",
+                "raw_fraction_near_destination",
+                "raw_source_return_evidence",
+                "shape_start_pitch_st", "shape_end_pitch_st",
+                "shape_median_pitch_st", "shape_span_st",
+                "shape_net_movement_st", "shape_path_length_st",
+                "shape_path_efficiency",
+                "shape_upward_fraction", "shape_downward_fraction",
+                "shape_dominant_direction", "shape_monotonic_fraction",
+                "shape_direction_reversals",
+                "shape_max_adjacent_step_st", "shape_median_adjacent_step_st",
+                "shape_overshoot_above_st", "shape_undershoot_below_st",
+                "shape_min_distance_source_st",
+                "shape_min_distance_destination_st",
+                "shape_fraction_near_source",
+                "shape_fraction_near_destination",
+                "shape_source_return_evidence",
+            ])
+
+            def _finite_csv(value):
+                try:
+                    return float(value) if np.isfinite(value) else ""
+                except (TypeError, ValueError):
+                    return ""
+
+            for comparison in offline_transition_geometry.transitions:
+                raw = comparison.raw
+                shape = comparison.shape
+                writer.writerow([
+                    int(raw.region_index),
+                    int(raw.start_index), int(raw.end_index),
+                    float(raw.start_time_s), float(raw.end_time_s),
+                    float(raw.duration_ms),
+                    _finite_csv(raw.source_target_st),
+                    _finite_csv(raw.destination_target_st),
+                    int(raw.has_source), int(raw.has_destination),
+                    _finite_csv(raw.target_interval_st),
+                    _finite_csv(raw.start_pitch_st),
+                    _finite_csv(raw.end_pitch_st),
+                    _finite_csv(raw.median_pitch_st),
+                    _finite_csv(raw.span_st),
+                    _finite_csv(raw.net_movement_st),
+                    _finite_csv(raw.path_length_st),
+                    _finite_csv(raw.path_efficiency),
+                    _finite_csv(raw.upward_fraction),
+                    _finite_csv(raw.downward_fraction),
+                    int(raw.dominant_direction),
+                    _finite_csv(raw.monotonic_fraction),
+                    int(raw.direction_reversals),
+                    _finite_csv(raw.max_adjacent_step_st),
+                    _finite_csv(raw.median_adjacent_step_st),
+                    _finite_csv(raw.overshoot_above_st),
+                    _finite_csv(raw.undershoot_below_st),
+                    _finite_csv(raw.min_distance_source_st),
+                    _finite_csv(raw.min_distance_destination_st),
+                    _finite_csv(raw.fraction_near_source),
+                    _finite_csv(raw.fraction_near_destination),
+                    _finite_csv(raw.return_evidence),
+                    _finite_csv(shape.start_pitch_st),
+                    _finite_csv(shape.end_pitch_st),
+                    _finite_csv(shape.median_pitch_st),
+                    _finite_csv(shape.span_st),
+                    _finite_csv(shape.net_movement_st),
+                    _finite_csv(shape.path_length_st),
+                    _finite_csv(shape.path_efficiency),
+                    _finite_csv(shape.upward_fraction),
+                    _finite_csv(shape.downward_fraction),
+                    int(shape.dominant_direction),
+                    _finite_csv(shape.monotonic_fraction),
+                    int(shape.direction_reversals),
+                    _finite_csv(shape.max_adjacent_step_st),
+                    _finite_csv(shape.median_adjacent_step_st),
+                    _finite_csv(shape.overshoot_above_st),
+                    _finite_csv(shape.undershoot_below_st),
+                    _finite_csv(shape.min_distance_source_st),
+                    _finite_csv(shape.min_distance_destination_st),
+                    _finite_csv(shape.fraction_near_source),
+                    _finite_csv(shape.fraction_near_destination),
+                    _finite_csv(shape.return_evidence),
+                ])
+        print(f"Transition geometry: {transition_out}")
+
+        # ---------------------------------------------------------
+        # Gesture-structure diagnostic exports.
+        # ---------------------------------------------------------
+        # These files define future interpretation units without
+        # assigning musical labels.  Pitch and amplitude expression are
+        # summarized but never discarded; the complete per-sample lanes
+        # remain available in .expressive.csv / .amplitude_expression.csv.
+
+        def _csv_atom(value):
+            if isinstance(value, Enum):
+                return value.name
+            if isinstance(value, (tuple, list)):
+                return ";".join(str(_csv_atom(v)) for v in value)
+            if isinstance(value, (np.bool_, bool)):
+                return int(value)
+            if isinstance(value, (np.integer, int)):
+                return int(value)
+            if isinstance(value, (np.floating, float)):
+                return float(value) if np.isfinite(value) else ""
+            return value
+
+        def _amp_summary(start, end):
+            start = max(0, int(start))
+            end = min(len(sample_idx), int(end))
+            if end <= start:
+                return {
+                    "amp_shape_delta_db": "",
+                    "amp_residual_rms_db": "",
+                    "amp_residual_peak_to_peak_db": "",
+                    "amp_modulation_rate_median_hz": "",
+                    "amp_modulation_periodicity_median": "",
+                    "pitch_amplitude_correlation_median": "",
+                }
+
+            shape = np.asarray(offline_expressive_amplitude.shape_rms_dbfs[start:end], dtype=np.float64)
+            residual = np.asarray(offline_expressive_amplitude.residual_db[start:end], dtype=np.float64)
+            rate = np.asarray(offline_expressive_amplitude.local_modulation_rate_hz[start:end], dtype=np.float64)
+            periodicity = np.asarray(offline_expressive_amplitude.local_modulation_periodicity[start:end], dtype=np.float64)
+            corr = np.asarray(offline_expressive_amplitude.local_pitch_amplitude_correlation[start:end], dtype=np.float64)
+
+            def finite_values(a):
+                return a[np.isfinite(a)]
+
+            shape_f = finite_values(shape)
+            residual_f = finite_values(residual)
+            rate_f = finite_values(rate)
+            periodicity_f = finite_values(periodicity)
+            corr_f = finite_values(corr)
+
+            return {
+                "amp_shape_delta_db": (
+                    float(shape_f[-1] - shape_f[0]) if len(shape_f) >= 2 else ""
+                ),
+                "amp_residual_rms_db": (
+                    float(np.sqrt(np.mean(residual_f ** 2))) if len(residual_f) else ""
+                ),
+                "amp_residual_peak_to_peak_db": (
+                    float(np.max(residual_f) - np.min(residual_f)) if len(residual_f) else ""
+                ),
+                "amp_modulation_rate_median_hz": (
+                    float(np.median(rate_f)) if len(rate_f) else ""
+                ),
+                "amp_modulation_periodicity_median": (
+                    float(np.median(periodicity_f)) if len(periodicity_f) else ""
+                ),
+                "pitch_amplitude_correlation_median": (
+                    float(np.median(corr_f)) if len(corr_f) else ""
+                ),
+            }
+
+        gesture_features_out = out.with_suffix(out.suffix + ".gesture_features.csv")
+        gesture_feature_names = [f.name for f in fields(type(offline_gesture_features.gestures[0]))] if offline_gesture_features.gestures else []
+        amp_columns = [
+            "amp_shape_delta_db",
+            "amp_residual_rms_db",
+            "amp_residual_peak_to_peak_db",
+            "amp_modulation_rate_median_hz",
+            "amp_modulation_periodicity_median",
+            "pitch_amplitude_correlation_median",
+        ]
+        with gesture_features_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(gesture_feature_names + amp_columns)
+            for feature in offline_gesture_features.gestures:
+                amp = _amp_summary(feature.start_index, feature.end_index)
+                writer.writerow(
+                    [_csv_atom(getattr(feature, name)) for name in gesture_feature_names]
+                    + [amp[name] for name in amp_columns]
+                )
+        print(f"Gesture features: {gesture_features_out}")
+
+        gesture_objects_out = out.with_suffix(out.suffix + ".gesture_objects.csv")
+        object_skip = {"links"}
+        object_names = []
+        if offline_gesture_objects.objects:
+            object_names = [
+                f.name for f in fields(type(offline_gesture_objects.objects[0]))
+                if f.name not in object_skip
+            ]
+        with gesture_objects_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(object_names + amp_columns)
+            for obj in offline_gesture_objects.objects:
+                amp = _amp_summary(obj.start_index, obj.end_index)
+                writer.writerow(
+                    [_csv_atom(getattr(obj, name)) for name in object_names]
+                    + [amp[name] for name in amp_columns]
+                )
+        print(f"Gesture objects: {gesture_objects_out}")
+
+        gesture_links_out = out.with_suffix(out.suffix + ".gesture_links.csv")
+        link_header = [
+            "object_index", "link_index",
+            "left_transition_region_index", "stable_region_index", "right_transition_region_index",
+            "decision",
+            "connector_family_count", "boundary_family_count",
+            "excursion_connector", "direct_through_connector", "transition_similarity_connector",
+            "duration_discontinuity", "path_discontinuity", "center_shape_discontinuity",
+            "residual_discontinuity", "topology_discontinuity",
+            "stable_target_st", "stable_duration_ms",
+            "previous_target_st", "next_target_st",
+            "entry_interval_st", "exit_interval_st", "outer_interval_st",
+            "relation", "same_direction", "direction_reversal",
+            "returns_toward_previous", "returns_toward_next",
+            "local_target_path_st", "excess_over_outer_st", "outer_to_path_ratio",
+            "duration_similarity", "shape_path_similarity", "center_path_similarity",
+            "residual_rms_similarity",
+        ]
+        with gesture_links_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(link_header)
+            for obj_result in offline_gesture_structure.objects:
+                for decision in obj_result.link_decisions:
+                    ev = decision.evidence
+                    link = decision.v2
+                    writer.writerow([
+                        decision.object_index, decision.link_index,
+                        decision.left_transition_region_index, decision.stable_region_index,
+                        decision.right_transition_region_index,
+                        decision.decision.name,
+                        ev.connector_family_count, ev.boundary_family_count,
+                        int(ev.excursion_connector), int(ev.direct_through_connector),
+                        int(ev.transition_similarity_connector),
+                        int(ev.duration_discontinuity), int(ev.path_discontinuity),
+                        int(ev.center_shape_discontinuity), int(ev.residual_discontinuity),
+                        int(ev.topology_discontinuity),
+                        _csv_atom(link.stable_target_st), _csv_atom(link.stable_duration_ms),
+                        _csv_atom(link.previous_target_st), _csv_atom(link.next_target_st),
+                        _csv_atom(link.entry_interval_st), _csv_atom(link.exit_interval_st),
+                        _csv_atom(link.outer_interval_st), link.relation.name,
+                        int(link.same_direction), int(link.direction_reversal),
+                        int(link.returns_toward_previous), int(link.returns_toward_next),
+                        _csv_atom(link.local_target_path_st), _csv_atom(link.excess_over_outer_st),
+                        _csv_atom(link.outer_to_path_ratio), _csv_atom(link.duration_similarity),
+                        _csv_atom(link.shape_path_similarity), _csv_atom(link.center_path_similarity),
+                        _csv_atom(link.residual_rms_similarity),
+                    ])
+        print(f"Gesture links: {gesture_links_out}")
+
+        gesture_segments_out = out.with_suffix(out.suffix + ".gesture_segments.csv")
+        region_map = {i: region for i, region in enumerate(offline_interpretation.regions)}
+        segment_header = [
+            "object_index", "segment_index", "transition_region_indices", "stable_region_indices",
+            "internal_link_indices", "unresolved_link_indices", "n_transitions", "n_internal_links",
+            "start_index", "end_index", "start_time_s", "end_time_s", "duration_ms",
+            "pitch_shape_span_st", "pitch_center_span_st", "pitch_residual_rms_st",
+        ] + amp_columns
+        with gesture_segments_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(segment_header)
+            for obj_result in offline_gesture_structure.objects:
+                for segment in obj_result.segments:
+                    region_indices = sorted(set(segment.transition_region_indices + segment.stable_region_indices))
+                    if region_indices:
+                        start_index = min(region_map[i].start_index for i in region_indices)
+                        end_index = max(region_map[i].end_index for i in region_indices)
+                    else:
+                        start_index = end_index = 0
+                    shape = np.asarray(offline_expressive.shape_pitch_st[start_index:end_index], dtype=np.float64)
+                    center = np.asarray(offline_expressive.center_pitch_st[start_index:end_index], dtype=np.float64)
+                    residual = np.asarray(offline_expressive.residual_pitch_st[start_index:end_index], dtype=np.float64)
+                    shape = shape[np.isfinite(shape)]
+                    center = center[np.isfinite(center)]
+                    residual = residual[np.isfinite(residual)]
+                    shape_span = float(np.max(shape) - np.min(shape)) if len(shape) else ""
+                    center_span = float(np.max(center) - np.min(center)) if len(center) else ""
+                    residual_rms = float(np.sqrt(np.mean(residual ** 2))) if len(residual) else ""
+                    amp = _amp_summary(start_index, end_index)
+                    writer.writerow([
+                        segment.object_index, segment.segment_index,
+                        _csv_atom(segment.transition_region_indices),
+                        _csv_atom(segment.stable_region_indices),
+                        _csv_atom(segment.internal_link_indices),
+                        _csv_atom(segment.unresolved_link_indices),
+                        segment.n_transitions, segment.n_internal_links,
+                        start_index, end_index,
+                        float(start_index / analysis_hz), float(end_index / analysis_hz),
+                        float((end_index - start_index) * 1000.0 / analysis_hz),
+                        shape_span, center_span, residual_rms,
+                    ] + [amp[name] for name in amp_columns])
+        print(f"Gesture segments: {gesture_segments_out}")
+
+        gesture_candidates_out = out.with_suffix(out.suffix + ".gesture_candidates.csv")
+        candidate_names = [f.name for f in fields(type(offline_interpretation_candidates[0]))] if offline_interpretation_candidates else []
+        with gesture_candidates_out.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(candidate_names)
+            for candidate in offline_interpretation_candidates:
+                writer.writerow([_csv_atom(getattr(candidate, name)) for name in candidate_names])
+        print(f"Gesture interpretation candidates: {gesture_candidates_out}")
+
+        print(
+            "Gesture structure: "
+            f"objects={offline_gesture_structure.total_objects}, "
+            f"links={offline_gesture_structure.total_links}, "
+            f"join={offline_gesture_structure.join_links}, "
+            f"split={offline_gesture_structure.split_links}, "
+            f"unresolved={offline_gesture_structure.unresolved_links}, "
+            f"segments={offline_gesture_structure.total_segments}"
+        )
+    else:
+        # Keep MATLAB-mode export exactly as before.
+        table = np.column_stack(
+            [
+                sample_idx,
+                t,
+                result.f0_hz[
+                    sample_idx
+                ],
+                result.amplitude[
+                    sample_idx
+                ],
+                result.phase[
+                    sample_idx
+                ],
+                np.real(
+                    result.fundamental[
+                        sample_idx
+                    ]
+                ),
+                np.imag(
+                    result.fundamental[
+                        sample_idx
+                    ]
+                ),
+            ]
+        )
+
+        np.savetxt(
+            out,
+            table,
+            delimiter=",",
+            header=(
+                "sample,time_s,f0_hz,"
+                "amplitude,phase,"
+                "fundamental_real,"
+                "fundamental_imag"
+            ),
+            comments="",
+        )
+
+    print(f"Input:       {args.wav}")
+    print(f"Sample rate: {sr} Hz")
+    print(f"Mode:        {cfg.mode}")
+    print(f"Block size:  {cfg.block_size} samples")
+    print(f"Frame time:  {1000.0 * cfg.block_size / sr:.3f} ms")
+    print(f"c:           {cfg.c}")
+    print(f"wait:        {cfg.num_buf_to_wait}")
+    print(f"npeaks:      {cfg.npeaks}")
+    print(f"harmonic-change threshold: {cfg.nsemitones} semitones")
+    if cfg.mode == "offline":
+        print(f"Vocal floor: {cfg.vocal_floor_hz:.3f} Hz")
+        if result.silence_calibration is not None:
+            cal = result.silence_calibration
+            print(
+                f"Silence floor: {cal.threshold:.3f} "
+                f"(mode={cal.mode}, method={cal.method}, "
+                f"trustworthy_noise_floor={cal.trustworthy_noise_floor})"
+            )
+        first_valid_count = int(
+            np.sum(
+                offline_validity.first_pass_valid
+            )
+        )
+
+        corrected_valid_count = int(
+            np.sum(
+                offline_validity.valid
+            )
+        )
+
+        newly_valid_count = int(
+            np.sum(
+                offline_validity.valid
+                & ~offline_validity.first_pass_valid
+            )
+        )
+
+        print(
+            f"Valid F0:    "
+            f"{first_valid_count} -> "
+            f"{corrected_valid_count}"
+        )
+
+        print(
+            f"Rescued:     "
+            f"{newly_valid_count} rows"
+        )
+    # Export ECKF reset/onset landmarks for downstream musical-articulation
+    # interpretation. These are tracker reset landmarks, not final MIDI Note Ons.
+    onsets_path = Path(str(out) + ".onsets.csv")
+    with onsets_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["onset_index", "sample", "time_s"])
+        for oi, (sample, seconds) in enumerate(zip(result.onset_samples, result.onset_seconds)):
+            writer.writerow([oi, int(sample), float(seconds)])
+
+    print(f"Onsets:      {len(result.onset_samples)}")
+    print(f"Onset landmarks: {onsets_path}")
+    print(f"CSV:         {out}")
+
+    if cfg.mode == "offline" and offline_pitch_candidates is not None:
+        pitch_candidates_path = Path(str(out) + ".pitch_candidates.csv")
+        with pitch_candidates_path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "frame_index", "frame_start_sample", "time_s",
+                "frame_real_sample_count", "acoustic_state_name", "source",
+                "candidate_hz", "nearest_midi", "cents_from_nearest_midi",
+                "measured_period_hz", "measured_period_lag",
+                "measured_period_acf", "measured_period_cmndf",
+                "spectral_harmonic_count", "spectral_harmonics",
+                "measured_component_amplitude", "transition_penalty",
+                "selected_by_initializer", "initializer_selected_hz",
+                "note_group_midi",
+            ])
+            for r in offline_pitch_candidates:
+                writer.writerow([
+                    r.frame_index, r.frame_start_sample, r.time_s,
+                    r.frame_real_sample_count, r.acoustic_state_name, r.source,
+                    r.candidate_hz, r.nearest_midi, r.cents_from_nearest_midi,
+                    r.measured_period_hz, r.measured_period_lag,
+                    r.measured_period_acf, r.measured_period_cmndf,
+                    r.spectral_harmonic_count,
+                    ";".join(str(x) for x in r.spectral_harmonics),
+                    r.measured_component_amplitude,
+                    "" if r.transition_penalty is None else r.transition_penalty,
+                    int(r.selected_by_initializer),
+                    "" if r.initializer_selected_hz is None else r.initializer_selected_hz,
+                    r.note_group_midi,
+                ])
+        print(f"Pitch candidate field: {pitch_candidates_path}")
+
+
+    if cfg.mode == "offline" and offline_range_reference_result is not None:
+        range_refs_path = Path(str(out) + ".range_references.csv")
+        with range_refs_path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "frame_index","frame_start_sample","time_s","observational_hz",
+                "selected_measured_hz","selected_acf","selected_component_amplitude",
+                "local_candidate_count","competing_candidate_count","acoustic_measurement",
+                "relative_energy","energy_slope_db","low_energy_flag","decaying_flag",
+                "prior_reference_hz","penalty_elapsed_ms","transition_penalty",
+                "interval_energy_joint_challenge","evidence_status",
+                "diagnostic_settled","usable_as_next_reference",
+            ])
+            for rr in offline_range_reference_result.rows:
+                writer.writerow([
+                    rr.frame_index,rr.frame_start_sample,rr.time_s,
+                    "" if rr.observational_hz is None else rr.observational_hz,
+                    "" if rr.selected_measured_hz is None else rr.selected_measured_hz,
+                    "" if rr.selected_acf is None else rr.selected_acf,
+                    "" if rr.selected_component_amplitude is None else rr.selected_component_amplitude,
+                    rr.local_candidate_count,rr.competing_candidate_count,rr.acoustic_measurement,
+                    "" if rr.relative_energy is None else rr.relative_energy,
+                    "" if rr.energy_slope_db is None else rr.energy_slope_db,
+                    int(rr.low_energy_flag),int(rr.decaying_flag),
+                    "" if rr.prior_reference_hz is None else rr.prior_reference_hz,
+                    "" if rr.penalty_elapsed_ms is None else rr.penalty_elapsed_ms,
+                    "" if rr.transition_penalty is None else rr.transition_penalty,
+                    int(rr.interval_energy_joint_challenge),rr.evidence_status,
+                    int(rr.diagnostic_settled),int(rr.usable_as_next_reference),
+                ])
+        print(f"Historical range references: {range_refs_path}")
+
+    if cfg.mode == "offline" and preliminary_range_calibration is not None:
+        pre_range_path = Path(str(out) + ".pre_rescue_range_calibration.csv")
+        r = preliminary_range_calibration
+        with pre_range_path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "available","anchor_count","source","low_hz","high_hz",
+                "low_anchor_midi","high_anchor_midi",
+                "plateau_low_midi","plateau_high_midi",
+                "zero_low_midi","zero_high_midi",
+                "lo_quantile","hi_quantile",
+                "plateau_extension_st","shoulder_st",
+            ])
+            writer.writerow([
+                int(r.available), r.anchor_count, r.source,
+                "" if r.low_hz is None else r.low_hz,
+                "" if r.high_hz is None else r.high_hz,
+                "" if r.low_anchor_midi is None else r.low_anchor_midi,
+                "" if r.high_anchor_midi is None else r.high_anchor_midi,
+                "" if r.plateau_low_midi is None else r.plateau_low_midi,
+                "" if r.plateau_high_midi is None else r.plateau_high_midi,
+                "" if r.zero_low_midi is None else r.zero_low_midi,
+                "" if r.zero_high_midi is None else r.zero_high_midi,
+                r.lo_quantile, r.hi_quantile,
+                r.plateau_extension_st, r.shoulder_st,
+            ])
+        print(f"Pre-rescue range calibration: {pre_range_path}")
+
+    if cfg.mode == "offline" and offline_range_calibration is not None:
+        range_path = Path(str(out) + ".range_calibration.csv")
+        r = offline_range_calibration
+        with range_path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "available","anchor_count","source","low_hz","high_hz",
+                "low_anchor_midi","high_anchor_midi",
+                "plateau_low_midi","plateau_high_midi",
+                "zero_low_midi","zero_high_midi",
+                "lo_quantile","hi_quantile","plateau_extension_st","shoulder_st",
+                "w_range",
+            ])
+            writer.writerow([
+                int(r.available),r.anchor_count,r.source,
+                "" if r.low_hz is None else r.low_hz,
+                "" if r.high_hz is None else r.high_hz,
+                "" if r.low_anchor_midi is None else r.low_anchor_midi,
+                "" if r.high_anchor_midi is None else r.high_anchor_midi,
+                "" if r.plateau_low_midi is None else r.plateau_low_midi,
+                "" if r.plateau_high_midi is None else r.plateau_high_midi,
+                "" if r.zero_low_midi is None else r.zero_low_midi,
+                "" if r.zero_high_midi is None else r.zero_high_midi,
+                r.lo_quantile,r.hi_quantile,r.plateau_extension_st,r.shoulder_st,0.5,
+            ])
+        print(f"V22 range calibration: {range_path}")
+
+    if cfg.mode == "offline" and offline_juror_evidence is not None:
+        juror_path = Path(str(out) + ".juror_evidence.csv")
+        with juror_path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "frame_index","time_s","group_id","note_group_midi","within_49c","cents_from_note","representative_hz",
+                "representative_source","candidate_count_in_group",
+                "acf_median","cmndf_median","harmonic_count_median",
+                "component_amplitude_median","range_confidence",
+                "interval_previous_component","interval_following_component",
+                "interval_previous_reference_time_s","interval_previous_reference_hz",
+                "interval_following_reference_time_s","interval_following_reference_hz",
+                "interval_previous_blocked_by_interruption","interval_following_blocked_by_interruption",
+                "temporal_prev_same_note","temporal_next_same_note",
+                "temporal_persistence_count","selected_by_initializer",
+            ])
+            for r in offline_juror_evidence:
+                writer.writerow([
+                    r.frame_index,r.time_s,r.group_id,r.note_group_midi,int(r.within_49c),r.cents_from_note,r.representative_hz,
+                    r.representative_source,r.candidate_count_in_group,
+                    "" if r.acf_median is None else r.acf_median,
+                    "" if r.cmndf_median is None else r.cmndf_median,
+                    "" if r.harmonic_count_median is None else r.harmonic_count_median,
+                    "" if r.component_amplitude_median is None else r.component_amplitude_median,
+                    "" if r.range_confidence is None else r.range_confidence,
+                    "" if r.interval_previous_component is None else r.interval_previous_component,
+                    "" if r.interval_following_component is None else r.interval_following_component,
+                    "" if r.interval_previous_reference_time_s is None else r.interval_previous_reference_time_s,
+                    "" if r.interval_previous_reference_hz is None else r.interval_previous_reference_hz,
+                    "" if r.interval_following_reference_time_s is None else r.interval_following_reference_time_s,
+                    "" if r.interval_following_reference_hz is None else r.interval_following_reference_hz,
+                    int(r.interval_previous_blocked_by_interruption),int(r.interval_following_blocked_by_interruption),
+                    int(r.temporal_prev_same_note),int(r.temporal_next_same_note),
+                    r.temporal_persistence_count,int(r.selected_by_initializer),
+                ])
+        print(f"Juror evidence: {juror_path}")
+
+    if cfg.mode == "offline" and offline_juror_pairs is not None:
+        pair_path = Path(str(out) + ".juror_pairs.csv")
+        with pair_path.open("w", newline="", encoding="utf-8") as f:
+            writer=csv.writer(f)
+            writer.writerow(["frame_index","time_s","a_group_id","a_midi","a_hz","b_group_id","b_midi","b_hz","a_range_admitted","b_range_admitted","a_admissible","b_admissible","a_score","b_score","a_spectral","b_spectral","a_temporal","b_temporal","temporal_pattern","temporal_paired_measurements","temporal_low_supported_shift_count","temporal_high_supported_shift_count","temporal_low_acf_median","temporal_high_acf_median","a_interval","b_interval","a_range_component","b_range_component","winner_group_id","winner_midi","winner_hz","outcome","diagnostic"])
+            for r in offline_juror_pairs:
+                writer.writerow([r.frame_index,r.time_s,r.a_group_id,r.a_midi,r.a_hz,r.b_group_id,r.b_midi,r.b_hz,int(r.a_range_admitted),int(r.b_range_admitted),int(r.a_admissible),int(r.b_admissible),"" if r.a_score is None else r.a_score,"" if r.b_score is None else r.b_score,"" if r.a_spectral is None else r.a_spectral,"" if r.b_spectral is None else r.b_spectral,"" if r.a_temporal is None else r.a_temporal,"" if r.b_temporal is None else r.b_temporal,r.temporal_pattern,r.temporal_paired_measurements,r.temporal_low_supported_shift_count,r.temporal_high_supported_shift_count,"" if r.temporal_low_acf_median is None else r.temporal_low_acf_median,"" if r.temporal_high_acf_median is None else r.temporal_high_acf_median,"" if r.a_interval is None else r.a_interval,"" if r.b_interval is None else r.b_interval,"" if r.a_range_component is None else r.a_range_component,"" if r.b_range_component is None else r.b_range_component,"" if r.winner_group_id is None else r.winner_group_id,"" if r.winner_midi is None else r.winner_midi,"" if r.winner_hz is None else r.winner_hz,r.outcome,r.diagnostic])
+        print(f"Juror pair verdicts: {pair_path}")
+
+    if cfg.mode == "offline" and offline_juror_bench is not None:
+        bench_path = Path(str(out) + ".juror_bench.csv")
+        with bench_path.open("w", newline="", encoding="utf-8") as f:
+            writer=csv.writer(f)
+            writer.writerow(["frame_index","time_s","candidate_count","status","winner_group_id","winner_midi","winner_hz","decisive_edges","undecided_pairs","abstention_category"])
+            for r in offline_juror_bench:
+                writer.writerow([r.frame_index,r.time_s,r.candidate_count,r.status,"" if r.winner_group_id is None else r.winner_group_id,"" if r.winner_midi is None else r.winner_midi,"" if r.winner_hz is None else r.winner_hz,r.decisive_edges,r.undecided_pairs,r.abstention_category])
+        print(f"Juror bench: {bench_path}")
+
+    if cfg.mode == "offline" and offline_direct_edge_measurements is not None:
+        dep = Path(str(out) + ".direct_edge_measurements.csv")
+        with dep.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f)
+            w.writerow(["frame_index","time_s","a_group_id","a_midi","a_hz","b_group_id","b_midi","b_hz","a_testable_views","b_testable_views","a_supported_views","b_supported_views","a_acf_median","b_acf_median","temporal_pattern","original_outcome","direct_outcome","direct_winner_group_id","direct_winner_midi","direct_winner_hz","used_to_complete_edge","diagnostic"])
+            for r in offline_direct_edge_measurements:
+                w.writerow([r.frame_index,r.time_s,r.a_group_id,r.a_midi,r.a_hz,r.b_group_id,r.b_midi,r.b_hz,r.a_testable_views,r.b_testable_views,r.a_supported_views,r.b_supported_views,"" if r.a_acf_median is None else r.a_acf_median,"" if r.b_acf_median is None else r.b_acf_median,r.temporal_pattern,r.original_outcome,r.direct_outcome,r.direct_winner_group_id or "","" if r.direct_winner_midi is None else r.direct_winner_midi,"" if r.direct_winner_hz is None else r.direct_winner_hz,int(r.used_to_complete_edge),r.diagnostic])
+        print(f"Direct missing-edge measurements: {dep}")
+
+    if cfg.mode == "offline" and offline_detective_candidates is not None:
+        dcp = Path(str(out) + ".harmonic_detective_candidates.csv")
+        with dcp.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f); w.writerow(["frame_index","time_s","group_id","midi","hz","valid_windows","harmonic_score","harmonic_support","harmonic_strength","window_details_json","failure_reasons"])
+            for r in offline_detective_candidates:
+                w.writerow([r.frame_index,r.time_s,r.group_id,r.midi,r.hz,r.valid_windows,"" if r.harmonic_score is None else r.harmonic_score,"" if r.harmonic_support is None else r.harmonic_support,"" if r.harmonic_strength is None else r.harmonic_strength,r.window_details_json,r.failure_reasons])
+        dvp = Path(str(out) + ".harmonic_detective.csv")
+        with dvp.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f); w.writerow(["frame_index","time_s","jury_status","detective_called","eligible_representatives","best_group_id","best_midi","best_hz","best_score","best_support","runner_group_id","runner_hz","runner_score","harmonic_margin","detective_winner_group_id","detective_winner_midi","detective_winner_hz","reason"])
+            for r in offline_detective_verdicts:
+                w.writerow([r.frame_index,r.time_s,r.jury_status,int(r.detective_called),r.eligible_representatives,r.best_group_id or "","" if r.best_midi is None else r.best_midi,"" if r.best_hz is None else r.best_hz,"" if r.best_score is None else r.best_score,"" if r.best_support is None else r.best_support,r.runner_group_id or "","" if r.runner_hz is None else r.runner_hz,"" if r.runner_score is None else r.runner_score,"" if r.harmonic_margin is None else r.harmonic_margin,r.detective_winner_group_id or "","" if r.detective_winner_midi is None else r.detective_winner_midi,"" if r.detective_winner_hz is None else r.detective_winner_hz,r.reason])
+        if offline_structural_collaboration is not None:
+            scp = Path(str(out) + ".structural_collaboration.csv")
+            with scp.open("w", newline="", encoding="utf-8") as f:
+                w=csv.writer(f)
+                w.writerow(["frame_index","time_s","applied","frame_start_s","frame_end_s","trajectory_region_index","trajectory_region_kind","trajectory_overlap_ms","gesture_object_index","gesture_object_kind","gesture_overlap_ms","trusted_point_count","trusted_run_start_s","trusted_run_end_s","structural_reference_st","structural_reference_hz","structural_reference_midi","action","reason"])
+                for r in offline_structural_collaboration:
+                    w.writerow([r.frame_index,r.time_s,int(r.applied),r.frame_start_s,r.frame_end_s,"" if r.trajectory_region_index is None else r.trajectory_region_index,r.trajectory_region_kind,r.trajectory_overlap_ms,"" if r.gesture_object_index is None else r.gesture_object_index,r.gesture_object_kind,r.gesture_overlap_ms,r.trusted_point_count,"" if r.trusted_run_start_s is None else r.trusted_run_start_s,"" if r.trusted_run_end_s is None else r.trusted_run_end_s,"" if r.structural_reference_st is None else r.structural_reference_st,"" if r.structural_reference_hz is None else r.structural_reference_hz,"" if r.structural_reference_midi is None else r.structural_reference_midi,r.action,r.reason])
+            print(f"Structural collaboration: {scp}")
+
+        r17p = Path(str(out) + ".register_readjudication_v18.csv")
+        with r17p.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f)
+            w.writerow([
+                "region_id","peer_region_id","burst_start_s","burst_end_s","frame_index",
+                "original_hz","reviewed_hz","reviewed_midi","source",
+                "trigger_penalty_max","applied_sample_count",
+            ])
+            for r in offline_register_readjudication:
+                w.writerow([
+                    r.region_id,"" if r.peer_region_id is None else r.peer_region_id,r.burst_start_s,r.burst_end_s,r.frame_index,
+                    "" if r.original_hz is None else r.original_hz,
+                    "" if r.reviewed_hz is None else r.reviewed_hz,
+                    "" if r.reviewed_midi is None else r.reviewed_midi,
+                    r.source,r.trigger_penalty_max,r.applied_sample_count,
+                ])
+        print(f"V18 register re-adjudication: {r17p}")
+
+        raf = Path(str(out) + ".reacquisition_feedback.csv")
+        with raf.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f)
+            w.writerow(["frame_index","time_s","original_hz","original_reason","jury_hz","reviewed_hz","reviewed_midi","review_source","detective_best_score","detective_runner_score","detective_margin","applied_sample_count"])
+            for r in offline_reacquisition_feedback:
+                w.writerow([r.frame_index,r.time_s,"" if r.original_hz is None else r.original_hz,r.original_reason,"" if r.jury_hz is None else r.jury_hz,"" if r.reviewed_hz is None else r.reviewed_hz,"" if r.reviewed_midi is None else r.reviewed_midi,r.review_source,"" if r.detective_best_score is None else r.detective_best_score,"" if r.detective_runner_score is None else r.detective_runner_score,"" if r.detective_margin is None else r.detective_margin,r.applied_sample_count])
+        print(f"Reacquisition feedback: {raf}")
+
+        iap = Path(str(out) + ".interval_authority.csv")
+        with iap.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f)
+            w.writerow(["frame_index","time_s","preferred_group_id","preferred_midi","preferred_hz","rejected_group_id","rejected_midi","rejected_hz","preferred_component","rejected_component","authoritative","context_status","reference_time_s","reference_hz","source"])
+            for fi in sorted(offline_interval_authority or {}):
+                for r in (offline_interval_authority or {})[fi]:
+                    w.writerow([r.frame_index,r.time_s,r.preferred_group_id,r.preferred_midi,r.preferred_hz,r.rejected_group_id,r.rejected_midi,r.rejected_hz,r.preferred_component,r.rejected_component,int(bool(r.authoritative)),r.context_status,"" if r.reference_time_s is None else r.reference_time_s,"" if r.reference_hz is None else r.reference_hz,r.source])
+        print(f"Interval authority: {iap}")
+
+        fap = Path(str(out) + ".adjudication_final.csv")
+        with fap.open("w", newline="", encoding="utf-8") as f:
+            w=csv.writer(f); w.writerow(["frame_index","time_s","provenance","status","winner_group_id","winner_midi","winner_hz","original_jury_status","original_abstention_category"])
+            for r in offline_final_adjudication:
+                w.writerow([r.frame_index,r.time_s,r.provenance,r.status,r.winner_group_id or "","" if r.winner_midi is None else r.winner_midi,"" if r.winner_hz is None else r.winner_hz,r.original_jury_status,r.original_abstention_category])
+        print(f"Harmonic Detective: {dvp}")
+        print(f"Final adjudication: {fap}")
+
+    print(
+        f"Interpretation rate: requested {analysis_grid.requested_hz:g} Hz; "
+        f"actual {analysis_grid.actual_hz:.6f} Hz "
+        f"(dt={analysis_grid.dt_s * 1000.0:.3f} ms, "
+        f"every {analysis_grid.hop_samples} audio samples)"
+    )
+    return out
+
+if __name__ == "__main__":
+    main()
