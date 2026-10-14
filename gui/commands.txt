@@ -11,13 +11,18 @@ sudo docker compose -f compose.dev.yaml run --rm frontend npm install
 sudo docker compose -f compose.dev.yaml up
 #########
 ###For installing this project's dev tree as such
-mkdir songwriter_s_toolkit
+mkdir -p songwriter_s_toolkit # only if songwriter_s_toolkit does not exist already 
 cd songwriter_s_toolkit
 git clone -b main https://github.com/mihaimiculescu/songwriter_s_toolkit main
-git clone -b dev https://github.com/mihaimiculescu/songwriter_s_toolkit dev 
+git clone -b dev https://github.com/mihaimiculescu/songwriter_s_toolkit dev
+mkdir -p Projects
 cd dev/gui
-printf 'LOCAL_UID=%s\nLOCAL_GID=%s\n' "$(id -u)" "$(id -g)" > .env # only if the .env file does not exist
+TOOLKIT_ROOT="$(cd ../.. && pwd)"
+printf 'LOCAL_UID=%s\nLOCAL_GID=%s\nSONGWRITER_TOOLKIT_ROOT=%s\n' \
+  "$(id -u)" \
+  "$(id -g)" \
+  "$TOOLKIT_ROOT" \
+  > .env
 sudo docker compose -f compose.dev.yaml build
 sudo docker compose -f compose.dev.yaml run --rm frontend npm install
 sudo docker compose -f compose.dev.yaml up
-

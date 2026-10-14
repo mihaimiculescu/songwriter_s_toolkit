@@ -38,7 +38,6 @@
 	let attributeFocused = $state(false);
 	let rightFocused = $state(false);
 
-	let nextId = 1;
 
 	let pendingUnknowns = $state<PendingUnknown[]>([]);
 	let currentUnknown = $state<PendingUnknown | null>(null);
@@ -258,10 +257,13 @@
 			return;
 		}
 
+		const nextId =
+			entries.reduce((max, entry) => Math.max(max, entry.id), 0) + 1;
+
 		entries = [
 			...entries,
 			{
-				id: nextId++,
+				id: nextId,
 				attribute,
 				value
 			}

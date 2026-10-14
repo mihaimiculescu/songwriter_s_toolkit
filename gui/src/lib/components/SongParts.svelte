@@ -22,7 +22,6 @@
 
 	let inputElement = $state<HTMLInputElement | null>(null);
 
-	let nextId = 1;
 
 	let draggedId = $state<number | null>(null);
 	let pendingUnknown = $state<string | null>(null);
@@ -135,10 +134,13 @@
 			return;
 		}
 
+		const nextId =
+			entries.reduce((max, entry) => Math.max(max, entry.id), 0) + 1;
+
 		entries = [
 			...entries,
 			{
-				id: nextId++,
+				id: nextId,
 				value: canonical
 			}
 		];
@@ -340,10 +342,13 @@
 				canonicalizePart(value);
 
 			if (canonical) {
+				const nextId =
+					entries.reduce((max, entry) => Math.max(max, entry.id), 0) + 1;
+
 				entries = [
 					...entries,
 					{
-						id: nextId++,
+						id: nextId,
 						value: canonical
 					}
 				];

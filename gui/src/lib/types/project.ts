@@ -3,12 +3,16 @@ export type SongPartEntry = {
 	value: string;
 };
 
+export type PromptPairValue = {
+	attribute: string;
+	value: string;
+};
+
 /*
- * This is the musical/project description.
+ * output.json is the downstream musical/project description.
  *
- * output.json represents WHAT the project contains.
- * It is deliberately platform-agnostic and does not
- * contain ACE-Step-specific generation settings.
+ * It describes WHAT should be generated and deliberately avoids
+ * browser/UI-only state.
  */
 export type ProjectOutput = {
 	version: 1;
@@ -43,14 +47,13 @@ export type ProjectOutput = {
 	instruments: string[];
 };
 
-
 /*
- * This is the generator configuration.
+ * settings.json is the GUI reload state.
  *
- * settings.json represents HOW the project was configured.
- *
- * It is intentionally separate from output.json so that
- * the musical output remains platform-agnostic.
+ * output.json intentionally flattens prompt pairs and uses null for
+ * metadata fields that should be detected automatically. Those choices
+ * are lossy from an editor point of view, so settings.json stores exactly
+ * the additional state required to reconstruct the GUI.
  */
 export type ProjectSettings = {
 	version: 1;
@@ -64,7 +67,23 @@ export type ProjectSettings = {
 		language: boolean;
 	};
 
-	generation: {
-		keepAcapella: boolean;
+	promptPairs: {
+		genres: PromptPairValue[];
+		songTypes: PromptPairValue[];
+		themes: PromptPairValue[];
+		vocals: PromptPairValue[];
+		instruments: PromptPairValue[];
 	};
+};
+
+export type ProjectSummary = {
+	projectId: string;
+	audioName: string;
+	modifiedAt: string;
+};
+
+export type LoadedProject = {
+	projectId: string;
+	output: ProjectOutput;
+	settings: ProjectSettings;
 };

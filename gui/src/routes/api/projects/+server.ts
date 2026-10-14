@@ -4,11 +4,30 @@ import { writeFile, unlink } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
-import { saveProject } from '#lib/server/project.ts';
+import {
+	listProjects,
+	saveProject
+} from '#lib/server/project.ts';
 import type {
 	ProjectOutput,
 	ProjectSettings
 } from '#lib/types/project.ts';
+
+export const GET: RequestHandler = async () => {
+	try {
+		return Response.json(await listProjects());
+	} catch (err) {
+		return Response.json(
+			{
+				error:
+					err instanceof Error
+						? err.message
+						: 'Failed to list projects.'
+			},
+			{ status: 500 }
+		);
+	}
+};
 
 export const POST: RequestHandler = async ({ request }) => {
 	let temporaryAudioPath: string | null = null;
@@ -47,35 +66,18 @@ export const POST: RequestHandler = async ({ request }) => {
 			error(400, 'Invalid project settings JSON.');
 		}
 
-		/*
-		 * The uploaded File exists in the request, but
-		 * saveProject() expects a filesystem path.
-		 *
-		 * Write it to a temporary file first.
-		 */
-		const tempName =
-			`songwriter-toolkit-${Date.now()}-${audioFile.name}`;
+		const tempName = `songwriter-toolkit-${Date.now()}-${path.basename(audioFile.name)}`;
+		temporaryAudioPath = path.join(os.tmpdir(), tempName);
 
-		temporaryAudioPath = path.join(
-			os.tmpdir(),
-			tempName
+		const audioBuffer = Buffer.from(
+			await audioFile.arrayBuffer()
 		);
 
-		const audioBuffer =
-			Buffer.from(await audioFile.arrayBuffer());
+		await writeFile(temporaryAudioPath, audioBuffer);
 
-		await writeFile(
-			temporaryAudioPath,
-			audioBuffer
-		);
-
-		/*
-		 * Now saveProject() can copy the temporary file
-		 * into the final project directory.
-		 */
 		const result = await saveProject(
 			temporaryAudioPath,
-			audioFile.name,
+			path.basename(audioFile.name),
 			output,
 			settings
 		);
@@ -83,6 +85,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		return Response.json({
 			success: true,
 			projectId: result.projectId,
+			audioName: result.audioName,
 			displayName: result.displayName
 		});
 	} catch (err) {
@@ -99,23 +102,14 @@ export const POST: RequestHandler = async ({ request }) => {
 						? err.message
 						: 'Failed to save project.'
 			},
-			{
-				status: 500
-			}
+			{ status: 500 }
 		);
 	} finally {
-		/*
-		 * The temporary upload is no longer needed after
-		 * saveProject() has copied it into the project folder.
-		 */
 		if (temporaryAudioPath) {
 			try {
 				await unlink(temporaryAudioPath);
 			} catch {
-				/*
-				 * Nothing to do if the temporary file was
-				 * already removed or never created.
-				 */
+				// Temporary file may already be gone.
 			}
 		}
 	}

@@ -8,10 +8,12 @@ services:
       - "5173:5173"
     volumes:
       - .:/app
-      - ../../Projects:/projects
+      - "${SONGWRITER_TOOLKIT_ROOT}/Projects:/projects"
+      - "${SONGWRITER_TOOLKIT_ROOT}/dev/.runtime:/orchestrator-runtime"
     environment:
       - NODE_ENV=development
       - SONGWRITER_PROJECTS_ROOT=/projects
+      - ORCHESTRATOR_SOCKET=/orchestrator-runtime/orchestrator.sock
+      - TZ=${HOST_TZ}
     stdin_open: true
     tty: true
-
